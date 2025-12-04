@@ -1,0 +1,20 @@
+.TH LIBJ2 7 LIBJ2
+.SH NAME
+libj2 \- Double-max precision integers
+
+.SH SYNOPSIS
+.nf #include <libj2.h>
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+.B libj2
+provides integer data types with double the width of
+.BR uintmax_t ,
+along with functions for preforming standard
+integer operations, with optional overflow-detection.
+
+.SH SEE ALSO
+.BR libzahl (7)

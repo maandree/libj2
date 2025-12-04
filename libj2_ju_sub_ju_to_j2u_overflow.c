@@ -1,0 +1,13 @@
+/* See LICENSE file for copyright and license details. */
+#include "common.h"
+#ifndef TEST
+
+extern inline int libj2_ju_sub_ju_to_j2u_overflow(uintmax_t a, uintmax_t b, struct libj2_j2u *res);
+/* TODO Add man page */
+
+
+#else
+
+CONST int main(void) { return 0; } /* Tested in libj2_ju_sub_ju_to_j2u.c */
+
+#endif

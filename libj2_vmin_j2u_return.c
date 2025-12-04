@@ -1,0 +1,13 @@
+/* See LICENSE file for copyright and license details. */
+#include "common.h"
+#ifndef TEST
+
+extern inline const struct libj2_j2u *libj2_vmin_j2u_return(const struct libj2_j2u *a, va_list args);
+/* TODO Add man page */
+
+
+#else
+
+CONST int main(void) { return 0; } /* Tested via libj2_min_j2u_return */
+
+#endif

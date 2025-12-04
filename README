@@ -1,0 +1,15 @@
+NAME
+	libj2 - Double-max precision integers
+
+SYNOPSIS
+	#include <libj2.h>
+
+	Link with -lj2.
+
+DESCRIPTION
+	libj2 provides integer data types with double the width of
+	uintmax_t, along with functions for preforming standard
+	integer operations, with optional overflow-detection.
+
+SEE ALSO
+	libzahl(7)
