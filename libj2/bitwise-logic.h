@@ -13,7 +13,7 @@
  *             0 for the least significant bit
  * @return     1 if the bit is set, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_test_bit(const struct libj2_j2u *a, unsigned b)
 {
 	if (b >= LIBJ2_J2U_BIT)
@@ -34,7 +34,7 @@ libj2_j2u_test_bit(const struct libj2_j2u *a, unsigned b)
  * @return     1 if the two integers have set bits
  *             in common, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_test_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return (a->high & b->high) || (a->low & b->low);
@@ -51,7 +51,7 @@ libj2_j2u_test_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @return     1 if the two integers have set bits
  *             in common, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_test_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return !!(a->low & b);
@@ -68,7 +68,7 @@ libj2_j2u_test_ju(const struct libj2_j2u *a, uintmax_t b)
  * @return     1 if high part of `a` have set bits
  *             in common with `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_test_high_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return !!(a->high & b);
@@ -977,4 +977,589 @@ inline void
 libj2_ju_nif_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
 {
 	libj2_j2u_nimply_ju_to_j2u(b, a, res);
+}
+
+
+/**
+ * Calculate the bitwise AND of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This clears all but the specified bit
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_and_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = 0;
+		res->low = 0;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high & ((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->low = 0;
+	} else {
+		res->high = 0;
+		res->low = a->low & ((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise AND of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This clears all but the specified bit
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_and_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_and_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise OR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This sets the specified bit
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_or_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = a->high;
+		res->low = a->low;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high | ((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->low = a->low;
+	} else {
+		res->high = a->high;
+		res->low = a->low | ((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise OR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This sets the specified bit
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_or_bit(struct libj2_j2u *a, unsigned b)
+{
+	if (b >= LIBJ2_JU_BIT) {
+		if (b >= LIBJ2_J2U_BIT)
+			return;
+		a->high |= (uintmax_t)1 << (b - LIBJ2_JU_BIT);
+	} else {
+		a->low |= (uintmax_t)1 << b;
+	}
+}
+
+
+/**
+ * Calculate the bitwise XOR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips the specified bit
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_xor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = a->high;
+		res->low = a->low;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high ^ ((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->low = a->low;
+	} else {
+		res->high = a->high;
+		res->low = a->low ^ ((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise XOR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips the specified bit
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_xor_bit(struct libj2_j2u *a, unsigned b)
+{
+	if (b >= LIBJ2_JU_BIT) {
+		if (b >= LIBJ2_J2U_BIT)
+			return;
+		a->high ^= (uintmax_t)1 << (b - LIBJ2_JU_BIT);
+	} else {
+		a->low ^= (uintmax_t)1 << b;
+	}
+}
+
+
+/**
+ * Calculate the bitwise IF of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This sets all but the specified bit
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_if_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = UINTMAX_MAX;
+		res->low = UINTMAX_MAX;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high | ~((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->low = UINTMAX_MAX;
+	} else {
+		res->high = UINTMAX_MAX;
+		res->low = a->low | ~((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise IF of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This sets all but the specified bit
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_if_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_if_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise IMPLY of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This sets the specified bit and flips the rest
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_imply_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	res->high = a->high ^ UINTMAX_MAX;
+	res->low = a->low ^ UINTMAX_MAX;
+	if (b >= LIBJ2_JU_BIT) {
+		if (b >= LIBJ2_J2U_BIT)
+			return;
+		res->high |= (uintmax_t)1 << (b - LIBJ2_JU_BIT);
+	} else {
+		res->low |= (uintmax_t)1 << b;
+	}
+}
+
+
+/**
+ * Calculate the bitwise IMPLY of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This sets the specified bit and flips the rest
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_imply_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_imply_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise NAND of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips the specified bit and sets the rest
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_nand_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = UINTMAX_MAX;
+		res->low = UINTMAX_MAX;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high ^ UINTMAX_MAX;
+		res->high |= ~((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->low = UINTMAX_MAX;
+	} else {
+		res->high = UINTMAX_MAX;
+		res->low = a->low ^ UINTMAX_MAX;
+		res->low |= ~((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise NAND of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips the specified bit and sets the rest
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_nand_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_nand_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise NOR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This clears the specified bit and flips the rest
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_nor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	res->high = a->high ^ UINTMAX_MAX;
+	res->low = a->low ^ UINTMAX_MAX;
+	if (b >= LIBJ2_JU_BIT) {
+		if (b >= LIBJ2_J2U_BIT)
+			return;
+		res->high &= ~((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+	} else {
+		res->low &= ~((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise NOR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This clears the specified bit and flips the rest
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_nor_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_nor_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise XNOR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips all but the specified bit
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_xnor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	res->high = a->high ^ UINTMAX_MAX;
+	res->low = a->low ^ UINTMAX_MAX;
+	if (b >= LIBJ2_JU_BIT) {
+		if (b >= LIBJ2_J2U_BIT)
+			return;
+		res->high ^= (uintmax_t)1 << (b - LIBJ2_JU_BIT);
+	} else {
+		res->low ^= (uintmax_t)1 << b;
+	}
+}
+
+
+/**
+ * Calculate the bitwise XNOR of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips all but the specified bit
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_xnor_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_xnor_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise NIF of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips the specified bit and clears the rest
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_nif_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = 0;
+		res->low = 0;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high & ((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->high ^= (uintmax_t)1 << (b - LIBJ2_JU_BIT);
+		res->low = 0;
+	} else {
+		res->high = 0;
+		res->low = a->low & ((uintmax_t)1 << b);
+		res->low ^= (uintmax_t)1 << b;
+	}
+}
+
+
+/**
+ * Calculate the bitwise NIF of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This flips the specified bit and clears the rest
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_nif_bit(struct libj2_j2u *a, unsigned b)
+{
+	libj2_j2u_nif_bit_to_j2u(a, b, a);
+}
+
+
+/**
+ * Calculate the bitwise NIMPLY of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This clears the specified bit
+ * 
+ * @param  a    The left-hand integer
+ * @param  b    The index of bit that shall be set in
+ *              the right-hand integer, 0 for the least
+ *              significant bit
+ * @param  res  Output parameter for the result
+ */
+inline void
+libj2_j2u_nimply_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
+{
+	if (b >= LIBJ2_J2U_BIT) {
+		res->high = a->high;
+		res->low = a->low;
+	} else if (b >= LIBJ2_JU_BIT) {
+		res->high = a->high & ~((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+		res->low = a->low;
+	} else {
+		res->high = a->high;
+		res->low = a->low & ~((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Calculate the bitwise NIMPLY of an unsigned double-max
+ * precision integer (left-hand) and unsigned double-max
+ * precision integer with one specified bit set and the
+ * reset cleared (right-hand)
+ * 
+ * This clears the specified bit
+ * 
+ * @param  a  The left-hand integer, also used as the
+ *            output parameter for the result
+ * @param  b  The index of bit that shall be set in
+ *            the right-hand integer, 0 for the least
+ *            significant bit
+ */
+inline void
+libj2_j2u_nimply_bit(struct libj2_j2u *a, unsigned b)
+{
+	if (b >= LIBJ2_JU_BIT) {
+		if (b >= LIBJ2_J2U_BIT)
+			return;
+		a->high &= ~((uintmax_t)1 << (b - LIBJ2_JU_BIT));
+	} else {
+		a->low &= ~((uintmax_t)1 << b);
+	}
+}
+
+
+/**
+ * Check that all of some specified bits are set
+ * in an unsigned double-max precision integer
+ * 
+ * `libj2_j2u_has_j2u(a, b)` implements `(*a & *b) == *b`
+ * 
+ * @param   a  The integer to inspect
+ * @param   b  Integer whose set bits should also be set in `a`
+ * @return     1 if the set bits in `b` are also set in `a`,
+ *             0 otherwise
+ */
+LIBJ2_PURE_ inline int
+libj2_j2u_has_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	return (a->low & b->low) == b->low && (a->high & b->high) == b->high;
+}
+
+
+/**
+ * Check that all of some specified bits are set
+ * in an unsigned double-max precision integer
+ * 
+ * `libj2_j2u_has_ju(a, b)` implements `(*a & b) == b`
+ * 
+ * @param   a  The integer to inspect
+ * @param   b  Integer whose set bits should also be set in `a`
+ * @return     1 if the set bits in `b` are also set in `a`,
+ *             0 otherwise
+ */
+LIBJ2_PURE_ inline int
+libj2_j2u_has_ju(const struct libj2_j2u *a, uintmax_t b)
+{
+	return (a->low & b) == b;
+}
+
+
+/**
+ * Check that all of some specified bits are set
+ * in the most significant half of an unsigned
+ * double-max precision integer
+ * 
+ * `libj2_j2u_has_ju(a, b)` implements `(a->high & b) == b`
+ * 
+ * @param   a  The integer to inspect
+ * @param   b  Integer whose set bits should also be set in `a`'s
+ *             most significant half (`a->high`)
+ * @return     1 if the set bits in `b` are also set in `a->high`,
+ *             0 otherwise
+ */
+LIBJ2_PURE_ inline int
+libj2_j2u_has_high_ju(const struct libj2_j2u *a, uintmax_t b)
+{
+	return (a->high & b) == b;
 }

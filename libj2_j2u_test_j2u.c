@@ -24,6 +24,7 @@ set_pattern(struct libj2_j2u *a, unsigned off, unsigned mod)
 	}
 }
 
+
 CONST static int
 expected(unsigned a_off, unsigned a_mod, unsigned b_off, unsigned b_mod)
 {
@@ -44,6 +45,7 @@ expected(unsigned a_off, unsigned a_mod, unsigned b_off, unsigned b_mod)
 	}
 	return 0;
 }
+
 
 int
 main(void)

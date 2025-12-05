@@ -13,7 +13,7 @@
  * @param   a  The integer to inspect
  * @return     1 if `a` has a positive value, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_is_positive(const struct libj2_j2u *a)
 {
 	return a->high || a->low;
@@ -35,7 +35,7 @@ libj2_j2u_is_positive(const struct libj2_j2u *a)
  *             +1 if `a` is positive, and
  *             0 if `a` is 0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_sgn_j2u(const struct libj2_j2u *a)
 {
 	return libj2_j2u_is_positive(a);

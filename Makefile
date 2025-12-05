@@ -203,7 +203,53 @@ OBJ =\
 	libj2_vmax_j2u_to_j2u.o\
 	libj2_vmin_j2u.o\
 	libj2_vmin_j2u_return.o\
-	libj2_vmin_j2u_to_j2u.o
+	libj2_vmin_j2u_to_j2u.o\
+	libj2_j2u_and_bit_to_j2u.o\
+	libj2_j2u_and_bit.o\
+	libj2_j2u_or_bit_to_j2u.o\
+	libj2_j2u_or_bit.o\
+	libj2_j2u_xor_bit_to_j2u.o\
+	libj2_j2u_xor_bit.o\
+	libj2_j2u_if_bit_to_j2u.o\
+	libj2_j2u_if_bit.o\
+	libj2_j2u_imply_bit_to_j2u.o\
+	libj2_j2u_imply_bit.o\
+	libj2_j2u_nand_bit_to_j2u.o\
+	libj2_j2u_nand_bit.o\
+	libj2_j2u_nor_bit_to_j2u.o\
+	libj2_j2u_nor_bit.o\
+	libj2_j2u_xnor_bit_to_j2u.o\
+	libj2_j2u_xnor_bit.o\
+	libj2_j2u_nif_bit_to_j2u.o\
+	libj2_j2u_nif_bit.o\
+	libj2_j2u_nimply_bit_to_j2u.o\
+	libj2_j2u_nimply_bit.o\
+	libj2_clz_j2u.o\
+	libj2_clo_j2u.o\
+	libj2_ctz_j2u.o\
+	libj2_cto_j2u.o\
+	libj2_co_j2u.o\
+	libj2_cz_j2u.o\
+	libj2_ffs_j2u.o\
+	libj2_ffc_j2u.o\
+	libj2_fls_j2u.o\
+	libj2_flc_j2u.o\
+	libj2_parity_j2u.o\
+	libj2_kfs_j2u.o\
+	libj2_kfs_j2u_to_j2u.o\
+	libj2_kls_j2u.o\
+	libj2_kls_j2u_to_j2u.o\
+	libj2_cfs_j2u.o\
+	libj2_cfs_j2u_to_j2u.o\
+	libj2_cls_j2u.o\
+	libj2_cls_j2u_to_j2u.o\
+	libj2_sfc_j2u.o\
+	libj2_sfc_j2u_to_j2u.o\
+	libj2_slc_j2u.o\
+	libj2_slc_j2u_to_j2u.o\
+	libj2_j2u_has_j2u.o\
+	libj2_j2u_has_ju.o\
+	libj2_j2u_has_high_ju.o
 
 SUBHDR =\
 	libj2/constants.h\
@@ -212,6 +258,7 @@ SUBHDR =\
 	libj2/unsigned-comparsion.h\
 	libj2/bitwise-logic.h\
 	libj2/bit-shifting.h\
+	libj2/bit-scanning.h\
 	libj2/sign-shifting.h\
 	libj2/addition.h\
 	libj2/subtraction.h\

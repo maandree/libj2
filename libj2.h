@@ -9,7 +9,17 @@
 #if 1
 # if defined(__GNUC__)
 #  define LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_
+#   if !defined(__clang__)
+#    define LIBJ2_USE_GCC_PARITYG_
+#   endif
 # endif
+#endif
+
+
+#if defined(__GNUC__)
+# define LIBJ2_PURE_ __attribute__((__pure__))
+#else
+# define LIBJ2_PURE_
 #endif
 
 
@@ -48,6 +58,7 @@ struct libj2_j2u {
 #include "libj2/unsigned-comparsion.h"
 #include "libj2/bitwise-logic.h"
 #include "libj2/bit-shifting.h"
+#include "libj2/bit-scanning.h"
 #include "libj2/sign-shifting.h"
 #include "libj2/addition.h"
 #include "libj2/subtraction.h"
@@ -58,5 +69,6 @@ struct libj2_j2u {
 #if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)
 # undef LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_
 #endif
+#undef LIBJ2_PURE_
 
 #endif

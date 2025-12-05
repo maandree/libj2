@@ -13,7 +13,7 @@
  * @param   a  The integer to inspect
  * @return     1 if `a` has the value 0, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_is_zero(const struct libj2_j2u *a)
 {
 	return !a->high && !a->low;
@@ -41,7 +41,7 @@ libj2_j2u_zero(struct libj2_j2u *res)
  * @param   a  The integer to inspect
  * @return     1 if `a` has highest representable value, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_is_max(const struct libj2_j2u *a)
 {
 	return a->high == UINTMAX_MAX && a->low == UINTMAX_MAX;
@@ -71,7 +71,7 @@ libj2_j2u_max(struct libj2_j2u *res)
  * @param   a  The integer to inspect
  * @return     1 if `a` has lowest representable value, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_is_min(const struct libj2_j2u *a)
 {
 	return libj2_j2u_is_zero(a);

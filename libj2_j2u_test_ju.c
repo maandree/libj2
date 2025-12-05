@@ -17,8 +17,8 @@ main(void)
 	for (h = 0; h < 10; h++) {
 		a.high = h;
 		for (i = 0; i < 128; i++) {
+			a.low = i;
 			for (j = 0; j < 128; j++) {
-				a.low = i;
 				if (i & j)
 					EXPECT(libj2_j2u_test_ju(&a, j) == 1);
 				else

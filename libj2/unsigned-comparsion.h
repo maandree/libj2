@@ -15,7 +15,7 @@
  * @param   b  The right-hand value
  * @return     1 if `*a` is less than `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_lt_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high < b->high || (a->high == b->high && a->low < b->low);
@@ -32,7 +32,7 @@ libj2_j2u_lt_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is less than or equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_le_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high < b->high || (a->high == b->high && a->low <= b->low);
@@ -49,7 +49,7 @@ libj2_j2u_le_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is greater than `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_gt_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high > b->high || (a->high == b->high && a->low > b->low);
@@ -66,7 +66,7 @@ libj2_j2u_gt_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is greater than or equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_ge_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high > b->high || (a->high == b->high && a->low >= b->low);
@@ -83,7 +83,7 @@ libj2_j2u_ge_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_eq_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high == b->high && a->low == b->low;
@@ -100,7 +100,7 @@ libj2_j2u_eq_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is not equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_ne_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high != b->high || a->low != b->low;
@@ -120,7 +120,7 @@ libj2_j2u_ne_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  *             +1 if `*a` is greater than `*b`,
  *             0 if `*a` is equal to `*b`
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_cmp_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return a->high < b->high ? -1 : a->high > b->high ? +1 : a->low < b->low ? -1 : a->low > b->low;
@@ -137,7 +137,7 @@ libj2_j2u_cmp_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is less than `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_lt_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return !a->high && a->low < b;
@@ -154,7 +154,7 @@ libj2_j2u_lt_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is less than or equal to `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_le_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return !a->high && a->low <= b;
@@ -171,7 +171,7 @@ libj2_j2u_le_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is less than `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_gt_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return a->high || a->low > b;
@@ -188,7 +188,7 @@ libj2_j2u_gt_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is greater than or equal to `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_ge_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return a->high || a->low >= b;
@@ -205,7 +205,7 @@ libj2_j2u_ge_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is equal to `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_eq_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return !a->high && a->low == b;
@@ -222,7 +222,7 @@ libj2_j2u_eq_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The right-hand value
  * @return     1 if `*a` is not equal to `b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_ne_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return a->high || a->low != b;
@@ -242,7 +242,7 @@ libj2_j2u_ne_ju(const struct libj2_j2u *a, uintmax_t b)
  *             +1 if `*a` is greater than `b`,
  *             0 if `*a` is equal to `b`
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_cmp_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return a->high ? +1 : a->low < b ? -1 : a->low > b;
@@ -259,7 +259,7 @@ libj2_j2u_cmp_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The right-hand value
  * @return     1 if `a` is less than `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_lt_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_gt_ju(b, a);
@@ -276,7 +276,7 @@ libj2_ju_lt_j2u(uintmax_t a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `a` is less than or equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_le_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_ge_ju(b, a);
@@ -293,7 +293,7 @@ libj2_ju_le_j2u(uintmax_t a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `a` is less than `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_gt_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_lt_ju(b, a);
@@ -310,7 +310,7 @@ libj2_ju_gt_j2u(uintmax_t a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `a` is greater than or equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_ge_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_le_ju(b, a);
@@ -327,7 +327,7 @@ libj2_ju_ge_j2u(uintmax_t a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `a` is equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_eq_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_eq_ju(b, a);
@@ -344,7 +344,7 @@ libj2_ju_eq_j2u(uintmax_t a, const struct libj2_j2u *b)
  * @param   b  The right-hand value
  * @return     1 if `a` is not equal to `*b`, 0 otherwise
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_ne_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_ne_ju(b, a);
@@ -364,7 +364,7 @@ libj2_ju_ne_j2u(uintmax_t a, const struct libj2_j2u *b)
  *             +1 if `a` is greater than `*b`,
  *             0 if `a` is equal to `*b`
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_cmp_j2u(uintmax_t a, const struct libj2_j2u *b)
 {
 	return b->high ? -1 : a < b->low ? -1 : a > b->low;
@@ -606,7 +606,7 @@ libj2_vmax_j2u_return(const struct libj2_j2u *a, va_list args)
  * @return       One of the `const struct libj2_j2u *` that as the
  *               maximum of the values of each argument
  */
-inline const struct libj2_j2u *
+LIBJ2_PURE_ inline const struct libj2_j2u *
 libj2_max_j2u_return(const struct libj2_j2u *a, ... /*, NULL */)
 {
 	va_list args;
@@ -724,7 +724,7 @@ libj2_vmin_j2u_return(const struct libj2_j2u *a, va_list args)
  * @return       One of the `const struct libj2_j2u *` that as the
  *               minimum of the values of each argument
  */
-inline const struct libj2_j2u *
+LIBJ2_PURE_ inline const struct libj2_j2u *
 libj2_min_j2u_return(const struct libj2_j2u *a, ... /*, NULL */)
 {
 	va_list args;

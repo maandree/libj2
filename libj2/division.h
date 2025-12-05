@@ -38,7 +38,9 @@ libj2_j2u_divmod_j2u_to_j2u(struct libj2_j2u *a, const struct libj2_j2u *b, stru
 		goto out;
 	}
 
-	/* TODO e = leading_zeroes(a) - leading_zeroes(b) + 1 */
+#if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)
+	e = libj2_clz_j2u(b) - libj2_clz_j2u(a) + 1U;
+#endif
 
 	while (!libj2_j2u_is_zero(a) && e--) {
 		if (libj2_j2u_lsh_to_j2u_overflow(&d, e, &c))
