@@ -574,3 +574,131 @@ libj2_j2u_mod_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
 	*res = *a;
 	libj2_j2u_mod_ju(res, b);
 }
+
+
+/**
+ * Calculate the integer quotient, rounded
+ * towards zero, of two unsigned double-max
+ * precision integers
+ * 
+ * `libj2_j2u_div_j2u_underflow(a, b)` implements
+ * `t = !!(*a % b), *a /= *b, t`
+ * (using an intermediate variable `t`)
+ * 
+ * @param   a  The dividend (left-hand), also used as
+ *             the output parameter for the quotient
+ * @param   b  The divisor (right-hand)
+ * @return     1 if the remainder is non-zero, 0 otherwise
+ * 
+ * @since  1.0
+ */
+inline int
+libj2_j2u_div_j2u_underflow(struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	struct libj2_j2u c = *a;
+	libj2_j2u_divmod_j2u_to_j2u(&c, b, a);
+	return c.high || c.low;
+}
+
+
+/**
+ * Calculate the integer quotient, rounded
+ * towards zero, of two unsigned double-max
+ * precision integers
+ * 
+ * `libj2_j2u_div_j2u_to_j2u_underflow(a, b, res)`
+ * implements `*res = *a / *b, !!(a % b)`
+ * 
+ * @param   a    The dividend (left-hand)
+ * @param   b    The divisor (right-hand)
+ * @param   res  Output parameter for the quotient
+ * @return       1 if the remainder is non-zero, 0 otherwise
+ * 
+ * @since  1.0
+ */
+inline int
+libj2_j2u_div_j2u_to_j2u_underflow(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
+{
+	struct libj2_j2u c = *a;
+	libj2_j2u_divmod_j2u_to_j2u(&c, b, res);
+	return c.high || c.low;
+}
+
+
+/**
+ * Calculate the integer quotient, rounded
+ * towards zero, of two unsigned double-max
+ * precision integers; in this variant
+ * of `libj2_j2u_div_j2u`, the dividend
+ * (left-hand) is the second parameter and the
+ * divisor (right-hand) is the first parameter
+ * 
+ * `libj2_j2u_rdiv_j2u_underflow(a, b)` implements
+ * `t = !!(*a % *b), *a = *b / *a, t`
+ * (using an intermediate variable `t`)
+ * 
+ * @param   a  The divisor (right-hand), also used as
+ *             the output parameter for the quotient
+ * @param   b  The dividend (left-hand)
+ * @return     1 if the remainder is non-zero, 0 otherwise
+ * 
+ * @since  1.0
+ */
+inline int
+libj2_j2u_rdiv_j2u_underflow(struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	struct libj2_j2u c = *b;
+	libj2_j2u_divmod_j2u_to_j2u(&c, a, a);
+	return c.high || c.low;
+}
+
+
+/**
+ * Calculate the integer quotient, rounded
+ * towards zero, of an unsigned double-max
+ * precision integer (dividend) and an
+ * unsigned max precision integer (divisor)
+ * 
+ * `libj2_j2u_div_ju_underflow(a, b)` implements
+ * `t = !!(a % b), *a /= b, t`
+ * (using an intermediate variable `t`)
+ * 
+ * @param   a  The dividend (left-hand), also used as
+ *             the output parameter for the quotient
+ * @param   b  The divisor (right-hand)
+ * @return     1 if the remainder is non-zero, 0 otherwise
+ * 
+ * @since  1.0
+ */
+inline int
+libj2_j2u_div_ju_underflow(struct libj2_j2u *a, uintmax_t b)
+{
+	struct libj2_j2u c = *a;
+	libj2_j2u_divmod_ju_to_j2u(&c, b, a);
+	return c.high || c.low;
+}
+
+
+/**
+ * Calculate the integer quotient, rounded
+ * towards zero, of an unsigned double-max
+ * precision integer (dividend) and an
+ * unsigned max precision integer (divisor)
+ * 
+ * `libj2_j2u_div_ju_to_j2u_underflow(a, b, res)`
+ * implements `*res = *a / b, !!(a % b)`
+ * 
+ * @param   a    The dividend (left-hand)
+ * @param   b    The divisor (right-hand)
+ * @param   res  Output parameter for the quotient
+ * @return       1 if the remainder is non-zero, 0 otherwise
+ * 
+ * @since  1.0
+ */
+inline int
+libj2_j2u_div_ju_to_j2u_underflow(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
+{
+	struct libj2_j2u c = *a;
+	libj2_j2u_divmod_ju_to_j2u(&c, b, res);
+	return c.high || c.low;
+}

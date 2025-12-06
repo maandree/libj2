@@ -43,6 +43,7 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
              const struct libj2_j2u *expected_q, const struct libj2_j2u *expected_r)
 {
 	struct libj2_j2u a_saved = *a, b_saved = *b, q, r, eq, er;
+	int underflow;
 
 	EXPECT(!libj2_j2u_is_zero(b));
 
@@ -63,6 +64,7 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 		er = r;
 		expected_r = &er;
 	}
+	underflow = !libj2_j2u_is_zero(expected_r);
 
 	validate_result(a, b, expected_q, expected_r);
 
@@ -122,6 +124,22 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
 	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
+	q = (struct libj2_j2u){333, 444};
+	EXPECT(libj2_j2u_div_j2u_to_j2u_underflow(a, b, &q) == underflow);
+	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+	EXPECT(libj2_j2u_eq_j2u(b, &b_saved));
+	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
+	q = *a;
+	EXPECT(libj2_j2u_div_j2u_to_j2u_underflow(&q, b, &q) == underflow);
+	EXPECT(libj2_j2u_eq_j2u(b, &b_saved));
+	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
+	q = *b;
+	EXPECT(libj2_j2u_div_j2u_to_j2u_underflow(a, &q, &q) == underflow);
+	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
 	r = (struct libj2_j2u){111, 222};
 	libj2_j2u_mod_j2u_to_j2u(a, b, &r);
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
@@ -156,6 +174,11 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 	EXPECT(libj2_j2u_eq_j2u(b, &b_saved));
 	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
+	q = *a;
+	EXPECT(libj2_j2u_div_j2u_underflow(&q, b) == underflow);
+	EXPECT(libj2_j2u_eq_j2u(b, &b_saved));
+	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
 	r = *a;
 	libj2_j2u_mod_j2u(&r, b);
 	EXPECT(libj2_j2u_eq_j2u(b, &b_saved));
@@ -176,6 +199,11 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 
 	q = *b;
 	libj2_j2u_rdiv_j2u(&q, a);
+	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
+	q = *b;
+	EXPECT(libj2_j2u_rdiv_j2u_underflow(&q, a) == underflow);
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
 	EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
@@ -222,6 +250,15 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 		libj2_j2u_div_ju_to_j2u(&q, b->low, &q);
 		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
+		q = (struct libj2_j2u){333, 444};
+		EXPECT(libj2_j2u_div_ju_to_j2u_underflow(a, b->low, &q) == underflow);
+		EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
+		q = *a;
+		EXPECT(libj2_j2u_div_ju_to_j2u_underflow(&q, b->low, &q) == underflow);
+		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
 		r = (struct libj2_j2u){111, 222};
 		libj2_j2u_mod_ju_to_j2u(a, b->low, &r);
 		EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
@@ -239,6 +276,10 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 
 		q = *a;
 		libj2_j2u_div_ju(&q, b->low);
+		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
+		q = *a;
+		EXPECT(libj2_j2u_div_ju_underflow(&q, b->low) == underflow);
 		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
 		r = *a;
@@ -275,6 +316,10 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 		libj2_j2u_div_j2u_to_j2u(&q, &q, &q);
 		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
+		q = *a;
+		EXPECT(libj2_j2u_div_j2u_to_j2u_underflow(&q, &q, &q) == underflow);
+		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
 		r = *a;
 		libj2_j2u_mod_j2u_to_j2u(&r, &r, &r);
 		EXPECT(libj2_j2u_eq_j2u(&r, expected_r));
@@ -289,6 +334,10 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 		libj2_j2u_div_j2u(&q, &q);
 		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
+		q = *a;
+		EXPECT(libj2_j2u_div_j2u_underflow(&q, &q) == underflow);
+		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
 		r = *a;
 		libj2_j2u_mod_j2u(&r, &r);
 		EXPECT(libj2_j2u_eq_j2u(&r, expected_r));
@@ -301,6 +350,10 @@ check_manual(const struct libj2_j2u *a, const struct libj2_j2u *b,
 
 		q = *a;
 		libj2_j2u_rdiv_j2u(&q, &q);
+		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
+
+		q = *a;
+		EXPECT(libj2_j2u_rdiv_j2u_underflow(&q, &q) == underflow);
 		EXPECT(libj2_j2u_eq_j2u(&q, expected_q));
 
 		r = *a;

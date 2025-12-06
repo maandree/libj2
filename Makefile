@@ -271,7 +271,12 @@ OBJ =\
 	libj2_ju_mul_j2u_overflow_p.o\
 	libj2_j2u_mul_j2u_to_j2u_overflow_p.o\
 	libj2_j2u_mul_ju_to_j2u_overflow_p.o\
-	libj2_ju_mul_j2u_to_j2u_overflow_p.o
+	libj2_ju_mul_j2u_to_j2u_overflow_p.o\
+	libj2_j2u_div_j2u_underflow.o\
+	libj2_j2u_div_j2u_to_j2u_underflow.o\
+	libj2_j2u_rdiv_j2u_underflow.o\
+	libj2_j2u_div_ju_underflow.o\
+	libj2_j2u_div_ju_to_j2u_underflow.o
 
 SUBHDR =\
 	libj2/constants.h\
