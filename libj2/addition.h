@@ -294,11 +294,11 @@ libj2_j2u_add_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
  * `libj2_j2u_add_j2u_to_j2u_overflow(a, b, res)` implements
  * `*res = *a + *b` with overflow-detection
  * 
- * @param  a    The augend
- * @param  b    The addend
- * @param  res  Output parameter for the sum
- * @return      1 on overflow (the highest set bit in the sum
- *              cannot be stored in the result), 0 otherwise
+ * @param   a    The augend
+ * @param   b    The addend
+ * @param   res  Output parameter for the sum
+ * @return       1 on overflow (the highest set bit in the sum
+ *               cannot be stored in the result), 0 otherwise
  * 
  * @since  1.0
  */

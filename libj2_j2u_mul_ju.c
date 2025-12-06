@@ -83,6 +83,10 @@ mul(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *expected, int expe
 	EXPECT(libj2_j2u_eq_j2u(&t, expected));
 
 	t = *a;
+	libj2_j2u_sat_mul_ju(&t, b);
+	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
+
+	t = *a;
 	EXPECT(libj2_j2u_mul_ju_overflow_p((const struct libj2_j2u *)&t, b) == expect_overflow);
 	EXPECT(libj2_j2u_eq_j2u(&t, a));
 
@@ -115,6 +119,15 @@ mul(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *expected, int expe
 	EXPECT(libj2_j2u_eq_j2u(&t, expected));
 
 	t = (struct libj2_j2u){111, 222};
+	libj2_j2u_sat_mul_ju_to_j2u(a, b, &t);
+	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
+	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+
+	t = *a;
+	libj2_j2u_sat_mul_ju_to_j2u(&t, b, &t);
+	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
+
+	t = (struct libj2_j2u){111, 222};
 	EXPECT(libj2_ju_mul_j2u_to_j2u_overflow(b, a, &t) == expect_overflow);
 	EXPECT(libj2_j2u_eq_j2u(&t, expected));
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
@@ -122,6 +135,15 @@ mul(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *expected, int expe
 	t = *a;
 	EXPECT(libj2_ju_mul_j2u_to_j2u_overflow(b, &t, &t) == expect_overflow);
 	EXPECT(libj2_j2u_eq_j2u(&t, expected));
+
+	t = (struct libj2_j2u){111, 222};
+	libj2_ju_sat_mul_j2u_to_j2u(b, a, &t);
+	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
+	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+
+	t = *a;
+	libj2_ju_sat_mul_j2u_to_j2u(b, &t, &t);
+	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
 
 	set = 999;
 	t = (struct libj2_j2u){111, 222};

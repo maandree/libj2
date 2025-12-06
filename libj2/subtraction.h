@@ -141,7 +141,7 @@ libj2_j2u_sub_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct 
  * max precision integers, as an unsigned double-max
  * precision integer
  * 
- * `libj2_ju_sub_ju_to_j2u_overflow(a, b, res)`
+ * `libj2_ju_sub_ju_to_j2u(a, b, res)`
  * implements `*res = a - b`, where `a` and `b`
  * are converted into `struct libj2_j2u`'s
  * 
@@ -419,12 +419,12 @@ libj2_j2u_rsub_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * `libj2_j2u_rsub_j2u_overflow(a, b, res)`
  * implements `*a = *b - *a` with overflow-detection
  * 
- * @param   a    The subtrahend (right-hand), also used as
- *               the output parameter for the difference
- * @param   b    The minuend (left-hand)
- * @return       1 if the result overflowed (`*a` is greater than `*b`),
- *               so the result wrapped around (actual difference is
- *               negative), 0 otherwise
+ * @param   a  The subtrahend (right-hand), also used as
+ *             the output parameter for the difference
+ * @param   b  The minuend (left-hand)
+ * @return     1 if the result overflowed (`*a` is greater than `*b`),
+ *             so the result wrapped around (actual difference is
+ *             negative), 0 otherwise
  * 
  * @since  1.0
  */
@@ -494,12 +494,12 @@ libj2_j2u_rsub_ju(struct libj2_j2u *a, uintmax_t b)
  * `libj2_j2u_rsub_ju_overflow(a, b, res)`
  * implements `*a = b - *a` with overflow-detection
  * 
- * @param   a    The subtrahend (right-hand), also used as
- *               the output parameter for the difference
- * @param   b    The minuend (left-hand)
- * @return       1 if the result overflowed (`*a` is greater than `b`),
- *               so the result wrapped around (actual difference is
- *               negative), 0 otherwise
+ * @param   a  The subtrahend (right-hand), also used as
+ *             the output parameter for the difference
+ * @param   b  The minuend (left-hand)
+ * @return     1 if the result overflowed (`*a` is greater than `b`),
+ *             so the result wrapped around (actual difference is
+ *             negative), 0 otherwise
  * 
  * @since  1.0
  */

@@ -98,6 +98,7 @@ enum libj2_overflow {
 #include "libj2/subtraction.h"
 #include "libj2/multiplication.h"
 #include "libj2/division.h"
+#include "libj2/saturated-math.h"
 
 
 #if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)

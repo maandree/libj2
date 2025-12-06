@@ -11,7 +11,7 @@ include mk/$(OS).mk
 
 
 LIB_MAJOR = 1
-LIB_MINOR = 0
+LIB_MINOR = 1
 LIB_VERSION = $(LIB_MAJOR).$(LIB_MINOR)
 LIB_NAME = j2
 
@@ -276,7 +276,29 @@ OBJ =\
 	libj2_j2u_div_j2u_to_j2u_underflow.o\
 	libj2_j2u_rdiv_j2u_underflow.o\
 	libj2_j2u_div_ju_underflow.o\
-	libj2_j2u_div_ju_to_j2u_underflow.o
+	libj2_j2u_div_ju_to_j2u_underflow.o\
+	libj2_j2u_sat_lsh.o\
+	libj2_j2u_sat_lsh_to_j2u.o\
+	libj2_ju_sat_lsh_to_j2u.o\
+	libj2_j2u_sat_add_ju.o\
+	libj2_j2u_sat_add_ju_to_j2u.o\
+	libj2_ju_sat_add_j2u_to_j2u.o\
+	libj2_j2u_sat_add_j2u.o\
+	libj2_j2u_sat_add_j2u_to_j2u.o\
+	libj2_j2u_sat_sub_ju.o\
+	libj2_j2u_sat_sub_ju_to_j2u.o\
+	libj2_ju_sat_sub_ju_to_j2u.o\
+	libj2_j2u_sat_sub_j2u.o\
+	libj2_j2u_sat_sub_j2u_to_j2u.o\
+	libj2_ju_sat_sub_j2u_to_j2u.o\
+	libj2_j2u_sat_rsub_j2u.o\
+	libj2_j2u_sat_rsub_ju.o\
+	libj2_j2u_sat_mul_ju.o\
+	libj2_j2u_sat_mul_ju_to_j2u.o\
+	libj2_ju_sat_mul_j2u_to_j2u.o\
+	libj2_j2u_sat_mul_j2u_destructive.o\
+	libj2_j2u_sat_mul_j2u.o\
+	libj2_j2u_sat_mul_j2u_to_j2u.o
 
 SUBHDR =\
 	libj2/constants.h\
@@ -290,7 +312,8 @@ SUBHDR =\
 	libj2/addition.h\
 	libj2/subtraction.h\
 	libj2/multiplication.h\
-	libj2/division.h
+	libj2/division.h\
+	libj2/saturated-math.h
 
 HDR =\
 	$(SUBHDR)\

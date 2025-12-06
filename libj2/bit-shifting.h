@@ -5,7 +5,7 @@
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to more signficant positions (left-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -41,7 +41,7 @@ libj2_j2u_lsh(struct libj2_j2u *a, unsigned b)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to more signficant positions (left-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -68,7 +68,7 @@ libj2_j2u_lsh_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *re
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer, represented by an unsigned max precision
  * integer and whose high part is treated as having
  * the value 0, to more signficant positions (left-shift)
@@ -105,7 +105,7 @@ libj2_ju_lsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to more signficant positions (left-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -157,7 +157,7 @@ libj2_j2u_lsh_overflow(struct libj2_j2u *a, unsigned b)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to more signficant positions (left-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -187,7 +187,7 @@ libj2_j2u_lsh_to_j2u_overflow(const struct libj2_j2u *a, unsigned b, struct libj
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer, represented by an unsigned max precision
  * integer and whose high part is treated as having
  * the value 0, to more signficant positions (left-shift)
@@ -220,7 +220,7 @@ libj2_ju_lsh_to_j2u_overflow(uintmax_t a, unsigned b, struct libj2_j2u *res)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to less signficant positions (right-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -256,7 +256,7 @@ libj2_j2u_rsh(struct libj2_j2u *a, unsigned b)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to less signficant positions (right-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -283,7 +283,7 @@ libj2_j2u_rsh_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *re
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer, represented by an unsigned max precision
  * integer and whose high part is treated as having
  * the value 0, to less signficant positions (right-shift)
@@ -313,7 +313,7 @@ libj2_ju_rsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to less signficant positions (right-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -365,7 +365,7 @@ libj2_j2u_rsh_underflow(struct libj2_j2u *a, unsigned b)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to less signficant positions (right-shift)
  * 
  * Bits shifted out of precision will be discarded,
@@ -395,7 +395,7 @@ libj2_j2u_rsh_to_j2u_underflow(const struct libj2_j2u *a, unsigned b, struct lib
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer, represented by an unsigned max precision
  * integer and whose high part is treated as having
  * the value 0, to less signficant positions (right-shift)
@@ -428,7 +428,7 @@ libj2_ju_rsh_to_j2u_underflow(uintmax_t a, unsigned b, struct libj2_j2u *res)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to more signficant positions
  * 
  * Bits shifted out of precision are wrapped around
@@ -466,7 +466,7 @@ libj2_j2u_lrot(struct libj2_j2u *a, unsigned b)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to more signficant positions
  * 
  * Bits shifted out of precision are wrapped around
@@ -491,7 +491,7 @@ libj2_j2u_lrot_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *r
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer, represented by an unsigned max precision
  * integer and whose high part is treated as having
  * the value 0, to more signficant positions
@@ -519,7 +519,7 @@ libj2_ju_lrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to less signficant positions
  * 
  * Bits shifted out of precision are wrapped around
@@ -557,7 +557,7 @@ libj2_j2u_rrot(struct libj2_j2u *a, unsigned b)
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer to less signficant positions
  * 
  * Bits shifted out of precision are wrapped around
@@ -582,7 +582,7 @@ libj2_j2u_rrot_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *r
 
 
 /**
- * Shift the bits an unsigned double-max precision
+ * Shift the bits in an unsigned double-max precision
  * integer, represented by an unsigned max precision
  * integer and whose high part is treated as having
  * the value 0, to less signficant positions

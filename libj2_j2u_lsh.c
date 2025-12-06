@@ -127,6 +127,10 @@ check(const char *pattern)
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
 
 		r = a;
+		libj2_j2u_sat_lsh(&r, i);
+		EXPECT(overflows ? libj2_j2u_is_max(&r) : libj2_j2u_eq_j2u(&r, &expected));
+
+		r = a;
 		EXPECT(libj2_j2u_lsh_overflow_p((const struct libj2_j2u *)&r, i) == overflows);
 		EXPECT(libj2_j2u_eq_j2u(&r, &a));
 
@@ -140,6 +144,11 @@ check(const char *pattern)
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
 		EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
 
+		r = (struct libj2_j2u){111, 222};
+		libj2_j2u_sat_lsh_to_j2u(&a, i, &r);
+		EXPECT(overflows ? libj2_j2u_is_max(&r) : libj2_j2u_eq_j2u(&r, &expected));
+		EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
 		r = a;
 		libj2_j2u_lsh_to_j2u(&r, i, &r);
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
@@ -147,6 +156,10 @@ check(const char *pattern)
 		r = a;
 		EXPECT(libj2_j2u_lsh_to_j2u_overflow(&r, i, &r) == overflows);
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
+
+		r = a;
+		libj2_j2u_sat_lsh_to_j2u(&r, i, &r);
+		EXPECT(overflows ? libj2_j2u_is_max(&r) : libj2_j2u_eq_j2u(&r, &expected));
 	}
 }
 

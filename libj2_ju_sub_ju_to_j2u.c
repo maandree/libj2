@@ -37,6 +37,10 @@ check(uintmax_t a, uintmax_t b)
 	EXPECT(libj2_ju_sub_ju_to_j2u_overflow(a, b, &r) == expected_overflow);
 	EXPECT(libj2_j2u_eq_j2u(&r, &expected));
 
+	r = (struct libj2_j2u){111, 222};
+	libj2_ju_sat_sub_ju_to_j2u(a, b, &r);
+	EXPECT(expected_overflow ? libj2_j2u_is_zero(&r) : libj2_j2u_eq_j2u(&r, &expected));
+
 	EXPECT(libj2_ju_sub_ju_overflow_p(a, b) == expected_overflow);
 }
 
