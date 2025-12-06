@@ -1,7 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "common.h"
 #include <errno.h>
-#include <stdio.h>
 #ifndef TEST
 
 /* TODO Add man page */
