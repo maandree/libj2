@@ -84,6 +84,10 @@ check(const char *pattern)
 		EXPECT(libj2_j2u_rsh_underflow(&r, i) == underflows);
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
 
+		r = a;
+		EXPECT(libj2_j2u_rsh_underflow_p((const struct libj2_j2u *)&r, i) == underflows);
+		EXPECT(libj2_j2u_eq_j2u(&r, &a));
+
 		r = (struct libj2_j2u){111, 222};
 		libj2_j2u_rsh_to_j2u(&a, i, &r);
 		EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));

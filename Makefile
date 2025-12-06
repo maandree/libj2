@@ -249,7 +249,29 @@ OBJ =\
 	libj2_slc_j2u_to_j2u.o\
 	libj2_j2u_has_j2u.o\
 	libj2_j2u_has_ju.o\
-	libj2_j2u_has_high_ju.o
+	libj2_j2u_has_high_ju.o\
+	libj2_j2u_lsh_overflow_p.o\
+	libj2_ju_lsh_overflow_p.o\
+	libj2_j2u_rsh_underflow_p.o\
+	libj2_ju_rsh_underflow_p.o\
+	libj2_j2u_add_ju_overflow_p.o\
+	libj2_ju_add_j2u_overflow_p.o\
+	libj2_j2u_add_j2u_overflow_p.o\
+	libj2_j2u_sub_ju_overflow_p.o\
+	libj2_ju_sub_j2u_overflow_p.o\
+	libj2_ju_sub_ju_overflow_p.o\
+	libj2_j2u_sub_j2u_overflow_p.o\
+	libj2_j2u_rsub_j2u_overflow_p.o\
+	libj2_j2u_rsub_ju_overflow_p.o\
+	libj2_j2u_mul_j2u_overflow_p_quick.o\
+	libj2_j2u_mul_ju_overflow_p_quick.o\
+	libj2_ju_mul_j2u_overflow_p_quick.o\
+	libj2_j2u_mul_j2u_overflow_p.o\
+	libj2_j2u_mul_ju_overflow_p.o\
+	libj2_ju_mul_j2u_overflow_p.o\
+	libj2_j2u_mul_j2u_to_j2u_overflow_p.o\
+	libj2_j2u_mul_ju_to_j2u_overflow_p.o\
+	libj2_ju_mul_j2u_to_j2u_overflow_p.o
 
 SUBHDR =\
 	libj2/constants.h\

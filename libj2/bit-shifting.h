@@ -571,3 +571,109 @@ libj2_ju_rrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
 	libj2_ju_to_j2u(a, res);
 	libj2_j2u_rrot(res, b);
 }
+
+
+/**
+ * Predict whether `libj2_j2u_lsh_overflow` or
+ * `libj2_j2u_lsh_to_j2u_overflow` will return
+ * a result-overflow signal
+ * 
+ * `libj2_j2u_lsh_overflow_p(a, b)` implements
+ * `libj2_j2u_lsh_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     1 if set bit would be be shifted out, 0 otherwise
+ */
+inline int
+libj2_j2u_lsh_overflow_p(const struct libj2_j2u *a, unsigned b)
+{
+	if (b >= LIBJ2_J2U_BIT)
+		return a->high || a->low;
+	else if (b > LIBJ2_JU_BIT)
+		return a->high || a->low >> (LIBJ2_J2U_BIT - b);
+	else if (b == LIBJ2_JU_BIT)
+		return !!a->high;
+	else if (b)
+		return !!(a->high >> (LIBJ2_JU_BIT - b));
+	else
+		return 0;
+}
+
+
+/**
+ * Predict whether `libj2_ju_lsh_to_j2u_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_ju_lsh_overflow_p(a, b)` implements
+ * `libj2_ju_lsh_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     1 if set bit would be be shifted out, 0 otherwise
+ */
+inline int
+libj2_ju_lsh_overflow_p(uintmax_t a, unsigned b)
+{
+	if (b >= LIBJ2_J2U_BIT)
+		return !!a;
+	else if (b > LIBJ2_JU_BIT)
+		return !!(a >> (LIBJ2_J2U_BIT - b));
+	else
+		return 0;
+}
+
+
+/**
+ * Predict whether `libj2_j2u_rsh_underflow` or
+ * `libj2_j2u_rsh_to_j2u_underflow` will return
+ * a result-underflow signal
+ * 
+ * `libj2_j2u_rsh_underflow_p(a, b)` implements
+ * `libj2_j2u_rsh_to_j2u_underflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     1 if set bit would be be shifted out, 0 otherwise
+ */
+inline int
+libj2_j2u_rsh_underflow_p(const struct libj2_j2u *a, unsigned b)
+{
+	if (b >= LIBJ2_J2U_BIT)
+		return a->high || a->low;
+	else if (b > LIBJ2_JU_BIT)
+		return a->low || a->high >> (LIBJ2_J2U_BIT - b);
+	else if (b == LIBJ2_JU_BIT)
+		return !!a->low;
+	else if (b)
+		return !!(a->low << (LIBJ2_JU_BIT - b));
+	else
+		return 0;
+}
+
+
+/**
+ * Predict whether `libj2_ju_rsh_to_j2u_underflow`
+ * will return a result-underflowflow signal
+ * 
+ * `libj2_ju_rsh_underflow_p(a, b)` implements
+ * `libj2_ju_rsh_to_j2u_underflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     1 if set bit would be be shifted out, 0 otherwise
+ */
+inline int
+libj2_ju_rsh_underflow_p(uintmax_t a, unsigned b)
+{
+	if (b >= LIBJ2_JU_BIT)
+		return !!a;
+	else if (b)
+		return !!(a << (LIBJ2_JU_BIT - b));
+	else
+		return 0;
+}

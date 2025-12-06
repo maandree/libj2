@@ -311,3 +311,67 @@ libj2_j2u_add_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
 #endif
 	}
 }
+
+
+/**
+ * Predict whether `libj2_j2u_add_ju_to_j2u_overflow` 
+ * or `libj2_j2u_add_ju_overflow` will return a
+ * result-overflow signal
+ * 
+ * `libj2_j2u_add_ju_overflow_p(a, b)` implements
+ * `libj2_j2u_add_ju_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The augend
+ * @param   b  The addend
+ * @return     1 if the addition would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_add_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
+{
+	return a->low > UINTMAX_MAX - b && a->high == UINTMAX_MAX;
+}
+
+
+/**
+ * Predict whether `libj2_ju_add_j2u_to_j2u_overflow` 
+ * will return a result-overflow signal
+ * 
+ * `libj2_ju_add_j2u_overflow_p(a, b)` implements
+ * `libj2_ju_add_j2u_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The augend
+ * @param   b  The addend
+ * @return     1 if the addition would overflow, 0 otherwise
+ */
+inline int
+libj2_ju_add_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
+{
+	return libj2_j2u_add_ju_overflow_p(b, a);
+}
+
+
+/**
+ * Predict whether `libj2_j2u_add_j2u_to_j2u_overflow` 
+ * or `libj2_j2u_add_j2u_overflow` will return a
+ * result-overflow signal
+ * 
+ * `libj2_j2u_add_j2u_overflow_p(a, b)` implements
+ * `libj2_j2u_add_j2u_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The augend
+ * @param   b  The addend
+ * @return     1 if the addition would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_add_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	if (a == b)
+		return (int)(a->high >> (LIBJ2_JU_BIT - 1U));
+	else if (libj2_j2u_add_ju_overflow_p(a, b->low))
+		return 1;
+	else
+		return a->high > UINTMAX_MAX - b->high;
+}

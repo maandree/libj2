@@ -52,6 +52,32 @@ struct libj2_j2u {
 };
 
 
+/**
+ * Arithmetic overflow prediction result
+ * 
+ * Use by some functions for which prediction
+ * is costly in edge cases, and thus stopped
+ * as soon as such an edge case is detected
+ */
+enum libj2_overflow {
+	/**
+	 * Where will not be an overflow
+	 */
+	LIBJ2_NO_OVERFLOW = 0,
+
+	/**
+	 * Where will be an overflow
+	 */
+	LIBJ2_OVERFLOW = 1,
+
+	/**
+	 * Overflow prediction stopped
+	 * (due to high cost)
+	 */
+	LIBJ2_OVERFLOW_UNKNOWN
+};
+
+
 #include "libj2/constants.h"
 #include "libj2/signum.h"
 #include "libj2/constructors.h"

@@ -41,6 +41,11 @@ check(uintmax_t a_high, uintmax_t a_low, uintmax_t b)
 	EXPECT(libj2_j2u_sub_ju_overflow(&a, b) == expected_overflow);
 	EXPECT(libj2_j2u_eq_j2u(&a, &expected));
 
+	a = (struct libj2_j2u){.high = a_high, .low = a_low};
+	EXPECT(libj2_j2u_sub_ju_overflow_p((const struct libj2_j2u *)&a, b) == expected_overflow);
+	EXPECT(a.high == a_high);
+	EXPECT(a.low == a_low);
+
 	r = (struct libj2_j2u){111, 222};
 	a = (struct libj2_j2u){.high = a_high, .low = a_low};
 	libj2_j2u_sub_ju_to_j2u(&a, b, &r);
@@ -86,6 +91,11 @@ check(uintmax_t a_high, uintmax_t a_low, uintmax_t b)
 	libj2_minus_j2u(&a);
 	EXPECT(libj2_j2u_eq_j2u(&a, &expected));
 
+	a = (struct libj2_j2u){.high = a_high, .low = a_low};
+	EXPECT(libj2_j2u_rsub_ju_overflow_p((const struct libj2_j2u *)&a, b) == expected_roverflow);
+	EXPECT(a.high == a_high);
+	EXPECT(a.low == a_low);
+
 	r = (struct libj2_j2u){111, 222};
 	a = (struct libj2_j2u){.high = a_high, .low = a_low};
 	EXPECT(libj2_ju_sub_j2u_to_j2u_overflow(b, &a, &r) == expected_roverflow);
@@ -97,7 +107,12 @@ check(uintmax_t a_high, uintmax_t a_low, uintmax_t b)
 	a = (struct libj2_j2u){.high = a_high, .low = a_low};
 	EXPECT(libj2_ju_sub_j2u_to_j2u_overflow(b, &a, &a) == expected_roverflow);
 	libj2_minus_j2u(&a);
-	EXPECT(libj2_j2u_eq_j2u(&a, &expected));
+	EXPECT(libj2_j2u_eq_j2u(&a, &expected));;
+
+	a = (struct libj2_j2u){.high = a_high, .low = a_low};
+	EXPECT(libj2_ju_sub_j2u_overflow_p(b, (const struct libj2_j2u *)&a) == expected_roverflow);
+	EXPECT(a.high == a_high);
+	EXPECT(a.low == a_low);
 }
 
 

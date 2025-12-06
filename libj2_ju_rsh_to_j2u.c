@@ -93,6 +93,8 @@ check(const char *pattern)
 		r = (struct libj2_j2u){111, 222};
 		EXPECT(libj2_ju_rsh_to_j2u_underflow(a.low, i, &r) == underflows);
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
+
+		EXPECT(libj2_ju_rsh_underflow_p(a.low, i) == underflows);
 	}
 }
 

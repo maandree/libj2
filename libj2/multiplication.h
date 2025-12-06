@@ -364,3 +364,238 @@ libj2_j2u_mul_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
 	*res = *a;
 	return libj2_j2u_mul_j2u_overflow_destructive(res, &c);
 }
+
+
+/**
+ * Variant of `libj2_j2u_mul_j2u_overflow_p` that
+ * that stops the overflow-prediction is costly
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
+ *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ */
+inline enum libj2_overflow
+libj2_j2u_mul_j2u_overflow_p_quick(const struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	unsigned lz;
+
+	if (!a->high == !b->high)
+		return a->high > 0 ? LIBJ2_OVERFLOW : LIBJ2_NO_OVERFLOW;
+	if (!a->high && a->low <= 1U)
+		return LIBJ2_NO_OVERFLOW;
+	if (!b->high && b->low <= 1U)
+		return LIBJ2_NO_OVERFLOW;
+
+	lz = libj2_clz_j2u(a) + libj2_clz_j2u(b);
+	if (lz <= LIBJ2_J2U_BIT)
+		return LIBJ2_OVERFLOW;
+	if (lz > LIBJ2_J2U_BIT - 1U)
+		return LIBJ2_NO_OVERFLOW;
+
+	return LIBJ2_OVERFLOW_UNKNOWN;
+}
+
+
+/**
+ * Variant of `libj2_j2u_mul_ju_overflow_p` that
+ * that stops the overflow-prediction is costly
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
+ *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ */
+inline enum libj2_overflow
+libj2_j2u_mul_ju_overflow_p_quick(const struct libj2_j2u *a, uintmax_t b)
+{
+	return libj2_j2u_mul_j2u_overflow_p_quick(a, &(struct libj2_j2u){.high = 0, .low = b});
+}
+
+
+/**
+ * Variant of `libj2_ju_mul_j2u_overflow_p` that
+ * that stops the overflow-prediction is costly
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
+ *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ */
+inline enum libj2_overflow
+libj2_ju_mul_j2u_overflow_p_quick(uintmax_t a, const struct libj2_j2u *b)
+{
+	return libj2_j2u_mul_ju_overflow_p_quick(b, a);
+}
+
+
+/**
+ * Predict whether `libj2_j2u_mul_j2u_overflow_destructive` 
+ * `libj2_j2u_mul_j2u_overflow`, or `libj2_j2u_mul_j2u_to_j2u_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2u_mul_j2u_overflow_p(a, b)` implements
+ * `libj2_j2u_mul_j2u_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner for most cases
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     1 if the multiplication would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_mul_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	enum libj2_overflow overflow;
+	struct libj2_j2u j2u;
+	uintmax_t ju, c;
+
+	overflow = libj2_j2u_mul_j2u_overflow_p_quick(a, b);
+	if (overflow != LIBJ2_OVERFLOW_UNKNOWN)
+		return (int)overflow;
+
+	if (a->high) {
+		j2u = *a;
+		ju = b->low;
+	} else {
+		j2u = *b;
+		ju = a->low;
+	}
+
+#if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)
+	if (__builtin_mul_overflow(j2u.high, ju, &c))
+		return 1;
+#else
+	if (j2u.high > UINTMAX_MAX / ju)
+		return 1;
+	c = j2u.high * ju;
+#endif
+
+	libj2_ju_mul_ju_to_j2u(j2u.low, ju, &j2u);
+	return j2u.high > UINTMAX_MAX - c;
+}
+
+
+/**
+ * Predict whether `libj2_j2u_mul_ju_overflow`
+ * or `libj2_j2u_mul_ju_to_j2u_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2u_mul_ju_overflow_p(a, b)` implements
+ * `libj2_j2u_mul_ju_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner for most cases
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     1 if the multiplication would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_mul_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
+{
+	return libj2_j2u_mul_j2u_overflow_p(a, &(struct libj2_j2u){.high = 0, .low = b});
+}
+
+
+/**
+ * Predict whether `libj2_ju_mul_j2u_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_ju_mul_j2u_overflow_p(a, b)` implements
+ * `libj2_ju_mul_j2u(&(struct libj2_j2u){.high = a->high, .low = a->low}, b)`
+ * in an efficient manner for most cases
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     1 if the multiplication would overflow, 0 otherwise
+ */
+inline int
+libj2_ju_mul_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
+{
+	return libj2_j2u_mul_ju_overflow_p(b, a);
+}
+
+
+/**
+ * Variant of `libj2_j2u_mul_j2u_overflow_p` that
+ * that performs the multiplication if the
+ * overflow-prediction is costly
+ * 
+ * @param   a        The multiplier
+ * @param   b        The multiplicand
+ * @param   res      Output parameter for the product
+ * @param   res_set  Output parameter for whether `*res` is set,
+ *                   if set to 1 when the function returns,
+ *                   `*res` will be set to the product,
+ *                   if set to 0 when the function returns,
+ *                   `*res` will be unmodified;
+ *                   will never be set to any other value
+ * @return           1 if the multiplication would overflow
+ *                   (did overflow), 0 otherwise
+ */
+inline int
+libj2_j2u_mul_j2u_to_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res, int *res_set)
+{
+	enum libj2_overflow overflow;
+
+	overflow = libj2_j2u_mul_j2u_overflow_p_quick(a, b);
+	if (overflow != LIBJ2_OVERFLOW_UNKNOWN) {
+		*res_set = 0;
+		return (int)overflow;
+	}
+
+	*res_set = 1;
+	if (a->high)
+		return libj2_j2u_mul_ju_to_j2u_overflow(a, b->low, res);
+	else
+		return libj2_j2u_mul_ju_to_j2u_overflow(b, a->low, res);
+}
+
+
+/**
+ * Variant of `libj2_j2u_mul_ju_overflow_p` that
+ * that performs the multiplication if the
+ * overflow-prediction is costly
+ * 
+ * @param   a        The multiplier
+ * @param   b        The multiplicand
+ * @param   res      Output parameter for the product
+ * @param   res_set  Output parameter for whether `*res` is set,
+ *                   if set to 1 when the function returns,
+ *                   `*res` will be set to the product,
+ *                   if set to 0 when the function returns,
+ *                   `*res` will be unmodified;
+ *                   will never be set to any other value
+ * @return           1 if the multiplication would overflow
+ *                   (did overflow), 0 otherwise
+ */
+inline int
+libj2_j2u_mul_ju_to_j2u_overflow_p(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res, int *res_set)
+{
+	return libj2_j2u_mul_j2u_to_j2u_overflow_p(a, &(struct libj2_j2u){.high = 0, .low = b}, res, res_set);
+}
+
+
+/**
+ * Variant of `libj2_ju_mul_j2u_overflow_p` that
+ * that performs the multiplication if the
+ * overflow-prediction is costly
+ * 
+ * @param   a        The multiplier
+ * @param   b        The multiplicand
+ * @param   res      Output parameter for the product
+ * @param   res_set  Output parameter for whether `*res` is set,
+ *                   if set to 1 when the function returns,
+ *                   `*res` will be set to the product,
+ *                   if set to 0 when the function returns,
+ *                   `*res` will be unmodified;
+ *                   will never be set to any other value
+ * @return           1 if the multiplication would overflow
+ *                   (did overflow), 0 otherwise
+ */
+inline int
+libj2_ju_mul_j2u_to_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res, int *res_set)
+{
+	return libj2_j2u_mul_ju_to_j2u_overflow_p(b, a, res, res_set);
+}

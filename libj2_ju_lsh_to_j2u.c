@@ -142,6 +142,8 @@ check(const char *pattern)
 		r = (struct libj2_j2u){111, 222};
 		EXPECT(libj2_ju_lsh_to_j2u_overflow(a.low, i, &r) == overflows);
 		EXPECT(libj2_j2u_eq_j2u(&r, &expected));
+
+		EXPECT(libj2_ju_lsh_overflow_p(a.low, i) == overflows);
 	}
 }
 

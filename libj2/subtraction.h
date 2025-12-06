@@ -491,3 +491,119 @@ libj2_j2u_rsub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
 #endif
 	return overflow;
 }
+
+
+/**
+ * Predict whether `libj2_j2u_sub_ju_to_j2u_overflow` 
+ * or `libj2_j2u_sub_ju_overflow` will return a
+ * result-overflow signal
+ * 
+ * `libj2_j2u_sub_ju_overflow_p(a, b)` implements
+ * `libj2_j2u_sub_ju_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     1 if the subtraction would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_sub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
+{
+	return a->low < b && !a->high;
+}
+
+
+/**
+ * Predict whether `libj2_ju_sub_j2u_to_j2u_overflow` 
+ * will return a result-overflow signal
+ * 
+ * `libj2_ju_sub_j2u_overflow_p(a, b)` implements
+ * `libj2_ju_sub_j2u_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     1 if the subtraction would overflow, 0 otherwise
+ */
+inline int
+libj2_ju_sub_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
+{
+	return b->high || b->low > a;
+}
+
+
+/**
+ * Predict whether `libj2_ju_sub_ju_to_j2u_overflow` 
+ * will return a result-overflow signal
+ * 
+ * `libj2_ju_sub_ju_overflow_p(a, b)` implements
+ * `libj2_ju_sub_ju_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     1 if the subtraction would overflow, 0 otherwise
+ */
+inline int
+libj2_ju_sub_ju_overflow_p(uintmax_t a, uintmax_t b)
+{
+	return a < b;
+}
+
+
+/**
+ * Predict whether `libj2_j2u_sub_j2u_to_j2u_overflow` 
+ * or `libj2_j2u_sub_j2u_overflow` will return a
+ * result-overflow signal
+ * 
+ * `libj2_j2u_sub_j2u_overflow_p(a, b)` implements
+ * `libj2_j2u_sub_j2u_to_j2u_overflow(a, b, &(struct libj2_j2u){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     1 if the subtraction would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_sub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	return libj2_j2u_sub_ju_overflow_p(a, b->low) || a->high < b->high;
+}
+
+
+/**
+ * Predict whether `libj2_j2u_rsub_j2u_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2u_rsub_j2u_overflow_p(a, b)` implements
+ * `libj2_j2u_rsub_j2u_overflow(&(struct libj2_j2u){.high = a->high, .low = a->low}, b)`
+ * in an efficient manner
+ * 
+ * @param   a  The subtrahend (right-hand)
+ * @param   b  The minuend (left-hand)
+ * @return     1 if the subtraction would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_rsub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
+{
+	return libj2_j2u_sub_j2u_overflow_p(b, a);
+}
+
+
+/**
+ * Predict whether `libj2_j2u_rsub_ju_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2u_rsub_ju_overflow_p(a, b)` implements
+ * `libj2_j2u_rsub_ju_overflow(&(struct libj2_j2u){.high = a->high, .low = a->low}, b)`
+ * in an efficient manner
+ * 
+ * @param   a  The subtrahend (right-hand)
+ * @param   b  The minuend (left-hand)
+ * @return     1 if the subtraction would overflow, 0 otherwise
+ */
+inline int
+libj2_j2u_rsub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
+{
+	return libj2_ju_sub_j2u_overflow_p(b, a);
+}
