@@ -3,6 +3,7 @@
 #define LIBJ2_H
 
 #include <limits.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdarg.h>
 
@@ -99,6 +100,7 @@ enum libj2_overflow {
 #include "libj2/multiplication.h"
 #include "libj2/division.h"
 #include "libj2/saturated-math.h"
+#include "libj2/strings.h"
 
 
 #if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)

@@ -298,7 +298,9 @@ OBJ =\
 	libj2_ju_sat_mul_j2u_to_j2u.o\
 	libj2_j2u_sat_mul_j2u_destructive.o\
 	libj2_j2u_sat_mul_j2u.o\
-	libj2_j2u_sat_mul_j2u_to_j2u.o
+	libj2_j2u_sat_mul_j2u_to_j2u.o\
+	libj2_j2u_to_str.o\
+	libj2_str_to_j2u.o
 
 SUBHDR =\
 	libj2/constants.h\
@@ -313,7 +315,8 @@ SUBHDR =\
 	libj2/subtraction.h\
 	libj2/multiplication.h\
 	libj2/division.h\
-	libj2/saturated-math.h
+	libj2/saturated-math.h\
+	libj2/strings.h
 
 HDR =\
 	$(SUBHDR)\
