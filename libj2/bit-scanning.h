@@ -11,6 +11,8 @@
  * @param   a  The integer to inspect
  * @return     The number of zeroes after the most signficant set
  *             bit in `a`, `LIBJ2_J2U_BIT` if `a` has the value 0
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_clz_j2u(const struct libj2_j2u *a)
@@ -43,6 +45,8 @@ libj2_clz_j2u(const struct libj2_j2u *a)
  * @param   a  The integer to inspect
  * @return     The number of ones after the most signficant cleared
  *             bit in `a`, `LIBJ2_J2U_BIT` if all bits in `a` are set
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_clo_j2u(const struct libj2_j2u *a)
@@ -58,6 +62,8 @@ libj2_clo_j2u(const struct libj2_j2u *a)
  * @param   a  The integer to inspect
  * @return     The number of zeroes before the least signficant set
  *             bit in `a`, `LIBJ2_J2U_BIT` if `a` has the value 0
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_ctz_j2u(const struct libj2_j2u *a)
@@ -89,6 +95,8 @@ libj2_ctz_j2u(const struct libj2_j2u *a)
  * @param   a  The integer to inspect
  * @return     The number of ones before the leadt signficant cleared
  *             bit in `a`, `LIBJ2_J2U_BIT` if all bits in `a` are set
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_cto_j2u(const struct libj2_j2u *a)
@@ -103,6 +111,8 @@ libj2_cto_j2u(const struct libj2_j2u *a)
  * 
  * @param   a  The integer to inspect
  * @return     The number of set bits in `a`
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_co_j2u(const struct libj2_j2u *a)
@@ -155,6 +165,8 @@ libj2_co_j2u(const struct libj2_j2u *a)
  * 
  * @param   a  The integer to inspect
  * @return     The number of cleared bits in `a`
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_cz_j2u(const struct libj2_j2u *a)
@@ -172,6 +184,8 @@ libj2_cz_j2u(const struct libj2_j2u *a)
  *             at the least significant bit, of the
  *             least significant set bit in `a`, or
  *             0 if no bit is set
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_ffs_j2u(const struct libj2_j2u *a)
@@ -190,6 +204,8 @@ libj2_ffs_j2u(const struct libj2_j2u *a)
  *             at the least significant bit, of the
  *             least significant cleared bit in `a`,
  *             or 0 if no bit is cleared
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_ffc_j2u(const struct libj2_j2u *a)
@@ -207,6 +223,8 @@ libj2_ffc_j2u(const struct libj2_j2u *a)
  *             at the least significant bit, of the
  *             most significant set bit in `a`,
  *             or 0 if no bit is set
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_fls_j2u(const struct libj2_j2u *a)
@@ -225,6 +243,8 @@ libj2_fls_j2u(const struct libj2_j2u *a)
  *             at the least significant bit, of the
  *             most significant cleared bit in `a`,
  *             or 0 if no bit is cleared
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_flc_j2u(const struct libj2_j2u *a)
@@ -240,6 +260,8 @@ libj2_flc_j2u(const struct libj2_j2u *a)
  * @param   a  The integer to inspect
  * @return     1 if the number of set bits in `a`
  *             is odd, 0 otherwise (if even)
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline unsigned
 libj2_parity_j2u(const struct libj2_j2u *a)
@@ -264,6 +286,8 @@ libj2_parity_j2u(const struct libj2_j2u *a)
  * integer except the least significant set bit
  * 
  * @param  a  The integer to modify; will be updated
+ * 
+ * @since  1.0
  */
 inline void
 libj2_kfs_j2u(struct libj2_j2u *a)
@@ -280,6 +304,8 @@ libj2_kfs_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to modify
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_kfs_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
@@ -297,6 +323,8 @@ libj2_kfs_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
  * integer except the most significant set bit
  * 
  * @param   a  The integer to modify; will be modified
+ * 
+ * @since  1.0
  */
 inline void
 libj2_kls_j2u(struct libj2_j2u *a)
@@ -313,6 +341,8 @@ libj2_kls_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to modify
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_kls_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
@@ -330,6 +360,8 @@ libj2_kls_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
  * unsigned double-max precision integer
  * 
  * @param  a  The integer to modify; will be updated
+ * 
+ * @since  1.0
  */
 inline void
 libj2_cfs_j2u(struct libj2_j2u *a)
@@ -346,6 +378,8 @@ libj2_cfs_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to modify
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_cfs_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
@@ -363,6 +397,8 @@ libj2_cfs_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
  * unsigned double-max precision integer
  * 
  * @param   a  The integer to modify; will be modified
+ * 
+ * @since  1.0
  */
 inline void
 libj2_cls_j2u(struct libj2_j2u *a)
@@ -379,6 +415,8 @@ libj2_cls_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to modify
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_cls_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
@@ -396,6 +434,8 @@ libj2_cls_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
  * unsigned double-max precision integer
  * 
  * @param  a  The integer to modify; will be updated
+ * 
+ * @since  1.0
  */
 inline void
 libj2_sfc_j2u(struct libj2_j2u *a)
@@ -412,6 +452,8 @@ libj2_sfc_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to modify
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_sfc_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
@@ -429,6 +471,8 @@ libj2_sfc_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
  * unsigned double-max precision integer
  * 
  * @param   a  The integer to modify; will be modified
+ * 
+ * @since  1.0
  */
 inline void
 libj2_slc_j2u(struct libj2_j2u *a)
@@ -445,6 +489,8 @@ libj2_slc_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to modify
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_slc_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)

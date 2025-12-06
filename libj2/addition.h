@@ -12,6 +12,8 @@
  * 
  * @param  a  The augend, and output parameter for the sum
  * @param  b  The addend
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_add_ju(struct libj2_j2u *a, uintmax_t b)
@@ -38,6 +40,8 @@ libj2_j2u_add_ju(struct libj2_j2u *a, uintmax_t b)
  * @param   b  The addend
  * @return     1 on overflow (the highest set bit in the sum
  *             cannot be stored in the result), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_add_ju_overflow(struct libj2_j2u *a, uintmax_t b)
@@ -69,6 +73,8 @@ libj2_j2u_add_ju_overflow(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The augend
  * @param  b    The addend
  * @param  res  Output parameter for the sum
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_add_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -95,6 +101,8 @@ libj2_j2u_add_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param  a    The augend
  * @param  b    The addend
  * @param  res  Output parameter for the sum
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_add_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -115,6 +123,8 @@ libj2_ju_add_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  * @param   res  Output parameter for the sum
  * @return       1 on overflow (the highest set bit in the sum
  *               cannot be stored in the result), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_add_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -150,6 +160,8 @@ libj2_j2u_add_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct 
  * @param   res  Output parameter for the sum
  * @return       1 on overflow (the highest set bit in the sum
  *               cannot be stored in the result), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_add_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -169,6 +181,8 @@ libj2_ju_add_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct 
  * @param  a    The augend
  * @param  b    The addend
  * @param  res  Output parameter for the sum
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_add_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
@@ -190,6 +204,8 @@ libj2_ju_add_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
  * 
  * @param  a  The augend, and output parameter for the sum
  * @param  b  The addend
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_add_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -214,6 +230,8 @@ libj2_j2u_add_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a    The augend
  * @param  b    The addend
  * @param  res  Output parameter for the sum
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_add_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -243,6 +261,8 @@ libj2_j2u_add_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param   b  The addend
  * @return     1 on overflow (the highest set bit in the sum
  *             cannot be stored in the result), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_add_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -279,6 +299,8 @@ libj2_j2u_add_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  res  Output parameter for the sum
  * @return      1 on overflow (the highest set bit in the sum
  *              cannot be stored in the result), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_add_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -325,6 +347,8 @@ libj2_j2u_add_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
  * @param   a  The augend
  * @param   b  The addend
  * @return     1 if the addition would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_add_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
@@ -344,6 +368,8 @@ libj2_j2u_add_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
  * @param   a  The augend
  * @param   b  The addend
  * @return     1 if the addition would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_add_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
@@ -364,6 +390,8 @@ libj2_ju_add_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
  * @param   a  The augend
  * @param   b  The addend
  * @return     1 if the addition would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_add_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)

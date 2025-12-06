@@ -20,6 +20,8 @@
  * @param  a  The integer to shift, also used as the
  *            output parameter for the result
  * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_lsh(struct libj2_j2u *a, unsigned b)
@@ -54,6 +56,8 @@ libj2_j2u_lsh(struct libj2_j2u *a, unsigned b)
  * @param  a    The integer to shift
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_lsh_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -89,6 +93,8 @@ libj2_j2u_lsh_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *re
  * @param  a    The integer to shift
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_lsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
@@ -117,6 +123,8 @@ libj2_ju_lsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * @param   b  The number of positions to shift each bit
  * @return     1 if any set bit was discarded because
  *             it was shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_lsh_overflow(struct libj2_j2u *a, unsigned b)
@@ -167,6 +175,8 @@ libj2_j2u_lsh_overflow(struct libj2_j2u *a, unsigned b)
  * @param   res  Output parameter for the result
  * @return       1 if any set bit was discarded because
  *               it was shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_lsh_to_j2u_overflow(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -198,6 +208,8 @@ libj2_j2u_lsh_to_j2u_overflow(const struct libj2_j2u *a, unsigned b, struct libj
  * @param   res  Output parameter for the result
  * @return       1 if any set bit was discarded because
  *               it was shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_lsh_to_j2u_overflow(uintmax_t a, unsigned b, struct libj2_j2u *res)
@@ -223,6 +235,8 @@ libj2_ju_lsh_to_j2u_overflow(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * @param  a  The integer to shift, also used as the
  *            output parameter for the result
  * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rsh(struct libj2_j2u *a, unsigned b)
@@ -257,6 +271,8 @@ libj2_j2u_rsh(struct libj2_j2u *a, unsigned b)
  * @param  a    The integer to shift
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rsh_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -285,6 +301,8 @@ libj2_j2u_rsh_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *re
  * @param  a    The integer to shift
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_rsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
@@ -313,6 +331,8 @@ libj2_ju_rsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * @param   b  The number of positions to shift each bit
  * @return     1 if any set bit was discarded because
  *             it was shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsh_underflow(struct libj2_j2u *a, unsigned b)
@@ -363,6 +383,8 @@ libj2_j2u_rsh_underflow(struct libj2_j2u *a, unsigned b)
  * @param   res  Output parameter for the result
  * @return       1 if any set bit was discarded because
  *               it was shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsh_to_j2u_underflow(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -394,6 +416,8 @@ libj2_j2u_rsh_to_j2u_underflow(const struct libj2_j2u *a, unsigned b, struct lib
  * @param   res  Output parameter for the result
  * @return       1 if any set bit was discarded because
  *               it was shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_rsh_to_j2u_underflow(uintmax_t a, unsigned b, struct libj2_j2u *res)
@@ -417,6 +441,8 @@ libj2_ju_rsh_to_j2u_underflow(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * @param  a  The integer to rotate, also used as the
  *            output parameter for the result
  * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_lrot(struct libj2_j2u *a, unsigned b)
@@ -453,6 +479,8 @@ libj2_j2u_lrot(struct libj2_j2u *a, unsigned b)
  * @param  a    The integer to rotate
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_lrot_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -479,6 +507,8 @@ libj2_j2u_lrot_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *r
  * @param  a    The integer to rotate
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_lrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
@@ -502,6 +532,8 @@ libj2_ju_lrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * @param  a  The integer to rotate, also used as the
  *            output parameter for the result
  * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rrot(struct libj2_j2u *a, unsigned b)
@@ -538,6 +570,8 @@ libj2_j2u_rrot(struct libj2_j2u *a, unsigned b)
  * @param  a    The integer to rotate
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rrot_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -564,6 +598,8 @@ libj2_j2u_rrot_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *r
  * @param  a    The integer to rotate
  * @param  b    The number of positions to shift each bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_rrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
@@ -585,6 +621,8 @@ libj2_ju_rrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * @param   a  The integer to shift (dry-run)
  * @param   b  The number of positions to shift each bit
  * @return     1 if set bit would be be shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_lsh_overflow_p(const struct libj2_j2u *a, unsigned b)
@@ -613,6 +651,8 @@ libj2_j2u_lsh_overflow_p(const struct libj2_j2u *a, unsigned b)
  * @param   a  The integer to shift (dry-run)
  * @param   b  The number of positions to shift each bit
  * @return     1 if set bit would be be shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_lsh_overflow_p(uintmax_t a, unsigned b)
@@ -638,6 +678,8 @@ libj2_ju_lsh_overflow_p(uintmax_t a, unsigned b)
  * @param   a  The integer to shift (dry-run)
  * @param   b  The number of positions to shift each bit
  * @return     1 if set bit would be be shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsh_underflow_p(const struct libj2_j2u *a, unsigned b)
@@ -666,6 +708,8 @@ libj2_j2u_rsh_underflow_p(const struct libj2_j2u *a, unsigned b)
  * @param   a  The integer to shift (dry-run)
  * @param   b  The number of positions to shift each bit
  * @return     1 if set bit would be be shifted out, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_rsh_underflow_p(uintmax_t a, unsigned b)

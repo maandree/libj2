@@ -12,6 +12,8 @@
  * 
  * @param  a    The value to assign to `*res`
  * @param  res  The integer to assign the value `a` to
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_to_j2u(uintmax_t a, struct libj2_j2u *res)

@@ -15,6 +15,8 @@
  * @param  a    The multiplier
  * @param  b    The multiplicand
  * @param  res  Output parameter for the product
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_mul_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
@@ -71,6 +73,8 @@ libj2_ju_mul_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
  * @param  a  The multiplier, also used as the
  *            output parameter for the product
  * @param  b  The multiplicand
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mul_ju(struct libj2_j2u *a, uintmax_t b)
@@ -93,6 +97,8 @@ libj2_j2u_mul_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The multiplier
  * @param  b    The multiplicand
  * @param  res  Output parameter for the product
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mul_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -114,6 +120,8 @@ libj2_j2u_mul_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param  a    The multiplier
  * @param  b    The multiplicand
  * @param  res  Output parameter for the product
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_mul_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -136,6 +144,8 @@ libj2_ju_mul_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  *             output parameter for the product
  * @param   b  The multiplicand
  * @return     1 if the result overflowed, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_ju_overflow(struct libj2_j2u *a, uintmax_t b)
@@ -179,6 +189,8 @@ libj2_j2u_mul_ju_overflow(struct libj2_j2u *a, uintmax_t b)
  * @param   b    The multiplicand
  * @param   res  Output parameter for the product
  * @return       1 if the result overflowed, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -202,6 +214,8 @@ libj2_j2u_mul_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct 
  * @param   b    The multiplicand
  * @param   res  Output parameter for the product
  * @return       1 if the result overflowed, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_mul_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -224,6 +238,8 @@ libj2_ju_mul_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct 
  * @param  b  The multiplicand; will be tainted
  * 
  * `a` and `b` must not be the same pointers
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mul_j2u_destructive(struct libj2_j2u *restrict a /* result */, struct libj2_j2u *restrict b /* destructed */)
@@ -246,6 +262,8 @@ libj2_j2u_mul_j2u_destructive(struct libj2_j2u *restrict a /* result */, struct 
  * @param  a  The multiplier, also used as the
  *            output parameter for the product
  * @param  b  The multiplicand
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mul_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -270,6 +288,8 @@ libj2_j2u_mul_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @return     1 if the result overflowed, 0 otherwise
  * 
  * `a` and `b` must not be the same pointers
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_j2u_overflow_destructive(struct libj2_j2u *restrict a /* result */, struct libj2_j2u *restrict b /* destructed */)
@@ -317,6 +337,8 @@ libj2_j2u_mul_j2u_overflow_destructive(struct libj2_j2u *restrict a /* result */
  *             output parameter for the product
  * @param   b  The multiplicand
  * @return     1 if the result overflowed, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -336,6 +358,8 @@ libj2_j2u_mul_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a    The multiplier
  * @param  b    The multiplicand
  * @param  res  Output parameter for the product
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mul_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -356,6 +380,8 @@ libj2_j2u_mul_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param   b    The multiplicand
  * @param   res  Output parameter for the product
  * @return       1 if the result overflowed, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -375,6 +401,8 @@ libj2_j2u_mul_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
  * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
  *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
  *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ * 
+ * @since  1.0
  */
 inline enum libj2_overflow
 libj2_j2u_mul_j2u_overflow_p_quick(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -407,6 +435,8 @@ libj2_j2u_mul_j2u_overflow_p_quick(const struct libj2_j2u *a, const struct libj2
  * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
  *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
  *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ * 
+ * @since  1.0
  */
 inline enum libj2_overflow
 libj2_j2u_mul_ju_overflow_p_quick(const struct libj2_j2u *a, uintmax_t b)
@@ -424,6 +454,8 @@ libj2_j2u_mul_ju_overflow_p_quick(const struct libj2_j2u *a, uintmax_t b)
  * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
  *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
  *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ * 
+ * @since  1.0
  */
 inline enum libj2_overflow
 libj2_ju_mul_j2u_overflow_p_quick(uintmax_t a, const struct libj2_j2u *b)
@@ -444,6 +476,8 @@ libj2_ju_mul_j2u_overflow_p_quick(uintmax_t a, const struct libj2_j2u *b)
  * @param   a  The multiplier
  * @param   b  The multiplicand
  * @return     1 if the multiplication would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -490,6 +524,8 @@ libj2_j2u_mul_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
  * @param   a  The multiplier
  * @param   b  The multiplicand
  * @return     1 if the multiplication would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
@@ -509,6 +545,8 @@ libj2_j2u_mul_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
  * @param   a  The multiplier
  * @param   b  The multiplicand
  * @return     1 if the multiplication would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_mul_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
@@ -533,6 +571,8 @@ libj2_ju_mul_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
  *                   will never be set to any other value
  * @return           1 if the multiplication would overflow
  *                   (did overflow), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_j2u_to_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res, int *res_set)
@@ -569,6 +609,8 @@ libj2_j2u_mul_j2u_to_j2u_overflow_p(const struct libj2_j2u *a, const struct libj
  *                   will never be set to any other value
  * @return           1 if the multiplication would overflow
  *                   (did overflow), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_mul_ju_to_j2u_overflow_p(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res, int *res_set)
@@ -593,6 +635,8 @@ libj2_j2u_mul_ju_to_j2u_overflow_p(const struct libj2_j2u *a, uintmax_t b, struc
  *                   will never be set to any other value
  * @return           1 if the multiplication would overflow
  *                   (did overflow), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_mul_j2u_to_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res, int *res_set)

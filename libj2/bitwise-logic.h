@@ -12,6 +12,8 @@
  * @param   b  The index of the bit to test,
  *             0 for the least significant bit
  * @return     1 if the bit is set, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_test_bit(const struct libj2_j2u *a, unsigned b)
@@ -33,6 +35,8 @@ libj2_j2u_test_bit(const struct libj2_j2u *a, unsigned b)
  * @param   b  The other integer
  * @return     1 if the two integers have set bits
  *             in common, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_test_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -50,6 +54,8 @@ libj2_j2u_test_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  The max precision integer
  * @return     1 if the two integers have set bits
  *             in common, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_test_ju(const struct libj2_j2u *a, uintmax_t b)
@@ -67,6 +73,8 @@ libj2_j2u_test_ju(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The max precision integer
  * @return     1 if high part of `a` have set bits
  *             in common with `b`, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_test_high_ju(const struct libj2_j2u *a, uintmax_t b)
@@ -81,6 +89,8 @@ libj2_j2u_test_high_ju(const struct libj2_j2u *a, uintmax_t b)
  * 
  * @param  a  The integer, also used as output
  *            parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_not_j2u(struct libj2_j2u *a)
@@ -96,6 +106,8 @@ libj2_not_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_not_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
@@ -113,6 +125,8 @@ libj2_not_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
  * 
  * @param  a    The integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_not_ju_to_j2u(uintmax_t a, struct libj2_j2u *res)
@@ -129,6 +143,8 @@ libj2_not_ju_to_j2u(uintmax_t a, struct libj2_j2u *res)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_and_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -146,6 +162,8 @@ libj2_j2u_and_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_and_ju(struct libj2_j2u *a, uintmax_t b)
@@ -162,6 +180,8 @@ libj2_j2u_and_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_and_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -179,6 +199,8 @@ libj2_j2u_and_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_and_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -196,6 +218,8 @@ libj2_j2u_and_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_and_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -211,6 +235,8 @@ libj2_ju_and_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_or_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -228,6 +254,8 @@ libj2_j2u_or_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_or_ju(struct libj2_j2u *a, uintmax_t b)
@@ -243,6 +271,8 @@ libj2_j2u_or_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_or_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -260,6 +290,8 @@ libj2_j2u_or_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, st
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_or_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -277,6 +309,8 @@ libj2_j2u_or_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u 
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_or_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -292,6 +326,8 @@ libj2_ju_or_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u 
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xor_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -309,6 +345,8 @@ libj2_j2u_xor_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xor_ju(struct libj2_j2u *a, uintmax_t b)
@@ -324,6 +362,8 @@ libj2_j2u_xor_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xor_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -341,6 +381,8 @@ libj2_j2u_xor_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xor_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -358,6 +400,8 @@ libj2_j2u_xor_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_xor_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -373,6 +417,8 @@ libj2_ju_xor_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nand_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -390,6 +436,8 @@ libj2_j2u_nand_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nand_ju(struct libj2_j2u *a, uintmax_t b)
@@ -406,6 +454,8 @@ libj2_j2u_nand_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nand_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -423,6 +473,8 @@ libj2_j2u_nand_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, 
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nand_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -440,6 +492,8 @@ libj2_j2u_nand_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_nand_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -455,6 +509,8 @@ libj2_ju_nand_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nor_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -472,6 +528,8 @@ libj2_j2u_nor_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nor_ju(struct libj2_j2u *a, uintmax_t b)
@@ -488,6 +546,8 @@ libj2_j2u_nor_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nor_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -505,6 +565,8 @@ libj2_j2u_nor_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nor_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -522,6 +584,8 @@ libj2_j2u_nor_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_nor_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -537,6 +601,8 @@ libj2_ju_nor_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xnor_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -554,6 +620,8 @@ libj2_j2u_xnor_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xnor_ju(struct libj2_j2u *a, uintmax_t b)
@@ -570,6 +638,8 @@ libj2_j2u_xnor_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xnor_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -587,6 +657,8 @@ libj2_j2u_xnor_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, 
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xnor_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -604,6 +676,8 @@ libj2_j2u_xnor_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_xnor_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -619,6 +693,8 @@ libj2_ju_xnor_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_imply_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -640,6 +716,8 @@ libj2_j2u_imply_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_imply_ju(struct libj2_j2u *a, uintmax_t b)
@@ -656,6 +734,8 @@ libj2_j2u_imply_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_imply_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -682,6 +762,8 @@ libj2_j2u_imply_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b,
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_imply_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -698,6 +780,8 @@ libj2_j2u_imply_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_if_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -716,6 +800,8 @@ libj2_j2u_if_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_if_ju(struct libj2_j2u *a, uintmax_t b)
@@ -733,6 +819,8 @@ libj2_j2u_if_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_if_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -749,6 +837,8 @@ libj2_j2u_if_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, st
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_if_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -772,6 +862,8 @@ libj2_j2u_if_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u 
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_imply_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -788,6 +880,8 @@ libj2_ju_imply_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_if_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -803,6 +897,8 @@ libj2_ju_if_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u 
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nimply_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -821,6 +917,8 @@ libj2_j2u_nimply_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nimply_ju(struct libj2_j2u *a, uintmax_t b)
@@ -838,6 +936,8 @@ libj2_j2u_nimply_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nimply_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -864,6 +964,8 @@ libj2_j2u_nimply_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nimply_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -886,6 +988,8 @@ libj2_j2u_nimply_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nif_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -907,6 +1011,8 @@ libj2_j2u_nif_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The left-hand integer, also used as the
  *            output parameter for result
  * @param  b  The right-hand integer
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nif_ju(struct libj2_j2u *a, uintmax_t b)
@@ -923,6 +1029,8 @@ libj2_j2u_nif_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nif_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -939,6 +1047,8 @@ libj2_j2u_nif_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nif_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -956,6 +1066,8 @@ libj2_j2u_nif_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_nimply_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -972,6 +1084,8 @@ libj2_ju_nimply_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_
  * @param  a    The left-hand integer
  * @param  b    The right-hand integer
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_nif_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -993,6 +1107,8 @@ libj2_ju_nif_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_and_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1023,6 +1139,8 @@ libj2_j2u_and_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_and_bit(struct libj2_j2u *a, unsigned b)
@@ -1044,6 +1162,8 @@ libj2_j2u_and_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_or_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1074,6 +1194,8 @@ libj2_j2u_or_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u 
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_or_bit(struct libj2_j2u *a, unsigned b)
@@ -1101,6 +1223,8 @@ libj2_j2u_or_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1131,6 +1255,8 @@ libj2_j2u_xor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xor_bit(struct libj2_j2u *a, unsigned b)
@@ -1158,6 +1284,8 @@ libj2_j2u_xor_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_if_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1188,6 +1316,8 @@ libj2_j2u_if_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u 
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_if_bit(struct libj2_j2u *a, unsigned b)
@@ -1209,6 +1339,8 @@ libj2_j2u_if_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_imply_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1238,6 +1370,8 @@ libj2_j2u_imply_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_imply_bit(struct libj2_j2u *a, unsigned b)
@@ -1259,6 +1393,8 @@ libj2_j2u_imply_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nand_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1291,6 +1427,8 @@ libj2_j2u_nand_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nand_bit(struct libj2_j2u *a, unsigned b)
@@ -1312,6 +1450,8 @@ libj2_j2u_nand_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1341,6 +1481,8 @@ libj2_j2u_nor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nor_bit(struct libj2_j2u *a, unsigned b)
@@ -1362,6 +1504,8 @@ libj2_j2u_nor_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xnor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1391,6 +1535,8 @@ libj2_j2u_xnor_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_xnor_bit(struct libj2_j2u *a, unsigned b)
@@ -1412,6 +1558,8 @@ libj2_j2u_xnor_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nif_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1444,6 +1592,8 @@ libj2_j2u_nif_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nif_bit(struct libj2_j2u *a, unsigned b)
@@ -1465,6 +1615,8 @@ libj2_j2u_nif_bit(struct libj2_j2u *a, unsigned b)
  *              the right-hand integer, 0 for the least
  *              significant bit
  * @param  res  Output parameter for the result
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nimply_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res)
@@ -1495,6 +1647,8 @@ libj2_j2u_nimply_bit_to_j2u(const struct libj2_j2u *a, unsigned b, struct libj2_
  * @param  b  The index of bit that shall be set in
  *            the right-hand integer, 0 for the least
  *            significant bit
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_nimply_bit(struct libj2_j2u *a, unsigned b)
@@ -1519,6 +1673,8 @@ libj2_j2u_nimply_bit(struct libj2_j2u *a, unsigned b)
  * @param   b  Integer whose set bits should also be set in `a`
  * @return     1 if the set bits in `b` are also set in `a`,
  *             0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_has_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -1537,6 +1693,8 @@ libj2_j2u_has_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param   b  Integer whose set bits should also be set in `a`
  * @return     1 if the set bits in `b` are also set in `a`,
  *             0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_has_ju(const struct libj2_j2u *a, uintmax_t b)
@@ -1557,6 +1715,8 @@ libj2_j2u_has_ju(const struct libj2_j2u *a, uintmax_t b)
  *             most significant half (`a->high`)
  * @return     1 if the set bits in `b` are also set in `a->high`,
  *             0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_has_high_ju(const struct libj2_j2u *a, uintmax_t b)

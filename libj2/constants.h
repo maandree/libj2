@@ -12,6 +12,8 @@
  * 
  * @param   a  The integer to inspect
  * @return     1 if `a` has the value 0, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_is_zero(const struct libj2_j2u *a)
@@ -26,6 +28,8 @@ libj2_j2u_is_zero(const struct libj2_j2u *a)
  * `libj2_j2u_zero(res)` implements `(void)(*res = 0)`
  * 
  * @param  res  The integer to assign the value 0 to
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_zero(struct libj2_j2u *res)
@@ -40,6 +44,8 @@ libj2_j2u_zero(struct libj2_j2u *res)
  * 
  * @param   a  The integer to inspect
  * @return     1 if `a` has highest representable value, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_is_max(const struct libj2_j2u *a)
@@ -53,6 +59,8 @@ libj2_j2u_is_max(const struct libj2_j2u *a)
  * precision integer
  * 
  * @param  res  The integer to assign the value to
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_max(struct libj2_j2u *res)
@@ -70,6 +78,8 @@ libj2_j2u_max(struct libj2_j2u *res)
  * 
  * @param   a  The integer to inspect
  * @return     1 if `a` has lowest representable value, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_is_min(const struct libj2_j2u *a)
@@ -86,6 +96,8 @@ libj2_j2u_is_min(const struct libj2_j2u *a)
  * does the same thing as `libj2_j2u_zero(res)`
  * 
  * @param  res  The integer to assign the value to
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_min(struct libj2_j2u *res)

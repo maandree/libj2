@@ -14,6 +14,8 @@
  * @param  a  The minuend (left-hand), also used as the
  *            output parameter for the difference
  * @param  b  The subtrahend (right-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_sub_ju(struct libj2_j2u *a, uintmax_t b)
@@ -43,6 +45,8 @@ libj2_j2u_sub_ju(struct libj2_j2u *a, uintmax_t b)
  * @return     1 if the result overflowed (`b` is greater than `*a`),
  *             so the result wrapped around (actual difference is
  *             negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_sub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
@@ -75,6 +79,8 @@ libj2_j2u_sub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The minuend (left-hand)
  * @param  b    The subtrahend (right-hand)
  * @param  res  Output parameter for the difference
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_sub_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -105,6 +111,8 @@ libj2_j2u_sub_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @return       1 if the result overflowed (`b` is greater than `*a`),
  *               so the result wrapped around (actual difference is
  *               negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_sub_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -140,6 +148,8 @@ libj2_j2u_sub_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct 
  * @param  a    The minuend (left-hand)
  * @param  b    The subtrahend (right-hand)
  * @param  res  Output parameter for the difference
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_sub_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
@@ -169,6 +179,8 @@ libj2_ju_sub_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
  * @return       1 if the result overflowed (`b` is greater than `*a`),
  *               so the result wrapped around (actual difference is
  *               negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_sub_ju_to_j2u_overflow(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
@@ -194,6 +206,8 @@ libj2_ju_sub_ju_to_j2u_overflow(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
  * @param  a  The minuend (left-hand), also used
  *            as the output parameter for the difference
  * @param  b  The subtrahend (right-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_sub_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -213,6 +227,8 @@ libj2_j2u_sub_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a    The minuend (left-hand)
  * @param  b    The subtrahend (right-hand)
  * @param  res  Output parameter for the difference
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_sub_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -242,6 +258,8 @@ libj2_j2u_sub_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @return     1 if the result overflowed (`b` is greater than `*a`),
  *             so the result wrapped around (actual difference is
  *             negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_sub_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -271,6 +289,8 @@ libj2_j2u_sub_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @return       1 if the result overflowed (`b` is greater than `*a`),
  *               so the result wrapped around (actual difference is
  *               negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_sub_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -308,6 +328,8 @@ libj2_j2u_sub_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
  * @param  a    The minuend (left-hand)
  * @param  b    The subtrahend (right-hand)
  * @param  res  Output parameter for the difference
+ * 
+ * @since  1.0
  */
 inline void
 libj2_ju_sub_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -337,6 +359,8 @@ libj2_ju_sub_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
  * @return       1 if the result overflowed (`*b` is greater than `a`),
  *               so the result wrapped around (actual difference is
  *               negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_sub_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -367,6 +391,8 @@ libj2_ju_sub_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct 
  * @param   a    The subtrahend (right-hand), also used as
  *               the output parameter for the difference
  * @param   b    The minuend (left-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rsub_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -399,6 +425,8 @@ libj2_j2u_rsub_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @return       1 if the result overflowed (`*a` is greater than `*b`),
  *               so the result wrapped around (actual difference is
  *               negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsub_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -436,6 +464,8 @@ libj2_j2u_rsub_j2u_overflow(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The subtrahend (right-hand), also used as
  *            the output parameter for the difference
  * @param  b  The minuend (left-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rsub_ju(struct libj2_j2u *a, uintmax_t b)
@@ -470,6 +500,8 @@ libj2_j2u_rsub_ju(struct libj2_j2u *a, uintmax_t b)
  * @return       1 if the result overflowed (`*a` is greater than `b`),
  *               so the result wrapped around (actual difference is
  *               negative), 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
@@ -505,6 +537,8 @@ libj2_j2u_rsub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
  * @param   a  The minuend (left-hand)
  * @param   b  The subtrahend (right-hand)
  * @return     1 if the subtraction would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_sub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
@@ -524,6 +558,8 @@ libj2_j2u_sub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
  * @param   a  The minuend (left-hand)
  * @param   b  The subtrahend (right-hand)
  * @return     1 if the subtraction would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_sub_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
@@ -543,6 +579,8 @@ libj2_ju_sub_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
  * @param   a  The minuend (left-hand)
  * @param   b  The subtrahend (right-hand)
  * @return     1 if the subtraction would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_ju_sub_ju_overflow_p(uintmax_t a, uintmax_t b)
@@ -563,6 +601,8 @@ libj2_ju_sub_ju_overflow_p(uintmax_t a, uintmax_t b)
  * @param   a  The minuend (left-hand)
  * @param   b  The subtrahend (right-hand)
  * @return     1 if the subtraction would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_sub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -582,6 +622,8 @@ libj2_j2u_sub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
  * @param   a  The subtrahend (right-hand)
  * @param   b  The minuend (left-hand)
  * @return     1 if the subtraction would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -601,6 +643,8 @@ libj2_j2u_rsub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u 
  * @param   a  The subtrahend (right-hand)
  * @param   b  The minuend (left-hand)
  * @return     1 if the subtraction would overflow, 0 otherwise
+ * 
+ * @since  1.0
  */
 inline int
 libj2_j2u_rsub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)

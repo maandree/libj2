@@ -12,6 +12,8 @@
  * 
  * @param   a  The integer to inspect
  * @return     1 if `a` has a positive value, 0 otherwise
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_j2u_is_positive(const struct libj2_j2u *a)
@@ -34,6 +36,8 @@ libj2_j2u_is_positive(const struct libj2_j2u *a)
  * @return     -1 if `a` is negative (impossible),
  *             +1 if `a` is positive, and
  *             0 if `a` is 0
+ * 
+ * @since  1.0
  */
 LIBJ2_PURE_ inline int
 libj2_sgn_j2u(const struct libj2_j2u *a)

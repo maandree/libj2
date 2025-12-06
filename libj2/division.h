@@ -20,6 +20,8 @@
  *                the output parameter for the remainder
  * @param  b      The divisor (right-hand)
  * @param  res_q  Output parameter for the quotient
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_divmod_j2u_to_j2u(struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res_q)
@@ -75,6 +77,8 @@ out:
  * @param  b      The divisor (right-hand)
  * @param  res_q  Output parameter for the quotient
  * @param  res_r  Output parameter for the remainder
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_divmod_j2u_to_j2u_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b,
@@ -110,6 +114,8 @@ libj2_j2u_divmod_j2u_to_j2u_j2u(const struct libj2_j2u *a, const struct libj2_j2
  *             the output parameter for the remainder
  * @param   b  The divisor (right-hand)
  * @return     The low half of the quotient
+ * 
+ * @since  1.0
  */
 inline uintmax_t
 libj2_j2u_divmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -140,6 +146,8 @@ libj2_j2u_divmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  *             the output parameter for the remainder
  * @param   b  The divisor (right-hand)
  * @return     The low half of the quotient
+ * 
+ * @since  1.0
  */
 inline uintmax_t
 libj2_j2u_divmod_ju(struct libj2_j2u *a, uintmax_t b)
@@ -179,6 +187,8 @@ libj2_j2u_divmod_ju(struct libj2_j2u *a, uintmax_t b)
  *                the output parameter for the remainder
  * @param  b      The divisor (right-hand)
  * @param  res_q  Output parameter for the quotient
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_divmod_ju_to_j2u(struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res_q)
@@ -205,6 +215,8 @@ libj2_j2u_divmod_ju_to_j2u(struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *r
  * @param  b      The divisor (right-hand)
  * @param  res_q  Output parameter for the quotient
  * @param  res_r  Output parameter for the remainder
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_divmod_ju_to_j2u_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res_q, struct libj2_j2u *res_r)
@@ -234,6 +246,8 @@ libj2_j2u_divmod_ju_to_j2u_j2u(const struct libj2_j2u *a, uintmax_t b, struct li
  *                the output parameter for the remainder
  * @param  b      The dividend (left-hand)
  * @param  res_q  Output parameter for the quotient
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rdivmod_j2u_to_j2u(struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res_q)
@@ -266,6 +280,8 @@ libj2_j2u_rdivmod_j2u_to_j2u(struct libj2_j2u *a, const struct libj2_j2u *b, str
  *             the output parameter for the remainder
  * @param   b  The dividend (left-hand)
  * @return     The low half of the quotient
+ * 
+ * @since  1.0
  */
 inline uintmax_t
 libj2_j2u_rdivmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -286,6 +302,8 @@ libj2_j2u_rdivmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The dividend (left-hand), also used as
  *            the output parameter for the quotient
  * @param  b  The divisor (right-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_div_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -306,6 +324,8 @@ libj2_j2u_div_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a    The dividend (left-hand)
  * @param  b    The divisor (right-hand)
  * @param  res  Output parameter for the quotient
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_div_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -326,6 +346,8 @@ libj2_j2u_div_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param   a  The dividend (left-hand)
  * @param   b  The divisor (right-hand)
  * @return     The low half of the quotient
+ * 
+ * @since  1.0
  */
 inline uintmax_t
 libj2_j2u_div_j2u_return(const struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -348,6 +370,8 @@ libj2_j2u_div_j2u_return(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The divisor (right-hand), also used as
  *            the output parameter for the quotient
  * @param  b  The dividend (left-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rdiv_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -368,6 +392,8 @@ libj2_j2u_rdiv_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The dividend (left-hand), also used as
  *            the output parameter for the quotient
  * @param  b  The divisor (right-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_div_ju(struct libj2_j2u *a, uintmax_t b)
@@ -389,6 +415,8 @@ libj2_j2u_div_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The dividend (left-hand)
  * @param  b    The divisor (right-hand)
  * @param  res  Output parameter for the quotient
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_div_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)
@@ -410,6 +438,8 @@ libj2_j2u_div_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * @param   a  The dividend (left-hand)
  * @param   b  The divisor (right-hand)
  * @return     The low half of the quotient
+ * 
+ * @since  1.0
  */
 inline uintmax_t
 libj2_j2u_div_ju_return(const struct libj2_j2u *a, uintmax_t b)
@@ -429,6 +459,8 @@ libj2_j2u_div_ju_return(const struct libj2_j2u *a, uintmax_t b)
  * @param  a  The dividend (left-hand), also used as
  *            the output parameter for the remainder
  * @param  b  The divisor (right-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -448,6 +480,8 @@ libj2_j2u_mod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a    The dividend (left-hand)
  * @param  b    The divisor (right-hand)
  * @param  res  Output parameter for the remainder
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mod_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res)
@@ -477,6 +511,8 @@ libj2_j2u_mod_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * @param  a  The divisor (right-hand), also used as
  *            the output parameter for the remainder
  * @param  b  The dividend (left-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_rmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
@@ -497,6 +533,8 @@ libj2_j2u_rmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * @param  a  The dividend (left-hand), also used as
  *            the output parameter for the remainder
  * @param  b  The divisor (right-hand)
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mod_ju(struct libj2_j2u *a, uintmax_t b)
@@ -527,6 +565,8 @@ libj2_j2u_mod_ju(struct libj2_j2u *a, uintmax_t b)
  * @param  a    The dividend (left-hand)
  * @param  b    The divisor (right-hand)
  * @param  res  Output parameter for the remainder
+ * 
+ * @since  1.0
  */
 inline void
 libj2_j2u_mod_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u *res)

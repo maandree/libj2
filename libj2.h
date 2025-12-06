@@ -25,11 +25,15 @@
 
 /**
  * The number of bits in an `uintmax_t`
+ * 
+ * @since  1.0
  */
 #define LIBJ2_JU_BIT ((unsigned)CHAR_BIT * (unsigned)sizeof(uintmax_t))
 
 /**
  * The number of bits in an `struct libj2_j2u`
+ * 
+ * @since  1.0
  */
 #define LIBJ2_J2U_BIT (2U * LIBJ2_JU_BIT)
 
@@ -38,6 +42,8 @@
  * Unsigned double-maximum precision integer
  * 
  * If `uintmax_t` is a 64-bit type, this `struct` is a 128-bit type
+ * 
+ * @since  1.0
  */
 struct libj2_j2u {
 	/**
@@ -58,6 +64,8 @@ struct libj2_j2u {
  * Use by some functions for which prediction
  * is costly in edge cases, and thus stopped
  * as soon as such an edge case is detected
+ * 
+ * @since  1.0
  */
 enum libj2_overflow {
 	/**

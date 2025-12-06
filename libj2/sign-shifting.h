@@ -12,6 +12,8 @@
  * 
  * @param  a  The integer to invert, also used as the
  *            output parameter for the inverse
+ * 
+ * @since  1.0
  */
 inline void
 libj2_minus_j2u(struct libj2_j2u *a)
@@ -32,6 +34,8 @@ libj2_minus_j2u(struct libj2_j2u *a)
  * 
  * @param  a    The integer to invert
  * @param  res  Output parameter for the inverse
+ * 
+ * @since  1.0
  */
 inline void
 libj2_minus_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res)
