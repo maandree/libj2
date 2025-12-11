@@ -46,4 +46,63 @@ libj2_sgn_j2u(const struct libj2_j2u *a)
 }
 
 
-/* libj2_j2u_is_zero is located in constants.h */
+
+
+
+/**
+ * Check whether a signed double-max precision integer
+ * has a positive value
+ * 
+ * `libj2_j2i_is_positive(a)` implements `*a > 0`
+ * 
+ * @param   a  The integer to inspect
+ * @return     1 if `a` has a positive value, 0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_is_positive(const struct libj2_j2i *a)
+{
+	return a->high ? a->high <= UINTMAX_MAX >> 1 : a->low > 0;
+}
+
+
+/**
+ * Check whether a signed double-max precision integer
+ * has a negative value
+ * 
+ * `libj2_j2i_is_negative(a)` implements `*a < 0`
+ * 
+ * @param   a  The integer to inspect
+ * @return     1 if `a` has a negaitve value, 0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_is_negative(const struct libj2_j2i *a)
+{
+	return a->high > UINTMAX_MAX >> 1;
+}
+
+
+/**
+ * Get the sign (signum function) of a signed double-max
+ * precision integer
+ * 
+ * `libj2_sgn_j2i(a)` implements `*a < 0 ? -1 : *a > 0 ? +1 : 0`
+ * 
+ * @param   a  The integer to inspect
+ * @return     -1 if `a` is negative,
+ *             +1 if `a` is positive, and
+ *             0 if `a` is 0
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_sgn_j2i(const struct libj2_j2i *a)
+{
+	return libj2_j2i_is_negative(a) ? -1 : libj2_j2i_is_positive(a);
+}
+
+
+/* libj2_j2u_is_zero and libj2_j2i_is_zero are located in constants.h */

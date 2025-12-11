@@ -164,7 +164,7 @@ out:
 
 #else
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE (128U + LIBJ2_J2U_BIT)
 
 
 static uintmax_t

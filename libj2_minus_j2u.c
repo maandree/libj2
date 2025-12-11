@@ -66,8 +66,14 @@ main(void)
 	}
 
 	for (i = 0; i < 256; i++) {
-		a.high = b.high = random_ju();
+		a.high = b.high = random_ju() >> 1;
 		a.low = b.low = random_ju();
+		minus_j2u(&a);
+		libj2_j2u_add_j2u(&a, &b);
+		EXPECT(libj2_j2u_is_zero(&a));
+
+		a.high = b.high ^= UINTMAX_MAX;
+		a.low = b.low ^= UINTMAX_MAX;
 		minus_j2u(&a);
 		libj2_j2u_add_j2u(&a, &b);
 		EXPECT(libj2_j2u_is_zero(&a));

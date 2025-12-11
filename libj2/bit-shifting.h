@@ -372,8 +372,8 @@ libj2_j2u_rsh_underflow(struct libj2_j2u *a, unsigned b)
  * and positions without any new bit will be assigned
  * the bit value 0
  * 
- * `libj2_j2u_rsh_to_j2u_underflow(a, b, res)` implements
- * `*res = *a >> b, a != *res << b`
+ * `libj2_j2u_rsh_to_j2u_underflow(a, b, res)`
+ * implements `*res = *a >> b, a != *res << b`
  * 
  * This is equivalent to dividing `a` by the `b`th
  * power of 2
@@ -720,4 +720,570 @@ libj2_ju_rsh_underflow_p(uintmax_t a, unsigned b)
 		return !!(a << (LIBJ2_JU_BIT - b));
 	else
 		return 0;
+}
+
+
+
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to more signficant positions (left-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_lsh(a, b)` implements `*a <<= b`
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2
+ * 
+ * @param  a  The integer to shift, also used as the
+ *            output parameter for the result
+ * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_lsh(struct libj2_j2i *a, unsigned b)
+{
+	libj2_j2u_lsh((void *)a, b);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to more signficant positions (left-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_lsh_to_j2i(a, b, res)` implements `*res = *a << b`
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2
+ * 
+ * @param  a    The integer to shift
+ * @param  b    The number of positions to shift each bit
+ * @param  res  Output parameter for the result
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_lsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
+{
+	libj2_j2u_lsh_to_j2u((const void *)a, b, (void *)res);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer, represented by a signed max precision
+ * integer and whose absolute value's high part is
+ * treated as having the value 0, to more signficant
+ * positions (left-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_ji_lsh_to_j2i(a, b, res)` implements `*res = a << b`,
+ * where `a` is converted to a `struct libj2_j2i`
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2
+ * 
+ * You can rely on `libj2_ji_lsh_to_j2i(1, LIBJ2_J2I_BIT, res)`
+ * overflowing and assigning 0 to `*res`, and thus, subtracting
+ * 1 from `*res` afterwards will set all bits; and so,
+ * `libj2_ji_lsh_to_j2i(1, n, a), libj2_j2i_sub_j2(a, 1)` will
+ * always set the `n` least significant bits in `a` and clear
+ * all other bits
+ * 
+ * @param  a    The integer to shift
+ * @param  b    The number of positions to shift each bit
+ * @param  res  Output parameter for the result
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_lsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
+{
+	libj2_ji_to_j2i(a, res);
+	libj2_j2i_lsh(res, b);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to more signficant positions (left-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_lsh_overflow(a, b)` implements
+ * `(*a << b) >> b == *a ? (*a <<= b, 0) : (*a <<= b, sgn(*a))`
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2
+ * 
+ * @param   a  The integer to shift, also used as the
+ *             output parameter for the result
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `*a` was non-negative and a set bit
+ *             was shifted out of precision (discarded or
+ *             into the sign-bit position), that is, a
+ *             positive overflow,
+ *             -1 if `*a` was negative and a cleared bit
+ *             was shifted out of precision (discarded or
+ *             into the sign-bit position), that is, a
+ *             negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_lsh_overflow(struct libj2_j2i *a, unsigned b)
+{
+	if (libj2_j2i_is_negative(a)) {
+		int overflow;
+		libj2_not_j2u((void *)a);
+		overflow = libj2_j2u_lsh_overflow((void *)a, b) || libj2_j2i_is_negative(a);
+		libj2_not_j2u((void *)a);
+		return -overflow;
+	} else {
+		return libj2_j2u_lsh_overflow((void *)a, b) || libj2_j2i_is_negative(a);
+	}
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to more signficant positions (left-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_lsh_to_j2i_overflow(a, b, res)` implements
+ * `*res = *a << b, sgn(*a) * (*a != *res >> b)`
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2
+ * 
+ * @param   a    The integer to shift
+ * @param   b    The number of positions to shift each bit
+ * @param   res  Output parameter for the result
+ * @return       +1 if `*a` was non-negative and a set bit
+ *               was shifted out of precision (discarded or
+ *               into the sign-bit position), that is, a
+ *               positive overflow,
+ *               -1 if `*a` was negative and a cleared bit
+ *               was shifted out of precision (discarded or
+ *               into the sign-bit position), that is, a
+ *               negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_lsh_to_j2i_overflow(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
+{
+	*res = *a;
+	return libj2_j2i_lsh_overflow(res, b);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer, represented by a signed max precision
+ * integer and whose high part is treated as having
+ * the value 0, to more signficant positions (left-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_ji_lsh_to_j2i_overflow(a, b, res)` implements
+ * `*res = a << b, sgn(a) * (a != *res >> b`), where `a`
+ * is converted to a `struct libj2_j2i`
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2
+ * 
+ * @param   a    The integer to shift
+ * @param   b    The number of positions to shift each bit
+ * @param   res  Output parameter for the result
+ * @return       +1 if `a` was non-negative and a set bit
+ *               was shifted out of precision (discarded or
+ *               into the sign-bit position), that is, a
+ *               positive overflow,
+ *               -1 if `a` was negative and a cleared bit
+ *               was shifted out of precision (discarded or
+ *               into the sign-bit position), that is, a
+ *               negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_lsh_to_j2i_overflow(intmax_t a, unsigned b, struct libj2_j2i *res)
+{
+	libj2_ji_to_j2i(a, res);
+	return libj2_j2i_lsh_overflow(res, b);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to less signficant positions (right-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_rsh_to_j2i(a, b, res)` implements `*res = *a >> b`
+ * 
+ * This is equivalent to dividing `a` by the `b`th
+ * power of 2, using floored division
+ * 
+ * @param  a    The integer to shift
+ * @param  b    The number of positions to shift each bit
+ * @param  res  Output parameter for the result
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_rsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
+{
+	if (!libj2_j2i_is_negative(a)) {
+		libj2_j2u_rsh_to_j2u((const void *)a, b, (void *)res);
+	} else if (b >= LIBJ2_J2U_BIT) {
+		res->high = UINTMAX_MAX;
+		res->low = UINTMAX_MAX;
+	} else if (b == LIBJ2_JU_BIT) {
+		res->low = a->high;
+		res->high = UINTMAX_MAX;
+	} else if (b > LIBJ2_JU_BIT) {
+		res->low = a->high;
+		res->high = UINTMAX_MAX;
+		b -= LIBJ2_JU_BIT;
+		res->low >>= b;
+		res->low |= ((uintmax_t)1 << (LIBJ2_JU_BIT - 1U)) - 1U;
+	} else if (b) {
+		libj2_j2u_rsh_to_j2u((const void *)a, b, (void *)res);
+		res->high |= ((uintmax_t)1 << (LIBJ2_JU_BIT - 1U)) - 1U;
+	}
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to less signficant positions (right-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_rsh(a, b)` implements `*a >>= b`
+ * 
+ * This is equivalent to dividing `a` by the `b`th
+ * power of 2, using floored division
+ * 
+ * @param  a  The integer to shift, also used as the
+ *            output parameter for the result
+ * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_rsh(struct libj2_j2i *a, unsigned b)
+{
+	libj2_j2i_rsh_to_j2i(a, b, a);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer, represented by a signed max precision
+ * integer and whose high part is treated as having
+ * the value 0, to less signficant positions (right-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_ji_rsh_to_j2i(a, b, res)` implements `*res = a >> b`,
+ * where `a` is converted to a `struct libj2_j2i`
+ * 
+ * This is equivalent to dividing `a` by the `b`th
+ * power of 2, using floored division
+ * 
+ * @param  a    The integer to shift
+ * @param  b    The number of positions to shift each bit
+ * @param  res  Output parameter for the result
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_rsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
+{
+	libj2_ji_to_j2i(a, res);
+	libj2_j2i_rsh(res, b);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to less signficant positions (right-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_rsh_to_j2i_underflow(a, b, res)`
+ * implements `*res = *a >> b, sign(*a) * (*a != *res << b)`
+ * 
+ * This is equivalent to dividing `a` by the `b`th
+ * power of 2, using floored division
+ * 
+ * @param   a    The integer to shift
+ * @param   b    The number of positions to shift each bit
+ * @param   res  Output parameter for the result
+ * @return       +1 if `*a` was non-negative and a set bit
+ *               was shifted out (discarded), that is, a
+ *               positive underflow,
+ *               -1 if `*a` was negative and a cleared bit
+ *               was shifted out (discarded), that is, a
+ *               positive underflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_rsh_to_j2i_underflow(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
+{
+	if (libj2_j2i_is_negative(a)) {
+		int underflow;
+		libj2_not_j2u_to_j2u((const void *)a, (void *)res);
+		underflow = libj2_j2u_rsh_underflow((void *)res, b);
+		libj2_not_j2u((void *)res);
+		return -underflow;
+	} else {
+		return libj2_j2u_rsh_to_j2u_underflow((const void *)a, b, (void *)res);
+	}
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to less signficant positions (right-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_j2i_rsh_underflow(a, b)` implements
+ * `(*a >> b) << b == *a ? (*a >>= b, 0) : (*a >>= b, sgn(*a))`
+ * 
+ * This is equivalent to dividing `a` by the `b`th
+ * power of 2, using floored division
+ * 
+ * @param   a  The integer to shift, also used as the
+ *             output parameter for the result
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `*a` was non-negative and a set bit
+ *             was shifted out (discarded), that is, a
+ *             positive underflow,
+ *             -1 if `*a` was negative and a cleared bit
+ *             was shifted out (discarded), that is, a
+ *             positive underflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_rsh_underflow(struct libj2_j2i *a, unsigned b)
+{
+	return libj2_j2i_rsh_to_j2i_underflow(a, b, a);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer, represented by a signed max precision
+ * integer and whose high part is treated as having
+ * the value 0, to less signficant positions (right-shift)
+ * 
+ * Bits shifted out of precision will be discarded,
+ * and positions without any new bit will be assigned
+ * the bit value 0
+ * 
+ * `libj2_ji_rsh_to_j2i_underflow(a, b, res)` implements
+ * `*res = a >> b, sgn(a) * (a != *res << b`), where `a`
+ * is converted to a `struct libj2_j2i`
+ * 
+ * This is equivalent to dividing `a` by the `b`th
+ * power of 2, using floored division
+ * 
+ * @param   a    The integer to shift
+ * @param   b    The number of positions to shift each bit
+ * @param   res  Output parameter for the result
+ * @return       +1 if `a` was non-negative and a set bit
+ *               was shifted out (discarded), that is, a
+ *               positive underflow,
+ *               -1 if `a` was negative and a cleared bit
+ *               was shifted out (discarded), that is, a
+ *               positive underflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_rsh_to_j2i_underflow(intmax_t a, unsigned b, struct libj2_j2i *res)
+{
+	libj2_ji_to_j2i(a, res);
+	return libj2_j2i_rsh_underflow(res, b);
+}
+
+
+/**
+ * Predict whether `libj2_j2i_lsh_overflow` or
+ * `libj2_j2i_lsh_to_j2i_overflow` will return
+ * a result-overflow signal
+ * 
+ * `libj2_j2i_lsh_overflow_p(a, b)` implements
+ * `libj2_j2i_lsh_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `*a` is non-negative and a set bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             positive overflow,
+ *             -1 if `*a` is negative and a cleared bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_lsh_overflow_p(const struct libj2_j2i *a, unsigned b)
+{
+	struct libj2_j2u t;
+	int overflow;
+	libj2_j2i_xor_sign_to_j2u(a, &t);
+	b = b > LIBJ2_J2I_BIT ? LIBJ2_J2I_BIT + 1U : b + 1U;
+	overflow = libj2_j2u_lsh_overflow_p(&t, b);
+	return overflow && libj2_j2i_is_negative(a) ? -1 : overflow;
+}
+
+
+/**
+ * Predict whether `libj2_ji_lsh_to_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_ji_lsh_overflow_p(a, b)` implements
+ * `libj2_ji_lsh_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `a` is non-negative and a set bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             positive overflow,
+ *             -1 if `a` is negative and a cleared bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_lsh_overflow_p(intmax_t a, unsigned b)
+{
+	if (b >= LIBJ2_J2I_BIT)
+		return a < 0 ? -1 : a > 0;
+	else if (b <= LIBJ2_JU_BIT)
+		return 0;
+	else if (a >= 0)
+		return !!((uintmax_t)a >> (LIBJ2_J2I_BIT - b));
+	else
+		return !!(~(uintmax_t)a >> (LIBJ2_J2I_BIT - b));
+}
+
+
+/**
+ * Predict whether `libj2_j2i_rsh_underflow` or
+ * `libj2_j2i_rsh_to_j2i_underflow` will return
+ * a result-underflow signal
+ * 
+ * `libj2_j2i_rsh_underflow_p(a, b)` implements
+ * `libj2_j2i_rsh_to_j2i_underflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `*a` is non-negative and a set bit
+ *             would be shifted out (discarded), that is,
+ *             a positive underflow,
+ *             -1 if `*a` is negative and a cleared bit
+ *             would be shifted out (discarded), that is,
+ *             a positive underflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_rsh_underflow_p(const struct libj2_j2i *a, unsigned b)
+{
+	if (libj2_j2i_is_negative(a)) {
+		struct libj2_j2u t;
+		libj2_not_j2u_to_j2u((const void *)a, &t);
+		return -libj2_j2u_rsh_underflow_p(&t, b);
+	} else {
+		return libj2_j2u_rsh_underflow_p((const void *)a, b);
+	}
+}
+
+
+/**
+ * Predict whether `libj2_ji_rsh_to_j2i_underflow`
+ * will return a result-underflowflow signal
+ * 
+ * `libj2_ji_rsh_underflow_p(a, b)` implements
+ * `libj2_ji_rsh_to_j2i_underflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `a` is non-negative and a set bit
+ *             would be shifted out (discarded), that is,
+ *             a positive underflow,
+ *             -1 if `a` is negative and a cleared bit
+ *             would be shifted out (discarded), that is,
+ *             a positive underflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_rsh_underflow_p(intmax_t a, unsigned b)
+{
+	if (b >= LIBJ2_JU_BIT)
+		return a < -1 ? -1 : a > 0;
+	else if (!b)
+		return 0;
+	else if (a >= 0)
+		return !!((uintmax_t)a << (LIBJ2_JU_BIT - b));
+	else
+		return !!(~(uintmax_t)a << (LIBJ2_JU_BIT - b));
 }

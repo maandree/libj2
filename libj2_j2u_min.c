@@ -21,6 +21,9 @@ main(void)
 	EXPECT(value.high == 0);
 	EXPECT(value.low == 0);
 
+	libj2_j2u_sub_ju(&value, 1U);
+	EXPECT(libj2_j2u_is_max(&value));
+
 	return 0;
 }
 

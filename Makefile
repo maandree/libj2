@@ -300,17 +300,147 @@ OBJ =\
 	libj2_j2u_sat_mul_j2u.o\
 	libj2_j2u_sat_mul_j2u_to_j2u.o\
 	libj2_j2u_to_str.o\
-	libj2_str_to_j2u.o
+	libj2_str_to_j2u.o\
+	libj2_str_to_j2u_sign.o\
+	libj2_str_to_j2i.o\
+	libj2_j2i_is_zero.o\
+	libj2_j2i_zero.o\
+	libj2_j2i_is_max.o\
+	libj2_j2i_max.o\
+	libj2_j2i_is_min.o\
+	libj2_j2i_min.o\
+	libj2_ju_to_j2i.o\
+	libj2_ji_to_j2i.o\
+	libj2_j2u_to_j2i.o\
+	libj2_j2i_to_j2u.o\
+	libj2_j2i_is_positive.o\
+	libj2_j2i_is_negative.o\
+	libj2_sgn_j2i.o\
+	libj2_j2i_eq_j2i.o\
+	libj2_j2i_eq_ji.o\
+	libj2_j2i_ge_j2i.o\
+	libj2_j2i_ge_ji.o\
+	libj2_j2i_gt_j2i.o\
+	libj2_j2i_gt_ji.o\
+	libj2_j2i_le_j2i.o\
+	libj2_j2i_le_ji.o\
+	libj2_j2i_lt_j2i.o\
+	libj2_j2i_lt_ji.o\
+	libj2_j2i_ne_j2i.o\
+	libj2_j2i_ne_ji.o\
+	libj2_ji_eq_j2i.o\
+	libj2_ji_ge_j2i.o\
+	libj2_ji_gt_j2i.o\
+	libj2_ji_le_j2i.o\
+	libj2_ji_lt_j2i.o\
+	libj2_ji_ne_j2i.o\
+	libj2_j2u_eq_j2i.o\
+	libj2_j2u_eq_ji.o\
+	libj2_j2u_ge_j2i.o\
+	libj2_j2u_ge_ji.o\
+	libj2_j2u_gt_j2i.o\
+	libj2_j2u_gt_ji.o\
+	libj2_j2u_le_j2i.o\
+	libj2_j2u_le_ji.o\
+	libj2_j2u_lt_j2i.o\
+	libj2_j2u_lt_ji.o\
+	libj2_j2u_ne_j2i.o\
+	libj2_j2u_ne_ji.o\
+	libj2_ju_eq_j2i.o\
+	libj2_ju_ge_j2i.o\
+	libj2_ju_gt_j2i.o\
+	libj2_ju_le_j2i.o\
+	libj2_ju_lt_j2i.o\
+	libj2_ju_ne_j2i.o\
+	libj2_j2i_eq_j2u.o\
+	libj2_j2i_eq_ju.o\
+	libj2_j2i_ge_j2u.o\
+	libj2_j2i_ge_ju.o\
+	libj2_j2i_gt_j2u.o\
+	libj2_j2i_gt_ju.o\
+	libj2_j2i_le_j2u.o\
+	libj2_j2i_le_ju.o\
+	libj2_j2i_lt_j2u.o\
+	libj2_j2i_lt_ju.o\
+	libj2_j2i_ne_j2u.o\
+	libj2_j2i_ne_ju.o\
+	libj2_ji_eq_j2u.o\
+	libj2_ji_ge_j2u.o\
+	libj2_ji_gt_j2u.o\
+	libj2_ji_le_j2u.o\
+	libj2_ji_lt_j2u.o\
+	libj2_ji_ne_j2u.o\
+	libj2_ji_cmp_j2i.o\
+	libj2_j2i_cmp_ji.o\
+	libj2_j2i_cmp_j2i.o\
+	libj2_j2i_max_j2i_to_j2i.o\
+	libj2_j2i_max_ji_to_j2i.o\
+	libj2_j2i_max_j2i.o\
+	libj2_j2i_max_ji.o\
+	libj2_j2i_min_j2i_to_j2i.o\
+	libj2_j2i_min_ji_to_j2i.o\
+	libj2_j2i_min_j2i.o\
+	libj2_j2i_min_ji.o\
+	libj2_vmax_j2i.o\
+	libj2_max_j2i.o\
+	libj2_vmin_j2i.o\
+	libj2_min_j2i.o\
+	libj2_vmax_j2i_to_j2i.o\
+	libj2_max_j2i_to_j2i.o\
+	libj2_min_j2i_to_j2i.o\
+	libj2_vmin_j2i_to_j2i.o\
+	libj2_vmin_j2i_return.o\
+	libj2_min_j2i_return.o\
+	libj2_max_j2i_to_j2i.o\
+	libj2_vmax_j2i_to_j2i.o\
+	libj2_vmax_j2i_return.o\
+	libj2_max_j2i_return.o\
+	libj2_minus_j2i_to_j2i.o\
+	libj2_minus_j2i.o\
+	libj2_minus_j2i_to_j2u.o\
+	libj2_minus_j2u_to_j2i.o\
+	libj2_abs_j2i_to_j2i.o\
+	libj2_abs_j2i.o\
+	libj2_abs_j2i_to_j2u.o\
+	libj2_minus_abs_j2i_to_j2i.o\
+	libj2_minus_abs_j2i.o\
+	libj2_j2i_xor_sign_to_j2i.o\
+	libj2_j2i_xor_sign_to_j2u.o\
+	libj2_j2i_xor_sign.o\
+	libj2_j2i_cmp_j2u.o\
+	libj2_j2u_cmp_j2i.o\
+	libj2_ji_cmp_j2u.o\
+	libj2_ju_cmp_j2i.o\
+	libj2_j2i_cmp_ju.o\
+	libj2_j2u_cmp_ji.o\
+	libj2_j2i_lsh.o\
+	libj2_j2i_lsh_to_j2i.o\
+	libj2_ji_lsh_to_j2i.o\
+	libj2_j2i_lsh_overflow.o\
+	libj2_j2i_lsh_to_j2i_overflow.o\
+	libj2_ji_lsh_to_j2i_overflow.o\
+	libj2_j2i_rsh_to_j2i.o\
+	libj2_j2i_rsh.o\
+	libj2_ji_rsh_to_j2i.o\
+	libj2_j2i_rsh_to_j2i_underflow.o\
+	libj2_j2i_rsh_underflow.o\
+	libj2_ji_rsh_to_j2i_underflow.o\
+	libj2_j2i_lsh_overflow_p.o\
+	libj2_ji_lsh_overflow_p.o\
+	libj2_j2i_rsh_underflow_p.o\
+	libj2_ji_rsh_underflow_p.o
 
 SUBHDR =\
 	libj2/constants.h\
 	libj2/signum.h\
 	libj2/constructors.h\
 	libj2/unsigned-comparsion.h\
+	libj2/signed-comparsion.h\
+	libj2/mixed-comparsion.h\
 	libj2/bitwise-logic.h\
+	libj2/sign-shifting.h\
 	libj2/bit-shifting.h\
 	libj2/bit-scanning.h\
-	libj2/sign-shifting.h\
 	libj2/addition.h\
 	libj2/subtraction.h\
 	libj2/multiplication.h\

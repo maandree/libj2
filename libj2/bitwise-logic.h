@@ -1723,3 +1723,6 @@ libj2_j2u_has_high_ju(const struct libj2_j2u *a, uintmax_t b)
 {
 	return (a->high & b) == b;
 }
+
+
+/* libj2_j2i_xor_sign_to_j2i, libj2_j2i_xor_sign_to_j2u, and libj2_j2i_xor_sign are located in sign-shifting.h */

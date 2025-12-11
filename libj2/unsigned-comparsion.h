@@ -4,7 +4,6 @@
 #endif
 
 
-
 /**
  * Check whether an unsigned double-max precision integer is
  * less than another unsigned double-max precision integer
@@ -104,7 +103,7 @@ libj2_j2u_eq_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
  * Check whether an unsigned double-max precision integer is
  * not equal to another unsigned double-max precision integer
  * 
- * `libj2_j2u_eq_j2u(a, b)` implements `*a != *b`
+ * `libj2_j2u_ne_j2u(a, b)` implements `*a != *b`
  * 
  * @param   a  The left-hand value
  * @param   b  The right-hand value
@@ -121,7 +120,7 @@ libj2_j2u_ne_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b)
 
 /**
  * Compare an unsigned double-max precision integer
- * to another unsigned double-max precision integer
+ * against another unsigned double-max precision integer
  * 
  * `libj2_j2u_cmp_j2u(a, b)` implements `*a < *b ? -1 : *a > *b ? +1 : 0`,
  * or equivalently, the signum of `*a - *b` where the signum is 0 for 0
@@ -257,7 +256,7 @@ libj2_j2u_ne_ju(const struct libj2_j2u *a, uintmax_t b)
 
 /**
  * Compare an unsigned double-max precision integer
- * to an unsigned max precision integer
+ * against an unsigned max precision integer
  * 
  * `libj2_j2u_cmp_ju(a, b)` implements `*a < b ? -1 : *a > b ? +1 : 0`,
  * or equivalently, the signum of `*a - b` where the signum is 0 for 0
@@ -393,7 +392,7 @@ libj2_ju_ne_j2u(uintmax_t a, const struct libj2_j2u *b)
 
 /**
  * Compare an unsigned max precision integer
- * to an unsigned double-max precision integer
+ * against an unsigned double-max precision integer
  * 
  * `libj2_ju_cmp_j2u(a, b)` implements `a < *b ? -1 : a > *b ? +1 : 0`,
  * or equivalently, the signum of `a - *b` where the signum is 0 for 0

@@ -10,6 +10,7 @@ extern inline void libj2_min_j2u(struct libj2_j2u *a, ... /*, NULL */);
 
 static struct libj2_j2u v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
 
+
 static void
 reset(void)
 {
@@ -17,17 +18,18 @@ reset(void)
 	v1 = (struct libj2_j2u){0, 0};
 	v2 = (struct libj2_j2u){0, 1};
 	v3 = (struct libj2_j2u){0, 2};
-	v4 = (struct libj2_j2u){0, max - 1};
+	v4 = (struct libj2_j2u){0, max - 1U};
 	v5 = (struct libj2_j2u){1, 0};
 	v6 = (struct libj2_j2u){1, 1};
-	v7 = (struct libj2_j2u){max - 1, 0};
-	v8 = (struct libj2_j2u){max - 1, 1};
-	v9 = (struct libj2_j2u){max - 1, max};
+	v7 = (struct libj2_j2u){max - 1U, 0};
+	v8 = (struct libj2_j2u){max - 1U, 1};
+	v9 = (struct libj2_j2u){max - 1U, max};
 	v10 = (struct libj2_j2u){max, 0};
 	v11 = (struct libj2_j2u){max, 1};
-	v12 = (struct libj2_j2u){max, max - 1};
+	v12 = (struct libj2_j2u){max, max - 1U};
 	v13 = (struct libj2_j2u){max, max};
 }
+
 
 static void
 expect_untouched(void)
@@ -36,17 +38,18 @@ expect_untouched(void)
 	EXPECT(libj2_j2u_eq_j2u(&v1, &(struct libj2_j2u){0, 0}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v2, &(struct libj2_j2u){0, 1}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v3, &(struct libj2_j2u){0, 2}) == 1);
-	EXPECT(libj2_j2u_eq_j2u(&v4, &(struct libj2_j2u){0, max - 1}) == 1);
+	EXPECT(libj2_j2u_eq_j2u(&v4, &(struct libj2_j2u){0, max - 1U}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v5, &(struct libj2_j2u){1, 0}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v6, &(struct libj2_j2u){1, 1}) == 1);
-	EXPECT(libj2_j2u_eq_j2u(&v7, &(struct libj2_j2u){max - 1, 0}) == 1);
-	EXPECT(libj2_j2u_eq_j2u(&v8, &(struct libj2_j2u){max - 1, 1}) == 1);
-	EXPECT(libj2_j2u_eq_j2u(&v9, &(struct libj2_j2u){max - 1, max}) == 1);
+	EXPECT(libj2_j2u_eq_j2u(&v7, &(struct libj2_j2u){max - 1U, 0}) == 1);
+	EXPECT(libj2_j2u_eq_j2u(&v8, &(struct libj2_j2u){max - 1U, 1}) == 1);
+	EXPECT(libj2_j2u_eq_j2u(&v9, &(struct libj2_j2u){max - 1U, max}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v10, &(struct libj2_j2u){max, 0}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v11, &(struct libj2_j2u){max, 1}) == 1);
-	EXPECT(libj2_j2u_eq_j2u(&v12, &(struct libj2_j2u){max, max - 1}) == 1);
+	EXPECT(libj2_j2u_eq_j2u(&v12, &(struct libj2_j2u){max, max - 1U}) == 1);
 	EXPECT(libj2_j2u_eq_j2u(&v13, &(struct libj2_j2u){max, max}) == 1);
 }
+
 
 #define HEAD(X, ...) X
 #define TAIL(X, ...) __VA_ARGS__
@@ -70,6 +73,7 @@ expect_untouched(void)
 		expect_untouched();\
 		EXPECT(libj2_j2u_eq_j2u(&(MIN), &r));\
 	} while (0)
+
 
 int
 main(void)

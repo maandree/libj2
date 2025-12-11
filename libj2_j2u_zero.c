@@ -2,7 +2,7 @@
 #include "common.h"
 #ifndef TEST
 
-extern inline void libj2_j2u_zero(struct libj2_j2u *res);
+extern inline void libj2_j2i_zero(struct libj2_j2i *res);
 /* TODO Add man page */
 
 
@@ -11,13 +11,13 @@ extern inline void libj2_j2u_zero(struct libj2_j2u *res);
 int
 main(void)
 {
-	struct libj2_j2u value = {1, 2};
+	struct libj2_j2i value = {1, 2};
 
-	libj2_j2u_zero(&value);
+	libj2_j2i_zero(&value);
 	EXPECT(value.high == 0);
 	EXPECT(value.low == 0);
 
-	libj2_j2u_zero(&value);
+	libj2_j2i_zero(&value);
 	EXPECT(value.high == 0);
 	EXPECT(value.low == 0);
 

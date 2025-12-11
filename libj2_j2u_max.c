@@ -21,6 +21,9 @@ main(void)
 	EXPECT(~value.high == 0);
 	EXPECT(~value.low == 0);
 
+	libj2_j2u_add_ju(&value, 1U);
+	EXPECT(libj2_j2u_is_zero(&value));
+
 	return 0;
 }
 

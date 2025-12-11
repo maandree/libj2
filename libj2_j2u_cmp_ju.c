@@ -89,6 +89,7 @@ cmp(uintmax_t a_high, uintmax_t a_low, uintmax_t b)
 	return ret;
 }
 
+
 int
 main(void)
 {
@@ -101,7 +102,7 @@ main(void)
 	EXPECT(cmp(0, max, 0) == +1);
 	EXPECT(cmp(max, 0, 0) == +1);
 	EXPECT(cmp(max, max, 0) == +1);
-	EXPECT(cmp(max, max - 1, 0) == +1);
+	EXPECT(cmp(max, max - 1U, 0) == +1);
 
 	EXPECT(cmp(0, 0, 1) == -1);
 	EXPECT(cmp(0, 1, 1) == 0);
@@ -110,7 +111,7 @@ main(void)
 	EXPECT(cmp(0, max, 1) == +1);
 	EXPECT(cmp(max, 0, 1) == +1);
 	EXPECT(cmp(max, max, 1) == +1);
-	EXPECT(cmp(max, max - 1, 1) == +1);
+	EXPECT(cmp(max, max - 1U, 1) == +1);
 
 	EXPECT(cmp(0, 0, 2) == -1);
 	EXPECT(cmp(0, 1, 2) == -1);
@@ -119,7 +120,7 @@ main(void)
 	EXPECT(cmp(0, max, 2) == +1);
 	EXPECT(cmp(max, 0, 2) == +1);
 	EXPECT(cmp(max, max, 2) == +1);
-	EXPECT(cmp(max, max - 1, 2) == +1);
+	EXPECT(cmp(max, max - 1U, 2) == +1);
 
 	EXPECT(cmp(0, 0, max) == -1);
 	EXPECT(cmp(0, 1, max) == -1);
@@ -128,16 +129,16 @@ main(void)
 	EXPECT(cmp(0, max, max) == 0);
 	EXPECT(cmp(max, 0, max) == +1);
 	EXPECT(cmp(max, max, max) == +1);
-	EXPECT(cmp(max, max - 1, max) == +1);
+	EXPECT(cmp(max, max - 1U, max) == +1);
 
-	EXPECT(cmp(0, 0, max - 1) == -1);
-	EXPECT(cmp(0, 1, max - 1) == -1);
-	EXPECT(cmp(1, 0, max - 1) == +1);
-	EXPECT(cmp(1, 1, max - 1) == +1);
-	EXPECT(cmp(0, max, max - 1) == +1);
-	EXPECT(cmp(max, 0, max - 1) == +1);
-	EXPECT(cmp(max, max, max - 1) == +1);
-	EXPECT(cmp(max, max - 1, max - 1) == +1);
+	EXPECT(cmp(0, 0, max - 1U) == -1);
+	EXPECT(cmp(0, 1, max - 1U) == -1);
+	EXPECT(cmp(1, 0, max - 1U) == +1);
+	EXPECT(cmp(1, 1, max - 1U) == +1);
+	EXPECT(cmp(0, max, max - 1U) == +1);
+	EXPECT(cmp(max, 0, max - 1U) == +1);
+	EXPECT(cmp(max, max, max - 1U) == +1);
+	EXPECT(cmp(max, max - 1U, max - 1U) == +1);
 
 	return 0;
 }
