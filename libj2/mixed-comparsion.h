@@ -427,7 +427,7 @@ libj2_ji_cmp_j2u(intmax_t a, const struct libj2_j2u *b)
 LIBJ2_PURE_ inline int
 libj2_ju_lt_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? 0 : libj2_ju_lt_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? 0 : libj2_ju_lt_j2u(a, (const void *)b);
 }
 
 
@@ -446,7 +446,7 @@ libj2_ju_lt_j2i(uintmax_t a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_ju_le_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? 0 : libj2_ju_le_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? 0 : libj2_ju_le_j2u(a, (const void *)b);
 }
 
 
@@ -465,7 +465,7 @@ libj2_ju_le_j2i(uintmax_t a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_ju_gt_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? 1 : libj2_ju_gt_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? 1 : libj2_ju_gt_j2u(a, (const void *)b);
 }
 
 
@@ -484,7 +484,7 @@ libj2_ju_gt_j2i(uintmax_t a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_ju_ge_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? 1 : libj2_ju_ge_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? 1 : libj2_ju_ge_j2u(a, (const void *)b);
 }
 
 
@@ -503,7 +503,7 @@ libj2_ju_ge_j2i(uintmax_t a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_ju_eq_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? 0 : libj2_ju_eq_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? 0 : libj2_ju_eq_j2u(a, (const void *)b);
 }
 
 
@@ -522,7 +522,7 @@ libj2_ju_eq_j2i(uintmax_t a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_ju_ne_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? 1 : libj2_ju_ne_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? 1 : libj2_ju_ne_j2u(a, (const void *)b);
 }
 
 
@@ -544,7 +544,7 @@ libj2_ju_ne_j2i(uintmax_t a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_ju_cmp_j2i(uintmax_t a, const struct libj2_j2i *b)
 {
-	return libj2_j2i_is_negative(b) < 0 ? +1 : libj2_ju_cmp_j2u(a, (const void *)b);
+	return libj2_j2i_is_negative(b) ? +1 : libj2_ju_cmp_j2u(a, (const void *)b);
 }
 
 
