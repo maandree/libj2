@@ -25,7 +25,7 @@
 
 
 /**
- * The number of bits in an `uintmax_t`
+ * The number of bits in a `uintmax_t`
  * 
  * @since  1.0
  */
