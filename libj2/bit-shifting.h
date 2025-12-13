@@ -972,10 +972,12 @@ libj2_j2i_rsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *re
 		res->high = UINTMAX_MAX;
 		b -= LIBJ2_JU_BIT;
 		res->low >>= b;
-		res->low |= ((uintmax_t)1 << (LIBJ2_JU_BIT - 1U)) - 1U;
+		res->low |= UINTMAX_MAX << (LIBJ2_JU_BIT - b);
 	} else if (b) {
 		libj2_j2u_rsh_to_j2u((const void *)a, b, (void *)res);
-		res->high |= ((uintmax_t)1 << (LIBJ2_JU_BIT - 1U)) - 1U;
+		res->high |= UINTMAX_MAX << (LIBJ2_JU_BIT - b);
+	} else {
+		*res = *a;
 	}
 }
 
@@ -1283,7 +1285,7 @@ libj2_ji_rsh_underflow_p(intmax_t a, unsigned b)
 	else if (!b)
 		return 0;
 	else if (a >= 0)
-		return !!((uintmax_t)a << (LIBJ2_JU_BIT - b));
+		return (uintmax_t)a << (LIBJ2_JU_BIT - b) ? +1 : 0;
 	else
-		return !!(~(uintmax_t)a << (LIBJ2_JU_BIT - b));
+		return ~(uintmax_t)a << (LIBJ2_JU_BIT - b) ? -1 : 0;
 }
