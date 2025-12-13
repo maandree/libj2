@@ -94,6 +94,8 @@ check(const char *pattern)
 	for (i = 0; i < LIBJ2_J2I_BIT + 8U; i++) {
 		underflow = set(&expected, pattern, i);
 
+		EXPECT(libj2_j2i_is_negative(&a) ? underflow <= 0 : underflow >= 0);
+
 		r = a;
 		libj2_j2i_rsh(&r, i);
 		EXPECT(libj2_j2i_eq_j2i(&r, &expected));
