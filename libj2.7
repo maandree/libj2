@@ -15,6 +15,992 @@ provides integer data types with double the width of
 .BR uintmax_t ,
 along with functions for preforming standard
 integer operations, with optional overflow-detection.
+.PP
+.B libj2
+provides the following value-assignment functions:
+.TP
+.BR libj2_ju_to_j2i (3),
+.TQ
+.BR libj2_ji_to_j2i (3),
+.TQ
+.BR libj2_ju_to_j2u (3)
+Extend an intrinsic integer to an extended-precision integer.
+.TP
+.BR libj2_j2i_min (3),
+.TQ
+.BR libj2_j2u_min (3)
+Assign the minimum presentable value.
+.TP
+.BR libj2_j2i_max (3),
+.TQ
+.BR libj2_j2u_max (3)
+Assign the maximum presentable value.
+.TP
+.BR libj2_j2i_zero (3),
+.TQ
+.BR libj2_j2u_zero (3)
+Assign the value zero.
+.TP
+.BR libj2_j2u_to_j2i (3),
+.TQ
+.BR libj2_j2i_to_j2u (3)
+Convert between signed and unsigned extended-precision integer.
+.PP
+.B libj2
+provides the following string-representation functions:
+.TP
+.BR libj2_str_to_j2i (3),
+.TQ
+.BR libj2_str_to_j2u (3),
+.TQ
+.BR libj2_str_to_j2u_sign (3)
+Parse a string-representation.
+.TP
+.BR libj2_j2i_to_str (3),
+.TQ
+.BR libj2_j2u_to_str (3)
+Create a string-representation.
+.PP
+.B libj2
+provides the following sign-shifting functions:
+.TP
+.BR libj2_abs_j2i (3),
+.TQ
+.BR libj2_abs_j2i_to_j2i (3),
+.TQ
+.BR libj2_abs_j2i_to_j2u (3)
+Calculate the absolute value.
+.TP
+.BR libj2_minus_j2i (3),
+.TQ
+.BR libj2_minus_j2i_to_j2i (3),
+.TQ
+.BR libj2_minus_j2i_to_j2u (3),
+.TQ
+.BR libj2_minus_j2u (3),
+.TQ
+.BR libj2_minus_j2u_to_j2i (3),
+.TQ
+.BR libj2_minus_j2u_to_j2u (3)
+Calculate the additive inverse.
+.TP
+.BR libj2_minus_abs_j2i (3),
+.TQ
+.BR libj2_minus_abs_j2i_to_j2i (3)
+Calculate the additive inverse of the absolute value.
+.PP
+.B libj2
+provides the following comparsion functions:
+.TP
+.BR libj2_j2i_cmp_j2i (3),
+.TQ
+.BR libj2_j2i_cmp_ji (3),
+.TQ
+.BR libj2_ji_cmp_j2i (3),
+.TQ
+.BR libj2_j2i_cmp_j2u (3),
+.TQ
+.BR libj2_j2i_cmp_ju (3),
+.TQ
+.BR libj2_ji_cmp_j2u (3),
+.TQ
+.BR libj2_j2u_cmp_j2i (3),
+.TQ
+.BR libj2_j2u_cmp_ji (3),
+.TQ
+.BR libj2_ju_cmp_j2i (3),
+.TQ
+.BR libj2_j2u_cmp_j2u (3),
+.TQ
+.BR libj2_j2u_cmp_ju (3),
+.TQ
+.BR libj2_ju_cmp_j2u (3)
+Perform three-way comparision.
+.TP
+.BR libj2_j2i_eq_j2i (3),
+.TQ
+.BR libj2_j2i_eq_ji (3),
+.TQ
+.BR libj2_ji_eq_j2i (3),
+.TQ
+.BR libj2_j2i_eq_j2u (3),
+.TQ
+.BR libj2_j2i_eq_ju (3),
+.TQ
+.BR libj2_ji_eq_j2u (3),
+.TQ
+.BR libj2_j2u_eq_j2i (3),
+.TQ
+.BR libj2_j2u_eq_ji (3),
+.TQ
+.BR libj2_ju_eq_j2i (3),
+.TQ
+.BR libj2_j2u_eq_j2u (3),
+.TQ
+.BR libj2_j2u_eq_ju (3),
+.TQ
+.BR libj2_ju_eq_j2u (3)
+Check whether two values are equal.
+.TP
+.BR libj2_j2i_ne_j2i (3),
+.TQ
+.BR libj2_j2i_ne_ji (3),
+.TQ
+.BR libj2_ji_ne_j2i (3),
+.TQ
+.BR libj2_j2i_ne_j2u (3),
+.TQ
+.BR libj2_j2i_ne_ju (3),
+.TQ
+.BR libj2_ji_ne_j2u (3),
+.TQ
+.BR libj2_j2u_ne_j2i (3),
+.TQ
+.BR libj2_j2u_ne_ji (3),
+.TQ
+.BR libj2_ju_ne_j2i (3),
+.TQ
+.BR libj2_j2u_ne_j2u (3),
+.TQ
+.BR libj2_j2u_ne_ju (3),
+.TQ
+.BR libj2_ju_ne_j2u (3)
+Check whether two values are different.
+.TP
+.BR libj2_j2i_lt_j2i (3),
+.TQ
+.BR libj2_j2i_lt_ji (3),
+.TQ
+.BR libj2_ji_lt_j2i (3),
+.TQ
+.BR libj2_j2i_lt_j2u (3),
+.TQ
+.BR libj2_j2i_lt_ju (3),
+.TQ
+.BR libj2_ji_lt_j2u (3),
+.TQ
+.BR libj2_j2u_lt_j2i (3),
+.TQ
+.BR libj2_j2u_lt_ji (3),
+.TQ
+.BR libj2_ju_lt_j2i (3),
+.TQ
+.BR libj2_j2u_lt_j2u (3),
+.TQ
+.BR libj2_j2u_lt_ju (3),
+.TQ
+.BR libj2_ju_lt_j2u (3)
+Check whether a value is less than another value.
+.TP
+.BR libj2_j2i_le_j2i (3),
+.TQ
+.BR libj2_j2i_le_ji (3),
+.TQ
+.BR libj2_ji_le_j2i (3),
+.TQ
+.BR libj2_j2i_le_j2u (3),
+.TQ
+.BR libj2_j2i_le_ju (3),
+.TQ
+.BR libj2_ji_le_j2u (3),
+.TQ
+.BR libj2_j2u_le_j2i (3),
+.TQ
+.BR libj2_j2u_le_ji (3),
+.TQ
+.BR libj2_ju_le_j2i (3),
+.TQ
+.BR libj2_j2u_le_j2u (3),
+.TQ
+.BR libj2_j2u_le_ju (3),
+.TQ
+.BR libj2_ju_le_j2u (3)
+Check whether a value is less than another value
+or equal to it.
+.TP
+.BR libj2_j2i_gt_j2i (3),
+.TQ
+.BR libj2_j2i_gt_ji (3),
+.TQ
+.BR libj2_ji_gt_j2i (3),
+.TQ
+.BR libj2_j2i_gt_j2u (3),
+.TQ
+.BR libj2_j2i_gt_ju (3),
+.TQ
+.BR libj2_ji_gt_j2u (3),
+.TQ
+.BR libj2_j2u_gt_j2i (3),
+.TQ
+.BR libj2_j2u_gt_ji (3),
+.TQ
+.BR libj2_ju_gt_j2i (3),
+.TQ
+.BR libj2_j2u_gt_j2u (3),
+.TQ
+.BR libj2_j2u_gt_ju (3),
+.TQ
+.BR libj2_ju_gt_j2u (3)
+Check whether a value is greater than another value.
+.TP
+.BR libj2_j2i_ge_j2i (3),
+.TQ
+.BR libj2_j2i_ge_ji (3),
+.TQ
+.BR libj2_ji_ge_j2i (3),
+.TQ
+.BR libj2_j2i_ge_j2u (3),
+.TQ
+.BR libj2_j2i_ge_ju (3),
+.TQ
+.BR libj2_ji_ge_j2u (3),
+.TQ
+.BR libj2_j2u_ge_j2i (3),
+.TQ
+.BR libj2_j2u_ge_ji (3),
+.TQ
+.BR libj2_ju_ge_j2i (3),
+.TQ
+.BR libj2_j2u_ge_j2u (3),
+.TQ
+.BR libj2_j2u_ge_ju (3),
+.TQ
+.BR libj2_ju_ge_j2u (3)
+Check whether a value is greater than another value
+or eqaul to it.
+.TP
+.BR libj2_j2i_is_min (3),
+.TQ
+.BR libj2_j2u_is_min (3)
+Check whether a value is the minimum presentable value.
+.TP
+.BR libj2_j2i_is_max (3),
+.TQ
+.BR libj2_j2u_is_max (3)
+Check whether a value is the maximum presentable value.
+.TP
+.BR libj2_j2i_is_zero (3),
+.TQ
+.BR libj2_j2u_is_zero (3)
+Check whether a value is the value zero.
+.TP
+.BR libj2_j2i_is_positive (3),
+.TQ
+.BR libj2_j2u_is_positive (3)
+Check whether a value is positive.
+.TP
+.BR libj2_j2i_is_negative (3)
+Check whether a value is negative.
+.TP
+.BR ibj2_sgn_j2i (3),
+.TQ
+.BR libj2_sgn_j2u (3)
+Perform three-way comparision against the value zero (get the
+signum of a value).
+.TP
+.BR libj2_j2i_max_j2i (3),
+.TQ
+.BR libj2_j2i_max_j2i_to_j2i (3),
+.TQ
+.BR libj2_j2i_max_ji (3),
+.TQ
+.BR libj2_j2i_max_ji_to_j2i (3),
+.TQ
+.BR libj2_j2u_max_j2u (3),
+.TQ
+.BR libj2_j2u_max_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_max_ju (3),
+.TQ
+.BR libj2_j2u_max_ju_to_j2u (3)
+Get the maximum of two values.
+.TP
+.BR libj2_max_j2i (3),
+.TQ
+.BR libj2_max_j2i_to_j2i (3),
+.TQ
+.BR libj2_max_j2i_return (3),
+.TQ
+.BR libj2_max_j2u (3),
+.TQ
+.BR libj2_max_j2u_to_j2u (3),
+.TQ
+.BR libj2_max_j2u_return (3),
+.TQ
+.BR libj2_vmax_j2i (3),
+.TQ
+.BR libj2_vmax_j2i_to_j2i (3),
+.TQ
+.BR libj2_vmax_j2i_return (3),
+.TQ
+.BR libj2_vmax_j2u (3),
+.TQ
+.BR libj2_vmax_j2u_to_j2u (3),
+.TQ
+.BR libj2_vmax_j2u_return (3)
+Get the maximum of a list of values.
+.TP
+.BR libj2_j2i_min_j2i (3),
+.TQ
+.BR libj2_j2i_min_j2i_to_j2i (3),
+.TQ
+.BR libj2_j2i_min_ji (3),
+.TQ
+.BR libj2_j2i_min_ji_to_j2i (3),
+.TQ
+.BR libj2_j2u_min_j2u (3),
+.TQ
+.BR libj2_j2u_min_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_min_ju (3),
+.TQ
+.BR libj2_j2u_min_ju_to_j2u (3)
+Get the minimum of two values.
+.TP
+.BR libj2_min_j2i (3),
+.TQ
+.BR libj2_min_j2i_to_j2i (3),
+.TQ
+.BR libj2_min_j2i_return (3),
+.TQ
+.BR libj2_min_j2u (3),
+.TQ
+.BR libj2_min_j2u_to_j2u (3),
+.TQ
+.BR libj2_min_j2u_return (3),
+.TQ
+.BR libj2_vmin_j2i (3),
+.TQ
+.BR libj2_vmin_j2i_to_j2i (3),
+.TQ
+.BR libj2_vmin_j2i_return (3),
+.TQ
+.BR libj2_vmin_j2u (3),
+.TQ
+.BR libj2_vmin_j2u_to_j2u (3),
+.TQ
+.BR libj2_vmin_j2u_return (3)
+Get the minimum of a list of values.
+.PP
+.B libj2
+provides the following bitwise logic functions:
+.TP
+.BR libj2_not_j2u (3),
+.TQ
+.BR libj2_not_j2u_to_j2u (3),
+.TQ
+.BR libj2_not_ju_to_j2u (3)
+Flip all bits.
+.TP
+.BR libj2_j2i_xor_sign (3),
+.TQ
+.BR libj2_j2i_xor_sign_to_j2i (3),
+.TQ
+.BR libj2_j2i_xor_sign_to_j2u (3)
+Flip all bits if the sign-bit is set (if the value is negative).
+.TP
+.BR libj2_j2u_and_bit (3),
+.TQ
+.BR libj2_j2u_and_bit_to_j2u (3)
+Calculate the bitwise AND of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_and_j2u (3),
+.TQ
+.BR libj2_j2u_and_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_and_ju (3),
+.TQ
+.BR libj2_j2u_and_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_and_j2u_to_j2u (3)
+Calculate the bitwise AND of two values.
+.TP
+.BR libj2_j2u_or_bit (3),
+.TQ
+.BR libj2_j2u_or_bit_to_j2u (3)
+Calculate the bitwise OR of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_or_j2u (3),
+.TQ
+.BR libj2_j2u_or_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_or_ju (3),
+.TQ
+.BR libj2_j2u_or_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_or_j2u_to_j2u (3)
+Calculate the bitwise OR of two values.
+.TP
+.BR libj2_j2u_xor_bit (3),
+.TQ
+.BR libj2_j2u_xor_bit_to_j2u (3)
+Calculate the bitwise XOR of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_xor_j2u (3),
+.TQ
+.BR libj2_j2u_xor_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_xor_ju (3),
+.TQ
+.BR libj2_j2u_xor_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_xor_j2u_to_j2u (3)
+Calculate the bitwise XOR of two values.
+.TP
+.BR libj2_j2u_if_bit (3),
+.TQ
+.BR libj2_j2u_if_bit_to_j2u (3)
+Calculate the bitwise IF of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_if_j2u (3),
+.TQ
+.BR libj2_j2u_if_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_if_ju (3),
+.TQ
+.BR libj2_j2u_if_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_if_j2u_to_j2u (3)
+Calculate the bitwise IF of two values.
+.TP
+.BR libj2_j2u_imply_bit (3),
+.TQ
+.BR libj2_j2u_imply_bit_to_j2u (3)
+Calculate the bitwise IMPLY of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_imply_j2u (3),
+.TQ
+.BR libj2_j2u_imply_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_imply_ju (3),
+.TQ
+.BR libj2_j2u_imply_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_imply_j2u_to_j2u (3)
+Calculate the bitwise IMPLY of two values.
+.TP
+.BR libj2_j2u_nand_bit (3),
+.TQ
+.BR libj2_j2u_nand_bit_to_j2u (3)
+Calculate the bitwise NAND of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_nand_j2u (3),
+.TQ
+.BR libj2_j2u_nand_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_nand_ju (3),
+.TQ
+.BR libj2_j2u_nand_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_nand_j2u_to_j2u (3)
+Calculate the bitwise NAND of two values.
+.TP
+.BR libj2_j2u_nor_bit (3),
+.TQ
+.BR libj2_j2u_nor_bit_to_j2u (3)
+Calculate the bitwise NOR of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_nor_j2u (3),
+.TQ
+.BR libj2_j2u_nor_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_nor_ju (3),
+.TQ
+.BR libj2_j2u_nor_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_nor_j2u_to_j2u (3)
+Calculate the bitwise NOR of two values.
+.TP
+.BR libj2_j2u_xnor_bit (3),
+.TQ
+.BR libj2_j2u_xnor_bit_to_j2u (3)
+Calculate the bitwise XNOR of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_xnor_j2u (3),
+.TQ
+.BR libj2_j2u_xnor_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_xnor_ju (3),
+.TQ
+.BR libj2_j2u_xnor_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_xnor_j2u_to_j2u (3)
+Calculate the bitwise XNOR of two values.
+.TP
+.BR libj2_j2u_nif_bit (3),
+.TQ
+.BR libj2_j2u_nif_bit_to_j2u (3)
+Calculate the bitwise NIF of the value and the value where one
+specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_nif_j2u (3),
+.TQ
+.BR libj2_j2u_nif_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_nif_ju (3),
+.TQ
+.BR libj2_j2u_nif_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_nif_j2u_to_j2u (3)
+Calculate the bitwise NIF of two values.
+.TP
+.BR libj2_j2u_nimply_bit (3),
+.TQ
+.BR libj2_j2u_nimply_bit_to_j2u (3)
+Calculate the bitwise NIMPLY of the value and the value where
+one specific bit is set and all other bits are cleared.
+.TP
+.BR libj2_j2u_nimply_j2u (3),
+.TQ
+.BR libj2_j2u_nimply_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_nimply_ju (3),
+.TQ
+.BR libj2_j2u_nimply_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_nimply_j2u_to_j2u (3)
+Calculate the bitwise NIMPLY of two values.
+.TP
+.BR libj2_j2u_test_bit (3)
+Check whether a specific bit is set.
+.TP
+.BR libj2_j2u_test_j2u (3),
+.TQ
+.BR libj2_j2u_test_ju (3),
+.TQ
+.BR libj2_j2u_test_high_ju (3)
+Check whether two values any set bits in common.
+.TP
+.BR libj2_j2u_has_j2u (3),
+.TQ
+.BR libj2_j2u_has_ju (3),
+.TQ
+.BR libj2_j2u_has_high_ju (3)
+Check whether a value have all set bits in another value
+also set in it.
+.PP
+.B libj2
+provides the following bit-shifting functions:
+.TP
+.BR libj2_j2i_lsh (3),
+.TQ
+.BR libj2_j2i_lsh_to_j2i (3),
+.TQ
+.BR libj2_ji_lsh_to_j2i (3),
+.TQ
+.BR libj2_j2u_lsh (3),
+.TQ
+.BR libj2_j2u_lsh_to_j2u (3),
+.TQ
+.BR libj2_ju_lsh_to_j2u (3)
+Left-shift a value.
+.TP
+.BR libj2_j2i_lsh_overflow (3),
+.TQ
+.BR libj2_j2i_lsh_to_j2i_overflow (3),
+.TQ
+.BR libj2_ji_lsh_to_j2i_overflow (3),
+.TQ
+.BR libj2_j2u_lsh_overflow (3),
+.TQ
+.BR libj2_j2u_lsh_to_j2u_overflow (3),
+.TQ
+.BR libj2_ju_lsh_to_j2u_overflow (3)
+Left-shift a value, and detect overflow.
+.TP
+.BR libj2_j2i_lsh_overflow_p (3),
+.TQ
+.BR libj2_j2u_lsh_overflow_p (3),
+.TQ
+.BR libj2_ji_lsh_overflow_p (3),
+.TQ
+.BR libj2_ju_lsh_overflow_p (3)
+Predict overflow of left-shifting a value.
+.TP
+.BR libj2_j2u_sat_lsh (3),
+.TQ
+.BR libj2_j2u_sat_lsh_to_j2u (3),
+.TQ
+.BR libj2_ju_sat_lsh_to_j2u (3)
+Left-shift a value, but saturate on overflow.
+.TP
+.BR libj2_j2i_rsh (3),
+.TQ
+.BR libj2_j2i_rsh_to_j2i (3),
+.TQ
+.BR libj2_ji_rsh_to_j2i (3),
+.TQ
+.BR libj2_j2u_rsh (3),
+.TQ
+.BR libj2_j2u_rsh_to_j2u (3),
+.TQ
+.BR libj2_ju_rsh_to_j2u (3)
+Right-shift a value.
+.TP
+.BR libj2_j2i_rsh_underflow (3),
+.TQ
+.BR libj2_j2i_rsh_to_j2i_underflow (3),
+.TQ
+.BR libj2_ji_rsh_to_j2i_underflow (3),
+.TQ
+.BR libj2_j2u_rsh_underflow (3),
+.TQ
+.BR libj2_j2u_rsh_to_j2u_underflow (3),
+.TQ
+.BR libj2_ju_rsh_to_j2u_underflow (3)
+Right-shift a value, and detect underflow.
+.TP
+.BR libj2_j2i_rsh_underflow_p (3),
+.TQ
+.BR libj2_ji_rsh_underflow_p (3),
+.TQ
+.BR libj2_j2u_rsh_underflow_p (3),
+.TQ
+.BR libj2_ju_rsh_underflow_p (3)
+Predict underflow of right-shifting a value.
+.TP
+.BR libj2_j2u_lrot (3),
+.TQ
+.BR libj2_j2u_lrot_to_j2u (3),
+.TQ
+.BR libj2_ju_lrot_to_j2u (3)
+Left-rotate a value.
+.TP
+.BR libj2_j2u_rrot (3),
+.TQ
+.BR libj2_j2u_rrot_to_j2u (3),
+.TQ
+.BR libj2_ju_rrot_to_j2u (3)
+Right-rotate a value.
+.PP
+.B libj2
+provides the following bit-scanning functions:
+.TP
+.BR libj2_clo_j2u (3)
+Count leading set bits.
+.TP
+.BR libj2_clz_j2u (3)
+Count leading cleared bits.
+.TP
+.BR libj2_cto_j2u (3)
+Count trailing set bits.
+.TP
+.BR libj2_ctz_j2u (3)
+Count trailing cleared bits.
+.TP
+.BR libj2_co_j2u (3)
+Count set bits.
+.TP
+.BR libj2_cz_j2u (3)
+Count cleared bits.
+.TP
+.BR libj2_parity_j2u (3)
+Calculate the parity of the set bits (check whether the number
+of set bits is odd).
+.TP
+.BR libj2_fls_j2u (3)
+Find the most significant set bit.
+.TP
+.BR libj2_flc_j2u (3)
+Find the most significant cleared bit.
+.TP
+.BR libj2_ffs_j2u (3)
+Find the least significant set bit.
+.TP
+.BR libj2_ffc_j2u (3)
+Find the least significant cleared bit.
+.TP
+.BR libj2_kls_j2u (3),
+.TQ
+.BR libj2_kls_j2u_to_j2u (3)
+Clear all but the most significant set bit.
+.TP
+.BR libj2_kfs_j2u (3),
+.TQ
+.BR libj2_kfs_j2u_to_j2u (3)
+Clear all but the least significant set bit.
+.TP
+.BR libj2_cls_j2u (3),
+.TQ
+.BR libj2_cls_j2u_to_j2u (3)
+Clear the most significant set bit.
+.TP
+.BR libj2_cfs_j2u (3),
+.TQ
+.BR libj2_cfs_j2u_to_j2u (3)
+Clear the least significant set bit.
+.TP
+.BR libj2_slc_j2u (3),
+.TQ
+.BR libj2_slc_j2u_to_j2u (3)
+Set the most significant cleared bit.
+.TP
+.BR libj2_sfc_j2u (3),
+.TQ
+.BR libj2_sfc_j2u_to_j2u (3)
+Set the least significant cleared bit.
+.PP
+.B libj2
+provides the following arithmetic functions:
+.TP
+.BR libj2_j2u_add_j2u (3),
+.TQ
+.BR libj2_j2u_add_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_add_ju (3),
+.TQ
+.BR libj2_j2u_add_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_add_j2u_to_j2u (3),
+.TQ
+.BR libj2_ju_add_ju_to_j2u (3)
+Calculate the sum of two values.
+.TP
+.BR libj2_j2u_add_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_add_j2u_to_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_add_ju_overflow (3),
+.TQ
+.BR libj2_j2u_add_ju_to_j2u_overflow (3),
+.TQ
+.BR libj2_ju_add_j2u_to_j2u_overflow (3)
+Calculate the sum of two values, and detect overflow.
+.TP
+.BR libj2_j2u_add_j2u_overflow_p (3),
+.TQ
+.BR libj2_j2u_add_ju_overflow_p (3),
+.TQ
+.BR libj2_ju_add_j2u_overflow_p (3)
+Predict whether adding two values will result in an overflow.
+.TP
+.BR libj2_j2u_sat_add_j2u (3),
+.TQ
+.BR libj2_j2u_sat_add_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_sat_add_ju (3),
+.TQ
+.BR libj2_j2u_sat_add_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_sat_add_j2u_to_j2u (3)
+Calculate the sum of two values, but saturate on overflow.
+.TP
+.BR libj2_j2u_sub_j2u (3),
+.TQ
+.BR libj2_j2u_sub_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_sub_ju (3),
+.TQ
+.BR libj2_j2u_sub_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_sub_j2u_to_j2u (3),
+.TQ
+.BR libj2_ju_sub_ju_to_j2u (3)
+Calculate the difference between two values.
+.TQ
+.BR libj2_j2u_rsub_j2u (3),
+.TQ
+.BR libj2_j2u_rsub_ju (3)
+Calculate the difference between two values. These functions
+swap the position of the two operands.
+.TP
+.BR libj2_j2u_sub_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_sub_j2u_to_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_sub_ju_overflow (3),
+.TQ
+.BR libj2_j2u_sub_ju_to_j2u_overflow (3),
+.TQ
+.BR libj2_ju_sub_j2u_to_j2u_overflow (3),
+.TQ
+.BR libj2_ju_sub_ju_to_j2u_overflow (3)
+Calculate the difference between two values, and detect
+overflow.
+.TP
+.BR libj2_j2u_rsub_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_rsub_ju_overflow (3)
+Calculate the difference between two values, and detect
+overflow. These functions swap the position of the two operands.
+.TP
+.BR libj2_j2u_sub_j2u_overflow_p (3),
+.TQ
+.BR libj2_j2u_sub_ju_overflow_p (3),
+.TQ
+.BR libj2_ju_sub_j2u_overflow_p (3),
+.TQ
+.BR libj2_ju_sub_ju_overflow_p (3)
+Predict whether subtracting a value will result in an overflow.
+.TP
+.BR libj2_j2u_rsub_j2u_overflow_p (3),
+.TQ
+.BR libj2_j2u_rsub_ju_overflow_p (3)
+Predict whether subtracting a value will result in an overflow.
+These functions swap the position of the two operands.
+.TP
+.BR libj2_j2u_sat_sub_j2u (3),
+.TQ
+.BR libj2_j2u_sat_sub_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_sat_sub_ju (3),
+.TQ
+.BR libj2_j2u_sat_sub_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_sat_sub_j2u_to_j2u (3),
+.TQ
+.BR libj2_ju_sat_sub_ju_to_j2u (3)
+Calculate the difference between two values, but saturate on
+overflow.
+.TP
+.BR libj2_j2u_sat_rsub_j2u (3),
+.TQ
+.BR libj2_j2u_sat_rsub_ju (3)
+Calculate the difference between two values, but saturate on
+overflow. These functions swap the position of the two operands.
+.TP
+.BR libj2_j2u_mul_j2u (3),
+.TQ
+.BR libj2_j2u_mul_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_mul_ju (3),
+.TQ
+.BR libj2_j2u_mul_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_mul_j2u_to_j2u (3),
+.TQ
+.BR libj2_ju_mul_ju_to_j2u (3),
+.TQ
+.BR libj2_j2u_mul_j2u_destructive (3)
+Calculate the product of two values.
+.TP
+.BR libj2_j2u_mul_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_mul_j2u_to_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_mul_ju_overflow (3),
+.TQ
+.BR libj2_j2u_mul_ju_to_j2u_overflow (3),
+.TQ
+.BR libj2_ju_mul_j2u_to_j2u_overflow (3),
+.TQ
+.BR libj2_j2u_mul_j2u_overflow_destructive (3)
+Calculate the product of two values, and detect overflow.
+.TP
+.BR libj2_j2u_mul_j2u_overflow_p (3),
+.TQ
+.BR libj2_j2u_mul_ju_overflow_p (3),
+.TQ
+.BR libj2_ju_mul_j2u_overflow_p (3)
+Predict whether multiplying two values will result in an
+overflow.
+.TP
+.BR libj2_j2u_mul_j2u_overflow_p_quick (3),
+.TQ
+.BR libj2_j2u_mul_ju_overflow_p_quick (3),
+.TQ
+.BR libj2_ju_mul_j2u_overflow_p_quick (3)
+Predict whether multiplying two values will result in an
+overflow, but do not preform the prediction if it is costly.
+.TP
+.BR libj2_j2u_mul_j2u_to_j2u_overflow_p (3),
+.TQ
+.BR libj2_j2u_mul_ju_to_j2u_overflow_p (3),
+.TQ
+.BR libj2_ju_mul_j2u_to_j2u_overflow_p (3)
+Predict whether multiplying two values will result in an
+overflow, and if the prediction is costly, perform the
+multiplication.
+.TP
+.BR libj2_j2u_sat_mul_j2u (3),
+.TQ
+.BR libj2_j2u_sat_mul_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_sat_mul_ju (3),
+.TQ
+.BR libj2_j2u_sat_mul_ju_to_j2u (3),
+.TQ
+.BR libj2_ju_sat_mul_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_sat_mul_j2u_destructive (3)
+Calculate the product of two values, but saturate on overflow.
+.TP
+.BR libj2_j2u_divmod_j2u (3),
+.TQ
+.BR libj2_j2u_divmod_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_divmod_j2u_to_j2u_j2u (3),
+.TQ
+.BR libj2_j2u_divmod_ju (3),
+.TQ
+.BR libj2_j2u_divmod_ju_to_j2u (3),
+.TQ
+.BR libj2_j2u_divmod_ju_to_j2u_j2u (3)
+Calculate the ratio between values, and keep the computed
+remainder.
+.TP
+.BR libj2_j2u_rdivmod_j2u (3),
+.TQ
+.BR libj2_j2u_rdivmod_j2u_to_j2u (3)
+Calculate the ratio between values, and keep the computed
+remainder. These functions swap the position of the two
+operands.
+.TQ
+.BR libj2_j2u_div_j2u (3),
+.TQ
+.BR libj2_j2u_div_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_div_j2u_return (3),
+.TQ
+.BR libj2_j2u_div_ju (3),
+.TQ
+.BR libj2_j2u_div_ju_to_j2u (3),
+.TQ
+.BR libj2_j2u_div_ju_return (3)
+Calculate the ratio between values, and discard the
+computed remainder.
+.TP
+.BR libj2_j2u_rdiv_j2u (3)
+Calculate the ratio between values, and discard the
+computed remainder. This function swaps the position of the two
+operands.
+.TP
+.BR libj2_j2u_div_j2u_to_j2u_underflow (3),
+.TQ
+.BR libj2_j2u_div_j2u_underflow (3),
+.TQ
+.BR libj2_j2u_div_ju_to_j2u_underflow (3),
+.TQ
+.BR libj2_j2u_div_ju_underflow (3)
+Calculate the ratio between values, and discard the
+computed remainder, but detect underflow (non-zero remainder).
+.TP
+.BR libj2_j2u_rdiv_j2u_underflow (3)
+Calculate the ratio between values, and discard the
+computed remainder, but detect underflow (non-zero remainder).
+This function swaps the position of the two operands.
+.TP
+.BR libj2_j2u_mod_j2u (3),
+.TQ
+.BR libj2_j2u_mod_j2u_to_j2u (3),
+.TQ
+.BR libj2_j2u_mod_ju (3),
+.TQ
+.BR libj2_j2u_mod_ju_to_j2u (3)
+Calculate the remainder of the integer division between two
+values.
+.TP
+.BR libj2_j2u_rmod_j2u (3)
+Calculate the remainder of the integer division between two
+values. This function swaps the position of the two operands.
 
 .SH SEE ALSO
 .BR libzahl (7)
