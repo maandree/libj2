@@ -179,6 +179,39 @@ random_ju(void)
 }
 
 
+static size_t
+j2u_to_str(struct libj2_j2u *a, char *buf, size_t bufsize, const char *digits)
+{
+	char buf2[BUFFER_SIZE];
+	struct libj2_j2i b = {.high = a->high, .low = a->low};
+	size_t ret = libj2_j2u_to_str(a, buf, bufsize, digits);
+
+	if (!libj2_j2i_is_positive(&b))
+		return ret;
+
+	memset(buf2, '~', sizeof(buf2));
+	EXPECT(libj2_j2i_to_str(&b, buf2, bufsize, digits) == ret);
+	if (ret)
+		EXPECT(!strncmp(&buf2[0], buf, bufsize));
+
+	if (bufsize && ret) {
+		libj2_minus_j2i(&b);
+		memset(buf2, '~', sizeof(buf2));
+		EXPECT(libj2_j2i_to_str(&b, buf2, bufsize, digits) == ret + 1U);
+		if (bufsize > 1U) {
+			EXPECT(buf2[0] == '-');
+			EXPECT(!strncmp(&buf2[1], buf, bufsize - 2U));
+			if (bufsize < ret + 2U)
+				EXPECT(buf2[bufsize - 1U] == '\0');
+		} else if (bufsize == 1U) {
+			EXPECT(buf2[0] == '\0');
+		}
+	}
+
+	return ret;
+}
+
+
 static void
 check_(struct libj2_j2u *a, size_t bufsize, const char *digits, const char *expected_s, size_t expected_n)
 {
@@ -187,7 +220,7 @@ check_(struct libj2_j2u *a, size_t bufsize, const char *digits, const char *expe
 	size_t n;
 
 	memset(buf, '~', sizeof(buf));
-	EXPECT(libj2_j2u_to_str(a, buf, bufsize, digits) == expected_n);
+	EXPECT(j2u_to_str(a, buf, bufsize, digits) == expected_n);
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
 	if (expected_s) {
 		n = strlen(expected_s);
@@ -211,7 +244,7 @@ check_(struct libj2_j2u *a, size_t bufsize, const char *digits, const char *expe
 
 	for (; n; n--) {
 		memset(buf, '~', sizeof(buf));
-		EXPECT(libj2_j2u_to_str(a, buf, n + 1U, digits) == expected_n);
+		EXPECT(j2u_to_str(a, buf, n + 1U, digits) == expected_n);
 		EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
 		EXPECT(!memcmp(buf, expected_s, n));
 		EXPECT(buf[n] == '\0');
@@ -219,13 +252,13 @@ check_(struct libj2_j2u *a, size_t bufsize, const char *digits, const char *expe
 	}
 
 	memset(buf, '~', sizeof(buf));
-	EXPECT(libj2_j2u_to_str(a, buf, 1, digits) == expected_n);
+	EXPECT(j2u_to_str(a, buf, 1, digits) == expected_n);
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
 	EXPECT(buf[0] == '\0');
 	EXPECT(buf[1] == '~');
 
 	memset(buf, '~', sizeof(buf));
-	EXPECT(libj2_j2u_to_str(a, buf, 0, digits) == expected_n);
+	EXPECT(j2u_to_str(a, buf, 0, digits) == expected_n);
 	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
 	EXPECT(buf[0] == '~');
 }
@@ -288,7 +321,7 @@ check_zero_low(const struct libj2_j2u *a_with_low, const char *digits, const cha
 
 	a = *a_with_low;
 	a.high = 0;
-	EXPECT(libj2_j2u_to_str(&a, buf1, BUFFER_SIZE, digits) > 0);
+	EXPECT(j2u_to_str(&a, buf1, BUFFER_SIZE, digits) > 0);
 	i = strlen(expected);
 	j = strlen(buf1);
 	EXPECT(j <= i);
@@ -332,19 +365,19 @@ main(void)
 	srand((unsigned)time(NULL));
 
 	libj2_j2u_zero(&a);
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "") == 0);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "") == 0);
 	EXPECT(libj2_j2u_is_zero(&a));
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "0") == 0);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "0") == 0);
 	EXPECT(libj2_j2u_is_zero(&a));
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "01") == 1);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "01") == 1);
 	EXPECT(libj2_j2u_is_zero(&a));
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "01234") == 1);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "01234") == 1);
 	EXPECT(libj2_j2u_is_zero(&a));
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "01234567") == 1);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "01234567") == 1);
 	EXPECT(libj2_j2u_is_zero(&a));
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "0123456789") == 1);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "0123456789") == 1);
 	EXPECT(libj2_j2u_is_zero(&a));
-	EXPECT(libj2_j2u_to_str(&a, NULL, SIZE_MAX, "00") == 0);
+	EXPECT(j2u_to_str(&a, NULL, SIZE_MAX, "00") == 0);
 	EXPECT(libj2_j2u_is_zero(&a));
 
 	libj2_j2u_zero(&a);
