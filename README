@@ -305,8 +305,8 @@ DESCRIPTION
 		Count cleared bits.
 
 	libj2_parity_j2u(3)
-		Calculate the parity of the set bits (check whether the number
-		of set bits is odd).
+		Calculate the parity of the set (or equaivalently the cleared)
+		bits (check whether the number of set bits is odd).
 
 	libj2_fls_j2u(3)
 		Find the most significant set bit.
