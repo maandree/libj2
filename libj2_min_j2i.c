@@ -53,6 +53,54 @@ expect_untouched(void)
 }
 
 
+static void
+neg_reset(void)
+{
+	const uintmax_t umax = UINTMAX_MAX;
+	const uintmax_t max = UINTMAX_MAX >> 1;
+	const uintmax_t zero = 0U;
+	const uintmax_t one = 1U;
+	const uintmax_t two = 2U;
+	v1 = (struct libj2_j2i){~zero, ~zero};
+	v2 = (struct libj2_j2i){~zero, ~one};
+	v3 = (struct libj2_j2i){~zero, ~two};
+	v4 = (struct libj2_j2i){~zero, ~(umax - 1U)};
+	v5 = (struct libj2_j2i){~one, ~zero};
+	v6 = (struct libj2_j2i){~one, ~one};
+	v7 = (struct libj2_j2i){~(max - 1U), ~zero};
+	v8 = (struct libj2_j2i){~(max - 1U), ~one};
+	v9 = (struct libj2_j2i){~(max - 1U), ~umax};
+	v10 = (struct libj2_j2i){~max, ~zero};
+	v11 = (struct libj2_j2i){~max, ~one};
+	v12 = (struct libj2_j2i){~max, ~(umax - 1U)};
+	v13 = (struct libj2_j2i){~max, ~umax};
+}
+
+
+static void
+neg_expect_untouched(void)
+{
+	const uintmax_t umax = UINTMAX_MAX;
+	const uintmax_t max = UINTMAX_MAX >> 1;
+	const uintmax_t zero = 0U;
+	const uintmax_t one = 1U;
+	const uintmax_t two = 2U;
+	EXPECT(libj2_j2i_eq_j2i(&v1, &(struct libj2_j2i){~zero, ~zero}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v2, &(struct libj2_j2i){~zero, ~one}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v3, &(struct libj2_j2i){~zero, ~two}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v4, &(struct libj2_j2i){~zero, ~(umax - 1U)}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v5, &(struct libj2_j2i){~one, ~zero}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v6, &(struct libj2_j2i){~one, ~one}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v7, &(struct libj2_j2i){~(max - 1U), ~zero}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v8, &(struct libj2_j2i){~(max - 1U), ~one}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v9, &(struct libj2_j2i){~(max - 1U), ~umax}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v10, &(struct libj2_j2i){~max, ~zero}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v11, &(struct libj2_j2i){~max, ~one}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v12, &(struct libj2_j2i){~max, ~(umax - 1U)}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v13, &(struct libj2_j2i){~max, ~umax}) == 1);
+}
+
+
 #define HEAD(X, ...) X
 #define TAIL(X, ...) __VA_ARGS__
 
@@ -73,6 +121,26 @@ expect_untouched(void)
 		r = (struct libj2_j2i){111, 222};\
 		libj2_min_j2i_to_j2i(__VA_ARGS__, &r);\
 		expect_untouched();\
+		EXPECT(libj2_j2i_eq_j2i(&(MIN), &r));\
+	} while (0)
+
+#define NEG_CHECK(MIN, ...)\
+	do {\
+		neg_reset();\
+		\
+		r = *(HEAD(__VA_ARGS__));\
+		libj2_min_j2i(&r, TAIL(__VA_ARGS__));\
+		neg_expect_untouched();\
+		EXPECT(libj2_j2i_eq_j2i(&(MIN), &r));\
+		\
+		p = libj2_min_j2i_return(__VA_ARGS__);\
+		neg_expect_untouched();\
+		EXPECT(p != NULL);\
+		EXPECT(libj2_j2i_eq_j2i(&(MIN), p));\
+		\
+		r = (struct libj2_j2i){111, 222};\
+		libj2_min_j2i_to_j2i(__VA_ARGS__, &r);\
+		neg_expect_untouched();\
 		EXPECT(libj2_j2i_eq_j2i(&(MIN), &r));\
 	} while (0)
 
@@ -189,9 +257,103 @@ main(void)
 	CHECK(v2, &v10, &v4, &v5, &v6, &v3, &v7, &v13, &v8, &v12, &v2, &v9, &v11, NULL);
 	CHECK(v2, &v9, &v3, &v8, &v12, &v5, &v6, &v2, &v10, &v11, &v4, &v7, &v13, NULL);
 
+	NEG_CHECK(v1, &v1, NULL);
+	NEG_CHECK(v2, &v2, NULL);
+	NEG_CHECK(v3, &v3, NULL);
+
+	NEG_CHECK(v2, &v1, &v2, NULL);
+	NEG_CHECK(v2, &v2, &v1, NULL);
+	NEG_CHECK(v3, &v2, &v3, NULL);
+	NEG_CHECK(v3, &v3, &v2, NULL);
+	NEG_CHECK(v4, &v3, &v4, NULL);
+	NEG_CHECK(v4, &v4, &v3, NULL);
+	NEG_CHECK(v5, &v4, &v5, NULL);
+	NEG_CHECK(v5, &v5, &v4, NULL);
+	NEG_CHECK(v6, &v5, &v6, NULL);
+	NEG_CHECK(v6, &v6, &v5, NULL);
+	NEG_CHECK(v7, &v6, &v7, NULL);
+	NEG_CHECK(v7, &v7, &v6, NULL);
+	NEG_CHECK(v8, &v7, &v8, NULL);
+	NEG_CHECK(v8, &v8, &v7, NULL);
+	NEG_CHECK(v9, &v8, &v9, NULL);
+	NEG_CHECK(v9, &v9, &v8, NULL);
+	NEG_CHECK(v10, &v9, &v10, NULL);
+	NEG_CHECK(v10, &v10, &v9, NULL);
+	NEG_CHECK(v11, &v10, &v11, NULL);
+	NEG_CHECK(v11, &v11, &v10, NULL);
+	NEG_CHECK(v12, &v11, &v12, NULL);
+	NEG_CHECK(v12, &v12, &v11, NULL);
+	NEG_CHECK(v13, &v12, &v13, NULL);
+	NEG_CHECK(v13, &v13, &v12, NULL);
+
+	NEG_CHECK(v6, &v1, &v2, &v3, &v4, &v5, &v6, NULL);
+	NEG_CHECK(v6, &v1, &v2, &v3, &v4, &v6, &v5, NULL);
+	NEG_CHECK(v6, &v1, &v2, &v3, &v6, &v4, &v5, NULL);
+	NEG_CHECK(v6, &v1, &v2, &v6, &v3, &v4, &v5, NULL);
+	NEG_CHECK(v6, &v1, &v6, &v2, &v3, &v4, &v5, NULL);
+	NEG_CHECK(v6, &v6, &v1, &v2, &v3, &v4, &v5, NULL);
+
+	NEG_CHECK(v6, &v6, &v5, &v4, &v3, &v2, &v1, NULL);
+	NEG_CHECK(v6, &v5, &v6, &v4, &v3, &v2, &v1, NULL);
+	NEG_CHECK(v6, &v5, &v4, &v6, &v3, &v2, &v1, NULL);
+	NEG_CHECK(v6, &v5, &v4, &v3, &v6, &v2, &v1, NULL);
+	NEG_CHECK(v6, &v5, &v4, &v3, &v2, &v6, &v1, NULL);
+	NEG_CHECK(v6, &v5, &v4, &v3, &v2, &v1, &v6, NULL);
+
+	NEG_CHECK(v13, &v1, &v6, &v9, &v11, &v12, &v4, &v8, &v2, &v3, &v10, &v7, &v5, &v13, NULL);
+	NEG_CHECK(v13, &v12, &v2, &v11, &v13, &v7, &v4, &v9, &v10, &v1, &v6, &v3, &v8, &v5, NULL);
+	NEG_CHECK(v13, &v5, &v13, &v6, &v12, &v8, &v10, &v3, &v9, &v7, &v2, &v11, &v1, &v4, NULL);
+	NEG_CHECK(v13, &v4, &v13, &v10, &v11, &v5, &v12, &v9, &v3, &v7, &v6, &v1, &v8, &v2, NULL);
+	NEG_CHECK(v13, &v5, &v7, &v6, &v3, &v2, &v1, &v11, &v12, &v8, &v4, &v9, &v13, &v10, NULL);
+	NEG_CHECK(v13, &v3, &v8, &v7, &v10, &v1, &v11, &v13, &v12, &v5, &v4, &v2, &v6, &v9, NULL);
+	NEG_CHECK(v13, &v11, &v2, &v8, &v3, &v5, &v12, &v4, &v13, &v1, &v10, &v7, &v6, &v9, NULL);
+	NEG_CHECK(v13, &v8, &v6, &v2, &v10, &v9, &v13, &v12, &v4, &v7, &v1, &v11, &v5, &v3, NULL);
+	NEG_CHECK(v13, &v4, &v8, &v7, &v12, &v13, &v1, &v6, &v11, &v2, &v3, &v10, &v9, &v5, NULL);
+	NEG_CHECK(v13, &v13, &v11, &v1, &v4, &v8, &v10, &v12, &v5, &v3, &v2, &v9, &v7, &v6, NULL);
+	NEG_CHECK(v13, &v13, &v3, &v12, &v8, &v10, &v11, &v7, &v2, &v4, &v1, &v9, &v6, &v5, NULL);
+	NEG_CHECK(v13, &v9, &v8, &v13, &v7, &v1, &v5, &v6, &v11, &v12, &v4, &v3, &v2, &v10, NULL);
+	NEG_CHECK(v13, &v9, &v8, &v10, &v6, &v3, &v1, &v12, &v2, &v5, &v11, &v4, &v7, &v13, NULL);
+	NEG_CHECK(v13, &v5, &v4, &v12, &v13, &v8, &v7, &v9, &v1, &v6, &v10, &v3, &v2, &v11, NULL);
+	NEG_CHECK(v13, &v5, &v4, &v11, &v9, &v8, &v7, &v10, &v6, &v2, &v3, &v1, &v13, &v12, NULL);
+	NEG_CHECK(v13, &v12, &v1, &v13, &v10, &v7, &v6, &v5, &v2, &v11, &v4, &v3, &v8, &v9, NULL);
+	NEG_CHECK(v13, &v2, &v1, &v8, &v7, &v13, &v5, &v9, &v10, &v6, &v3, &v11, &v12, &v4, NULL);
+	NEG_CHECK(v13, &v3, &v7, &v13, &v9, &v6, &v8, &v5, &v12, &v4, &v11, &v2, &v10, &v1, NULL);
+	NEG_CHECK(v13, &v12, &v3, &v6, &v5, &v2, &v9, &v4, &v11, &v8, &v10, &v13, &v1, &v7, NULL);
+	NEG_CHECK(v13, &v1, &v13, &v7, &v4, &v3, &v12, &v2, &v9, &v5, &v10, &v11, &v6, &v8, NULL);
+	NEG_CHECK(v13, &v7, &v3, &v8, &v1, &v2, &v4, &v13, &v5, &v6, &v10, &v9, &v11, &v12, NULL);
+	NEG_CHECK(v13, &v2, &v3, &v13, &v8, &v12, &v5, &v11, &v1, &v9, &v10, &v4, &v7, &v6, NULL);
+	NEG_CHECK(v13, &v10, &v6, &v7, &v5, &v11, &v9, &v1, &v3, &v13, &v4, &v2, &v8, &v12, NULL);
+	NEG_CHECK(v13, &v6, &v9, &v12, &v7, &v2, &v1, &v10, &v4, &v13, &v11, &v3, &v5, &v8, NULL);
+	NEG_CHECK(v13, &v5, &v1, &v9, &v6, &v4, &v8, &v7, &v11, &v13, &v3, &v2, &v12, &v10, NULL);
+	NEG_CHECK(v13, &v1, &v10, &v11, &v2, &v9, &v12, &v7, &v5, &v3, &v8, &v13, &v6, &v4, NULL);
+	NEG_CHECK(v13, &v3, &v10, &v2, &v4, &v8, &v9, &v11, &v7, &v5, &v1, &v13, &v6, &v12, NULL);
+	NEG_CHECK(v13, &v8, &v10, &v11, &v6, &v5, &v2, &v9, &v4, &v3, &v13, &v7, &v12, &v1, NULL);
+	NEG_CHECK(v13, &v4, &v12, &v11, &v7, &v3, &v13, &v10, &v2, &v5, &v9, &v1, &v6, &v8, NULL);
+	NEG_CHECK(v13, &v7, &v13, &v12, &v3, &v4, &v8, &v11, &v9, &v1, &v10, &v6, &v2, &v5, NULL);
+	NEG_CHECK(v13, &v5, &v4, &v2, &v1, &v8, &v7, &v13, &v10, &v11, &v3, &v9, &v6, &v12, NULL);
+	NEG_CHECK(v13, &v7, &v8, &v10, &v2, &v4, &v1, &v11, &v9, &v12, &v6, &v13, &v5, &v3, NULL);
+	NEG_CHECK(v13, &v3, &v7, &v2, &v13, &v5, &v10, &v12, &v6, &v8, &v1, &v11, &v9, &v4, NULL);
+	NEG_CHECK(v13, &v12, &v13, &v6, &v9, &v4, &v11, &v8, &v3, &v2, &v1, &v7, &v10, &v5, NULL);
+	NEG_CHECK(v13, &v2, &v9, &v10, &v13, &v1, &v3, &v5, &v8, &v7, &v6, &v11, &v4, &v12, NULL);
+	NEG_CHECK(v13, &v7, &v5, &v10, &v11, &v3, &v12, &v4, &v9, &v6, &v13, &v1, &v2, &v8, NULL);
+	NEG_CHECK(v13, &v1, &v3, &v4, &v8, &v2, &v13, &v11, &v7, &v10, &v5, &v6, &v12, &v9, NULL);
+	NEG_CHECK(v13, &v7, &v2, &v1, &v13, &v5, &v10, &v3, &v9, &v6, &v4, &v11, &v8, &v12, NULL);
+	NEG_CHECK(v13, &v6, &v5, &v3, &v11, &v8, &v9, &v1, &v12, &v7, &v13, &v4, &v10, &v2, NULL);
+	NEG_CHECK(v13, &v13, &v6, &v5, &v4, &v3, &v8, &v1, &v2, &v7, &v9, &v10, &v11, &v12, NULL);
+	NEG_CHECK(v13, &v13, &v12, &v4, &v3, &v11, &v6, &v1, &v7, &v10, &v2, &v5, &v9, &v8, NULL);
+	NEG_CHECK(v13, &v13, &v6, &v7, &v2, &v8, &v4, &v1, &v5, &v12, &v11, &v3, &v10, &v9, NULL);
+	NEG_CHECK(v13, &v13, &v5, &v12, &v11, &v10, &v9, &v2, &v6, &v4, &v8, &v3, &v1, &v7, NULL);
+	NEG_CHECK(v13, &v1, &v8, &v7, &v6, &v13, &v9, &v3, &v11, &v10, &v4, &v2, &v12, &v5, NULL);
+	NEG_CHECK(v13, &v8, &v9, &v3, &v7, &v1, &v11, &v2, &v13, &v4, &v6, &v12, &v10, &v5, NULL);
+	NEG_CHECK(v13, &v4, &v5, &v13, &v2, &v7, &v8, &v9, &v10, &v11, &v1, &v3, &v6, &v12, NULL);
+	NEG_CHECK(v13, &v7, &v4, &v11, &v9, &v6, &v12, &v3, &v5, &v10, &v8, &v1, &v2, &v13, NULL);
+	NEG_CHECK(v13, &v8, &v9, &v6, &v2, &v11, &v5, &v13, &v1, &v3, &v7, &v10, &v12, &v4, NULL);
+	NEG_CHECK(v13, &v10, &v4, &v5, &v6, &v3, &v7, &v13, &v8, &v12, &v2, &v9, &v1, &v11, NULL);
+	NEG_CHECK(v13, &v9, &v1, &v3, &v8, &v12, &v5, &v6, &v2, &v10, &v11, &v4, &v7, &v13, NULL);
+
 	return 0;
 }
 
-/* TODO test with negative values, and mixing positive and negative values */
+/* TODO test mixing positive and negative values */
 
 #endif
