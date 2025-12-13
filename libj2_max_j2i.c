@@ -101,6 +101,32 @@ neg_expect_untouched(void)
 }
 
 
+static void
+mix_reset(void)
+{
+	const uintmax_t umax = UINTMAX_MAX;
+	const uintmax_t max = UINTMAX_MAX >> 1;
+	v1 = (struct libj2_j2i){~max, 0};
+	v2 = (struct libj2_j2i){umax, umax};
+	v3 = (struct libj2_j2i){0, 0};
+	v4 = (struct libj2_j2i){0, 1};
+	v5 = (struct libj2_j2i){max, umax};
+}
+
+
+static void
+mix_expect_untouched(void)
+{
+	const uintmax_t umax = UINTMAX_MAX;
+	const uintmax_t max = UINTMAX_MAX >> 1;
+	EXPECT(libj2_j2i_eq_j2i(&v1, &(struct libj2_j2i){~max, 0}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v2, &(struct libj2_j2i){umax, umax}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v3, &(struct libj2_j2i){0, 0}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v4, &(struct libj2_j2i){0, 1}) == 1);
+	EXPECT(libj2_j2i_eq_j2i(&v5, &(struct libj2_j2i){max, umax}) == 1);
+}
+
+
 #define HEAD(X, ...) X
 #define TAIL(X, ...) __VA_ARGS__
 
@@ -144,12 +170,84 @@ neg_expect_untouched(void)
 		EXPECT(libj2_j2i_eq_j2i(&(MAX), &r));\
 	} while (0)
 
+#define MIX_CHECK(MAX, ...)\
+	do {\
+		mix_reset();\
+		\
+		r = *(HEAD(__VA_ARGS__));\
+		libj2_max_j2i(&r, TAIL(__VA_ARGS__));\
+		mix_expect_untouched();\
+		EXPECT(libj2_j2i_eq_j2i((MAX), &r));\
+		\
+		p = libj2_max_j2i_return(__VA_ARGS__);\
+		mix_expect_untouched();\
+		EXPECT(p != NULL);\
+		EXPECT(libj2_j2i_eq_j2i((MAX), p));\
+		\
+		r = (struct libj2_j2i){111, 222};\
+		libj2_max_j2i_to_j2i(__VA_ARGS__, &r);\
+		mix_expect_untouched();\
+		EXPECT(libj2_j2i_eq_j2i((MAX), &r));\
+	} while (0)
+
+
+static void
+check_mixed(const struct libj2_j2i *i1, const struct libj2_j2i *i2, const struct libj2_j2i *i3,
+            const struct libj2_j2i *i4, const struct libj2_j2i *i5)
+{
+	struct libj2_j2i r;
+	const struct libj2_j2i *p;
+	const struct libj2_j2i *is[5];
+	size_t n = 0;
+	size_t i, ii, iii, iv;
+
+	if (i1)
+		is[n++] = i1;
+	if (i2)
+		is[n++] = i2;
+	if (i3)
+		is[n++] = i3;
+	if (i4)
+		is[n++] = i4;
+	if (i5)
+		is[n++] = i5;
+
+	switch (n--) {
+	case 2:
+		MIX_CHECK(is[n], is[0], is[1], NULL);
+		MIX_CHECK(is[n], is[1], is[0], NULL);
+		break;
+
+	case 3:
+		MIX_CHECK(is[n], is[0], is[1], is[2], NULL);
+		MIX_CHECK(is[n], is[0], is[2], is[1], NULL);
+		MIX_CHECK(is[n], is[1], is[0], is[2], NULL);
+		MIX_CHECK(is[n], is[2], is[0], is[1], NULL);
+		MIX_CHECK(is[n], is[1], is[2], is[0], NULL);
+		MIX_CHECK(is[n], is[2], is[1], is[0], NULL);
+		break;
+
+	case 4:
+		for (i = 0; i < 4; i++)
+			for (ii = 0; ii < 4; ii++)
+				for (iii = 0; iii < 4; iii++)
+					for (iv = 0; iv < 4; iv++)
+						if (i != ii && i != iii && i != iv && ii != iii && ii != iv && iii != iv)
+							MIX_CHECK(is[n], is[i], is[ii], is[iii], is[iv], NULL);
+		break;
+
+	default:
+		return;
+	}
+}
+
 
 int
 main(void)
 {
 	struct libj2_j2i r;
 	const struct libj2_j2i *p;
+	unsigned i;
 
 	CHECK(v1, &v1, NULL);
 	CHECK(v2, &v2, NULL);
@@ -351,9 +449,14 @@ main(void)
 	NEG_CHECK(v2, &v10, &v4, &v5, &v6, &v3, &v7, &v13, &v8, &v12, &v2, &v9, &v11, NULL);
 	NEG_CHECK(v2, &v9, &v3, &v8, &v12, &v5, &v6, &v2, &v10, &v11, &v4, &v7, &v13, NULL);
 
+	for (i = 1U; i < (1U << 5); i++)
+		check_mixed((i & 1U) ? &v1 : NULL,
+		            (i & 2U) ? &v2 : NULL,
+		            (i & 4U) ? &v3 : NULL,
+		            (i & 8U) ? &v4 : NULL,
+		            (i & 16U) ? &v5 : NULL);
+
 	return 0;
 }
-
-/* TODO test mixing positive and negative values */
 
 #endif
