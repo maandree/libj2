@@ -300,6 +300,7 @@ OBJ =\
 	libj2_j2u_sat_mul_j2u.o\
 	libj2_j2u_sat_mul_j2u_to_j2u.o\
 	libj2_j2u_to_str.o\
+	libj2_j2i_to_str.o\
 	libj2_str_to_j2u.o\
 	libj2_str_to_j2u_sign.o\
 	libj2_str_to_j2i.o\
