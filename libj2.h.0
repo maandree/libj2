@@ -23,9 +23,13 @@ libj2.h \- Double-max precision integers header file
 
 \fBenum libj2_overflow\fP {
 	\fBLIBJ2_NO_OVERFLOW\fP = 0,
-	\fBLIBJ2_OVERFLOW\fP = 1,
-	\fBLIBJ2_OVERFLOW_UNKNOWN\fP = 2
+	\fBLIBJ2_POSITIVE_OVERFLOW\fP = 1,
+	\fBLIBJ2_POSITIVE_OVERFLOW_UNKNOWN\fP = 2,
+	\fBLIBJ2_NEGATIVE_OVERFLOW\fP = -1,
+	\fBLIBJ2_NEGATIVE_OVERFLOW_UNKNOWN\fP = -2
 };
+#define \fBLIBJ2_POSITIVE_OVERFLOW\fP         LIBJ2_OVERFLOW
+#define \fBLIBJ2_POSITIVE_OVERFLOW_UNKNOWN\fP LIBJ2_OVERFLOW_UNKNOWNP
 
 .fi
 .PP
@@ -70,7 +74,7 @@ Each half stores
 bits, for a sum of
 .B LIBJ2_J2U_BIT
 bits for the entire
-.I struct .
+.IR struct .
 .PP
 .B LIBJ2_J2I_BIT
 is a synonym for
@@ -102,12 +106,24 @@ is used as the return-type by some
 overflow-prediction functions.
 .B LIBJ2_NO_OVERFLOW
 signifies that the result is fully representable.
-.B LIBJ2_OVERFLOW
+.B LIBJ2_POSITIVE_OVERFLOW
 signifies that the result is positive but too large
-to be fully represented.
-.B LIBJ2_OVERFLOW_UNKNOWN
+to be fully represented; for unsigned operations,
+the synonym
+.B LIBJ2_OVERFLOW
+is documented as the return value.
+.B LIBJ2_POSITIVE_OVERFLOW_UNKNOWN
 signifies that the function bailed out making the
-overflow prediction, but that the result is positive.
+overflow prediction, but that the result is positive;
+for unsigned operations, the synonym
+.B LIBJ2_OVERFLOW_UNKNOWN
+is documented as the return value.
+.B LIBJ2_NEGATIVE_OVERFLOW
+signifies that the result is negative but too large
+to be fully represented.
+.B LIBJ2_NEGATIVE_OVERFLOW_UNKNOWN
+signifies that the function bailed out making the
+overflow prediction, but that the result is negative.
 .PP
 See
 .BR libj2 (7)
@@ -120,13 +136,22 @@ header file.
 .BR struct\ libj2_j2u ,
 and
 .B enum\ libj2_overflow
+with
+.BR LIBJ2_NO_OVERFLOW ,
+.BR LIBJ2_OVERFLOW ,
+and
+.B LIBJ2_OVERFLOW_UNKNOWN
 where added in version 1.0 of
 .BR libj2 .
 .PP
 .BR LIBJ2_J2I_BIT ,
 .BR LIBJ2_J2I_VBIT ,
+.BR struct\ libj2_j2i ,
+.BR LIBJ2_POSITIVE_OVERFLOW ,
+.BR LIBJ2_POSITIVE_OVERFLOW_UNKNOWN ,
+.BR LIBJ2_NEGATIVE_OVERFLOW ,
 and
-.B struct\ libj2_j2i
+.B LIBJ2_NEGATIVE_OVERFLOW_UNKNOWN
 where added in version 1.1 of
 .BR libj2 .
 

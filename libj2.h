@@ -114,7 +114,9 @@ struct libj2_j2i {
  * is costly in edge cases, and thus stopped
  * as soon as such an edge case is detected
  * 
- * @since  1.0
+ * @since  1.0  LIBJ2_NO_OVERFLOW, LIBJ2_OVERFLOW, LIBJ2_OVERFLOW_UNKNOWN
+ * @since  1.1  LIBJ2_POSITIVE_OVERFLOW, LIBJ2_POSITIVE_OVERFLOW_UNKNOWN,
+ *              LIBJ2_NEGATIVE_OVERFLOW, LIBJ2_NEGATIVE_OVERFLOW_UNKNOWN
  */
 enum libj2_overflow {
 	/**
@@ -123,15 +125,30 @@ enum libj2_overflow {
 	LIBJ2_NO_OVERFLOW = 0,
 
 	/**
-	 * Where will be an overflow
+	 * Where will be a positive overflow
 	 */
-	LIBJ2_OVERFLOW = 1,
+	LIBJ2_POSITIVE_OVERFLOW = 1,
+#define LIBJ2_OVERFLOW LIBJ2_POSITIVE_OVERFLOW
 
 	/**
 	 * Overflow prediction stopped
-	 * (due to high cost)
+	 * (due to high cost);
+	 * result is positive
 	 */
-	LIBJ2_OVERFLOW_UNKNOWN = 2
+	LIBJ2_POSITIVE_OVERFLOW_UNKNOWN = 2,
+#define LIBJ2_OVERFLOW_UNKNOWN LIBJ2_POSITIVE_OVERFLOW_UNKNOWN
+
+	/**
+	 * Where will be a positive overflow
+	 */
+	LIBJ2_NEGATIVE_OVERFLOW = -1,
+
+	/**
+	 * Overflow prediction stopped
+	 * (due to high cost);
+	 * result is positive
+	 */
+	LIBJ2_NEGATIVE_OVERFLOW_UNKNOWN = -2
 };
 
 
