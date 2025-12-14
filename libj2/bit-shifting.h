@@ -817,6 +817,89 @@ libj2_ji_lsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
 
 
 /**
+ * Predict whether `libj2_j2i_lsh_overflow` or
+ * `libj2_j2i_lsh_to_j2i_overflow` will return
+ * a result-overflow signal
+ * 
+ * `libj2_j2i_lsh_overflow_p(a, b)` implements
+ * `libj2_j2i_lsh_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `*a` is non-negative and a set bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             positive overflow,
+ *             -1 if `*a` is negative and a cleared bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_lsh_overflow_p(const struct libj2_j2i *a, unsigned b)
+{
+	if (!b) {
+		return 0;
+	} else if (!libj2_j2i_is_negative(a)) {
+		if (b >= LIBJ2_J2I_BIT)
+			return a->high || a->low;
+		else if (b >= LIBJ2_JU_BIT)
+			return a->high || a->low >> (LIBJ2_J2U_BIT - 1U - b);
+		else
+			return !!(a->high >> (LIBJ2_JU_BIT - 1U - b));
+	} else if (b >= LIBJ2_J2I_BIT) {
+		return -1;
+	} else if (b == LIBJ2_JU_BIT) {
+		return a->high != UINTMAX_MAX ? -1 : (a->low & (UINTMAX_MAX ^ (UINTMAX_MAX >> 1))) ? 0 : -1;
+	} else if (b > LIBJ2_JU_BIT) {
+		return (a->high != UINTMAX_MAX || ~a->low >> (LIBJ2_J2U_BIT - 1U - b)) ? -1 : 0;
+	} else {
+		return ~(a->high << 1) >> (LIBJ2_JU_BIT - b) ? -1 : 0;
+	}
+}
+
+
+/**
+ * Predict whether `libj2_ji_lsh_to_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_ji_lsh_overflow_p(a, b)` implements
+ * `libj2_ji_lsh_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The integer to shift (dry-run)
+ * @param   b  The number of positions to shift each bit
+ * @return     +1 if `a` is non-negative and a set bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             positive overflow,
+ *             -1 if `a` is negative and a cleared bit
+ *             would be shifted out of precision (discarded
+ *             or into the sign-bit position), that is, a
+ *             negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_lsh_overflow_p(intmax_t a, unsigned b)
+{
+	if (b >= LIBJ2_J2I_BIT)
+		return a < 0 ? -1 : a > 0;
+	else if (b <= LIBJ2_JU_BIT)
+		return 0;
+	else if (a >= 0)
+		return (uintmax_t)a >> (LIBJ2_J2I_VBIT - b) ? +1 : 0;
+	else
+		return ~(uintmax_t)a >> (LIBJ2_J2I_VBIT - b) ? -1 : 0;
+}
+
+
+/**
  * Shift the bits in a signed double-max precision
  * integer to more signficant positions (left-shift)
  * 
@@ -848,15 +931,9 @@ libj2_ji_lsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
 inline int
 libj2_j2i_lsh_overflow(struct libj2_j2i *a, unsigned b)
 {
-	if (libj2_j2i_is_negative(a)) {
-		int overflow;
-		libj2_not_j2u((void *)a);
-		overflow = libj2_j2u_lsh_overflow((void *)a, b) || libj2_j2i_is_negative(a);
-		libj2_not_j2u((void *)a);
-		return -overflow;
-	} else {
-		return libj2_j2u_lsh_overflow((void *)a, b) || libj2_j2i_is_negative(a);
-	}
+	int overflow = libj2_j2i_lsh_overflow_p(a, b);
+	libj2_j2i_lsh(a, b);
+	return overflow;
 }
 
 
@@ -892,8 +969,9 @@ libj2_j2i_lsh_overflow(struct libj2_j2i *a, unsigned b)
 inline int
 libj2_j2i_lsh_to_j2i_overflow(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
 {
-	*res = *a;
-	return libj2_j2i_lsh_overflow(res, b);
+	int overflow = libj2_j2i_lsh_overflow_p(a, b);
+	libj2_j2i_lsh_to_j2i(a, b, res);
+	return overflow;
 }
 
 
@@ -1149,77 +1227,6 @@ libj2_ji_rsh_to_j2i_underflow(intmax_t a, unsigned b, struct libj2_j2i *res)
 {
 	libj2_ji_to_j2i(a, res);
 	return libj2_j2i_rsh_underflow(res, b);
-}
-
-
-/**
- * Predict whether `libj2_j2i_lsh_overflow` or
- * `libj2_j2i_lsh_to_j2i_overflow` will return
- * a result-overflow signal
- * 
- * `libj2_j2i_lsh_overflow_p(a, b)` implements
- * `libj2_j2i_lsh_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
- * in an efficient manner
- * 
- * @param   a  The integer to shift (dry-run)
- * @param   b  The number of positions to shift each bit
- * @return     +1 if `*a` is non-negative and a set bit
- *             would be shifted out of precision (discarded
- *             or into the sign-bit position), that is, a
- *             positive overflow,
- *             -1 if `*a` is negative and a cleared bit
- *             would be shifted out of precision (discarded
- *             or into the sign-bit position), that is, a
- *             negative overflow,
- *             0 otherwise
- * 
- * @since  1.1
- */
-inline int
-libj2_j2i_lsh_overflow_p(const struct libj2_j2i *a, unsigned b)
-{
-	struct libj2_j2u t;
-	int overflow;
-	libj2_j2i_xor_sign_to_j2u(a, &t);
-	b = b > LIBJ2_J2I_BIT ? LIBJ2_J2I_BIT + 1U : b + 1U;
-	overflow = libj2_j2u_lsh_overflow_p(&t, b);
-	return overflow && libj2_j2i_is_negative(a) ? -1 : overflow;
-}
-
-
-/**
- * Predict whether `libj2_ji_lsh_to_j2i_overflow`
- * will return a result-overflow signal
- * 
- * `libj2_ji_lsh_overflow_p(a, b)` implements
- * `libj2_ji_lsh_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
- * in an efficient manner
- * 
- * @param   a  The integer to shift (dry-run)
- * @param   b  The number of positions to shift each bit
- * @return     +1 if `a` is non-negative and a set bit
- *             would be shifted out of precision (discarded
- *             or into the sign-bit position), that is, a
- *             positive overflow,
- *             -1 if `a` is negative and a cleared bit
- *             would be shifted out of precision (discarded
- *             or into the sign-bit position), that is, a
- *             negative overflow,
- *             0 otherwise
- * 
- * @since  1.1
- */
-inline int
-libj2_ji_lsh_overflow_p(intmax_t a, unsigned b)
-{
-	if (b >= LIBJ2_J2I_BIT)
-		return a < 0 ? -1 : a > 0;
-	else if (b <= LIBJ2_JU_BIT)
-		return 0;
-	else if (a >= 0)
-		return !!((uintmax_t)a >> (LIBJ2_J2I_BIT - b));
-	else
-		return !!(~(uintmax_t)a >> (LIBJ2_J2I_BIT - b));
 }
 
 

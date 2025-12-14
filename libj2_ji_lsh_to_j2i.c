@@ -8,7 +8,6 @@ extern inline void libj2_ji_lsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i 
 
 #else
 
-CONST int main(void) { return 0; }
-/* TODO test libj2_ji_lsh_to_j2i, libj2_ji_lsh_to_j2i_overflow, libj2_ji_lsh_overflow_p */
+CONST int main(void) { return 0; } /* Tested in libj2_j2i_lsh.c */
 
 #endif
