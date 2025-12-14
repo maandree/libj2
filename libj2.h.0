@@ -1,0 +1,134 @@
+.TH LIBJ2.H 0 LIBJ2
+.SH NAME
+libj2.h \- Double-max precision integers header file
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+#define \fBLIBJ2_JU_BIT\fP   /* implementation omitted */
+#define \fBLIBJ2_J2U_BIT\fP  (2U * LIBJ2_JU_BIT)
+#define \fBLIBJ2_J2I_BIT\fP  LIBJ2_J2U_BIT
+#define \fBLIBJ2_J2I_VBIT\fP (LIBJ2_J2I_BIT - 1U)
+
+\fBstruct libj2_j2u\fP {
+	uintmax_t \fIhigh\fP;
+	uintmax_t \fIlow\fP;
+};
+
+\fBstruct libj2_j2i\fP {
+	uintmax_t \fIhigh\fP;
+	uintmax_t \fIlow\fP;
+};
+
+\fBenum libj2_overflow\fP {
+	\fBLIBJ2_NO_OVERFLOW\fP = 0,
+	\fBLIBJ2_OVERFLOW\fP = 1,
+	\fBLIBJ2_OVERFLOW_UNKNOWN\fP = 2
+};
+
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.B libj2.h
+header file, provides definitions used for the
+.B libj2
+double-max precision integer library.
+.PP
+The header file defines the type
+.B struct\ libj2_j2u
+for unsigned integers with double the width of
+.BR uintmax_t ,
+and the type
+.B struct\ libj2_j2i
+for signed integers with the same width, including
+one bit for signess.
+.B struct\ libj2_j2i
+uses two's complement, and is designed to be
+storage-wise identical to
+.BR struct\ libj2_j2u .
+It is guaranteed for both types that,
+.I high
+is the first member, and
+.I low
+is the second member, and that those are the only
+members, of the
+.IR struct s.
+.I high
+stores the most significant half, including the
+sign-bit as the most significant bit for
+.BR struct\ libj2_j2i ,
+and
+.I low
+stores the least significant half.
+Each half stores
+.B LIBJ2_JU_BIT
+bits, for a sum of
+.B LIBJ2_J2U_BIT
+bits for the entire
+.I struct .
+.PP
+.B LIBJ2_J2I_BIT
+is a synonym for
+.BR LIBJ2_J2U_BIT .
+.B LIBJ2_J2I_BIT
+is preferable in the context of the width of
+.BR struct\ libj2_j2i ,
+whereas
+.B LIBJ2_J2U_BIT
+is preferable in the context of the width of
+.BR struct\ libj2_j2u .
+.PP
+.B LIBJ2_J2I_VBIT
+specifies the number of value-bits in a
+.BR struct\ libj2_j2i ,
+that is, the number of bits it holds less
+the sign-bit.
+.PP
+.BR LIBJ2_JU_BIT ,
+.BR LIBJ2_J2U_BIT ,
+.BR LIBJ2_J2I_BIT ,
+and
+.B LIBJ2_J2I_VBIT
+are compile-time constants, but not
+preprocessor-time constants.
+.PP
+.B enum\ libj2_overflow
+is used as the return-type by some
+overflow-prediction functions.
+.B LIBJ2_NO_OVERFLOW
+signifies that the result is fully representable.
+.B LIBJ2_OVERFLOW
+signifies that the result is positive but too large
+to be fully represented.
+.B LIBJ2_OVERFLOW_UNKNOWN
+signifies that the function bailed out making the
+overflow prediction, but that the result is positive.
+.PP
+See
+.BR libj2 (7)
+for a listing of functions defined by the
+header file.
+
+.SH HISTORY
+.BR LIBJ2_JU_BIT ,
+.BR LIBJ2_J2U_BIT ,
+.BR struct\ libj2_j2u ,
+and
+.B enum\ libj2_overflow
+where added in version 1.0 of
+.BR libj2 .
+.PP
+.BR LIBJ2_J2I_BIT ,
+.BR LIBJ2_J2I_VBIT ,
+and
+.B struct\ libj2_j2i
+where added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7)

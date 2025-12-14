@@ -458,7 +458,19 @@ LOBJ = $(OBJ:.o=.lo)
 TOBJ = $(OBJ:.o=.to)
 TEST = $(OBJ:.o=.t)
 
+MAN0 = libj2.h.0
 MAN7 = libj2.7
+MAN3 =\
+	LIBJ2_JU_BIT.3\
+	LIBJ2_J2U_BIT.3\
+	LIBJ2_J2I_BIT.3\
+	LIBJ2_J2I_VBIT.3\
+	struct_libj2_j2u.3\
+	libj2_j2u.3\
+	struct_libj2_j2i.3\
+	libj2_j2i.3\
+	enum_libj2_overflow.3\
+	libj2_overflow.3
 
 
 all: libj2.a libj2.$(LIBEXT) $(TEST)
@@ -500,6 +512,8 @@ check: $(TEST)
 install: libj2.a libj2.$(LIBEXT)
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/lib"
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/include/libj2"
+	mkdir -p -- "$(DESTDIR)$(MANPREFIX)/man0"
+	mkdir -p -- "$(DESTDIR)$(MANPREFIX)/man3"
 	mkdir -p -- "$(DESTDIR)$(MANPREFIX)/man7"
 	cp -- libj2.a "$(DESTDIR)$(PREFIX)/lib/"
 	cp -- libj2.$(LIBEXT) "$(DESTDIR)$(PREFIX)/lib/libj2.$(LIBMINOREXT)"
@@ -508,7 +522,9 @@ install: libj2.a libj2.$(LIBEXT)
 	ln -sf -- libj2.$(LIBMAJOREXT) "$(DESTDIR)$(PREFIX)/lib/libj2.$(LIBEXT)"
 	cp -- libj2.h "$(DESTDIR)$(PREFIX)/include/"
 	cp -- $(SUBHDR) "$(DESTDIR)$(PREFIX)/include/libj2/"
-	cp -- $(MAN7) "$(DESTDIR)$(MANPREFIX)/man7/"
+	cp -P -- $(MAN0) "$(DESTDIR)$(MANPREFIX)/man0/"
+	cp -P -- $(MAN3) "$(DESTDIR)$(MANPREFIX)/man3/"
+	cp -P -- $(MAN7) "$(DESTDIR)$(MANPREFIX)/man7/"
 
 uninstall:
 	-rm -f -- "$(DESTDIR)$(PREFIX)/lib/libj2.a"
@@ -518,6 +534,8 @@ uninstall:
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libj2.h"
 	-cd -- "$(DESTDIR)$(PREFIX)/include/" && rm -f -- $(SUBHDR)
 	-rmdir -- "$(DESTDIR)$(PREFIX)/include/libj2"
+	-cd -- "$(DESTDIR)$(MANPREFIX)/man0/" && rm -f -- $(MAN0)
+	-cd -- "$(DESTDIR)$(MANPREFIX)/man3/" && rm -f -- $(MAN3)
 	-cd -- "$(DESTDIR)$(MANPREFIX)/man7/" && rm -f -- $(MAN7)
 
 clean:

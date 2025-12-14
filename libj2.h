@@ -67,7 +67,7 @@ struct libj2_j2u {
 	/**
 	 * Most significant half
 	 */
-        uintmax_t high;
+	uintmax_t high;
 
 	/**
 	 * Least significant half
@@ -98,7 +98,7 @@ struct libj2_j2i {
 	 * Most significant half, of which the most
 	 * significant bit is the sign bit
 	 */
-        uintmax_t high;
+	uintmax_t high;
 
 	/**
 	 * Least significant half
@@ -131,7 +131,7 @@ enum libj2_overflow {
 	 * Overflow prediction stopped
 	 * (due to high cost)
 	 */
-	LIBJ2_OVERFLOW_UNKNOWN
+	LIBJ2_OVERFLOW_UNKNOWN = 2
 };
 
 
