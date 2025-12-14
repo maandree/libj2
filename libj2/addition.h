@@ -400,6 +400,8 @@ libj2_j2u_add_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
 		return (int)(a->high >> (LIBJ2_JU_BIT - 1U));
 	else if (libj2_j2u_add_ju_overflow_p(a, b->low))
 		return 1;
+	else if (a->low > UINTMAX_MAX - b->low)
+		return a->high + 1U > UINTMAX_MAX - b->high;
 	else
 		return a->high > UINTMAX_MAX - b->high;
 }

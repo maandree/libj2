@@ -243,6 +243,10 @@ main(void)
 		check_double(UINTMAX_MAX, random_ju());
 	}
 
+	check_manual(UINTMAX_MAX - 1U, UINTMAX_MAX - 1U, 1, 1, UINTMAX_MAX, UINTMAX_MAX, 0);
+	check_manual(UINTMAX_MAX - 1U, UINTMAX_MAX - 1U, 1, 2, 0, 0, 1);
+	check_manual(UINTMAX_MAX - 1U, UINTMAX_MAX - 1U, 1, 3, 0, 1, 1);
+
 	return 0;
 }
 
