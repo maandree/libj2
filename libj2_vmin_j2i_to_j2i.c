@@ -8,6 +8,6 @@ extern inline void libj2_vmin_j2i_to_j2i(const struct libj2_j2i *a, va_list args
 
 #else
 
-CONST int main(void) { return 0; } /* Tested via libj2_vmin_j2i_to_j2i */
+CONST int main(void) { return 0; } /* Tested via libj2_min_j2i_to_j2i */
 
 #endif

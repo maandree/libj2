@@ -386,13 +386,11 @@ OBJ =\
 	libj2_max_j2i.o\
 	libj2_vmin_j2i.o\
 	libj2_min_j2i.o\
-	libj2_vmax_j2i_to_j2i.o\
 	libj2_max_j2i_to_j2i.o\
 	libj2_min_j2i_to_j2i.o\
 	libj2_vmin_j2i_to_j2i.o\
 	libj2_vmin_j2i_return.o\
 	libj2_min_j2i_return.o\
-	libj2_max_j2i_to_j2i.o\
 	libj2_vmax_j2i_to_j2i.o\
 	libj2_vmax_j2i_return.o\
 	libj2_max_j2i_return.o\
@@ -429,7 +427,86 @@ OBJ =\
 	libj2_j2i_lsh_overflow_p.o\
 	libj2_ji_lsh_overflow_p.o\
 	libj2_j2i_rsh_underflow_p.o\
-	libj2_ji_rsh_underflow_p.o
+	libj2_ji_rsh_underflow_p.o\
+	libj2_j2i_add_j2i.o\
+	libj2_j2i_add_j2i_overflow.o\
+	libj2_j2i_add_j2i_overflow_p.o\
+	libj2_j2i_add_j2i_to_j2i.o\
+	libj2_j2i_add_j2i_to_j2i_overflow.o\
+	libj2_j2i_add_ji.o\
+	libj2_j2i_add_ji_overflow.o\
+	libj2_j2i_add_ji_overflow_p.o\
+	libj2_j2i_add_ji_to_j2i.o\
+	libj2_j2i_add_ji_to_j2i_overflow.o\
+	libj2_ji_add_j2i_overflow_p.o\
+	libj2_ji_add_j2i_to_j2i.o\
+	libj2_ji_add_j2i_to_j2i_overflow.o\
+	libj2_ji_add_ji_to_j2i.o\
+	libj2_j2i_rsub_j2i.o\
+	libj2_j2i_rsub_j2i_overflow.o\
+	libj2_j2i_rsub_j2i_overflow_p.o\
+	libj2_j2i_rsub_ji.o\
+	libj2_j2i_rsub_ji_overflow.o\
+	libj2_j2i_rsub_ji_overflow_p.o\
+	libj2_j2i_sub_j2i.o\
+	libj2_j2i_sub_j2i_overflow.o\
+	libj2_j2i_sub_j2i_overflow_p.o\
+	libj2_j2i_sub_j2i_to_j2i.o\
+	libj2_j2i_sub_j2i_to_j2i_overflow.o\
+	libj2_j2i_sub_ji.o\
+	libj2_j2i_sub_ji_overflow.o\
+	libj2_j2i_sub_ji_overflow_p.o\
+	libj2_j2i_sub_ji_to_j2i.o\
+	libj2_j2i_sub_ji_to_j2i_overflow.o\
+	libj2_ji_sub_j2i_overflow_p.o\
+	libj2_ji_sub_j2i_to_j2i.o\
+	libj2_ji_sub_j2i_to_j2i_overflow.o\
+	libj2_ji_sub_ji_to_j2i.o\
+	libj2_j2i_mul_j2i.o\
+	libj2_j2i_mul_j2i_overflow.o\
+	libj2_j2i_mul_j2i_overflow_p.o\
+	libj2_j2i_mul_j2i_overflow_p_quick.o\
+	libj2_j2i_mul_j2i_to_j2i.o\
+	libj2_j2i_mul_j2i_to_j2i_overflow.o\
+	libj2_j2i_mul_j2i_to_j2i_overflow_p.o\
+	libj2_j2i_mul_ji.o\
+	libj2_j2i_mul_ji_overflow.o\
+	libj2_j2i_mul_ji_overflow_p.o\
+	libj2_j2i_mul_ji_overflow_p_quick.o\
+	libj2_j2i_mul_ji_to_j2i.o\
+	libj2_j2i_mul_ji_to_j2i_overflow.o\
+	libj2_j2i_mul_ji_to_j2i_overflow_p.o\
+	libj2_ji_mul_j2i_overflow_p.o\
+	libj2_ji_mul_j2i_overflow_p_quick.o\
+	libj2_ji_mul_j2i_to_j2i.o\
+	libj2_ji_mul_j2i_to_j2i_overflow.o\
+	libj2_ji_mul_j2i_to_j2i_overflow_p.o\
+	libj2_ji_mul_ji_to_j2i.o\
+	libj2_j2i_div_j2i.o\
+	libj2_j2i_div_j2i_return.o\
+	libj2_j2i_div_j2i_to_j2i.o\
+	libj2_j2i_div_j2i_to_j2i_underflow.o\
+	libj2_j2i_div_j2i_underflow.o\
+	libj2_j2i_div_ji.o\
+	libj2_j2i_div_ji_return.o\
+	libj2_j2i_div_ji_to_j2i.o\
+	libj2_j2i_div_ji_to_j2i_underflow.o\
+	libj2_j2i_div_ji_underflow.o\
+	libj2_j2i_divmod_j2i.o\
+	libj2_j2i_divmod_j2i_to_j2i.o\
+	libj2_j2i_divmod_j2i_to_j2i_j2i.o\
+	libj2_j2i_divmod_ji.o\
+	libj2_j2i_divmod_ji_to_j2i.o\
+	libj2_j2i_divmod_ji_to_j2i_j2i.o\
+	libj2_j2i_mod_j2i.o\
+	libj2_j2i_mod_j2i_to_j2i.o\
+	libj2_j2i_mod_ji.o\
+	libj2_j2i_mod_ji_to_j2i.o\
+	libj2_j2i_rdiv_j2i.o\
+	libj2_j2i_rdiv_j2i_underflow.o\
+	libj2_j2i_rdivmod_j2i.o\
+	libj2_j2i_rdivmod_j2i_to_j2i.o\
+	libj2_j2i_rmod_j2i.o
 
 SUBHDR =\
 	libj2/constants.h\
@@ -516,6 +593,13 @@ check: $(TEST)
 		$(CHECK_PREFIX) ./"$$t";\
 	done
 
+makefile-check:
+	grep '\.o\\\{0,1\}$$' < Makefile |\
+		sed 's/^'"$$(printf '\t')"'//' |\
+		sed 's/\.o\\\{0,1\}$$/\.c/' |\
+		sort |\
+		diff -u <(printf '%s\n' *.c | sort) -
+
 install: libj2.a libj2.$(LIBEXT)
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/lib"
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/include/libj2"
@@ -553,4 +637,4 @@ clean:
 .SUFFIXES:
 .SUFFIXES: .lo .o .c .to .t
 
-.PHONY: all install uninstall clean
+.PHONY: all check release-check install uninstall clean

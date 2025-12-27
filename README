@@ -340,18 +340,24 @@ DESCRIPTION
 
 	libj2 provides the following arithmetic functions:
 
+	libj2_j2i_add_j2i(3), libj2_j2i_add_j2i_to_j2i(3),
+	libj2_j2i_add_ji(3), libj2_j2i_add_ji_to_j2ui3),
+	libj2_ji_add_j2i_to_j2i(3), libj2_ji_add_ji_to_j2i(3),
 	libj2_j2u_add_j2u(3), libj2_j2u_add_j2u_to_j2u(3),
 	libj2_j2u_add_ju(3), libj2_j2u_add_ju_to_j2u(3),
 	libj2_ju_add_j2u_to_j2u(3), libj2_ju_add_ju_to_j2u(3)
 		Calculate the sum of two values.
 
-	libj2_j2u_add_j2u_overflow(3), libj2_j2u_add_j2u_to_j2u_overflow(3),
-	libj2_j2u_add_ju_overflow(3), libj2_j2u_add_ju_to_j2u_overflow(3),
-	libj2_ju_add_j2u_to_j2u_overflow(3)
+	libj2_j2i_add_j2i_overflow(3), libj2_j2i_add_j2i_to_j2i_overflow(3),
+	libj2_j2i_add_ji_overflow(3), libj2_j2i_add_ji_to_j2i_overflow(3),
+	libj2_ji_add_j2i_to_j2i_overflow(3), libj2_j2u_add_j2u_overflow(3),
+	libj2_j2u_add_j2u_to_j2u_overflow(3), libj2_j2u_add_ju_overflow(3),
+	libj2_j2u_add_ju_to_j2u_overflow(3), libj2_ju_add_j2u_to_j2u_overflow(3)
 		Calculate the sum of two values, and detect overflow.
 
-	libj2_j2u_add_j2u_overflow_p(3), libj2_j2u_add_ju_overflow_p(3),
-	libj2_ju_add_j2u_overflow_p(3)
+	libj2_j2i_add_j2i_overflow_p(3), libj2_j2i_add_ji_overflow_p(3),
+	libj2_ji_add_j2i_overflow_p(3), libj2_j2u_add_j2u_overflow_p(3),
+	libj2_j2u_add_ju_overflow_p(3), libj2_ju_add_j2u_overflow_p(3)
 		Predict whether adding two values will result in an overflow.
 
 	libj2_j2u_sat_add_j2u(3), libj2_j2u_sat_add_j2u_to_j2u(3),
@@ -359,29 +365,40 @@ DESCRIPTION
 	libj2_ju_sat_add_j2u_to_j2u(3)
 		Calculate the sum of two values, but saturate on overflow.
 
+	libj2_j2i_sub_j2i(3), libj2_j2i_sub_j2i_to_j2i(3),
+	libj2_j2i_sub_ji(3), libj2_j2i_sub_ji_to_j2i(3),
+	libj2_ji_sub_j2i_to_j2i(3), libj2_ji_sub_ji_to_j2i(3),
 	libj2_j2u_sub_j2u(3), libj2_j2u_sub_j2u_to_j2u(3),
 	libj2_j2u_sub_ju(3), libj2_j2u_sub_ju_to_j2u(3),
 	libj2_ju_sub_j2u_to_j2u(3), libj2_ju_sub_ju_to_j2u(3)
 		Calculate the difference between two values.
 
+	libj2_j2i_rsub_j2i(3), libj2_j2i_rsub_ji(3),
 	libj2_j2u_rsub_j2u(3), libj2_j2u_rsub_ju(3)
 		Calculate the difference between two values. These functions
 		swap the position of the two operands.
 
-	libj2_j2u_sub_j2u_overflow(3), libj2_j2u_sub_j2u_to_j2u_overflow(3),
-	libj2_j2u_sub_ju_overflow(3), libj2_j2u_sub_ju_to_j2u_overflow(3),
-	libj2_ju_sub_j2u_to_j2u_overflow(3), libj2_ju_sub_ju_to_j2u_overflow(3)
+	libj2_j2i_sub_j2i_overflow(3), libj2_j2i_sub_j2i_to_j2i_overflow(3),
+	libj2_j2i_sub_ji_overflow(3), libj2_j2i_sub_ji_to_j2i_overflow(3),
+	libj2_ji_sub_j2i_to_j2i_overflow(3), libj2_j2u_sub_j2u_overflow(3),
+	libj2_j2u_sub_j2u_to_j2u_overflow(3), libj2_j2u_sub_ju_overflow(3),
+	libj2_j2u_sub_ju_to_j2u_overflow(3), libj2_ju_sub_j2u_to_j2u_overflow(3),
+	libj2_ju_sub_ju_to_j2u_overflow(3)
 		Calculate the difference between two values, and detect
 		overflow.
 
+	libj2_j2i_rsub_j2i_overflow(3), libj2_j2i_rsub_ji_overflow(3),
 	libj2_j2u_rsub_j2u_overflow(3), libj2_j2u_rsub_ju_overflow(3)
 		Calculate the difference between two values, and detect
 		overflow. These functions swap the position of the two operands.
 
-	libj2_j2u_sub_j2u_overflow_p(3), libj2_j2u_sub_ju_overflow_p(3),
-	libj2_ju_sub_j2u_overflow_p(3), libj2_ju_sub_ju_overflow_p(3)
+	libj2_j2i_sub_j2i_overflow_p(3), libj2_j2i_sub_ji_overflow_p(3),
+	libj2_ji_sub_j2i_overflow_p(3), libj2_j2u_sub_j2u_overflow_p(3),
+	libj2_j2u_sub_ju_overflow_p(3), libj2_ju_sub_j2u_overflow_p(3),
+	libj2_ju_sub_ju_overflow_p(3)
 		Predict whether subtracting a value will result in an overflow.
 
+	libj2_j2i_rsub_j2i_overflow_p(3), libj2_j2i_rsub_ji_overflow_p(3),
 	libj2_j2u_rsub_j2u_overflow_p(3), libj2_j2u_rsub_ju_overflow_p(3)
 		Predict whether subtracting a value will result in an overflow.
 		These functions swap the position of the two operands.
@@ -396,29 +413,41 @@ DESCRIPTION
 		Calculate the difference between two values, but saturate on
 		overflow. These functions swap the position of the two operands.
 
+	libj2_j2i_mul_j2i(3), libj2_j2i_mul_j2i_to_j2i(3),
+	libj2_j2i_mul_ji(3), libj2_j2i_mul_ji_to_j2i(3),
+	libj2_ji_mul_j2i_to_j2i(3), libj2_ji_mul_ji_to_j2i(3),
 	libj2_j2u_mul_j2u(3), libj2_j2u_mul_j2u_to_j2u(3),
 	libj2_j2u_mul_ju(3), libj2_j2u_mul_ju_to_j2u(3),
 	libj2_ju_mul_j2u_to_j2u(3), libj2_ju_mul_ju_to_j2u(3),
 	libj2_j2u_mul_j2u_destructive(3)
 		Calculate the product of two values.
 
-	libj2_j2u_mul_j2u_overflow(3), libj2_j2u_mul_j2u_to_j2u_overflow(3),
-	libj2_j2u_mul_ju_overflow(3), libj2_j2u_mul_ju_to_j2u_overflow(3),
-	libj2_ju_mul_j2u_to_j2u_overflow(3),
+	libj2_j2i_mul_j2i_overflow(3), libj2_j2i_mul_j2i_to_j2i_overflow(3),
+	libj2_j2i_mul_ji_overflow(3), libj2_j2i_mul_ji_to_j2i_overflow(3),
+	libj2_ji_mul_j2i_to_j2i_overflow(3), libj2_j2u_mul_j2u_overflow(3),
+	libj2_j2u_mul_j2u_to_j2u_overflow(3), libj2_j2u_mul_ju_overflow(3),
+	libj2_j2u_mul_ju_to_j2u_overflow(3), libj2_ju_mul_j2u_to_j2u_overflow(3),
 	libj2_j2u_mul_j2u_overflow_destructive(3)
 		Calculate the product of two values, and detect overflow.
 
-	libj2_j2u_mul_j2u_overflow_p(3), libj2_j2u_mul_ju_overflow_p(3),
-	libj2_ju_mul_j2u_overflow_p(3)
+	libj2_j2i_mul_j2i_overflow_p(3), libj2_j2i_mul_ji_overflow_p(3),
+	libj2_ji_mul_j2i_overflow_p(3), libj2_j2u_mul_j2u_overflow_p(3),
+	libj2_j2u_mul_ju_overflow_p(3), libj2_ju_mul_j2u_overflow_p(3)
 		Predict whether multiplying two values will result in an
 		overflow.
 
+	libj2_j2i_mul_j2i_overflow_p_quick(3),
+	libj2_j2i_mul_ji_overflow_p_quick(3),
+	libj2_ji_mul_j2i_overflow_p_quick(3),
 	libj2_j2u_mul_j2u_overflow_p_quick(3),
 	libj2_j2u_mul_ju_overflow_p_quick(3),
 	libj2_ju_mul_j2u_overflow_p_quick(3)
 		Predict whether multiplying two values will result in an
 		overflow, but do not preform the prediction if it is costly.
 
+	libj2_j2i_mul_j2i_to_j2i_overflow_p(3),
+	libj2_j2i_mul_ji_to_j2i_overflow_p(3),
+	libj2_ji_mul_j2i_to_j2i_overflow_p(3),
 	libj2_j2u_mul_j2u_to_j2u_overflow_p(3),
 	libj2_j2u_mul_ju_to_j2u_overflow_p(3),
 	libj2_ju_mul_j2u_to_j2u_overflow_p(3)
@@ -431,44 +460,55 @@ DESCRIPTION
 	libj2_ju_sat_mul_j2u_to_j2u(3), libj2_j2u_sat_mul_j2u_destructive(3)
 		Calculate the product of two values, but saturate on overflow.
 
+	libj2_j2i_divmod_j2i(3), libj2_j2i_divmod_j2i_to_j2i(3),
+	libj2_j2i_divmod_j2i_to_j2i_j2i(3), libj2_j2i_divmod_ji(3),
+	libj2_j2i_divmod_ji_to_j2i(3), libj2_j2i_divmod_ji_to_j2i_j2i(3),
 	libj2_j2u_divmod_j2u(3), libj2_j2u_divmod_j2u_to_j2u(3),
 	libj2_j2u_divmod_j2u_to_j2u_j2u(3), libj2_j2u_divmod_ju(3),
 	libj2_j2u_divmod_ju_to_j2u(3), libj2_j2u_divmod_ju_to_j2u_j2u(3)
 		Calculate the ratio between values, and keep the computed
 		remainder.
 
+	libj2_j2i_rdivmod_j2i(3), libj2_j2i_rdivmod_j2i_to_j2i(3),
 	libj2_j2u_rdivmod_j2u(3), libj2_j2u_rdivmod_j2u_to_j2u(3)
 		Calculate the ratio between values, and keep the computed
 		remainder. These functions swap the position of the two
 		operands.
 
+	libj2_j2i_div_j2i(3), libj2_j2i_div_j2i_to_j2i(3),
+	libj2_j2i_div_j2i_return(3), libj2_j2i_div_ji(3),
+	libj2_j2i_div_ji_to_j2i(3), libj2_j2i_div_ji_return(3),
 	libj2_j2u_div_j2u(3), libj2_j2u_div_j2u_to_j2u(3),
 	libj2_j2u_div_j2u_return(3), libj2_j2u_div_ju(3),
 	libj2_j2u_div_ju_to_j2u(3), libj2_j2u_div_ju_return(3)
 		Calculate the ratio between values, and discard the
 		computed remainder.
 
-	libj2_j2u_rdiv_j2u(3)
+	libj2_j2i_rdiv_j2i(3), libj2_j2u_rdiv_j2u(3)
 		Calculate the ratio between values, and discard the
 		computed remainder. This function swaps the position of the two
 		operands.
 
+	libj2_j2i_div_j2i_to_j2i_underflow(3), libj2_j2i_div_j2i_underflow(3),
+	libj2_j2i_div_ji_to_j2i_underflow(3), libj2_j2i_div_ji_underflow(3),
 	libj2_j2u_div_j2u_to_j2u_underflow(3), libj2_j2u_div_j2u_underflow(3),
 	libj2_j2u_div_ju_to_j2u_underflow(3), libj2_j2u_div_ju_underflow(3)
 		Calculate the ratio between values, and discard the
 		computed remainder, but detect underflow (non-zero remainder).
 
-	libj2_j2u_rdiv_j2u_underflow(3)
+	libj2_j2i_rdiv_j2i_underflow(3), libj2_j2u_rdiv_j2u_underflow(3)
 		Calculate the ratio between values, and discard the
 		computed remainder, but detect underflow (non-zero remainder).
 		This function swaps the position of the two operands.
 
-	libj2_j2u_mod_j2u(3), libj2_j2u_mod_j2u_to_j2u(3), libj2_j2u_mod_ju(3),
+	libj2_j2i_mod_j2i(3), libj2_j2i_mod_j2i_to_j2i(3), libj2_j2i_mod_ji(3),
+	libj2_j2i_mod_ji_to_j2i(3), libj2_j2u_mod_j2u(3),
+	libj2_j2u_mod_j2u_to_j2u(3), libj2_j2u_mod_ju(3),
 	libj2_j2u_mod_ju_to_j2u(3)
 		Calculate the remainder of the integer division between two
 		values.
 
-	libj2_j2u_rmod_j2u(3)
+	libj2_j2i_rmod_j2i(3), libj2_j2u_rmod_j2u(3)
 		Calculate the remainder of the integer division between two
 		values. This function swaps the position of the two operands.
 

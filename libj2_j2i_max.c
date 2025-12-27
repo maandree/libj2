@@ -22,10 +22,8 @@ main(void)
 	EXPECT(value.high == (uintmax_t)INTMAX_MAX);
 	EXPECT(value.low == UINTMAX_MAX);
 
-#ifdef TODO /* requires libj2_j2i_add_ji */
 	libj2_j2i_add_ji(&value, 1);
 	EXPECT(libj2_j2i_is_min(&value));
-#endif
 
 	return 0;
 }

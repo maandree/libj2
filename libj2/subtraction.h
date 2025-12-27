@@ -388,9 +388,9 @@ libj2_ju_sub_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct 
  * `libj2_j2u_rsub_j2u(a, b, res)` implements
  * `*a = *b - *a`
  * 
- * @param   a    The subtrahend (right-hand), also used as
- *               the output parameter for the difference
- * @param   b    The minuend (left-hand)
+ * @param  a  The subtrahend (right-hand), also used as
+ *            the output parameter for the difference
+ * @param  b  The minuend (left-hand)
  * 
  * @since  1.0
  */
@@ -526,7 +526,7 @@ libj2_j2u_rsub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
 
 
 /**
- * Predict whether `libj2_j2u_sub_ju_to_j2u_overflow` 
+ * Predict whether `libj2_j2u_sub_ju_to_j2u_overflow`
  * or `libj2_j2u_sub_ju_overflow` will return a
  * result-overflow signal
  * 
@@ -540,7 +540,7 @@ libj2_j2u_rsub_ju_overflow(struct libj2_j2u *a, uintmax_t b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_sub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
 {
 	return a->low < b && !a->high;
@@ -548,7 +548,7 @@ libj2_j2u_sub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
 
 
 /**
- * Predict whether `libj2_ju_sub_j2u_to_j2u_overflow` 
+ * Predict whether `libj2_ju_sub_j2u_to_j2u_overflow`
  * will return a result-overflow signal
  * 
  * `libj2_ju_sub_j2u_overflow_p(a, b)` implements
@@ -561,7 +561,7 @@ libj2_j2u_sub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_sub_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
 {
 	return b->high || b->low > a;
@@ -569,7 +569,7 @@ libj2_ju_sub_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
 
 
 /**
- * Predict whether `libj2_ju_sub_ju_to_j2u_overflow` 
+ * Predict whether `libj2_ju_sub_ju_to_j2u_overflow`
  * will return a result-overflow signal
  * 
  * `libj2_ju_sub_ju_overflow_p(a, b)` implements
@@ -582,7 +582,7 @@ libj2_ju_sub_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_sub_ju_overflow_p(uintmax_t a, uintmax_t b)
 {
 	return a < b;
@@ -590,7 +590,7 @@ libj2_ju_sub_ju_overflow_p(uintmax_t a, uintmax_t b)
 
 
 /**
- * Predict whether `libj2_j2u_sub_j2u_to_j2u_overflow` 
+ * Predict whether `libj2_j2u_sub_j2u_to_j2u_overflow`
  * or `libj2_j2u_sub_j2u_overflow` will return a
  * result-overflow signal
  * 
@@ -604,7 +604,7 @@ libj2_ju_sub_ju_overflow_p(uintmax_t a, uintmax_t b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_sub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_sub_ju_overflow_p(a, b->low) || a->high < b->high;
@@ -625,7 +625,7 @@ libj2_j2u_sub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_rsub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_sub_j2u_overflow_p(b, a);
@@ -646,8 +646,497 @@ libj2_j2u_rsub_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u 
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_rsub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
 {
 	return libj2_ju_sub_j2u_overflow_p(b, a);
+}
+
+
+
+
+
+/**
+ * Calculate the difference between two signed
+ * double-max precision integers
+ * 
+ * `libj2_j2i_sub_j2i_to_j2i(a, b, res)` implements
+ * `*res = *a - *b`
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sub_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	libj2_j2u_sub_j2u_to_j2u((const void *)a, (const void *)b, (void *)res);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * double-max precision integer (minuend) and a
+ * signed max precision integer (subtrahend)
+ * 
+ * `libj2_j2i_sub_ji_to_j2i(a, b, res)`
+ * implements `*res = *a - b`
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sub_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	libj2_j2i_sub_j2i_to_j2i(a, &t, res);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * max precision integer (minuend) and a signed
+ * double-max precision integer (subtrahend)
+ * 
+ * `libj2_ji_sub_j2i_to_j2i(a, b, res)`
+ * implements `*res = a - *b`
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_sub_j2i_to_j2i(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(a, &t);
+	libj2_j2i_sub_j2i_to_j2i(&t, b, res);
+}
+
+
+/**
+ * Calculate the difference between two signed
+ * max precision integers, as a signed double-max
+ * precision integer
+ * 
+ * `libj2_ji_sub_ji_to_j2i(a, b, res)`
+ * implements `*res = a - b`, where `a` and `b`
+ * are converted into `struct libj2_j2i`'s
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_sub_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
+{
+	struct libj2_j2i s, t;
+	libj2_ji_to_j2i(a, &s);
+	libj2_ji_to_j2i(b, &t);
+	libj2_j2i_sub_j2i_to_j2i(&s, &t, res);
+}
+
+
+/**
+ * Calculate the difference between two signed
+ * double-max precision integers
+ * 
+ * `libj2_j2i_sub_j2i(a, b)` implements `*a -= *b`
+ * 
+ * @param  a  The minuend (left-hand), also used
+ *            as the output parameter for the difference
+ * @param  b  The subtrahend (right-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sub_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	libj2_j2u_sub_j2u((void *)a, (const void *)b);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * double-max precision integer (minuend) and a
+ * signed max precision integer (subtrahend)
+ * 
+ * `libj2_j2i_sub_ji(a, b)` implements `*a -= b`
+ * 
+ * @param  a  The minuend (left-hand), also used as the
+ *            output parameter for the difference
+ * @param  b  The subtrahend (right-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sub_ji(struct libj2_j2i *a, intmax_t b)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	libj2_j2i_sub_j2i(a, &t);
+}
+
+
+/**
+ * Predict whether `libj2_j2i_sub_j2i_to_j2i_overflow`
+ * or `libj2_j2i_sub_j2i_overflow` will return a
+ * result-overflow signal
+ * 
+ * `libj2_j2i_sub_j2i_overflow_p(a, b)` implements
+ * `libj2_j2i_sub_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     +1 if the subtraction would overflow positively,
+ *             -1 if the subtraction would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_sub_j2i_overflow_p(const struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	if (libj2_j2i_is_negative(a)) {
+		if (!libj2_j2i_is_positive(b))
+			return 0;
+		return a->high - b->high - (uintmax_t)(a->low < b->low) <= (uintmax_t)INTMAX_MAX ? -1 : 0;
+	} else {
+		if (!libj2_j2i_is_negative(b))
+			return 0;
+		return a->high - b->high - (uintmax_t)(a->low < b->low) > (uintmax_t)INTMAX_MAX;
+	}
+}
+
+
+/**
+ * Predict whether `libj2_j2i_sub_ji_to_j2i_overflow`
+ * or `libj2_j2i_sub_ji_overflow` will return a
+ * result-overflow signal
+ * 
+ * `libj2_j2i_sub_ji_overflow_p(a, b)` implements
+ * `libj2_j2i_sub_ji_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     +1 if the subtraction would overflow positively,
+ *             -1 if the subtraction would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_sub_ji_overflow_p(const struct libj2_j2i *a, intmax_t b)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_sub_j2i_overflow_p(a, &t);
+}
+
+
+/**
+ * Predict whether `libj2_ji_sub_j2i_to_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_ji_sub_j2i_overflow_p(a, b)` implements
+ * `libj2_ji_sub_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The minuend (left-hand)
+ * @param   b  The subtrahend (right-hand)
+ * @return     +1 if the subtraction would overflow positively,
+ *             -1 if the subtraction would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_ji_sub_j2i_overflow_p(intmax_t a, const struct libj2_j2i *b)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(a, &t);
+	return libj2_j2i_sub_j2i_overflow_p(&t, b);
+}
+
+
+/**
+ * Calculate the difference between two signed
+ * double-max precision integers
+ * 
+ * `libj2_j2i_sub_j2i_to_j2i_overflow(a, b, res)`
+ * implements `*res = *a - *b` with overflow-detection
+ * 
+ * @param   a    The minuend (left-hand)
+ * @param   b    The subtrahend (right-hand)
+ * @param   res  Output parameter for the difference
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_sub_j2i_to_j2i_overflow(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int overflow = libj2_j2i_sub_j2i_overflow_p(a, b);
+	libj2_j2i_sub_j2i_to_j2i(a, b, res);
+	return overflow;
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * double-max precision integer (minuend) and a
+ * signed max precision integer (subtrahend)
+ * 
+ * `libj2_j2i_sub_ji_to_j2i_overflow(a, b, res)`
+ * implements `*res = *a - b` with overflow-detection
+ * 
+ * @param   a    The minuend (left-hand)
+ * @param   b    The subtrahend (right-hand)
+ * @param   res  Output parameter for the difference
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_sub_ji_to_j2i_overflow(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_sub_j2i_to_j2i_overflow(a, &t, res);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * max precision integer (minuend) and a signed
+ * double-max precision integer (subtrahend)
+ * 
+ * `libj2_ji_sub_j2i_to_j2i_overflow(a, b, res)`
+ * implements `*res = a - *b` with overflow-detection
+ * 
+ * @param   a    The minuend (left-hand)
+ * @param   b    The subtrahend (right-hand)
+ * @param   res  Output parameter for the difference
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_sub_j2i_to_j2i_overflow(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(a, &t);
+	return libj2_j2i_sub_j2i_to_j2i_overflow(&t, b, res);
+}
+
+
+/**
+ * Calculate the difference between two signed
+ * double-max precision integers
+ * 
+ * `libj2_j2i_sub_j2i_overflow(a, b)`
+ * implements `*a -= *b` with overflow-detection
+ * 
+ * @param   a  The minuend (left-hand), also used
+ *             as the output parameter for the difference
+ * @param   b  The subtrahend (right-hand)
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_sub_j2i_overflow(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	return libj2_j2i_sub_j2i_to_j2i_overflow(a, b, a);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * double-max precision integer (minuend) and a
+ * signed max precision integer (subtrahend)
+ * 
+ * `libj2_j2i_sub_ji_overflow(a, b)` implements
+ * `*a -= b` with overflow-detection
+ * 
+ * @param   a  The minuend (left-hand), also used as the
+ *             output parameter for the difference
+ * @param   b  The subtrahend (right-hand)
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_sub_ji_overflow(struct libj2_j2i *a, intmax_t b)
+{
+	return libj2_j2i_sub_ji_to_j2i_overflow(a, b, a);
+}
+
+
+/**
+ * Calculate the difference between two signed
+ * max precision integers; in this variant of
+ * `libj2_j2i_sub_j2i`, the minuend (left-hand)
+ * is the second parameter and the subtrahend
+ * (right-hand) is the first parameter
+ * 
+ * `libj2_j2i_rsub_j2i(a, b, res)` implements
+ * `*a = *b - *a`
+ * 
+ * @param  a  The subtrahend (right-hand), also used as
+ *            the output parameter for the difference
+ * @param  b  The minuend (left-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_rsub_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	libj2_j2i_sub_j2i_to_j2i(b, a, a);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * max precision integer (minuend) and a signed
+ * double-max precision integer (subtrahend);
+ * in this variant of `libj2_j2i_sub_ji`, the
+ * minuend (left-hand) is the second parameter
+ * and the subtrahend (right-hand) is the first
+ * parameter
+ * 
+ * `libj2_j2i_rsub_ji(a, b, res)` implements `*a = b - *a`
+ * 
+ * @param  a  The subtrahend (right-hand), also used as
+ *            the output parameter for the difference
+ * @param  b  The minuend (left-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_rsub_ji(struct libj2_j2i *a, intmax_t b)
+{
+	libj2_ji_sub_j2i_to_j2i(b, a, a);
+}
+
+
+/**
+ * Calculate the difference between two signed
+ * max precision integers; in this variant of
+ * `libj2_j2i_sub_j2i`, the minuend (left-hand)
+ * is the second parameter and the subtrahend
+ * (right-hand) is the first parameter
+ * 
+ * `libj2_j2i_rsub_j2i_overflow(a, b, res)`
+ * implements `*a = *b - *a` with overflow-detection
+ * 
+ * @param   a  The subtrahend (right-hand), also used as
+ *             the output parameter for the difference
+ * @param   b  The minuend (left-hand)
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_rsub_j2i_overflow(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	return libj2_j2i_sub_j2i_to_j2i_overflow(b, a, a);
+}
+
+
+/**
+ * Calculate the difference between a signed
+ * max precision integer (minuend) and a signed
+ * double-max precision integer (subtrahend);
+ * in this variant of `libj2_j2i_sub_ji`, the
+ * minuend (left-hand) is the second parameter
+ * and the subtrahend (right-hand) is the first
+ * parameter
+ * 
+ * `libj2_j2i_rsub_ji_overflow(a, b, res)`
+ * implements `*a = b - *a` with overflow-detection
+ * 
+ * @param   a  The subtrahend (right-hand), also used as
+ *             the output parameter for the difference
+ * @param   b  The minuend (left-hand)
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_rsub_ji_overflow(struct libj2_j2i *a, intmax_t b)
+{
+	return libj2_ji_sub_j2i_to_j2i_overflow(b, a, a);
+}
+
+
+/**
+ * Predict whether `libj2_j2i_rsub_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2i_rsub_j2i_overflow_p(a, b)` implements
+ * `libj2_j2i_rsub_j2i_overflow(&(struct libj2_j2i){.high = a->high, .low = a->low}, b)`
+ * in an efficient manner
+ * 
+ * @param   a  The subtrahend (right-hand)
+ * @param   b  The minuend (left-hand)
+ * @return     +1 if the subtraction would overflow positively,
+ *             -1 if the subtraction would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_rsub_j2i_overflow_p(const struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	return libj2_j2i_sub_j2i_overflow_p(b, a);
+}
+
+
+/**
+ * Predict whether `libj2_j2i_rsub_ji_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2i_rsub_ji_overflow_p(a, b)` implements
+ * `libj2_j2i_rsub_ji_overflow(&(struct libj2_j2i){.high = a->high, .low = a->low}, b)`
+ * in an efficient manner
+ * 
+ * @param   a  The subtrahend (right-hand)
+ * @param   b  The minuend (left-hand)
+ * @return     +1 if the subtraction would overflow positively,
+ *             -1 if the subtraction would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_rsub_ji_overflow_p(const struct libj2_j2i *a, intmax_t b)
+{
+	return libj2_ji_sub_j2i_overflow_p(b, a);
 }

@@ -624,7 +624,7 @@ libj2_ju_rrot_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_lsh_overflow_p(const struct libj2_j2u *a, unsigned b)
 {
 	if (b >= LIBJ2_J2U_BIT)
@@ -654,7 +654,7 @@ libj2_j2u_lsh_overflow_p(const struct libj2_j2u *a, unsigned b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_lsh_overflow_p(uintmax_t a, unsigned b)
 {
 	if (b >= LIBJ2_J2U_BIT)
@@ -681,7 +681,7 @@ libj2_ju_lsh_overflow_p(uintmax_t a, unsigned b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_rsh_underflow_p(const struct libj2_j2u *a, unsigned b)
 {
 	if (b >= LIBJ2_J2U_BIT)
@@ -711,7 +711,7 @@ libj2_j2u_rsh_underflow_p(const struct libj2_j2u *a, unsigned b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_rsh_underflow_p(uintmax_t a, unsigned b)
 {
 	if (b >= LIBJ2_JU_BIT)
@@ -839,7 +839,7 @@ libj2_ji_lsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
  * 
  * @since  1.1
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2i_lsh_overflow_p(const struct libj2_j2i *a, unsigned b)
 {
 	if (!b) {
@@ -885,7 +885,7 @@ libj2_j2i_lsh_overflow_p(const struct libj2_j2i *a, unsigned b)
  * 
  * @since  1.1
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ji_lsh_overflow_p(intmax_t a, unsigned b)
 {
 	if (b >= LIBJ2_J2I_BIT)
@@ -1251,7 +1251,7 @@ libj2_ji_rsh_to_j2i_underflow(intmax_t a, unsigned b, struct libj2_j2i *res)
  * 
  * @since  1.1
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2i_rsh_underflow_p(const struct libj2_j2i *a, unsigned b)
 {
 	if (libj2_j2i_is_negative(a)) {
@@ -1284,7 +1284,7 @@ libj2_j2i_rsh_underflow_p(const struct libj2_j2i *a, unsigned b)
  * 
  * @since  1.1
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ji_rsh_underflow_p(intmax_t a, unsigned b)
 {
 	if (b >= LIBJ2_JU_BIT)

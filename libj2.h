@@ -162,17 +162,22 @@ enum libj2_overflow {
 #include "libj2/sign-shifting.h"
 #include "libj2/bit-shifting.h"
 #include "libj2/bit-scanning.h"
-#include "libj2/addition.h" /* TODO add signed versions */
-#include "libj2/subtraction.h" /* TODO add signed versions */
-#include "libj2/multiplication.h" /* TODO add signed versions */
-#include "libj2/division.h" /* TODO add signed versions */
+#include "libj2/addition.h"
+#include "libj2/subtraction.h"
+#include "libj2/multiplication.h"
+#include "libj2/division.h"
 #include "libj2/saturated-math.h" /* TODO add signed versions */
 #include "libj2/strings.h"
 
 
-#if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)
-# undef LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_
+#if !defined(LIBJ2_COMPILING_)
+# if defined(LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_)
+#  undef LIBJ2_USE_GCC_INTRINSIC_FUNCTIONS_
+# endif
+# if defined(LIBJ2_USE_GCC_PARITYG_)
+#  undef LIBJ2_USE_GCC_PARITYG_
+# endif
+# undef LIBJ2_PURE_
 #endif
-#undef LIBJ2_PURE_
 
 #endif

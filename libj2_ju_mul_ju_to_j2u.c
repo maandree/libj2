@@ -129,6 +129,11 @@ main(void)
 	EXPECT(r.high == UINTMAX_MAX - 1U);
 	EXPECT(r.low == 1);
 
+	r = (struct libj2_j2u){111, 222};
+	libj2_ju_mul_ju_to_j2u(UINTMAX_MAX >> 1, UINTMAX_MAX >> 1, &r);
+	EXPECT(r.high == UINTMAX_MAX >> 2);
+	EXPECT(r.low == 1);
+
 	for (i = 0; i < 256; i++) {
 		u = random_ju();
 		v = random_ju();

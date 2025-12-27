@@ -172,7 +172,7 @@ libj2_ju_add_j2u_to_j2u_overflow(uintmax_t a, const struct libj2_j2u *b, struct 
 
 /**
  * Calculate the sum, as an unsigned double-max precision
- * integer, of two unsigned double-max precision integers
+ * integer, of two unsigned max precision integers
  * 
  * `libj2_ju_add_ju_to_j2u(a, b, res)` implements
  * `*res = a + b`, where `a` and `b` are converted to
@@ -222,10 +222,11 @@ libj2_j2u_add_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
 
 
 /**
- * Calculate the sum of two unsigned double-max precision
- * integers
+ * Calculate the sum of two unsigned double-max
+ * precision integers
  * 
- * `libj2_j2u_add_j2u_to_j2u(a, b, res)` implements `*res = *a + *b`
+ * `libj2_j2u_add_j2u_to_j2u(a, b, res)` implements
+ * `*res = *a + *b`
  * 
  * @param  a    The augend
  * @param  b    The addend
@@ -350,7 +351,7 @@ libj2_j2u_add_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_add_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
 {
 	return a->low > UINTMAX_MAX - b && a->high == UINTMAX_MAX;
@@ -371,7 +372,7 @@ libj2_j2u_add_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_add_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_add_ju_overflow_p(b, a);
@@ -391,9 +392,10 @@ libj2_ju_add_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
  * @param   b  The addend
  * @return     1 if the addition would overflow, 0 otherwise
  * 
- * @since  1.0
+ * @since  1.0 (broken)
+ * @since  1.1 (fixed)
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_add_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	if (a == b)
@@ -404,4 +406,374 @@ libj2_j2u_add_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
 		return a->high + 1U > UINTMAX_MAX - b->high;
 	else
 		return a->high > UINTMAX_MAX - b->high;
+}
+
+
+
+
+
+/**
+ * Calculate the sum of a signed double-max precision
+ * integer and a signed max precision integer
+ * 
+ * `libj2_j2i_add_ji(a, b)` implements `*a += b`
+ * 
+ * @param  a  The augend, and output parameter for the sum
+ * @param  b  The addend
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_add_ji(struct libj2_j2i *a, intmax_t b)
+{
+	struct libj2_j2u u;
+	if (b < 0) {
+		u.high = UINTMAX_MAX;
+		u.low = ~(uintmax_t)-(b + 1);
+	} else {
+		u.high = 0;
+		u.low = (uintmax_t)b;
+	}
+	libj2_j2u_add_j2u((void *)a, &u);
+}
+
+
+/**
+ * Calculate the sum of two signed double-max precision
+ * integers
+ * 
+ * `libj2_j2i_add_j2i(a, b)` implements `*a += *b`
+ * 
+ * @param  a  The augend, and output parameter for the sum
+ * @param  b  The addend
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_add_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	libj2_j2u_add_j2u((void *)a, (const void *)b);
+}
+
+
+/**
+ * Calculate the sum of a signed double-max precision
+ * integer and a signed max precision integer
+ * 
+ * `libj2_j2i_add_ji_to_j2i(a, b, res)` implements
+ * `*res = *a + b`
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_add_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	struct libj2_j2u u;
+	if (b < 0) {
+		u.high = UINTMAX_MAX;
+		u.low = ~(uintmax_t)-(b + 1);
+	} else {
+		u.high = 0;
+		u.low = (uintmax_t)b;
+	}
+	libj2_j2u_add_j2u_to_j2u((const void *)a, &u, (void *)res);
+}
+
+
+/**
+ * Calculate the sum of two signed double-max precision
+ * integers
+ * 
+ * `libj2_j2i_add_j2i_to_j2i(a, b, res)` implements `*res = *a + *b`
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_add_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	libj2_j2u_add_j2u_to_j2u((const void *)a, (const void *)b, (void *)res);
+}
+
+
+/**
+ * Calculate the sum, as a signed double-max precision
+ * integer, of two signed max precision integers
+ * 
+ * `libj2_ji_add_ji_to_j2i(a, b, res)` implements
+ * `*res = a + b`, where `a` and `b` are converted to
+ * `struct libj2_j2i`'s
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_add_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
+{
+	struct libj2_j2u u, v;
+	if (a < 0) {
+		u.high = UINTMAX_MAX;
+		u.low = ~(uintmax_t)-(a + 1);
+	} else {
+		u.high = 0;
+		u.low = (uintmax_t)a;
+	}
+	if (b < 0) {
+		v.high = UINTMAX_MAX;
+		v.low = ~(uintmax_t)-(b + 1);
+	} else {
+		v.high = 0;
+		v.low = (uintmax_t)b;
+	}
+	libj2_j2u_add_j2u_to_j2u(&u, &v, (void *)res);
+}
+
+
+/**
+ * Calculate the sum of a signed max precision
+ * integer and a signed double-max precision integer
+ * 
+ * `libj2_ji_add_j2i_to_j2i(a, b, res)` implements
+ * `*res = a + *b`
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_add_j2i_to_j2i(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	libj2_j2i_add_ji_to_j2i(b, a, res);
+}
+
+
+/**
+ * Predict the result-overflow signal
+ * `libj2_j2i_add_j2i_to_j2i_overflow` or
+ * `libj2_j2i_add_j2i_overflow` will return
+ * 
+ * `libj2_j2i_add_j2i_overflow_p(a, b)` implements
+ * `libj2_j2i_add_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The augend
+ * @param   b  The addend
+ * @return     +1 if the addition would overflow positively,
+ *             -1 if the addition would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_add_j2i_overflow_p(const struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	if (libj2_j2i_is_positive(a) && libj2_j2i_is_positive(b)) {
+		if (a == b)
+			return (int)(a->high >> (LIBJ2_JU_BIT - 2U));
+		if (a->low > UINTMAX_MAX - b->low)
+			return a->high >= (uintmax_t)INTMAX_MAX - b->high;
+		else
+			return a->high > (uintmax_t)INTMAX_MAX - b->high;
+	} else if (libj2_j2i_is_negative(a) && libj2_j2i_is_negative(b)) {
+		if (a == b)
+			return ~a->high >> (LIBJ2_JU_BIT - 2U) ? -1 : 0;
+		if (a->low > UINTMAX_MAX - b->low)
+			return a->high + b->high + 1U < ~(uintmax_t)INTMAX_MAX ? -1 : 0;
+		else
+			return a->high + b->high < ~(uintmax_t)INTMAX_MAX ? -1 : 0;
+	} else {
+		return 0;
+	}
+}
+
+
+/**
+ * Predict the result-overflow signal
+ * `libj2_j2i_add_ji_to_j2i_overflow` or
+ * `libj2_j2i_add_ji_overflow` will return
+ * 
+ * `libj2_j2i_add_ji_overflow_p(a, b)` implements
+ * `libj2_j2i_add_ji_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The augend
+ * @param   b  The addend
+ * @return     +1 if the addition would overflow positively,
+ *             -1 if the addition would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_add_ji_overflow_p(const struct libj2_j2i *a, intmax_t b)
+{
+	if (b > 0 && libj2_j2i_is_positive(a)) {
+		if (a->low > UINTMAX_MAX - (uintmax_t)b)
+			return a->high >= (uintmax_t)INTMAX_MAX;
+		else
+			return a->high > (uintmax_t)INTMAX_MAX;
+	} else if (b < 0 && libj2_j2i_is_negative(a)) {
+		if (a->low > UINTMAX_MAX - ~(uintmax_t)-(b + 1))
+			return a->high < ~(uintmax_t)INTMAX_MAX ? -1 : 0;
+		else
+			return a->high <= ~(uintmax_t)INTMAX_MAX ? -1 : 0;
+	} else {
+		return 0;
+	}
+}
+
+
+/**
+ * Predict the result-overflow signal
+ * `libj2_ji_add_j2i_to_j2i_overflow` will return
+ * 
+ * `libj2_ji_add_j2i_overflow_p(a, b)` implements
+ * `libj2_ji_add_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner
+ * 
+ * @param   a  The augend
+ * @param   b  The addend
+ * @return     +1 if the addition would overflow positively,
+ *             -1 if the addition would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_ji_add_j2i_overflow_p(intmax_t a, const struct libj2_j2i *b)
+{
+	return libj2_j2i_add_ji_overflow_p(b, a);
+}
+
+
+/**
+ * Calculate the sum of a signed double-max precision
+ * integer and a signed max precision integer
+ * 
+ * `libj2_j2i_add_ji_overflow(a, b)` implements `*a += b`
+ * with overflow-detection
+ * 
+ * @param   a  The augend, and output parameter for the sum
+ * @param   b  The addend
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_add_ji_overflow(struct libj2_j2i *a, intmax_t b)
+{
+	int overflow = libj2_j2i_add_ji_overflow_p(a, b);
+	libj2_j2i_add_ji(a, b);
+	return overflow;
+}
+
+
+/**
+ * Calculate the sum of two signed double-max precision
+ * integers
+ * 
+ * `libj2_j2i_add_j2i_overflow(a, b)` implements `*a += *b`
+ * with overflow-detection
+ * 
+ * @param   a  The augend, and output parameter for the sum
+ * @param   b  The addend
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_add_j2i_overflow(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	int overflow = libj2_j2i_add_j2i_overflow_p(a, b);
+	libj2_j2i_add_j2i(a, b);
+	return overflow;
+}
+
+
+/**
+ * Calculate the sum of a signed double-max precision
+ * integer and a signed max precision integer
+ * 
+ * `libj2_j2i_add_ji_to_j2i_overflow(a, b, res)` implements
+ * `*res = *a + b` with overflow-detection
+ * 
+ * @param   a    The augend
+ * @param   b    The addend
+ * @param   res  Output parameter for the sum
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_add_ji_to_j2i_overflow(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	int overflow = libj2_j2i_add_ji_overflow_p(a, b);
+	libj2_j2i_add_ji_to_j2i(a, b, res);
+	return overflow;
+}
+
+
+/**
+ * Calculate the sum of two signed double-max precision
+ * integers
+ * 
+ * `libj2_j2i_add_j2i_to_j2i_overflow(a, b, res)` implements
+ * `*res = *a + *b` with overflow-detection
+ * 
+ * @param   a    The augend
+ * @param   b    The addend
+ * @param   res  Output parameter for the sum
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *                0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_add_j2i_to_j2i_overflow(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int overflow = libj2_j2i_add_j2i_overflow_p(a, b);
+	libj2_j2i_add_j2i_to_j2i(a, b, res);
+	return overflow;
+}
+
+
+/**
+ * Calculate the sum of a signed max precision
+ * integer and a signed double-max precision integer
+ * 
+ * `libj2_ji_add_j2i_to_j2i_overflow(a, b, res)` implements
+ * `*res = a + *b` with overflow-detection
+ * 
+ * @param   a    The augend
+ * @param   b    The addend
+ * @param   res  Output parameter for the sum
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *                0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_add_j2i_to_j2i_overflow(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	return libj2_j2i_add_ji_to_j2i_overflow(b, a, res);
 }

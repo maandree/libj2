@@ -1,13 +1,8 @@
 /* See LICENSE file for copyright and license details. */
+#define LIBJ2_COMPILING_
 #include "libj2.h"
 
-#if defined(__GNUC__)
-# define CONST __attribute__((__const__))
-# define PURE __attribute__((__pure__))
-#else
-# define CONST
-# define PURE
-#endif
+#define PURE LIBJ2_PURE_
 
 #if defined(__clang__)
 # pragma clang diagnostic ignored "-Wunsafe-buffer-usage" /* broken warning, spams false positives */
@@ -15,6 +10,11 @@
 #endif
 
 #ifdef TEST
+# if defined(__GNUC__)
+#  define CONST __attribute__((__const__))
+# else
+#  define CONST
+# endif
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>

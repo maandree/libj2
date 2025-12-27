@@ -73,7 +73,6 @@ main(void)
 		EXPECT(a.low == 0U - v);
 	}
 
-#ifdef TODO /* requires libj2_j2i_add_j2i */
 	for (i = 0; i < 256; i++) {
 		a.high = b.high = random_ju() >> 1;
 		a.low = b.low = random_ju();
@@ -87,7 +86,6 @@ main(void)
 		libj2_j2i_add_j2i(&a, &b);
 		EXPECT(libj2_j2i_is_zero(&a));
 	}
-#endif
 
 	return 0;
 }

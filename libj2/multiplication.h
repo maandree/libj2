@@ -6,7 +6,7 @@
 
 /**
  * Calculate the unsigned double-max precision integer
- * product of two unsigned double-max precision integers
+ * product of two unsigned max precision integers
  * 
  * `libj2_ju_mul_ju_to_j2u(a, b, res)` implements
  * `*res = a * b`, where `a` and `b` are converted
@@ -63,8 +63,8 @@ libj2_ju_mul_ju_to_j2u(uintmax_t a, uintmax_t b, struct libj2_j2u *res)
 
 
 /**
- * Calculate the product of an unsigned double-max
- * precision integer (multiplier) and an unsigned
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
  * max precision integer (multiplicand)
  * 
  * `libj2_j2u_mul_ju_to_j2u(a, b)` implements `*a *= b`,
@@ -86,8 +86,8 @@ libj2_j2u_mul_ju(struct libj2_j2u *a, uintmax_t b)
 
 
 /**
- * Calculate the product of an unsigned double-max
- * precision integer (multiplier) and an unsigned
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
  * max precision integer (multiplicand)
  * 
  * `libj2_j2u_mul_ju_to_j2u(a, b, res)` implements
@@ -109,8 +109,8 @@ libj2_j2u_mul_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
 
 
 /**
- * Calculate the product of an unsigned max
- * precision integer (multiplier) and an unsigned
+ * Calculate the product of a signed max
+ * precision integer (multiplier) and a signed
  * double-max precision integer (multiplicand)
  * 
  * `libj2_ju_mul_j2u_to_j2u(a, b, res)` implements
@@ -132,8 +132,8 @@ libj2_ju_mul_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u
 
 
 /**
- * Calculate the product of an unsigned double-max
- * precision integer (multiplier) and an unsigned
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
  * max precision integer (multiplicand)
  * 
  * `libj2_j2u_mul_ju_to_overflow(a, b)` implements
@@ -176,8 +176,8 @@ libj2_j2u_mul_ju_overflow(struct libj2_j2u *a, uintmax_t b)
 
 
 /**
- * Calculate the product of an unsigned double-max
- * precision integer (multiplier) and an unsigned
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
  * max precision integer (multiplicand)
  * 
  * `libj2_j2u_mul_ju_to_j2u_overflow(a, b, res)`
@@ -201,8 +201,8 @@ libj2_j2u_mul_ju_to_j2u_overflow(const struct libj2_j2u *a, uintmax_t b, struct 
 
 
 /**
- * Calculate the product of an unsigned max
- * precision integer (multiplier) and an unsigned
+ * Calculate the product of a signed max
+ * precision integer (multiplier) and a signed
  * double-max precision integer (multiplicand)
  * 
  * `libj2_ju_mul_j2u_to_j2u_overflow(a, b, res)`
@@ -400,11 +400,11 @@ libj2_j2u_mul_j2u_to_j2u_overflow(const struct libj2_j2u *a, const struct libj2_
  * @param   b  The multiplicand
  * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
  *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
- *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` (= +2) if the prediction was not made
  * 
  * @since  1.0
  */
-inline enum libj2_overflow
+LIBJ2_PURE_ inline enum libj2_overflow
 libj2_j2u_mul_j2u_overflow_p_quick(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	unsigned lz;
@@ -434,11 +434,11 @@ libj2_j2u_mul_j2u_overflow_p_quick(const struct libj2_j2u *a, const struct libj2
  * @param   b  The multiplicand
  * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
  *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
- *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` (= +2) if the prediction was not made
  * 
  * @since  1.0
  */
-inline enum libj2_overflow
+LIBJ2_PURE_ inline enum libj2_overflow
 libj2_j2u_mul_ju_overflow_p_quick(const struct libj2_j2u *a, uintmax_t b)
 {
 	return libj2_j2u_mul_j2u_overflow_p_quick(a, &(struct libj2_j2u){.high = 0, .low = b});
@@ -453,11 +453,11 @@ libj2_j2u_mul_ju_overflow_p_quick(const struct libj2_j2u *a, uintmax_t b)
  * @param   b  The multiplicand
  * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
  *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
- *             or `LIBJ2_OVERFLOW_UNKNOWN` if the prediction was not made
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` (= +2) if the prediction was not made
  * 
  * @since  1.0
  */
-inline enum libj2_overflow
+LIBJ2_PURE_ inline enum libj2_overflow
 libj2_ju_mul_j2u_overflow_p_quick(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_mul_ju_overflow_p_quick(b, a);
@@ -479,7 +479,7 @@ libj2_ju_mul_j2u_overflow_p_quick(uintmax_t a, const struct libj2_j2u *b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_mul_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	enum libj2_overflow overflow;
@@ -527,7 +527,7 @@ libj2_j2u_mul_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_j2u_mul_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
 {
 	return libj2_j2u_mul_j2u_overflow_p(a, &(struct libj2_j2u){.high = 0, .low = b});
@@ -548,7 +548,7 @@ libj2_j2u_mul_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
  * 
  * @since  1.0
  */
-inline int
+LIBJ2_PURE_ inline int
 libj2_ju_mul_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b)
 {
 	return libj2_j2u_mul_ju_overflow_p(b, a);
@@ -642,4 +642,557 @@ inline int
 libj2_ju_mul_j2u_to_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b, struct libj2_j2u *res, int *res_set)
 {
 	return libj2_j2u_mul_ju_to_j2u_overflow_p(b, a, res, res_set);
+}
+
+
+
+
+
+/**
+ * Calculate the product of two signed double-max
+ * precision integers
+ * 
+ * `libj2_j2i_mul_j2i_overflow(a, b)` implements
+ * `*a *= *b` with overflow-detection
+ * 
+ * @param   a  The multiplier, also used as the
+ *             output parameter for the product
+ * @param   b  The multiplicand
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_mul_j2i_overflow(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	struct libj2_j2u t;
+	int overflow, neg = libj2_j2i_is_negative(a);
+	if (neg)
+		libj2_minus_j2i(a);
+	if (a == b) {
+		neg = 0;
+	} else if (libj2_j2i_is_negative(b)) {
+		neg ^= 1;
+		libj2_minus_j2i_to_j2u(b, &t);
+		b = (const void *)&t;
+	}
+	overflow = libj2_j2u_mul_j2u_overflow((void *)a, (const void *)b);
+	if (neg) {
+		if (overflow)
+			overflow = -overflow;
+		else if (libj2_j2i_is_min(a))
+			return 0;
+		else if (libj2_j2i_is_negative(a))
+			overflow = -1;
+		libj2_minus_j2i(a);
+	} else if (!overflow) {
+		overflow = libj2_j2i_is_negative(a);
+	}
+	return overflow;
+}
+
+
+/**
+ * Calculate the product of two signed double-max
+ * precision integers
+ * 
+ * `libj2_j2i_mul_j2i_to_j2i_overflow(a, b, res)`
+ * implements `*res = *a * *b` with overflow-detection
+ * 
+ * @param   a    The multiplier
+ * @param   b    The multiplicand
+ * @param   res  Output parameter for the product
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_mul_j2i_to_j2i_overflow(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	if (a == res) {
+		return libj2_j2i_mul_j2i_overflow(res, b);
+	} else if (b == res) {
+		return libj2_j2i_mul_j2i_overflow(res, a);
+	} else {
+		*res = *a;
+		return libj2_j2i_mul_j2i_overflow(res, b);
+	}
+}
+
+
+/**
+ * Predict whether `libj2_j2i_mul_j2i_overflow_destructive` 
+ * `libj2_j2i_mul_j2i_overflow`, or `libj2_j2i_mul_j2i_to_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2i_mul_j2i_overflow_p(a, b)` implements
+ * `libj2_j2i_mul_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner for most cases
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     +1 if the multiplication would overflow positively,
+ *             -1 if the multiplication would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_mul_j2i_overflow_p(const struct libj2_j2i *a, const struct libj2_j2i *b) /* TODO optimised impl */
+{
+	return libj2_j2i_mul_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){0, 0});
+}
+
+
+/**
+ * Variant of `libj2_j2i_mul_j2i_overflow_p` that
+ * that stops the overflow-prediction is costly
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     `LIBJ2_POSITIVE_OVERFLOW` (= +1) if the
+ *             multiplication would overflow positively,
+ *             `LIBJ2_NEGATIVE_OVERFLOW` (= -1) if the
+ *             multiplication would overflow negatively,
+ *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication
+ *             would not overflow,
+ *             `LIBJ2_POSITIVE_OVERFLOW_UNKNOWN` (= +2)
+ *             if the prediction was not made but the
+ *             multiplication could overflow positively, or
+ *             `LIBJ2_NEGATIVE_OVERFLOW_UNKNOWN` (= -2)
+ *             if the prediction was not made but the
+ *             multiplication could overflow negatively
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline enum libj2_overflow
+libj2_j2i_mul_j2i_overflow_p_quick(const struct libj2_j2i *a, const struct libj2_j2i *b) /* TODO optimised impl */
+{
+	int ret = libj2_j2i_mul_j2i_to_j2i_overflow(a, b, &(struct libj2_j2i){0, 0});
+	return (enum libj2_overflow)ret;
+}
+
+
+/**
+ * Variant of `libj2_j2i_mul_j2i_overflow_p` that
+ * that performs the multiplication if the
+ * overflow-prediction is costly
+ * 
+ * @param   a        The multiplier
+ * @param   b        The multiplicand
+ * @param   res      Output parameter for the product
+ * @param   res_set  Output parameter for whether `*res` is set,
+ *                   if set to 1 when the function returns,
+ *                   `*res` will be set to the product,
+ *                   if set to 0 when the function returns,
+ *                   `*res` will be unmodified;
+ *                   will never be set to any other value
+ * @return           +1 if the multiplication would or did overflow positively,
+ *                   -1 if the multiplication would or did overflow negatively,
+ *                   0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_mul_j2i_to_j2i_overflow_p(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res, int *res_set) /* TODO optimised impl */
+{
+	*res_set = 1;
+	return libj2_j2i_mul_j2i_to_j2i_overflow(a, b, res);
+}
+
+
+/**
+ * Calculate the signed double-max precision integer
+ * product of two signed max precision integers
+ * 
+ * `libj2_ji_mul_ji_to_j2i(a, b, res)` implements
+ * `*res = a * b`, where `a` and `b` are converted
+ * into `struct libj2_j2i`'s
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_mul_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
+{
+	int neg = (a < 0) ^ (b < 0);
+	libj2_ju_mul_ju_to_j2u((uintmax_t)(a < 0 ? -a : a), (uintmax_t)(b < 0 ? -b : b), (void *)res);
+	if (neg)
+		libj2_minus_j2i(res);
+}
+
+
+/**
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
+ * max precision integer (multiplicand)
+ * 
+ * `libj2_j2i_mul_ji_to_j2i(a, b)` implements `*a *= b`,
+ * where `b` are converted into an `struct libj2_j2i`
+ * 
+ * @param  a  The multiplier, also used as the
+ *            output parameter for the product
+ * @param  b  The multiplicand
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_mul_ji(struct libj2_j2i *a, intmax_t b)
+{
+	int neg = libj2_j2i_is_negative(a);
+	if (neg)
+		libj2_minus_j2i(a);
+	if (b < 0) {
+		neg ^= 1;
+		b = -b;
+	}
+	libj2_j2u_mul_ju((void *)a, (uintmax_t)b);
+	if (neg)
+		libj2_minus_j2i(a);
+}
+
+
+/**
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
+ * max precision integer (multiplicand)
+ * 
+ * `libj2_j2i_mul_ji_to_j2i(a, b, res)` implements
+ * `*res = *a * b`, where `b` are converted into
+ * an `struct libj2_j2i`
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_mul_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	*res = *a;
+	libj2_j2i_mul_ji(res, b);
+}
+
+
+/**
+ * Calculate the product of a signed max
+ * precision integer (multiplier) and a signed
+ * double-max precision integer (multiplicand)
+ * 
+ * `libj2_ji_mul_j2i_to_j2i(a, b, res)` implements
+ * `*res = a * *b`, where `a` are converted into
+ * an `struct libj2_j2i`
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_mul_j2i_to_j2i(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	libj2_j2i_mul_ji_to_j2i(b, a, res);
+}
+
+
+/**
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
+ * max precision integer (multiplicand)
+ * 
+ * `libj2_j2i_mul_ji_to_overflow(a, b)` implements
+ * `*a *= b`, where `b` are converted into an
+ * `struct libj2_j2i`, with overflow-detection
+ * 
+ * @param   a  The multiplier, also used as the
+ *             output parameter for the product
+ * @param   b  The multiplicand
+ * @return     +1 on positive overflow,
+ *             -1 on negative overflow,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_mul_ji_overflow(struct libj2_j2i *a, intmax_t b)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_mul_j2i_overflow(a, &t);
+}
+
+
+/**
+ * Calculate the product of a signed double-max
+ * precision integer (multiplier) and a signed
+ * max precision integer (multiplicand)
+ * 
+ * `libj2_j2i_mul_ji_to_j2i_overflow(a, b, res)`
+ * implements `*res = *a * b`, where `b` are
+ * converted into an `struct libj2_j2i`, with
+ * overflow-detection
+ * 
+ * @param   a    The multiplier
+ * @param   b    The multiplicand
+ * @param   res  Output parameter for the product
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_mul_ji_to_j2i_overflow(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_mul_j2i_to_j2i_overflow(a, &t, res);
+}
+
+
+/**
+ * Calculate the product of a signed max
+ * precision integer (multiplier) and a signed
+ * double-max precision integer (multiplicand)
+ * 
+ * `libj2_ji_mul_j2i_to_j2i_overflow(a, b, res)`
+ * implements `*res = a * *b`, where `a` are
+ * converted into an `struct libj2_j2i`, with
+ * overflow-detection
+ * 
+ * @param   a    The multiplier
+ * @param   b    The multiplicand
+ * @param   res  Output parameter for the product
+ * @return       +1 on positive overflow,
+ *               -1 on negative overflow,
+ *               0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_mul_j2i_to_j2i_overflow(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	return libj2_j2i_mul_ji_to_j2i_overflow(b, a, res);
+}
+
+
+/**
+ * Calculate the product of two signed double-max
+ * precision integers
+ * 
+ * `libj2_j2i_mul_j2i(a, b)` implements `*a *= *b`
+ * 
+ * @param  a  The multiplier, also used as the
+ *            output parameter for the product
+ * @param  b  The multiplicand
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_mul_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	struct libj2_j2u t;
+	int neg = libj2_j2i_is_negative(a);
+	if (neg)
+		libj2_minus_j2i(a);
+	if (a == b) {
+		neg = 0;
+	} else if (libj2_j2i_is_negative(b)) {
+		neg ^= 1;
+		libj2_minus_j2i_to_j2u(b, &t);
+		b = (const void *)&t;
+	}
+	libj2_j2u_mul_j2u((void *)a, (const void *)b);
+	if (neg)
+		libj2_minus_j2i(a);
+}
+
+
+/**
+ * Calculate the product of two signed double-max
+ * precision integers
+ * 
+ * `libj2_j2i_mul_j2i_to_j2i(a, b, res)`
+ * implements `*res = *a * *b`
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_mul_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	if (a == res) {
+	common:
+		libj2_j2i_mul_j2i(res, b);
+	} else if (b == res) {
+		b = a;
+		goto common;
+	} else if (a == b) {
+		if (libj2_j2i_is_negative(a)) {
+			libj2_minus_j2i_to_j2u(a, (void *)res);
+			libj2_j2u_mul_j2u((void *)res, (const void *)res);
+		} else {
+			libj2_j2u_mul_j2u_to_j2u((const void *)a, (const void *)b, (void *)res);
+		}
+	} else {
+		*res = *a;
+		goto common;
+	}
+}
+
+
+/**
+ * Variant of `libj2_j2i_mul_ji_overflow_p` that
+ * that stops the overflow-prediction is costly
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
+ *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` (= +2) if the prediction was not made
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline enum libj2_overflow
+libj2_j2i_mul_ji_overflow_p_quick(const struct libj2_j2i *a, intmax_t b)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_mul_j2i_overflow_p_quick(a, &t);
+}
+
+
+/**
+ * Variant of `libj2_ji_mul_j2i_overflow_p` that
+ * that stops the overflow-prediction is costly
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     `LIBJ2_OVERFLOW` (= 1) if the multiplication would overflow,
+ *             `LIBJ2_NO_OVERFLOW` (= 0) if the multiplication would not overflow,
+ *             or `LIBJ2_OVERFLOW_UNKNOWN` (= +2) if the prediction was not made
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline enum libj2_overflow
+libj2_ji_mul_j2i_overflow_p_quick(intmax_t a, const struct libj2_j2i *b)
+{
+	return libj2_j2i_mul_ji_overflow_p_quick(b, a);
+}
+
+
+/**
+ * Predict whether `libj2_j2i_mul_ji_overflow`
+ * or `libj2_j2i_mul_ji_to_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_j2i_mul_ji_overflow_p(a, b)` implements
+ * `libj2_j2i_mul_ji_to_j2i_overflow(a, b, &(struct libj2_j2i){})`
+ * in an efficient manner for most cases
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     +1 if the multiplication would overflow positively,
+ *             -1 if the multiplication would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_j2i_mul_ji_overflow_p(const struct libj2_j2i *a, intmax_t b)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_mul_j2i_overflow_p(a, &t);
+}
+
+
+/**
+ * Predict whether `libj2_ji_mul_j2i_overflow`
+ * will return a result-overflow signal
+ * 
+ * `libj2_ji_mul_j2i_overflow_p(a, b)` implements
+ * `libj2_ji_mul_j2i(&(struct libj2_j2i){.high = a->high, .low = a->low}, b)`
+ * in an efficient manner for most cases
+ * 
+ * @param   a  The multiplier
+ * @param   b  The multiplicand
+ * @return     +1 if the multiplication would overflow positively,
+ *             -1 if the multiplication would overflow negatively,
+ *             0 otherwise
+ * 
+ * @since  1.1
+ */
+LIBJ2_PURE_ inline int
+libj2_ji_mul_j2i_overflow_p(intmax_t a, const struct libj2_j2i *b)
+{
+	return libj2_j2i_mul_ji_overflow_p(b, a);
+}
+
+
+/**
+ * Variant of `libj2_j2i_mul_ji_overflow_p` that
+ * that performs the multiplication if the
+ * overflow-prediction is costly
+ * 
+ * @param   a        The multiplier
+ * @param   b        The multiplicand
+ * @param   res      Output parameter for the product
+ * @param   res_set  Output parameter for whether `*res` is set,
+ *                   if set to 1 when the function returns,
+ *                   `*res` will be set to the product,
+ *                   if set to 0 when the function returns,
+ *                   `*res` will be unmodified;
+ *                   will never be set to any other value
+ * @return           +1 if the multiplication would or did overflow positively,
+ *                   -1 if the multiplication would or did overflow negatively,
+ *                   0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_j2i_mul_ji_to_j2i_overflow_p(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res, int *res_set)
+{
+	struct libj2_j2i t;
+	libj2_ji_to_j2i(b, &t);
+	return libj2_j2i_mul_j2i_to_j2i_overflow_p(a, &t, res, res_set);
+}
+
+
+/**
+ * Variant of `libj2_ji_mul_j2i_overflow_p` that
+ * that performs the multiplication if the
+ * overflow-prediction is costly
+ * 
+ * @param   a        The multiplier
+ * @param   b        The multiplicand
+ * @param   res      Output parameter for the product
+ * @param   res_set  Output parameter for whether `*res` is set,
+ *                   if set to 1 when the function returns,
+ *                   `*res` will be set to the product,
+ *                   if set to 0 when the function returns,
+ *                   `*res` will be unmodified;
+ *                   will never be set to any other value
+ * @return           +1 if the multiplication would or did overflow positively,
+ *                   -1 if the multiplication would or did overflow negatively,
+ *                   0 otherwise
+ * 
+ * @since  1.1
+ */
+inline int
+libj2_ji_mul_j2i_to_j2i_overflow_p(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res, int *res_set)
+{
+	return libj2_j2i_mul_ji_to_j2i_overflow_p(b, a, res, res_set);
 }
