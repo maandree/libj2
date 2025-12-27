@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_kls_j2u(struct libj2_j2u *a);
-/* TODO Add man page */
 
 
 #else

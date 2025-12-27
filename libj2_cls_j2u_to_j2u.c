@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_cls_j2u_to_j2u(const struct libj2_j2u *a, struct libj2_j2u *res);
-/* TODO Add man page */
 
 
 #else

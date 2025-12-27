@@ -1,0 +1,52 @@
+.TH LIBJ2_FLC_J2U 3 LIBJ2
+.SH NAME
+libj2_flc_j2u \- Find last cleared bit
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+unsigned \fBlibj2_flc_j2u\fP(const struct libj2_j2u *\fIa\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_flc_j2u ()
+function returns the index of the most
+significant cleared bit in
+.IR a ,
+where the index is counted from 1,
+and from the the least significant bit.
+.PP
+In the case that no bit in
+.I a
+is cleared, 0 is returned.
+.PP
+.I a
+is assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+The
+.BR libj2_flc_j2u ()
+function returns the one-based index of
+the last cleared bit in
+.IR a ,
+or 0 if no bit is set.
+
+.SH ERRORS
+The
+.BR libj2_flc_j2u ()
+function cannot fail.
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_fls_j2u (3),
+.BR libj2_ffc_j2u (3),
+.BR libj2_clo_j2u (3),
+.BR libj2_kls_j2u (3),
+.BR libj2_cls_j2u (3),
+.BR libj2_slc_j2u (3)

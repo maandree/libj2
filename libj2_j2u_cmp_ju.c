@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2u_cmp_ju(const struct libj2_j2u *a, uintmax_t b);
-/* TODO Add man page */
 
 
 #else

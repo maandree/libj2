@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_ji_gt_j2i(intmax_t a, const struct libj2_j2i *b);
-/* TODO Add man page */
 
 
 #else

@@ -1,0 +1,53 @@
+.TH LIBJ2_CTZ_J2U 3 LIBJ2
+.SH NAME
+libj2_ctz_j2u \- Count trailing zeroes
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+unsigned \fBlibj2_ctz_j2u\fP(const struct libj2_j2u *\fIa\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_ctz_j2u ()
+function returns the number of trailing cleared bits in
+.IR a .
+.PP
+In the case that all bits in
+.I a
+are cleared, all of them are counted as trailing.
+.PP
+.I a
+is assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+The
+.BR libj2_ctz_j2u ()
+function returns the number of cleared bits that
+are less significant than the least significant
+set bits in
+.IR a ,
+or the total number of bits in
+.I a
+if all its bits are cleared.
+
+.SH ERRORS
+The
+.BR libj2_ctz_j2u ()
+function cannot fail.
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_cto_j2u (3),
+.BR libj2_clz_j2u (3),
+.BR libj2_cz_j2u (3),
+.BR libj2_ffc_j2u (3),
+.BR libj2_kfs_j2u (3),
+.BR libj2_cfs_j2u (3),
+.BR libj2_sfc_j2u (3)

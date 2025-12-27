@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline unsigned libj2_cz_j2u(const struct libj2_j2u *a);
-/* TODO Add man page */
 
 
 #else

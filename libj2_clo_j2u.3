@@ -1,0 +1,53 @@
+.TH LIBJ2_CLO_J2U 3 LIBJ2
+.SH NAME
+libj2_clo_j2u \- Count leading ones
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+unsigned \fBlibj2_clo_j2u\fP(const struct libj2_j2u *\fIa\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_clo_j2u ()
+function returns the number of leading set bits in
+.IR a .
+.PP
+In the case that all bits in
+.I a
+are set, all of them are counted as leading.
+.PP
+.I a
+is assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+The
+.BR libj2_clo_j2u ()
+function returns the number of set bits that
+are more significant than the most significant
+cleared bits in
+.IR a ,
+or the total number of bits in
+.I a
+if all its bits are set.
+
+.SH ERRORS
+The
+.BR libj2_clo_j2u ()
+function cannot fail.
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_clz_j2u (3),
+.BR libj2_cto_j2u (3),
+.BR libj2_co_j2u (3),
+.BR libj2_fls_j2u (3),
+.BR libj2_kls_j2u (3),
+.BR libj2_cls_j2u (3),
+.BR libj2_slc_j2u (3)
