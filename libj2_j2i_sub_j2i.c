@@ -43,19 +43,31 @@ validate(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low, u
 		overflow = 0;
 		libj2_minus_j2u(&a);
 		libj2_j2u_add_j2u_to_j2u_overflow(&a, &b, (void *)&r);
+		EXPECT(libj2_j2i_gt_j2i(&r, (const void *)&a));
 	} else if (a_neg) {
 		overflow = -libj2_j2u_add_j2u_to_j2u_overflow(&a, &b, (void *)&r);
+		EXPECT(overflow == 0 || overflow == -1);
 		libj2_minus_j2i(&r);
 		if (!libj2_j2i_is_negative(&r))
 			overflow = -1;
+		else if (overflow)
+			EXPECT(libj2_j2i_gt_j2i(&r, (const void *)&a));
+		if (!overflow)
+			EXPECT(libj2_j2i_le_j2i(&r, (const void *)&a));
 	} else if (b_neg) {
 		overflow = +libj2_j2u_add_j2u_to_j2u_overflow(&a, &b, (void *)&r);
+		EXPECT(overflow == 0 || overflow == +1);
 		if (!libj2_j2i_is_positive(&r))
 			overflow = +1;
+		else if (overflow)
+			EXPECT(libj2_j2i_lt_j2i(&r, (const void *)&a));
+		if (!overflow)
+			EXPECT(libj2_j2i_gt_j2i(&r, (const void *)&a));
 	} else {
 		overflow = 0;
 		libj2_minus_j2u(&b);
 		libj2_j2u_add_j2u_to_j2u(&a, &b, (void *)&r);
+		EXPECT(libj2_j2i_le_j2u(&r, &a));
 	}
 
 	EXPECT(r.high == r_high);
