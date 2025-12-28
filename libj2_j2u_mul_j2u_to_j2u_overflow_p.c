@@ -4,7 +4,6 @@
 
 extern inline int libj2_j2u_mul_j2u_to_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *b,
                                                       struct libj2_j2u *res, int *res_set);
-/* TODO Add man page */
 
 
 #else

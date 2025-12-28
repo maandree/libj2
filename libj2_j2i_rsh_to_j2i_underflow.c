@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2i_rsh_to_j2i_underflow(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res);
-/* TODO Add man page */
 
 
 #else

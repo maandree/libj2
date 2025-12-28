@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_lsh(struct libj2_j2u *a, unsigned b);
-/* TODO Add man page */
 
 
 #else

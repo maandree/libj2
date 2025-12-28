@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_ji_lsh_overflow_p(intmax_t a, unsigned b);
-/* TODO Add man page */
 
 
 #else

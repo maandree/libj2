@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2u_mul_j2u_overflow_destructive(struct libj2_j2u *restrict a /*result */, struct libj2_j2u *restrict b /*destructed */);
-/* TODO Add man page */
 
 
 #else

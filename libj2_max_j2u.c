@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_max_j2u(struct libj2_j2u *a, ... /*, NULL */);
-/* TODO Add man page */
 
 
 #else

@@ -3,7 +3,11 @@
 #ifndef TEST
 
 extern inline void libj2_not_j2u(struct libj2_j2u *a);
-/* TODO Add man page */
+/* TODO Add man pages
+   libj2_not_j2u
+   libj2_not_j2u_to_j2u
+   libj2_not_ju_to_j2u
+ */
 
 
 #else

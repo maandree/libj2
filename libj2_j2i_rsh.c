@@ -3,7 +3,24 @@
 #ifndef TEST
 
 extern inline void libj2_j2i_rsh(struct libj2_j2i *a, unsigned b);
-/* TODO Add man page */
+/* TODO Add man pages
+   libj2_j2i_rsh
+   libj2_j2i_rsh_to_j2i
+   libj2_ji_rsh_to_j2i
+   libj2_j2u_rsh
+   libj2_j2u_rsh_to_j2u
+   libj2_ju_rsh_to_j2u
+   libj2_j2i_rsh_underflow
+   libj2_j2i_rsh_to_j2i_underflow
+   libj2_ji_rsh_to_j2i_underflow
+   libj2_j2u_rsh_underflow
+   libj2_j2u_rsh_to_j2u_underflow
+   libj2_ju_rsh_to_j2u_underflow
+   libj2_j2i_rsh_underflow_p
+   libj2_ji_rsh_underflow_p
+   libj2_j2u_rsh_underflow_p
+   libj2_ju_rsh_underflow_p
+ */
 
 
 #else

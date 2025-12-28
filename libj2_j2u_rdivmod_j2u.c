@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline uintmax_t libj2_j2u_rdivmod_j2u(struct libj2_j2u *a, const struct libj2_j2u *b);
-/* TODO Add man page */
 
 
 #else

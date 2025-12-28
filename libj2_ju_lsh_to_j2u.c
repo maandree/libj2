@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_ju_lsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res);
-/* TODO Add man page */
 
 
 #else

@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_ji_mul_j2i_to_j2i_overflow_p(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res, int *res_set);
-/* TODO Add man page */
 
 
 #else

@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2u_div_ju_underflow(struct libj2_j2u *a, uintmax_t b);
-/* TODO Add man page */
 
 
 #else

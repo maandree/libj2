@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline const struct libj2_j2i *libj2_vmin_j2i_return(const struct libj2_j2i *a, va_list args);
-/* TODO Add man page */
 
 
 #else

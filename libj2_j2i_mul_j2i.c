@@ -3,7 +3,50 @@
 #ifndef TEST
 
 extern inline void libj2_j2i_mul_j2i(struct libj2_j2i *a, const struct libj2_j2i *b);
-/* TODO Add man page */
+/* TODO Add man pages
+   libj2_j2i_mul_j2i
+   libj2_j2i_mul_j2i_to_j2i
+   libj2_j2i_mul_ji
+   libj2_j2i_mul_ji_to_j2i
+   libj2_ji_mul_j2i_to_j2i
+   libj2_ji_mul_ji_to_j2i
+   libj2_j2u_mul_j2u
+   libj2_j2u_mul_j2u_to_j2u
+   libj2_j2u_mul_ju
+   libj2_j2u_mul_ju_to_j2u
+   libj2_ju_mul_j2u_to_j2u
+   libj2_ju_mul_ju_to_j2u
+   libj2_j2u_mul_j2u_destructive
+   libj2_j2i_mul_j2i_overflow
+   libj2_j2i_mul_j2i_to_j2i_overflow
+   libj2_j2i_mul_ji_overflow
+   libj2_j2i_mul_ji_to_j2i_overflow
+   libj2_ji_mul_j2i_to_j2i_overflow
+   libj2_j2u_mul_j2u_overflow
+   libj2_j2u_mul_j2u_to_j2u_overflow
+   libj2_j2u_mul_ju_overflow
+   libj2_j2u_mul_ju_to_j2u_overflow
+   libj2_ju_mul_j2u_to_j2u_overflow
+   libj2_j2u_mul_j2u_overflow_destructive
+   libj2_j2i_mul_j2i_overflow_p
+   libj2_j2i_mul_ji_overflow_p
+   libj2_ji_mul_j2i_overflow_p
+   libj2_j2u_mul_j2u_overflow_p
+   libj2_j2u_mul_ju_overflow_p
+   libj2_ju_mul_j2u_overflow_p
+   libj2_j2i_mul_j2i_overflow_p_quick
+   libj2_j2i_mul_ji_overflow_p_quick
+   libj2_ji_mul_j2i_overflow_p_quick
+   libj2_j2u_mul_j2u_overflow_p_quick
+   libj2_j2u_mul_ju_overflow_p_quick
+   libj2_ju_mul_j2u_overflow_p_quick
+   libj2_j2i_mul_j2i_to_j2i_overflow_p
+   libj2_j2i_mul_ji_to_j2i_overflow_p
+   libj2_ji_mul_j2i_to_j2i_overflow_p
+   libj2_j2u_mul_j2u_to_j2u_overflow_p
+   libj2_j2u_mul_ju_to_j2u_overflow_p
+   libj2_ju_mul_j2u_to_j2u_overflow_p
+ */
 
 
 #else

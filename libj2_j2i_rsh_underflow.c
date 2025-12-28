@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2i_rsh_underflow(struct libj2_j2i *a, unsigned b);
-/* TODO Add man page */
 
 
 #else

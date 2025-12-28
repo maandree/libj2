@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2u_lsh_to_j2u_overflow(const struct libj2_j2u *a, unsigned b, struct libj2_j2u *res);
-/* TODO Add man page */
 
 
 #else

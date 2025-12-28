@@ -3,7 +3,10 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_nimply_bit(struct libj2_j2u *a, unsigned b);
-/* TODO Add man page */
+/* TODO Add man pages
+   libj2_j2u_nimply_bit
+   libj2_j2u_nimply_bit_to_j2u
+ */
 
 
 #else

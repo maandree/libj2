@@ -4,7 +4,6 @@
 
 extern inline void libj2_j2i_divmod_ji_to_j2i_j2i(const struct libj2_j2i *a, intmax_t b,
                                                   struct libj2_j2i *res_q, struct libj2_j2i *res_r);
-/* TODO Add man page */
 
 
 #else

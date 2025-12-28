@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_xnor_ju(struct libj2_j2u *a, uintmax_t b);
-/* TODO Add man page */
 
 
 #else

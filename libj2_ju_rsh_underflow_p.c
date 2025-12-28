@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_ju_rsh_underflow_p(uintmax_t a, unsigned b);
-/* TODO Add man page */
 
 
 #else

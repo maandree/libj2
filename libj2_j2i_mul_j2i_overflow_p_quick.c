@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline enum libj2_overflow libj2_j2i_mul_j2i_overflow_p_quick(const struct libj2_j2i *a, const struct libj2_j2i *b);
-/* TODO Add man page */
 
 
 #else

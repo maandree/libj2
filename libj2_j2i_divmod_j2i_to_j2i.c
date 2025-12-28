@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2i_divmod_j2i_to_j2i(struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res_q);
-/* TODO Add man page */
 
 
 #else
