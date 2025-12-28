@@ -1,0 +1,99 @@
+.TH LIBJ2_MINUS_J2I 3 LIBJ2
+.SH NAME
+libj2_minus_j2i \- Additively inverse
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+void \fBlibj2_minus_j2i\fP(struct libj2_j2i *\fIa\fP);
+void \fBlibj2_minus_j2i_to_j2i\fP(const struct libj2_j2i *\fIa\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_minus_j2i_to_j2u\fP(const struct libj2_j2i *\fIa\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_minus_j2u\fP(struct libj2_j2u *\fIa\fP);
+void \fBlibj2_minus_j2u_to_j2i\fP(const struct libj2_j2u *\fIa\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_minus_j2u_to_j2u\fP(const struct libj2_j2u *\fIa\fP, struct libj2_j2u *\fIr\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_minus_j2i ()
+and
+.BR libj2_minus_j2u ()
+functions additively inverse the value of
+.IR a .
+.PP
+The
+.BR libj2_minus_j2i_to_j2i (),
+.BR libj2_minus_j2i_to_j2u (),
+.BR libj2_minus_j2u_to_j2i (),
+and
+.BR libj2_minus_j2u_to_j2u (),
+functions calculate the additive inverse
+of the value of
+.I a
+and store the result in
+.IR r .
+.PP
+In the case that
+.I a
+is the minimum representable value, the
+calculation of the
+.BR libj2_minus_j2i ()
+and
+.BR libj2_minus_j2i_to_j2i ()
+functions overflow to the input value.
+.PP
+In the case that
+.I a
+is positive, the calculation of the
+.BR libj2_minus_j2i_to_j2u ()
+function technically overflows, however
+the result is as if
+.I a
+was converted to
+.B struct libj2_j2i
+and then inverted.
+.PP
+In the case that
+.I a
+has its most significant bit set in
+addition to at least one other bit,
+that is if
+.IR "libj2_co_j2u(a) > 1U && libj2_j2u_test_bit(a, LIBJ2_J2U_BIT - 1U)" ,
+the calculation of the
+.BR libj2_minus_j2u_to_j2i ()
+function overflows to the input value.
+.PP
+The arguments are assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+None.
+
+.SH ERRORS
+The above listed functions cannot fail.
+
+.SH HISTORY
+The
+.BR libj2_minus_j2u ()
+and
+.BR libj2_minus_j2u_to_j2u ()
+functions were added in version 1.0 of
+.BR libj2 .
+.PP
+The
+.BR libj2_minus_j2i (),
+.BR libj2_minus_j2i_to_j2i (),
+.BR libj2_minus_j2i_to_j2u (),
+and
+.BR libj2_minus_j2u_to_j2i ()
+functions were added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_abs_j2i (3),
+.BR libj2_minus_abs_j2i (3)

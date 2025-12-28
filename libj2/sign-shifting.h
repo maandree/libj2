@@ -93,7 +93,7 @@ libj2_minus_j2i(struct libj2_j2i *a)
  * `libj2_minus_j2i_to_j2u(a, res)` implements
  * `*res = -*a`
  * 
- * Overflows if `libj2_j2i_is_min(a) || libj2_j2i_is_positive(a)`
+ * Overflows if `libj2_j2i_is_positive(a)`
  * 
  * @param  a    The integer to invert
  * @param  res  Output parameter for the inverse
