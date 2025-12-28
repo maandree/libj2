@@ -83,7 +83,7 @@ size_t libj2_j2u_to_str(const struct libj2_j2u *a, char *buf, size_t bufsize, co
  *                    '-' prefix characters
  * @return            0 upon successful completion, or an error
  *                    code on failure
- *
+ * 
  * @throws  EINVAL  `digits1` or `digits2` is misconfigured
  * @throws  EINVAL  No digit was encountered;
  *                  `*a` (unless it's `NULL`) will be set to
@@ -138,7 +138,7 @@ int libj2_str_to_j2u_sign(const char *s, size_t slen, char **end, const char *di
  * @param   a        Output parameter for the decoded integer
  * @return           0 upon successful completion, or an error
  *                   code on failure
- *
+ * 
  * @throws  EINVAL  `digits1` or `digits2` is misconfigured
  * @throws  EINVAL  No digit was encountered;
  *                  `*a` (unless it's `NULL`) will be set to
@@ -259,7 +259,7 @@ libj2_j2i_to_str(const struct libj2_j2i *a, char *buf, size_t bufsize, const cha
  * @param   a        Output parameter for the decoded integer
  * @return           0 upon successful completion, or an error
  *                   code on failure
- *
+ * 
  * @throws  EINVAL  `digits1` or `digits2` is misconfigured
  * @throws  EINVAL  No digit was encountered;
  *                  `*a` (unless it's `NULL`) will be set to
