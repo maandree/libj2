@@ -512,9 +512,9 @@ SUBHDR =\
 	libj2/constants.h\
 	libj2/signum.h\
 	libj2/constructors.h\
-	libj2/unsigned-comparsion.h\
-	libj2/signed-comparsion.h\
-	libj2/mixed-comparsion.h\
+	libj2/unsigned-comparison.h\
+	libj2/signed-comparison.h\
+	libj2/mixed-comparison.h\
 	libj2/bitwise-logic.h\
 	libj2/sign-shifting.h\
 	libj2/bit-shifting.h\

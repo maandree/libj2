@@ -48,13 +48,13 @@ DESCRIPTION
 	libj2_minus_abs_j2i(3), libj2_minus_abs_j2i_to_j2i(3)
 		Calculate the additive inverse of the absolute value.
 
-	libj2 provides the following comparsion functions:
+	libj2 provides the following comparison functions:
 
 	libj2_j2i_cmp_j2i(3), libj2_j2i_cmp_ji(3), libj2_ji_cmp_j2i(3),
 	libj2_j2i_cmp_j2u(3), libj2_j2i_cmp_ju(3), libj2_ji_cmp_j2u(3),
 	libj2_j2u_cmp_j2i(3), libj2_j2u_cmp_ji(3), libj2_ju_cmp_j2i(3),
 	libj2_j2u_cmp_j2u(3), libj2_j2u_cmp_ju(3), libj2_ju_cmp_j2u(3)
-		Perform three-way comparision.
+		Perform three-way comparison.
 
 	libj2_j2i_eq_j2i(3), libj2_j2i_eq_ji(3), libj2_ji_eq_j2i(3),
 	libj2_j2i_eq_j2u(3), libj2_j2i_eq_ju(3), libj2_ji_eq_j2u(3),
@@ -110,7 +110,7 @@ DESCRIPTION
 		Check whether a value is negative.
 
 	libj2_sgn_j2i(3), libj2_sgn_j2u(3)
-		Perform three-way comparision against the value zero (get the
+		Perform three-way comparison against the value zero (get the
 		signum of a value).
 
 	libj2_j2i_max_j2i(3), libj2_j2i_max_j2i_to_j2i(3),
