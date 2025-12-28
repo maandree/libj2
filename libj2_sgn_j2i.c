@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_sgn_j2i(const struct libj2_j2i *a);
-/* TODO Add man page */
 
 
 #else

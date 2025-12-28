@@ -1,0 +1,64 @@
+.TH LIBJ2_J2I_IS_MIN 3 LIBJ2
+.SH NAME
+libj2_j2i_is_min \- Compare against minimum representable value
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+int \fBlibj2_j2i_is_min\fP(const struct libj2_j2i *\fIa\fP);
+int \fBlibj2_j2u_is_min\fP(const struct libj2_j2u *\fIa\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_j2i_is_min ()
+function checks whether
+.I a
+is the largest negative number.
+.PP
+The
+.BR libj2_j2u_is_min ()
+function is identical to the
+.BR libj2_j2u_is_zero ()
+function, since
+.I a
+cannot be negative for it because
+it is unsigned.
+.PP
+.I a
+is assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+The functions return 1 if
+.I a
+is the minimum representable value,
+and 0 otherwise.
+
+.SH ERRORS
+The functions cannot fail.
+
+.SH HISTORY
+The
+.BR libj2_j2u_is_min ()
+function was added in version 1.0 of
+.BR libj2 .
+.PP
+The
+.BR libj2_j2i_is_min ()
+function was added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_j2i_min (3),
+.BR libj2_j2i_cmp_j2i (3),
+.BR libj2_j2i_is_max (3),
+.BR libj2_j2i_is_zero (3),
+.BR libj2_j2i_is_positive (3),
+.BR libj2_j2i_is_negative (3),
+.BR libj2_sgn_j2i (3)

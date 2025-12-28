@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2i_is_min(const struct libj2_j2i *a);
-/* TODO Add man page */
 
 
 #else

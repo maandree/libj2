@@ -1,0 +1,57 @@
+.TH LIBJ2_J2I_MIN 3 LIBJ2
+.SH NAME
+libj2_j2i_min \- Assign minimum representable value
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+void \fBlibj2_j2i_min\fP(struct libj2_j2i *\fIr\fP);
+void \fBlibj2_j2u_min\fP(struct libj2_j2u *\fIr\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_j2i_min ()
+function assigns the largest negative
+representable value to
+.IR r .
+.PP
+The
+.BR libj2_j2u_min ()
+function is identical to the
+.BR libj2_j2u_zero ()
+function, since
+.I r
+cannot hold negative values because
+it is unsigned.
+.PP
+.I r
+is assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+None
+
+.SH ERRORS
+The functions cannot fail.
+
+.SH HISTORY
+The
+.BR libj2_j2u_min ()
+function was added in version 1.0 of
+.BR libj2 .
+.PP
+The
+.BR libj2_j2i_min ()
+function was added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_j2i_max (3),
+.BR libj2_j2i_zero (3),
+.BR libj2_j2i_is_min (3)
