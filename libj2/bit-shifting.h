@@ -1138,7 +1138,7 @@ libj2_ji_rsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
  *               positive underflow,
  *               -1 if `*a` was negative and a cleared bit
  *               was shifted out (discarded), that is, a
- *               positive underflow,
+ *               negative underflow,
  *               0 otherwise
  * 
  * @since  1.1
@@ -1180,7 +1180,7 @@ libj2_j2i_rsh_to_j2i_underflow(const struct libj2_j2i *a, unsigned b, struct lib
  *             positive underflow,
  *             -1 if `*a` was negative and a cleared bit
  *             was shifted out (discarded), that is, a
- *             positive underflow,
+ *             negative underflow,
  *             0 otherwise
  * 
  * @since  1.1
@@ -1217,7 +1217,7 @@ libj2_j2i_rsh_underflow(struct libj2_j2i *a, unsigned b)
  *               positive underflow,
  *               -1 if `a` was negative and a cleared bit
  *               was shifted out (discarded), that is, a
- *               positive underflow,
+ *               negative underflow,
  *               0 otherwise
  * 
  * @since  1.1
@@ -1246,7 +1246,7 @@ libj2_ji_rsh_to_j2i_underflow(intmax_t a, unsigned b, struct libj2_j2i *res)
  *             a positive underflow,
  *             -1 if `*a` is negative and a cleared bit
  *             would be shifted out (discarded), that is,
- *             a positive underflow,
+ *             a negative underflow,
  *             0 otherwise
  * 
  * @since  1.1
@@ -1279,7 +1279,7 @@ libj2_j2i_rsh_underflow_p(const struct libj2_j2i *a, unsigned b)
  *             a positive underflow,
  *             -1 if `a` is negative and a cleared bit
  *             would be shifted out (discarded), that is,
- *             a positive underflow,
+ *             a negative underflow,
  *             0 otherwise
  * 
  * @since  1.1
