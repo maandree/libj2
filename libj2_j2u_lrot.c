@@ -3,11 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_lrot(struct libj2_j2u *a, unsigned b);
-/* TODO Add man pages
-   libj2_j2u_lrot
-   libj2_j2u_lrot_to_j2u
-   libj2_ju_lrot_to_j2u
- */
 
 
 #else
