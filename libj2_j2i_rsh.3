@@ -1,0 +1,121 @@
+.TH LIBJ2_J2I_RSH 3 LIBJ2
+.SH NAME
+libj2_j2i_rsh \- Right-shift bits
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+void \fBlibj2_j2i_rsh\fP(struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
+void \fBlibj2_j2i_rsh_to_j2i\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_ji_rsh_to_j2i\fP(intmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_j2u_rsh\fP(struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
+void \fBlibj2_j2u_rsh_to_j2u\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_ju_rsh_to_j2u\fP(uintmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+int \fBlibj2_j2i_rsh_underflow\fP(struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
+int \fBlibj2_j2i_rsh_to_j2i_underflow\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
+int \fBlibj2_ji_rsh_to_j2i_underflow\fP(intmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
+int \fBlibj2_j2u_rsh_underflow\fP(struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
+int \fBlibj2_j2u_rsh_to_j2u_underflow\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+int \fBlibj2_ju_rsh_to_j2u_underflow\fP(uintmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+int \fBlibj2_j2i_rsh_underflow_p\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
+int \fBlibj2_ji_rsh_underflow_p\fP(intmax_t \fIa\fP, unsigned \fIb\fP);
+int \fBlibj2_j2u_rsh_underflow_p\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
+int \fBlibj2_ju_rsh_underflow_p\fP(uintmax_t \fIa\fP, unsigned \fIb\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The above listed functions discard the
+.I b
+least significant bits in
+.IR a ,
+shift all bits to
+.I b
+less significant positions, and clears the
+.I b
+most significant bits if
+.I a
+was non-negative, but sets the
+.I b
+most significant bits if
+.I a
+was negative, effectively dividing
+.I a
+by 2 to the power of
+.IR b ,
+rounding towards negative infinity.
+The functions with the parameter
+.I r
+store the result in
+.IR r ,
+the other functions store the result in
+.IR a ,
+except the functions
+.BR libj2_j2i_rsh_underflow_p (),
+.BR libj2_ji_rsh_underflow_p (),
+.BR libj2_j2u_rsh_underflow_p (),
+and
+.BR libj2_ju_rsh_underflow_p (),
+only predict underflow, and do not perform
+any bit-shifting, and therefore does store
+it anywhere.
+.PP
+The value-returning functions (that is, those
+with word
+.B underflow
+in their name), detect underflow, that is,
+if any discarded bit (any of the
+.I b
+most significant bits) was set.
+
+.PP
+The arguments are assumed to be
+.RI non- NULL .
+
+.SH RETURN VALUE
+For functions with a return value, the functions
+return +1 if any discarded bit was set and
+.I a
+was positive, -1 if any discarded bit was cleared and
+.I a
+was negative,
+and 0 otherwise.
+
+.SH ERRORS
+The above listed functions cannot fail.
+
+.SH HISTORY
+The
+.BR libj2_j2u_rsh (),
+.BR libj2_j2u_rsh_to_j2u (),
+.BR libj2_ju_rsh_to_j2u (),
+.BR libj2_j2u_rsh_underflow (),
+.BR libj2_j2u_rsh_to_j2u_underflow (),
+.BR libj2_ju_rsh_to_j2u_underflow (),
+.BR libj2_j2u_rsh_underflow_p (),
+and
+.BR libj2_ju_rsh_underflow_p ()
+functions were added in version 1.0 of
+.BR libj2 .
+.PP
+The
+.BR libj2_j2i_rsh (),
+.BR libj2_j2i_rsh_to_j2i (),
+.BR libj2_ji_rsh_to_j2i (),
+.BR libj2_j2i_rsh_underflow (),
+.BR libj2_j2i_rsh_to_j2i_underflow (),
+.BR libj2_ji_rsh_to_j2i_underflow (),
+.BR libj2_j2i_rsh_underflow_p (),
+and
+.BR libj2_ji_rsh_underflow_p ()
+functions were added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_j2i_lsh (3),
+.BR libj2_j2i_lrot (3),
+.BR libj2_j2i_rrot (3)
