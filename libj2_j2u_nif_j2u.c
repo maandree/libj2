@@ -3,13 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_nif_j2u(struct libj2_j2u *a, const struct libj2_j2u *b);
-/* TODO Add man pages
-   libj2_j2u_nif_j2u
-   libj2_j2u_nif_j2u_to_j2u
-   libj2_j2u_nif_ju
-   libj2_j2u_nif_ju_to_j2u
-   libj2_ju_nif_j2u_to_j2u
- */
 
 
 #else

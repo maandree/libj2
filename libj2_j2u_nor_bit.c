@@ -3,10 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_nor_bit(struct libj2_j2u *a, unsigned b);
-/* TODO Add man pages
-   libj2_j2u_nor_bit
-   libj2_j2u_nor_bit_to_j2u
- */
 
 
 #else
