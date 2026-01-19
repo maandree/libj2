@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline int libj2_j2u_test_bit(const struct libj2_j2u *a, unsigned b);
-/* TODO Add man page */
 
 
 #else
