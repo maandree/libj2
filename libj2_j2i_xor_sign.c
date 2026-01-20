@@ -3,11 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2i_xor_sign(struct libj2_j2i *a);
-/* TODO Add man pages
-   libj2_j2i_xor_sign
-   libj2_j2i_xor_sign_to_j2i
-   libj2_j2i_xor_sign_to_j2u
- */
 
 
 #else
