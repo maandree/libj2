@@ -3,7 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_j2u_sat_rsub_ju(struct libj2_j2u *a, uintmax_t b);
-/* TODO Add man page */
 
 
 #else
