@@ -74,6 +74,11 @@ libj2_ji_to_j2i(intmax_t a, struct libj2_j2i *res)
  * 
  * Overflows if `libj2_j2u_test_bit(a, LIBJ2_J2U_BIT - 1U)`
  * 
+ * On overflow, the result wraps around to a negative
+ * value, which by design is holds the property that
+ * `-*res == 0 - *a`, where the right-hand of the
+ * equality is unsigned and therefore positive.
+ * 
  * @param  a    The value to assign to `*res`
  * @param  res  The integer to assign the value `a` to
  * 
@@ -94,6 +99,11 @@ libj2_j2u_to_j2i(const struct libj2_j2u *a, struct libj2_j2i *res)
  * `libj2_j2i_to_j2u(a, res)` implements `*res = a`
  * 
  * Overflows if `libj2_j2i_is_negative(a)`
+ * 
+ * On overflow, the result wraps around to a large
+ * value, which by design is holds the property that
+ * `0 - *res == -*a`, where the left-hand of the
+ * equality is unsigned and therefore positive.
  * 
  * @param  a    The value to assign to `*res`
  * @param  res  The integer to assign the value `a` to

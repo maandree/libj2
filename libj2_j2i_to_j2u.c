@@ -70,6 +70,15 @@ main(void)
 		EXPECT(u.low == b);
 	}
 
+	u = (struct libj2_j2u){111, 222};
+	v.high = a = 100;
+	v.low = b = 200;
+	libj2_minus_j2i(&v);
+	libj2_j2i_to_j2u(&v, &u);
+	libj2_j2u_rsub_ju(&u, 0);
+	EXPECT(u.high == a);
+	EXPECT(u.low == b);
+
 	return 0;
 }
 
