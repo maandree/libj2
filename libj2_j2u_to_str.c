@@ -3,8 +3,6 @@
 #include <errno.h>
 #ifndef TEST
 
-/* TODO Add man page */
-
 
 static size_t
 to_power_of_two(const struct libj2_j2u *a, char *buf, size_t bufsize, const char *digits, unsigned radix)

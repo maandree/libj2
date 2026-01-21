@@ -3,7 +3,12 @@
 #include <errno.h>
 #ifndef TEST
 
-/* TODO Add man page */
+/* TODO Add man pages
+ * libj2_str_to_j2i
+ * libj2_str_to_j2u
+ * libj2_str_to_j2u_sign
+ */
+
 
 int
 libj2_str_to_j2i(const char *s, size_t slen, char **end, const char *digits1, const char *digits2, struct libj2_j2i *a)

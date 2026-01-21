@@ -3,8 +3,6 @@
 #include <errno.h>
 #ifndef TEST
 
-/* TODO Add man page */
-
 extern inline int libj2_str_to_j2u(const char *str, size_t slen, char **end, const char *digits1,
                                    const char *digits2, struct libj2_j2u *a);
 

@@ -3,8 +3,6 @@
 #include <errno.h>
 #ifndef TEST
 
-/* TODO Add man page */
-
 
 static int
 from_generic(const unsigned char *s, size_t slen, const unsigned char **end,

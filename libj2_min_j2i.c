@@ -3,20 +3,6 @@
 #ifndef TEST
 
 extern inline void libj2_min_j2i(struct libj2_j2i *a, ... /*, NULL */);
-/* TODO Add man pages
-   libj2_min_j2i
-   libj2_min_j2i_to_j2i
-   libj2_min_j2i_return
-   libj2_vmin_j2i
-   libj2_vmin_j2i_to_j2i
-   libj2_vmin_j2i_return
-   libj2_min_j2u
-   libj2_min_j2u_to_j2u
-   libj2_min_j2u_return
-   libj2_vmin_j2u
-   libj2_vmin_j2u_to_j2u
-   libj2_vmin_j2u_return
- */
 
 
 #else
