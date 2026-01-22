@@ -1,0 +1,210 @@
+.TH LIBJ2_STR_TO_J2I 3 LIBJ2
+.SH NAME
+libj2_str_to_j2i \- Parse ASCII-encoded double-max precision integer
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+int \fBlibj2_str_to_j2i\fP(
+        const char *\fIs\fP, size_t \fIslen\fP, char **\fIend\fP,
+        const char *\fIdigits1\fP, const char *\fIdigits2\fP,
+        struct libj2_j2i *\fIa\fP);
+
+int \fBlibj2_str_to_j2u\fP(
+        const char *\fIs\fP, size_t \fIslen\fP, char **\fIend\fP,
+        const char *\fIdigits1\fP, const char *\fIdigits2\fP,
+        struct libj2_j2u *\fIa\fP)
+
+int \fBlibj2_str_to_j2u_sign\fP(
+        const char *\fIs\fP, size_t \fIslen\fP, char **\fIend\fP,
+        const char *\fIdigits1\fP, const char *\fIdigits2\fP,
+        struct libj2_j2u *\fIa\fP, int *\fInegative\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_str_to_j2i ()
+function parses
+.I s
+as a signed double-max precision integer.
+The result is stored in
+.I a
+or discarded if
+.I a
+is
+.IR NULL .
+The function will read
+.I s
+until it finds the end of the integer,
+a null byte, or has read
+.I slen
+bytes; whichever comes first.
+Unless
+.I end
+is
+.IR NULL ,
+.I *end
+will be set to
+.I s
+offset by the number of read bytes that
+was part of the integer or leading
+characters.
+.PP
+Any leading ASCII whitespace, as well
+as any leading ASCII plus sign
+.RB ( + ),
+will be ignored, the all digits will be
+parsed until any other character is
+encountered; additionally, the if the parity
+of the number of ASCII minus signs
+.RB ( - )
+intermixed with the leading characters is
+odd, the result will be negative.
+.PP
+The
+.BR libj2_str_to_j2u ()
+function is like the
+.BR libj2_str_to_j2i ()
+function, except the parsed integer is
+unsigned, and any ASCII minus sign
+.RB ( - )
+will terminate parsing.
+.PP
+The
+.BR libj2_str_to_j2u_sign ()
+function behaves like the
+.BR libj2_str_to_j2u ()
+function if
+.I negative
+is
+.IR NULL ,
+and like the
+.BR libj2_str_to_j2i ()
+function otherwise, except the
+.I a
+is unsigned, and
+.I *negative
+is set to 1 if the integer had an odd
+number of ASCII minus signs
+.RB ( - )
+and 0 otherwise.
+.PP
+.I digits1
+shall either be
+.I NULL
+(equivlent to
+.BR \(dq0123456789\(dq )
+for the decimal system, or the digits use
+in order of value (zero first). The radix
+will be the length of
+.IR digits1 ,
+which must be atleast 2. Any listed digit
+will be removed from the list of ignored
+leading characters (including the minus sign).
+The list may not contain any duplicates.
+.PP
+.I digits2
+can be either
+.IR NULL ,
+for unused, or
+another set of digits similar to
+.IR digits1 :
+symbols that will be recognised as
+synonyms for the symbols at the same
+position in
+.IR digits1 .
+.I digits2
+may contain symbols found in
+.IR digits1 ,
+but only at the same positions.
+.I digits2
+must also be the same length as
+.IR digits1 .
+.IR digits2 's
+intended purpose is to allow case-insensitivity,
+for example, for hexadecimal
+.I digits1
+can be set to
+.B \(dq0123456789abcdef\(dq
+and
+.I digits2
+set to
+.B \(dq0123456789ABCDEF\(dq .
+.PP
+.I digits2
+must be
+.I NULL
+if
+.I digits1
+is
+.IR NULL .
+
+.SH RETURN VALUE
+The
+.BR libj2_str_to_j2i (),
+.BR libj2_str_to_j2u (),
+and
+.BR libj2_str_to_j2u_sign ()
+functions return 0 on success on an
+error code,
+.I without
+setting
+.IR errno ,
+on failure.
+
+.SH ERRORS
+The
+.BR libj2_str_to_j2i (),
+.BR libj2_str_to_j2u (),
+and
+.BR libj2_str_to_j2u_sign ()
+functions will fail if:
+.TP
+.B EINVAL
+.I digits1
+or
+.IR digits2 ,
+or the combination of the two,
+is misconfigured.
+.TP
+.B EINVAL
+No digit was encountered.
+.IR a ,
+unless
+.IR NULL ,
+will be set to the value zero.
+.TP
+.B ERANGE
+The value is too large to be represented.
+.IR a ,
+unless
+.IR NULL ,
+will be set to the maximum value if the
+value is positive, or minimum value if the
+value is negative. (The value cannot be
+for the
+.BR libj2_str_to_j2u ()
+function or the
+.BR libj2_str_to_j2u_sign ()
+function if
+.I negative
+is
+.IR NULL .)
+
+.SH HISTORY
+The
+.BR libj2_str_to_j2i (),
+.BR libj2_str_to_j2u (),
+and
+.BR libj2_str_to_j2u_sign ()
+functions were added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_j2i_to_str (3),
+.BR libj2_ju_to_j2i (3)
