@@ -1,0 +1,75 @@
+.TH LIBJ2_J2U_TO_J2I 3 LIBJ2
+.SH NAME
+libj2_j2u_to_j2i \- Convert between signed and unsigned double-max precision integer
+
+.SH SYNOPSIS
+.nf
+#include <libj2.h>
+
+void \fBlibj2_j2u_to_j2i\fP(const struct libj2_j2u *\fIu\fP, struct libj2_j2i *\fIi\fP);
+void \fBlibj2_j2i_to_j2u\fP(const struct libj2_j2i *\fIi\fP, struct libj2_j2u *\fIu\fP);
+.fi
+.PP
+Link with
+.IR -lj2 .
+
+.SH DESCRIPTION
+The
+.BR libj2_j2u_to_j2i ()
+function converts
+.I u
+from unsigned double-max precision
+to signed double-max precision and
+stored the signed integer in
+.IR i .
+.PP
+The
+.BR libj2_j2i_to_j2u ()
+function converts
+.I i
+from signed double-max precision
+to unsigned double-max precision and
+stored the signed integer in
+.IR u .
+.PP
+The arguments are assumed to be
+.RI non- NULL .
+.PP
+.I u
+and
+.I i
+will be represented using the same bit
+sequence, by design, this means that if
+.I i
+is negative (for the
+.BR libj2_j2u_to_j2i ()
+function, this happs when
+.I u
+is too large to be represented by
+.BR "struct libj2_j2i" ),
+.I -i
+and the unsigned
+.I 0-u
+will have the same value.
+
+.SH RETURN VALUE
+None.
+
+.SH ERRORS
+The
+.BR libj2_j2u_to_j2i ()
+and
+.BR libj2_j2i_to_j2u ()
+functions cannot fail.
+
+.SH HISTORY
+The
+.BR libj2_j2u_to_j2i ()
+and
+.BR libj2_j2i_to_j2u ()
+functions were added in version 1.1 of
+.BR libj2 .
+
+.SH SEE ALSO
+.BR libj2 (7),
+.BR libj2_ju_to_j2i (3)

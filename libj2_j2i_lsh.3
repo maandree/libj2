@@ -9,17 +9,22 @@ libj2_j2i_lsh \- Left-shift bits
 void \fBlibj2_j2i_lsh\fP(struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
 void \fBlibj2_j2i_lsh_to_j2i\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
 void \fBlibj2_ji_lsh_to_j2i\fP(intmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
-void \fBlibj2_j2u_lsh\fP(struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
-void \fBlibj2_j2u_lsh_to_j2u\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
-void \fBlibj2_ju_lsh_to_j2u\fP(uintmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+
 int \fBlibj2_j2i_lsh_overflow\fP(struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
 int \fBlibj2_j2i_lsh_to_j2i_overflow\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
 int \fBlibj2_ji_lsh_to_j2i_overflow\fP(intmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2i *\fIr\fP);
+
+int \fBlibj2_j2i_lsh_overflow_p\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
+int \fBlibj2_ji_lsh_overflow_p\fP(intmax_t \fIa\fP, unsigned \fIb\fP);
+
+void \fBlibj2_j2u_lsh\fP(struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
+void \fBlibj2_j2u_lsh_to_j2u\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_ju_lsh_to_j2u\fP(uintmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
+
 int \fBlibj2_j2u_lsh_overflow\fP(struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
 int \fBlibj2_j2u_lsh_to_j2u_overflow\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
 int \fBlibj2_ju_lsh_to_j2u_overflow\fP(uintmax_t \fIa\fP, unsigned \fIb\fP, struct libj2_j2u *\fIr\fP);
-int \fBlibj2_j2i_lsh_overflow_p\fP(const struct libj2_j2i *\fIa\fP, unsigned \fIb\fP);
-int \fBlibj2_ji_lsh_overflow_p\fP(intmax_t \fIa\fP, unsigned \fIb\fP);
+
 int \fBlibj2_j2u_lsh_overflow_p\fP(const struct libj2_j2u *\fIa\fP, unsigned \fIb\fP);
 int \fBlibj2_ju_lsh_overflow_p\fP(uintmax_t \fIa\fP, unsigned \fIb\fP);
 .fi
