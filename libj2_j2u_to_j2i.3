@@ -43,14 +43,22 @@ sequence, by design, this means that if
 .I i
 is negative (for the
 .BR libj2_j2u_to_j2i ()
-function, this happs when
+function, this happens when
 .I u
 is too large to be represented by
 .BR "struct libj2_j2i" ),
 .I -i
 and the unsigned
 .I 0-u
-will have the same value.
+will have the same value, that is
+if some value
+.I a
+translates to some value
+.IR b ,
+the additive inverse of
+.I a
+translates to the additive inverse of
+.IR b .
 
 .SH RETURN VALUE
 None.
