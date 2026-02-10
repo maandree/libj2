@@ -506,7 +506,22 @@ OBJ =\
 	libj2_j2i_rdiv_j2i_underflow.o\
 	libj2_j2i_rdivmod_j2i.o\
 	libj2_j2i_rdivmod_j2i_to_j2i.o\
-	libj2_j2i_rmod_j2i.o
+	libj2_j2i_rmod_j2i.o\
+	libj2_j2i_sat_lsh.o\
+	libj2_j2i_sat_lsh_to_j2i.o\
+	libj2_ji_sat_lsh_to_j2i.o\
+	libj2_j2i_sat_add_ji.o\
+	libj2_j2i_sat_add_ji_to_j2i.o\
+	libj2_ji_sat_add_j2i_to_j2i.o\
+	libj2_j2i_sat_add_j2i.o\
+	libj2_j2i_sat_add_j2i_to_j2i.o\
+	libj2_j2i_sat_sub_ji.o\
+	libj2_j2i_sat_sub_ji_to_j2i.o\
+	libj2_j2i_sat_sub_j2i.o\
+	libj2_j2i_sat_sub_j2i_to_j2i.o\
+	libj2_ji_sat_sub_j2i_to_j2i.o\
+	libj2_j2i_sat_rsub_j2i.o\
+	libj2_j2i_sat_rsub_ji.o
 
 SUBHDR =\
 	libj2/constants.h\

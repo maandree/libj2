@@ -166,7 +166,7 @@ enum libj2_overflow {
 #include "libj2/subtraction.h"
 #include "libj2/multiplication.h"
 #include "libj2/division.h"
-#include "libj2/saturated-math.h" /* TODO add signed versions */
+#include "libj2/saturated-math.h" /* TODO add signed versions (mul) */
 #include "libj2/strings.h"
 
 

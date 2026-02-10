@@ -93,6 +93,108 @@ libj2_ju_sat_lsh_to_j2u(uintmax_t a, unsigned b, struct libj2_j2u *res)
 }
 
 
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to more signficant positions (left-shift)
+ * 
+ * If any set bit is shifted out of precision, it will
+ * be regarded an arithmetic overflow, and the result
+ * will be saturated to the maximum value (if positive)
+ * or minimum value (if negaitve) that can be
+ * represented
+ * 
+ * `libj2_j2i_sat_lsh` is a version `libj2_j2i_lsh`
+ * that uses saturated arithmetics
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2, using satured multiplication
+ * 
+ * @param  a  The integer to shift, also used as the
+ *            output parameter for the result
+ * @param  b  The number of positions to shift each bit
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_lsh(struct libj2_j2i *a, unsigned b)
+{
+	int r = libj2_j2i_lsh_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer to more signficant positions (left-shift)
+ * 
+ * If any set bit is shifted out of precision, it will
+ * be regarded an arithmetic overflow, and the result
+ * will be saturated to the maximum value (if positive)
+ * or minimum value (if negaitve) that can be
+ * represented
+ * 
+ * `libj2_j2i_sat_lsh_to_j2i` is a version
+ * `libj2_j2i_lsh_to_j2i` that uses saturated arithmetics
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2, using satured multiplication
+ * 
+ * @param  a    The integer to shift
+ * @param  b    The number of positions to shift each bit
+ * @param  res  Output parameter for the result
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_lsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_lsh_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Shift the bits in a signed double-max precision
+ * integer, represented by a signed max precision
+ * integer and whose high part, of the value bits,
+ * is treated as having the value 0, to more
+ * signficant positions (left-shift)
+ * 
+ * If any set bit is shifted out of precision, it will
+ * be regarded an arithmetic overflow, and the result
+ * will be saturated to the maximum value (if positive)
+ * or minimum value (if negaitve) that can be
+ * represented
+ * 
+ * `libj2_ji_sat_lsh_to_j2i` is a version
+ * `libj2_ji_lsh_to_j2i` that uses saturated arithmetics
+ * 
+ * This is equivalent to multiplying `a` by the `b`th
+ * power of 2, using satured multiplication
+ * 
+ * @param  a    The integer to shift
+ * @param  b    The number of positions to shift each bit
+ * @param  res  Output parameter for the result
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_sat_lsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
+{
+	int r = libj2_ji_lsh_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
 
 
 
@@ -211,6 +313,144 @@ libj2_j2u_sat_add_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *
 {
 	if (libj2_j2u_add_j2u_to_j2u_overflow(a, b, res))
 		libj2_j2u_max(res);
+}
+
+
+/**
+ * Calculate the saturated sum of a signed double-max
+ * precision integer and a signed max precision integer
+ * 
+ * `libj2_j2i_sat_add_ji` is a version
+ * `libj2_j2i_add_ji` that uses saturated arithmetics,
+ * meaning that if the result is too large to be
+ * represented it is saturated into the maximum value
+ * (if positive) or minimum value (if negative) that
+ * can be represented
+ * 
+ * @param  a  The augend, and output parameter for the sum
+ * @param  b  The addend
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_add_ji(struct libj2_j2i *a, intmax_t b)
+{
+	int r = libj2_j2i_add_ji_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated sum of a signed double-max
+ * precision integer and a signed max precision integer
+ * 
+ * `libj2_j2i_sat_add_ji_to_j2i` is a version
+ * `libj2_j2i_add_ji_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_add_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_add_ji_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated sum of a signed max precision
+ * integer and a signed double-max precision integer
+ * 
+ * `libj2_ji_sat_add_j2i_to_j2i` is a version
+ * `libj2_ji_add_j2i_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum
+ * value (if negative) that can be represented
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_sat_add_j2i_to_j2i(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int r = libj2_ji_add_j2i_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated sum of two signed double-max
+ * precision integers
+ * 
+ * `libj2_j2i_sat_add_j2i` is a version
+ * `libj2_j2i_add_j2i` that uses saturated arithmetics,
+ * meaning that if the result is too large to be
+ * represented it is saturated into the maximum value
+ * (if positive) or minimum value (if negative) that
+ * can be represented
+ * 
+ * @param  a  The augend, and output parameter for the sum
+ * @param  b  The addend
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_add_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	int r = libj2_j2i_add_j2i_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated sum of two signed double-max
+ * precision integers
+ * 
+ * `libj2_j2i_sat_add_j2i_to_j2i` is a version
+ * `libj2_j2i_add_j2i_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum
+ * value (if negative) that can be represented
+ * 
+ * @param  a    The augend
+ * @param  b    The addend
+ * @param  res  Output parameter for the sum
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_add_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_add_j2i_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
 }
 
 
@@ -368,7 +608,7 @@ libj2_ju_sat_sub_j2u_to_j2u(uintmax_t a, const struct libj2_j2u *b, struct libj2
 /**
  * Calculate the saturated difference between two
  * unsigned max precision integers; in this variant
- * of `libj2_j2u_sub_j2u`, the minuend (left-hand)
+ * of `libj2_j2u_sat_sub_j2u`, the minuend (left-hand)
  * is the second parameter and the subtrahend
  * (right-hand) is the first parameter
  * 
@@ -396,7 +636,7 @@ libj2_j2u_sat_rsub_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
  * Calculate the saturated difference between an
  * unsigned max precision integer (minuend) and an
  * unsigned double-max precision integer (subtrahend);
- * in this variant of `libj2_j2u_sub_ju`, the
+ * in this variant of `libj2_j2u_sat_sub_ju`, the
  * minuend (left-hand) is the second parameter
  * and the subtrahend (right-hand) is the first
  * parameter
@@ -418,6 +658,213 @@ libj2_j2u_sat_rsub_ju(struct libj2_j2u *a, uintmax_t b)
 {
 	if (libj2_j2u_rsub_ju_overflow(a, b))
 		libj2_j2u_min(a);
+}
+
+
+/**
+ * Calculate the saturated difference between n
+ * signed double-max precision integer (minuend)
+ * and a signed max precision integer (subtrahend)
+ * 
+ * `libj2_j2i_sat_sub_ji` is a version
+ * `libj2_j2i_sub_ji` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a  The minuend (left-hand), also used as the
+ *            output parameter for the difference
+ * @param  b  The subtrahend (right-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_sub_ji(struct libj2_j2i *a, intmax_t b)
+{
+	int r = libj2_j2i_sub_ji_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated difference between a
+ * signed double-max precision integer (minuend)
+ * and a signed max precision integer (subtrahend)
+ * 
+ * `libj2_j2i_sat_sub_ji_to_j2i` is a version
+ * `libj2_j2i_sub_ji_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_sub_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_sub_ji_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated difference between two
+ * signed double-max precision integers
+ * 
+ * `libj2_j2i_sat_sub_j2i` is a version
+ * `libj2_j2i_sub_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a  The minuend (left-hand), also used
+ *            as the output parameter for the difference
+ * @param  b  The subtrahend (right-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_sub_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	int r = libj2_j2i_sub_j2i_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated difference between two
+ * signed double-max precision integers
+ * 
+ * `libj2_j2i_sat_sub_j2i_to_j2i` is a version
+ * `libj2_j2i_sub_j2i_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_sub_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_sub_j2i_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated difference between a
+ * signed max precision integer (minuend) and a
+ * signed double-max precision integer (subtrahend)
+ * 
+ * `libj2_ji_sat_sub_j2i_to_j2i` is a version
+ * `libj2_ji_sub_j2i_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a    The minuend (left-hand)
+ * @param  b    The subtrahend (right-hand)
+ * @param  res  Output parameter for the difference
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_sat_sub_j2i_to_j2i(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int r = libj2_ji_sub_j2i_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated difference between two
+ * unsigned max precision integers; in this variant
+ * of `libj2_j2i_sat_sub_j2i`, the minuend (left-hand)
+ * is the second parameter and the subtrahend
+ * (right-hand) is the first parameter
+ * 
+ * `libj2_j2i_sat_rsub_j2i` is a version
+ * `libj2_j2i_rsub_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a    The subtrahend (right-hand), also used as
+ *              the output parameter for the difference
+ * @param  b    The minuend (left-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_rsub_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	int r = libj2_j2i_rsub_j2i_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated difference between an
+ * unsigned max precision integer (minuend) and an
+ * unsigned double-max precision integer (subtrahend);
+ * in this variant of `libj2_j2i_sat_sub_ji`, the
+ * minuend (left-hand) is the second parameter
+ * and the subtrahend (right-hand) is the first
+ * parameter
+ * 
+ * `libj2_j2i_sat_rsub_ji` is a version
+ * `libj2_j2i_rsub_ji` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum value
+ * (if negative) that can be represented
+ * 
+ * @param  a  The subtrahend (right-hand), also used as
+ *            the output parameter for the difference
+ * @param  b  The minuend (left-hand)
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_rsub_ji(struct libj2_j2i *a, intmax_t b)
+{
+	int r = libj2_j2i_rsub_ji_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
 }
 
 
