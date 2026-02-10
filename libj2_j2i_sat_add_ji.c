@@ -7,6 +7,6 @@ extern inline void libj2_j2i_sat_add_ji(struct libj2_j2i *a, intmax_t b);
 
 #else
 
-CONST int main(void) { return 0; } /* TODO test */
+CONST int main(void) { return 0; }
 
 #endif

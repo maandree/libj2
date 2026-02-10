@@ -61,13 +61,12 @@ check_(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low,
 	EXPECT(libj2_j2i_eq_j2i(&a, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
 
-#if 0 /* TODO saturated addition */
 	a = a_saved;
 	b = b_saved;
 	libj2_j2i_sat_add_j2i(&a, &b);
-	EXPECT(r_overflow ? libj2_j2i_is_max(&a) : libj2_j2i_eq_j2i(&a, &expected));
+	EXPECT(r_overflow > 0 ? libj2_j2i_is_max(&a) :
+	       r_overflow ? libj2_j2i_is_min(&a) : libj2_j2i_eq_j2i(&a, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
-#endif
 
 	a = a_saved;
 	b = b_saved;
@@ -95,27 +94,28 @@ check_(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low,
 	EXPECT(libj2_j2i_eq_j2i(&b, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
 
-#if 0 /* TODO saturated addition */
 	r = (struct libj2_j2i){111, 222};
 	a = a_saved;
 	b = b_saved;
 	libj2_j2i_sat_add_j2i_to_j2i(&a, &b, &r);
-	EXPECT(r_overflow ? libj2_j2i_is_max(&r) : libj2_j2i_eq_j2i(&r, &expected));
+	EXPECT(r_overflow > 0 ? libj2_j2i_is_max(&r) :
+	       r_overflow ? libj2_j2i_is_min(&r) : libj2_j2i_eq_j2i(&r, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
 	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
 
 	a = a_saved;
 	b = b_saved;
 	libj2_j2i_sat_add_j2i_to_j2i(&a, &b, &a);
-	EXPECT(r_overflow ? libj2_j2i_is_max(&a) : libj2_j2i_eq_j2i(&a, &expected));
+	EXPECT(r_overflow > 0 ? libj2_j2i_is_max(&a) :
+	       r_overflow ? libj2_j2i_is_min(&a) : libj2_j2i_eq_j2i(&a, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
 
 	a = a_saved;
 	b = b_saved;
 	libj2_j2i_sat_add_j2i_to_j2i(&a, &b, &b);
-	EXPECT(r_overflow ? libj2_j2i_is_max(&b) : libj2_j2i_eq_j2i(&b, &expected));
+	EXPECT(r_overflow > 0 ? libj2_j2i_is_max(&b) :
+	       r_overflow ? libj2_j2i_is_min(&b) : libj2_j2i_eq_j2i(&b, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
-#endif
 }
 
 
@@ -210,11 +210,10 @@ check_double(uintmax_t high, uintmax_t low)
 	EXPECT(libj2_j2i_add_j2i_overflow(&a, &a) == expected_overflow);
 	EXPECT(libj2_j2i_eq_j2i(&a, &expected));
 
-#if 0 /* TODO saturated addition */
 	a = a_saved;
 	libj2_j2i_sat_add_j2i(&a, &a);
-	EXPECT(expected_overflow ? libj2_j2i_is_max(&a) : libj2_j2i_eq_j2i(&a, &expected));
-#endif
+	EXPECT(expected_overflow > 0 ? libj2_j2i_is_max(&a) :
+	       expected_overflow ? libj2_j2i_is_min(&a) : libj2_j2i_eq_j2i(&a, &expected));
 
 	a = a_saved;
 	EXPECT(libj2_j2i_add_j2i_overflow_p((const struct libj2_j2i *)&a, (const struct libj2_j2i *)&a) == expected_overflow);
@@ -230,17 +229,17 @@ check_double(uintmax_t high, uintmax_t low)
 	EXPECT(libj2_j2i_add_j2i_to_j2i_overflow(&a, &a, &a) == expected_overflow);
 	EXPECT(libj2_j2i_eq_j2i(&a, &expected));
 
-#if 0 /* TODO saturated addition */
 	r = (struct libj2_j2i){111, 222};
 	a = a_saved;
 	libj2_j2i_sat_add_j2i_to_j2i(&a, &a, &r);
-	EXPECT(expected_overflow ? libj2_j2i_is_max(&r) : libj2_j2i_eq_j2i(&r, &expected));
+	EXPECT(expected_overflow > 0 ? libj2_j2i_is_max(&r) :
+	       expected_overflow ? libj2_j2i_is_min(&r) : libj2_j2i_eq_j2i(&r, &expected));
 	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
 
 	a = a_saved;
 	libj2_j2i_sat_add_j2i_to_j2i(&a, &a, &a);
-	EXPECT(expected_overflow ? libj2_j2i_is_max(&a) : libj2_j2i_eq_j2i(&a, &expected));
-#endif
+	EXPECT(expected_overflow > 0 ? libj2_j2i_is_max(&a) :
+	       expected_overflow ? libj2_j2i_is_min(&a) : libj2_j2i_eq_j2i(&a, &expected));
 }
 
 

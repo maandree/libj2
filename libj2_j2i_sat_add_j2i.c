@@ -14,6 +14,6 @@ extern inline void libj2_j2i_sat_add_j2i(struct libj2_j2i *a, const struct libj2
 
 #else
 
-CONST int main(void) { return 0; } /* TODO test */
+CONST int main(void) { return 0; }
 
 #endif
