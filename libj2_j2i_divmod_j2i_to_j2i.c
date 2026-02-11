@@ -452,6 +452,10 @@ main(void)
 
 	/* TODO test sign-issues in a better way, especially ji divisor */
 
+	libj2_j2i_min(&a);
+	libj2_j2i_min(&b);
+	check_manual(&a, &minus_one, &b, &zero);
+
 	return 0;
 }
 
