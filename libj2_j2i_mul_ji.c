@@ -100,11 +100,10 @@ mul_(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expe
 	EXPECT(libj2_j2i_mul_ji_overflow(&t, b) == expect_overflow);
 	EXPECT(libj2_j2i_eq_j2i(&t, expected));
 
-#if 0 /* TODO saturated multiplication */
 	t = *a;
-	libj2_j2u_sat_mul_ju(&t, b);
-	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
-#endif
+	libj2_j2i_sat_mul_ji(&t, b);
+	EXPECT(expect_overflow > 0 ? libj2_j2i_is_max(&t) :
+	       expect_overflow ? libj2_j2i_is_min(&t) : libj2_j2i_eq_j2i(&t, expected));
 
 	t = *a;
 	EXPECT(libj2_j2i_mul_ji_overflow_p((const struct libj2_j2i *)&t, b) == expect_overflow);
@@ -138,16 +137,16 @@ mul_(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expe
 	EXPECT(libj2_j2i_mul_ji_to_j2i_overflow(&t, b, &t) == expect_overflow);
 	EXPECT(libj2_j2i_eq_j2i(&t, expected));
 
-#if 0 /* TODO saturated multiplication */
-	t = (struct libj2_j2u){111, 222};
-	libj2_j2u_sat_mul_ju_to_j2u(a, b, &t);
-	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
-	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+	t = (struct libj2_j2i){111, 222};
+	libj2_j2i_sat_mul_ji_to_j2i(a, b, &t);
+	EXPECT(expect_overflow > 0 ? libj2_j2i_is_max(&t) :
+	       expect_overflow ? libj2_j2i_is_min(&t) : libj2_j2i_eq_j2i(&t, expected));
+	EXPECT(libj2_j2i_eq_j2i(a, &a_saved));
 
 	t = *a;
-	libj2_j2u_sat_mul_ju_to_j2u(&t, b, &t);
-	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
-#endif
+	libj2_j2i_sat_mul_ji_to_j2i(&t, b, &t);
+	EXPECT(expect_overflow > 0 ? libj2_j2i_is_max(&t) :
+	       expect_overflow ? libj2_j2i_is_min(&t) : libj2_j2i_eq_j2i(&t, expected));
 
 	t = (struct libj2_j2i){111, 222};
 	EXPECT(libj2_ji_mul_j2i_to_j2i_overflow(b, a, &t) == expect_overflow);
@@ -158,16 +157,16 @@ mul_(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expe
 	EXPECT(libj2_ji_mul_j2i_to_j2i_overflow(b, &t, &t) == expect_overflow);
 	EXPECT(libj2_j2i_eq_j2i(&t, expected));
 
-#if 0 /* TODO saturated multiplication */
-	t = (struct libj2_j2u){111, 222};
-	libj2_ju_sat_mul_j2u_to_j2u(b, a, &t);
-	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
-	EXPECT(libj2_j2u_eq_j2u(a, &a_saved));
+	t = (struct libj2_j2i){111, 222};
+	libj2_ji_sat_mul_j2i_to_j2i(b, a, &t);
+	EXPECT(expect_overflow > 0 ? libj2_j2i_is_max(&t) :
+	       expect_overflow ? libj2_j2i_is_min(&t) : libj2_j2i_eq_j2i(&t, expected));
+	EXPECT(libj2_j2i_eq_j2i(a, &a_saved));
 
 	t = *a;
-	libj2_ju_sat_mul_j2u_to_j2u(b, &t, &t);
-	EXPECT(expect_overflow ? libj2_j2u_is_max(&t) : libj2_j2u_eq_j2u(&t, expected));
-#endif
+	libj2_ji_sat_mul_j2i_to_j2i(b, &t, &t);
+	EXPECT(expect_overflow > 0 ? libj2_j2i_is_max(&t) :
+	       expect_overflow ? libj2_j2i_is_min(&t) : libj2_j2i_eq_j2i(&t, expected));
 
 	set = 999;
 	t = (struct libj2_j2i){111, 222};

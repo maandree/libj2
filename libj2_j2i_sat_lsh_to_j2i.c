@@ -7,6 +7,6 @@ extern inline void libj2_j2i_sat_lsh_to_j2i(const struct libj2_j2i *a, unsigned 
 
 #else
 
-CONST int main(void) { return 0; } /* TODO test */
+CONST int main(void) { return 0; } /* Tested in libj2_j2i_lsh.c */
 
 #endif

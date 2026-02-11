@@ -33,6 +33,16 @@ int \fBlibj2_j2u_rsub_ju_overflow\fP(struct libj2_j2u *\fIb\fP, uintmax_t \fIa\f
 
 int \fBlibj2_j2u_rsub_j2u_overflow_p\fP(const struct libj2_j2u *\fIb\fP, const struct libj2_j2u *\fIa\fP);
 int \fBlibj2_j2u_rsub_ju_overflow_p\fP(const struct libj2_j2u *\fIb\fP, uintmax_t \fIa\fP);
+
+void \fBlibj2_j2u_sat_sub_j2u\fP(struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP);
+void \fBlibj2_j2u_sat_sub_j2u_to_j2u\fP(const struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_j2u_sat_sub_ju\fP(struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP);
+void \fBlibj2_j2u_sat_sub_ju_to_j2u\fP(const struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_ju_sat_sub_j2u_to_j2u\fP(uintmax_t \fIa\fP, const struct libj2_j2u *\fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_ju_sat_sub_ju_to_j2u\fP(uintmax_t \fIa\fP, uintmax_t \fIb\fP, struct libj2_j2u *\fIr\fP);
+
+void \fBlibj2_j2u_sat_rsub_j2u\fP(struct libj2_j2u *\fIb\fP, const struct libj2_j2u *\fIa\fP);
+void \fBlibj2_j2u_sat_rsub_ju\fP(struct libj2_j2u *\fIb\fP, uintmax_t \fIa\fP);
 .fi
 .PP
 Link with
@@ -59,15 +69,17 @@ except the functions
 .BR libj2_ju_sub_ju_overflow_p (),
 .BR libj2_j2u_rsub_j2u_overflow_p (),
 and
-.BR libj2_j2u_rsub_ju_overflow_p (),
+.BR libj2_j2u_rsub_ju_overflow_p ()
 only predict overflow, and do not calculate
 the difference, and therefore does store it
 anywhere; and except the functions
 .BR libj2_j2u_rsub_j2u (),
 .BR libj2_j2u_rsub_ju (),
 .BR libj2_j2u_rsub_j2u_overflow (),
-and
 .BR libj2_j2u_rsub_ju_overflow (),
+.BR libj2_j2u_sat_rsub_j2u (),
+and
+.BR libj2_j2u_sat_rsub_ju ()
 store the result in
 .IR b .
 .PP
@@ -78,8 +90,13 @@ in their name), detect arithmetic overflow.
 .PP
 The result is truncated to the least significant
 bits, as many as can be stored, in case of overflow;
-that is, modular arithmetics is used.
-
+that is, modular arithmetics is used. However, the
+.BR sat_sub -
+and
+.BR sat_rsub -functions
+use saturated arithmetics, meaning that the result
+will be the maximum representable value on positive
+overflow and the value zero on negative overflow.
 .PP
 The arguments are assumed to be
 .RI non- NULL .
@@ -118,6 +135,19 @@ The
 and
 .BR libj2_j2u_rsub_ju_overflow_p ()
 functions were added in version 1.0 of
+.BR libj2 .
+.PP
+The
+.BR libj2_j2u_sat_sub_j2u (),
+.BR libj2_j2u_sat_sub_j2u_to_j2u (),
+.BR libj2_j2u_sat_sub_ju (),
+.BR libj2_j2u_sat_sub_ju_to_j2u (),
+.BR libj2_ju_sat_sub_j2u_to_j2u (),
+.BR libj2_ju_sat_sub_ju_to_j2u (),
+.BR libj2_j2u_sat_rsub_j2u (),
+and
+.BR libj2_j2u_sat_rsub_ju ()
+functions were added in version 1.1 of
 .BR libj2 .
 
 .SH NOTES

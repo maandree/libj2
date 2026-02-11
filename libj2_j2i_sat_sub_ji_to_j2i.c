@@ -7,6 +7,6 @@ extern inline void libj2_j2i_sat_sub_ji_to_j2i(const struct libj2_j2i *a, intmax
 
 #else
 
-CONST int main(void) { return 0; } /* TODO test */
+CONST int main(void) { return 0; } /* Tested in libj2_j2i_sub_ji.c */
 
 #endif

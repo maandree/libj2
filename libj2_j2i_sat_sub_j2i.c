@@ -3,19 +3,10 @@
 #ifndef TEST
 
 extern inline void libj2_j2i_sat_sub_j2i(struct libj2_j2i *a, const struct libj2_j2i *b);
-/* TODO Add man pages
- * libj2_j2i_sat_sub_j2i
- * libj2_j2i_sat_sub_j2i_to_j2i
- * libj2_j2i_sat_sub_ji
- * libj2_j2i_sat_sub_ji_to_j2i
- * libj2_ji_sat_sub_j2i_to_j2i
- * libj2_j2i_sat_rsub_j2i
- * libj2_j2i_sat_rsub_ji
- */
 
 
 #else
 
-CONST int main(void) { return 0; } /* TODO test */
+CONST int main(void) { return 0; } /* Tested in libj2_j2i_sub_j2i.c */
 
 #endif

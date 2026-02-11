@@ -521,7 +521,12 @@ OBJ =\
 	libj2_j2i_sat_sub_j2i_to_j2i.o\
 	libj2_ji_sat_sub_j2i_to_j2i.o\
 	libj2_j2i_sat_rsub_j2i.o\
-	libj2_j2i_sat_rsub_ji.o
+	libj2_j2i_sat_rsub_ji.o\
+	libj2_j2i_sat_mul_j2i.o\
+	libj2_j2i_sat_mul_j2i_to_j2i.o\
+	libj2_j2i_sat_mul_ji.o\
+	libj2_j2i_sat_mul_ji_to_j2i.o\
+	libj2_ji_sat_mul_j2i_to_j2i.o
 
 SUBHDR =\
 	libj2/constants.h\

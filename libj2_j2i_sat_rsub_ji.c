@@ -7,6 +7,6 @@ extern inline void libj2_j2i_sat_rsub_ji(struct libj2_j2i *a, intmax_t b);
 
 #else
 
-CONST int main(void) { return 0; } /* TODO test */
+CONST int main(void) { return 0; } /* Tested in libj2_j2i_sub_ji.c */
 
 #endif

@@ -31,6 +31,15 @@ int \fBlibj2_j2i_rsub_ji_overflow\fP(struct libj2_j2i *\fIb\fP, intmax_t \fIa\fP
 
 int \fBlibj2_j2i_rsub_j2i_overflow_p\fP(const struct libj2_j2i *\fIb\fP, const struct libj2_j2i *\fIa\fP);
 int \fBlibj2_j2i_rsub_ji_overflow_p\fP(const struct libj2_j2i *\fIb\fP, intmax_t \fIa\fP);
+
+void \fBlibj2_j2i_sat_sub_j2i\fP(struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP);
+void \fBlibj2_j2i_sat_sub_j2i_to_j2i\fP(const struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_j2i_sat_sub_ji\fP(struct libj2_j2i *\fIa\fP, intmax_t \fIb\fP);
+void \fBlibj2_j2i_sat_sub_ji_to_j2i\fP(const struct libj2_j2i *\fIa\fP, intmax_t \fIb\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_ji_sat_sub_j2i_to_j2i\fP(intmax_t \fIa\fP, const struct libj2_j2i *\fIb\fP, struct libj2_j2i *\fIr\fP);
+
+void \fBlibj2_j2i_sat_rsub_j2i\fP(struct libj2_j2i *\fIb\fP, const struct libj2_j2i *\fIa\fP);
+void \fBlibj2_j2i_sat_rsub_ji\fP(struct libj2_j2i *\fIb\fP, intmax_t \fIa\fP);
 .fi
 .PP
 Link with
@@ -56,15 +65,17 @@ except the functions
 .BR libj2_ji_sub_j2i_overflow_p (),
 .BR libj2_j2i_rsub_j2i_overflow_p (),
 and
-.BR libj2_j2i_rsub_ji_overflow_p (),
+.BR libj2_j2i_rsub_ji_overflow_p ()
 only predict overflow, and do not calculate
 the difference, and therefore does store it
 anywhere; and except the functions
 .BR libj2_j2i_rsub_j2i (),
 .BR libj2_j2i_rsub_ji (),
 .BR libj2_j2i_rsub_j2i_overflow (),
-and
 .BR libj2_j2i_rsub_ji_overflow (),
+.BR libj2_j2i_sat_rsub_j2i (),
+and
+.BR libj2_j2i_sat_rsub_ji ()
 store the result in
 .IR b .
 .PP
@@ -75,7 +86,14 @@ in their name), detect arithmetic overflow.
 .PP
 The result is truncated to the least significant
 bits, as many as can be stored, in case of overflow;
-that is, modular arithmetics is used.
+that is, modular arithmetics is used. However, the
+.BR sat_sub -
+and
+.BR sat_rsub -functions
+use saturated arithmetics, meaning that the result
+will be the maximum representable value on positive
+overflow and the minimum representable value on
+negative overflow.
 .PP
 The arguments are assumed to be
 .RI non- NULL .
@@ -110,8 +128,15 @@ The
 .BR libj2_j2i_rsub_j2i_overflow (),
 .BR libj2_j2i_rsub_ji_overflow (),
 .BR libj2_j2i_rsub_j2i_overflow_p (),
+.BR libj2_j2i_rsub_ji_overflow_p (),
+.BR libj2_j2i_sat_sub_j2i (),
+.BR libj2_j2i_sat_sub_j2i_to_j2i (),
+.BR libj2_j2i_sat_sub_ji (),
+.BR libj2_j2i_sat_sub_ji_to_j2i (),
+.BR libj2_ji_sat_sub_j2i_to_j2i (),
+.BR libj2_j2i_sat_rsub_j2i (),
 and
-.BR libj2_j2i_rsub_ji_overflow_p ()
+.BR libj2_j2i_sat_rsub_ji ()
 functions were added in version 1.1 of
 .BR libj2 .
 

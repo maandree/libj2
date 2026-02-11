@@ -2,7 +2,7 @@
 #include "common.h"
 #ifndef TEST
 
-extern inline void libj2_j2i_sat_add_j2i(struct libj2_j2i *a, const struct libj2_j2i *b);
+extern inline void libj2_j2i_sat_mul_ji(struct libj2_j2i *a, intmax_t b);
 
 
 #else

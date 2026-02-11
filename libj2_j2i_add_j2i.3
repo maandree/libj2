@@ -39,6 +39,18 @@ int \fBlibj2_ju_add_j2u_to_j2u_overflow\fP(uintmax_t \fIa\fP, const struct libj2
 int \fBlibj2_j2u_add_j2u_overflow_p\fP(const struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP);
 int \fBlibj2_j2u_add_ju_overflow_p\fP(const struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP);
 int \fBlibj2_ju_add_j2u_overflow_p\fP(uintmax_t \fIa\fP, const struct libj2_j2u *\fIb\fP);
+
+void \fBlibj2_j2i_sat_add_j2i\fP(struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP);
+void \fBlibj2_j2i_sat_add_j2i_to_j2i\fP(const struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_j2i_sat_add_ji\fP(struct libj2_j2i *\fIa\fP, intmax_t \fIb\fP);
+void \fBlibj2_j2i_sat_add_ji_to_j2i\fP(const struct libj2_j2i *\fIa\fP, intmax_t \fIb\fP, struct libj2_j2i *\fIr\fP);
+void \fBlibj2_ji_sat_add_j2i_to_j2i\fP(intmax_t \fIa\fP, const struct libj2_j2i *\fIb\fP, struct libj2_j2i *\fIr\fP);
+
+void \fBlibj2_j2u_sat_add_j2u\fP(struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP);
+void \fBlibj2_j2u_sat_add_j2u_to_j2u\fP(const struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_j2u_sat_add_ju\fP(struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP);
+void \fBlibj2_j2u_sat_add_ju_to_j2u\fP(const struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP, struct libj2_j2u *\fIr\fP);
+void \fBlibj2_ju_sat_add_j2u_to_j2u\fP(uintmax_t \fIa\fP, const struct libj2_j2u *\fIb\fP, struct libj2_j2u *\fIr\fP);
 .fi
 .PP
 Link with
@@ -74,7 +86,12 @@ in their name), detect arithmetic overflow.
 .PP
 The result is truncated to the least significant
 bits, as many as can be stored, in case of overflow;
-that is, modular arithmetics is used.
+that is, modular arithmetics is used. However, the
+.BR sat_add -functions
+use saturated arithmetics, meaning that the result
+will be the maximum representable value on positive
+overflow and the minimum representable value on
+negative overflow.
 .PP
 The arguments are assumed to be
 .RI non- NULL .
@@ -124,8 +141,18 @@ The
 .BR libj2_ji_add_j2i_to_j2i_overflow (),
 .BR libj2_j2i_add_j2i_overflow_p (),
 .BR libj2_j2i_add_ji_overflow_p (),
+.BR libj2_ji_add_j2i_overflow_p (),
+.BR libj2_j2i_sat_add_j2i (),
+.BR libj2_j2i_sat_add_j2i_to_j2i (),
+.BR libj2_j2i_sat_add_ji (),
+.BR libj2_j2i_sat_add_ji_to_j2i (),
+.BR libj2_ji_sat_add_j2i_to_j2i (),
+.BR libj2_j2u_sat_add_j2u (),
+.BR libj2_j2u_sat_add_j2u_to_j2u (),
+.BR libj2_j2u_sat_add_ju (),
+.BR libj2_j2u_sat_add_ju_to_j2u (),
 and
-.BR libj2_ji_add_j2i_overflow_p ()
+.BR libj2_ju_sat_add_j2u_to_j2u ()
 functions were added in version 1.1 of
 .BR libj2 .
 

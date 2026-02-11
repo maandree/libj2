@@ -1078,3 +1078,149 @@ libj2_j2u_sat_mul_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *
 	*res = *a;
 	libj2_j2u_sat_mul_j2u_destructive(res, &c);
 }
+
+
+/**
+ * Calculate the saturated product of a signed
+ * double-max precision integer (multiplier) and a
+ * signed max precision integer (multiplicand)
+ * 
+ * `libj2_j2i_sat_mul_ji` is a version
+ * `libj2_j2i_mul_ji` that uses saturated arithmetics,
+ * meaning that if the result is too large to be
+ * represented it is saturated into the maximum value
+ * (if positive) or minimum value (if negative) that
+ * can be represented
+ * 
+ * @param  a  The multiplier, also used as the
+ *            output parameter for the product
+ * @param  b  The multiplicand
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_mul_ji(struct libj2_j2i *a, intmax_t b)
+{
+	int r = libj2_j2i_mul_ji_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated product of a signed
+ * double-max precision integer (multiplier) and a
+ * signed max precision integer (multiplicand)
+ * 
+ * `libj2_j2i_sat_mul_ji_to_j2i` is a version
+ * `libj2_j2i_mul_ji_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum
+ * value (if negative) that can be represented
+ * can be represented
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_mul_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_mul_ji_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated product of a signed
+ * max precision integer (multiplier) and a signed
+ * double-max precision integer (multiplicand)
+ * 
+ * `libj2_ji_sat_mul_j2i_to_j2i` is a version
+ * `libj2_ji_mul_j2i_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum
+ * value (if negative) that can be represented
+ * can be represented
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_ji_sat_mul_j2i_to_j2i(intmax_t a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int r = libj2_ji_mul_j2i_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
+
+
+/**
+ * Calculate the saturated product of two signed
+ * double-max precision integers
+ * 
+ * `libj2_j2i_sat_mul_j2i` is a version
+ * `libj2_j2i_mul_j2i` that uses saturated arithmetics,
+ * meaning that if the result is too large to be
+ * represented it is saturated into the maximum value
+ * (if positive) or minimum value (if negative) that
+ * can be represented
+ * 
+ * @param  a  The multiplier, also used as the
+ *            output parameter for the product
+ * @param  b  The multiplicand
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_mul_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
+{
+	int r = libj2_j2i_mul_j2i_overflow(a, b);
+	if (r > 0)
+		libj2_j2i_max(a);
+	else if (r)
+		libj2_j2i_min(a);
+}
+
+
+/**
+ * Calculate the saturated product of two signed
+ * double-max precision integers
+ * 
+ * `libj2_j2i_sat_mul_j2i_to_j2i` is a version
+ * `libj2_j2i_mul_j2i_to_j2i` that uses saturated
+ * arithmetics, meaning that if the result is too
+ * large to be represented it is saturated into
+ * the maximum value (if positive) or minimum
+ * value (if negative) that can be represented
+ * can be represented
+ * 
+ * @param  a    The multiplier
+ * @param  b    The multiplicand
+ * @param  res  Output parameter for the product
+ * 
+ * @since  1.1
+ */
+inline void
+libj2_j2i_sat_mul_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
+{
+	int r = libj2_j2i_mul_j2i_to_j2i_overflow(a, b, res);
+	if (r > 0)
+		libj2_j2i_max(res);
+	else if (r)
+		libj2_j2i_min(res);
+}
