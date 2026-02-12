@@ -777,3 +777,123 @@ libj2_ji_add_j2i_to_j2i_overflow(intmax_t a, const struct libj2_j2i *b, struct l
 {
 	return libj2_j2i_add_ji_to_j2i_overflow(b, a, res);
 }
+
+
+
+
+
+/**
+ * Calculate the sum of two unsigned double-max
+ * precision integers and a carry flag, and
+ * update the carry flag
+ *
+ * `libj2_j2u_add_j2u_to_j2u_carry(a, b, res, &c)`
+ * imeplements `*res = *a + *b + *c` with
+ * overflow-detection
+ * 
+ * @param  a      The augend
+ * @param  b      The addend
+ * @param  res    Output parameter for the sum
+ * @param  carry  Shall point to the value 1 or 0:
+ *                the result will be incremented
+ *                with the value. When the function
+ *                returns, it will be updated to 1
+ *                on overflow, and 0 otherwise
+ * 
+ * @since  1.2
+ */
+inline void
+libj2_j2u_add_j2u_to_j2u_carry(const struct libj2_j2u *a, const struct libj2_j2u *b, struct libj2_j2u *res, int *carry)
+{
+	int overflow = libj2_j2u_add_j2u_to_j2u_overflow(a, b, res);
+	if (*carry)
+		overflow |= libj2_j2u_add_ju_overflow(res, 1u);
+	*carry = overflow;
+}
+
+
+/**
+ * Calculate the sum of two unsigned double-max
+ * precision integers and a carry flag, and
+ * update the carry flag
+ *
+ * `libj2_j2u_add_j2u_carry(a, b, &c)`
+ * imeplements `*a = *a + *b + *c` with
+ * overflow-detection
+ * 
+ * @param  a      The augend, and output parameter for the sum
+ * @param  b      The addend
+ * @param  carry  Shall point to the value 1 or 0:
+ *                the result will be incremented
+ *                with the value. When the function
+ *                returns, it will be updated to 1
+ *                on overflow, and 0 otherwise
+ * 
+ * @since  1.2
+ */
+inline void
+libj2_j2u_add_j2u_carry(struct libj2_j2u *a, const struct libj2_j2u *b, int *carry)
+{
+	libj2_j2u_add_j2u_to_j2u_carry(a, b, a, carry);
+}
+
+
+
+
+
+/**
+ * Calculate the sum of two signed double-max
+ * precision integers and a carry flag, and
+ * update the carry flag
+ *
+ * `libj2_j2i_add_j2i_to_j2i_carry(a, b, res, &c)`
+ * imeplements `*res = *a + *b + *c` with
+ * overflow-detection
+ * 
+ * @param  a      The augend
+ * @param  b      The addend
+ * @param  res    Output parameter for the sum
+ * @param  carry  Shall point to the value +1, -1, or 0:
+ *                the result will be incremented
+ *                with the value. When the function
+ *                returns, it will be updated to +1
+ *                on positive overflow, -1 on negative
+ *                overflow, and 0 otherwise
+ * 
+ * @since  1.2
+ */
+inline void
+libj2_j2i_add_j2i_to_j2i_carry(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res, int *carry)
+{
+	int overflow = libj2_j2i_add_j2i_to_j2i_overflow(a, b, res);
+	if (*carry)
+		overflow |= libj2_j2i_add_ji_overflow(res, *carry > 0 ? +1 : -1);
+	*carry = overflow;
+}
+
+
+/**
+ * Calculate the sum of two signed double-max
+ * precision integers and a carry flag, and
+ * update the carry flag
+ *
+ * `libj2_j2i_add_j2i_carry(a, b, &c)`
+ * imeplements `*a = *a + *b + *c` with
+ * overflow-detection
+ * 
+ * @param  a      The augend, and output parameter for the sum
+ * @param  b      The addend
+ * @param  carry  Shall point to the value +1, -1, or 0:
+ *                the result will be incremented
+ *                with the value. When the function
+ *                returns, it will be updated to +1
+ *                on positive overflow, -1 on negative
+ *                overflow, and 0 otherwise
+ * 
+ * @since  1.2
+ */
+inline void
+libj2_j2i_add_j2i_carry(struct libj2_j2i *a, const struct libj2_j2i *b, int *carry)
+{
+	libj2_j2i_add_j2i_to_j2i_carry(a, b, a, carry);
+}

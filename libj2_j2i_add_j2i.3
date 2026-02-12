@@ -23,6 +23,9 @@ int \fBlibj2_j2i_add_j2i_overflow_p\fP(const struct libj2_j2i *\fIa\fP, const st
 int \fBlibj2_j2i_add_ji_overflow_p\fP(const struct libj2_j2i *\fIa\fP, intmax_t \fIb\fP);
 int \fBlibj2_ji_add_j2i_overflow_p\fP(intmax_t \fIa\fP, const struct libj2_j2i *\fIb\fP);
 
+void \fBlibj2_j2i_add_j2i_carry\fP(struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP, int *\fIc\fP);
+void \fBlibj2_j2i_add_j2i_to_j2i_carry\fP(const struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP, struct libj2_j2i *\fIr\fP, int *\fIc\fP);
+
 void \fBlibj2_j2u_add_j2u\fP(struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP);
 void \fBlibj2_j2u_add_j2u_to_j2u\fP(const struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP, struct libj2_j2u *\fIr\fP);
 void \fBlibj2_j2u_add_ju\fP(struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP);
@@ -39,6 +42,9 @@ int \fBlibj2_ju_add_j2u_to_j2u_overflow\fP(uintmax_t \fIa\fP, const struct libj2
 int \fBlibj2_j2u_add_j2u_overflow_p\fP(const struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP);
 int \fBlibj2_j2u_add_ju_overflow_p\fP(const struct libj2_j2u *\fIa\fP, uintmax_t \fIb\fP);
 int \fBlibj2_ju_add_j2u_overflow_p\fP(uintmax_t \fIa\fP, const struct libj2_j2u *\fIb\fP);
+
+void \fBlibj2_j2u_add_j2u_carry\fP(struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP, int *\fIc\fP);
+void \fBlibj2_j2u_add_j2u_to_j2u_carry\fP(const struct libj2_j2u *\fIa\fP, const struct libj2_j2u *\fIb\fP, struct libj2_j2i *\fIr\fP, int *\fIc\fP);
 
 void \fBlibj2_j2i_sat_add_j2i\fP(struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP);
 void \fBlibj2_j2i_sat_add_j2i_to_j2i\fP(const struct libj2_j2i *\fIa\fP, const struct libj2_j2i *\fIb\fP, struct libj2_j2i *\fIr\fP);
@@ -83,6 +89,28 @@ The value-returning functions (that is, those
 with word
 .B overflow
 in their name), detect arithmetic overflow.
+.PP
+The
+.BR libj2_j2i_add_j2i_carry ()
+and
+.BR libj2_j2i_add_j2i_to_j2i_carry ()
+fuctions add
+.IR *c ,
+which must be +1, -1, or 0,
+to the result, and sets
+.I *c
+to +1 on positive overflow,
+-1 on negative overflow, and 0 otherwise.
+.PP
+.BR libj2_j2u_add_j2u_carry ()
+and
+.BR libj2_j2u_add_j2u_to_j2u_carry ()
+fuctions add
+.IR *c ,
+which must be 1 or 0,
+to the result, and sets
+.IR *c
+to 1 on overflow, and 0 otherwise.
 .PP
 The result is truncated to the least significant
 bits, as many as can be stored, in case of overflow;
@@ -154,6 +182,15 @@ The
 and
 .BR libj2_ju_sat_add_j2u_to_j2u ()
 functions were added in version 1.1 of
+.BR libj2 .
+.PP
+The
+.BR libj2_j2i_add_j2i_carry (),
+.BR libj2_j2i_add_j2i_to_j2i_carry (),
+.BR libj2_j2u_add_j2u_carry (),
+and
+.BR libj2_j2u_add_j2u_to_j2u_carry ()
+functions were added in version 1.2 of
 .BR libj2 .
 
 .SH SEE ALSO

@@ -79,7 +79,8 @@ static void
 check(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low)
 {
 	struct libj2_j2i a, a_saved, b, b_saved, r, expected;
-	int expected_overflow;
+	struct libj2_j2i expected_plus_one, expected_minus_one;
+	int expected_overflow, carry;
 
 	a.high = a_high;
 	a.low = a_low;
@@ -97,6 +98,9 @@ check(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low)
 	EXPECT(libj2_j2i_ne_j2i(&expected, &(struct libj2_j2i){111, 222}));
 
 	validate(a.high, a.low, b.high, b.low, expected.high, expected.low, expected_overflow);
+
+	libj2_j2i_add_ji_to_j2i(&expected, +1, &expected_plus_one);
+	libj2_j2i_add_ji_to_j2i(&expected, -1, &expected_minus_one);
 
 	r = a;
 	EXPECT(libj2_j2i_sub_j2i_to_j2i_overflow(CONST_ARG &r, CONST_ARG &b, &r) == expected_overflow);
@@ -226,6 +230,168 @@ check(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low)
 	r = a;
 	libj2_j2i_rsub_j2i(&r, CONST_ARG &r);
 	EXPECT(libj2_j2i_is_zero(&r));
+
+	carry = 0;
+	r = (struct libj2_j2i){111, 222};
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &a, CONST_ARG &b, &r, &carry);
+	EXPECT(carry == expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected));
+
+	carry = 0;
+	r = a;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &r, CONST_ARG &b, &r, &carry);
+	EXPECT(carry == expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected));
+
+	carry = 0;
+	r = b;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &a, CONST_ARG &r, &r, &carry);
+	EXPECT(carry == expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected));
+
+	carry = 0;
+	r = a;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &r, CONST_ARG &r, &r, &carry);
+	EXPECT(carry == 0);
+	EXPECT(libj2_j2i_is_zero(&r));
+
+	carry = 0;
+	r = a;
+	libj2_j2i_sub_j2i_carry(&r, CONST_ARG &b, &carry);
+	EXPECT(carry == expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected));
+
+	carry = 0;
+	r = a;
+	libj2_j2i_sub_j2i_carry(&r, CONST_ARG &r, &carry);
+	EXPECT(carry == 0);
+	EXPECT(libj2_j2i_is_zero(&r));
+
+	carry = 0;
+	r = b;
+	libj2_j2i_rsub_j2i_carry(&r, CONST_ARG &a, &carry);
+	EXPECT(carry == expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected));
+
+	carry = 0;
+	r = a;
+	libj2_j2i_rsub_j2i_carry(&r, CONST_ARG &r, &carry);
+	EXPECT(carry == 0);
+	EXPECT(libj2_j2i_is_zero(&r));
+
+	carry = +1;
+	r = (struct libj2_j2i){111, 222};
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &a, CONST_ARG &b, &r, &carry);
+	EXPECT(carry >= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_plus_one));
+
+	carry = +1;
+	r = a;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &r, CONST_ARG &b, &r, &carry);
+	EXPECT(carry >= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_plus_one));
+
+	carry = +1;
+	r = b;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &a, CONST_ARG &r, &r, &carry);
+	EXPECT(carry >= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_plus_one));
+
+	carry = +1;
+	r = a;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &r, CONST_ARG &r, &r, &carry);
+	EXPECT(carry >= 0);
+	EXPECT(libj2_j2i_eq_ji(&r, +1));
+
+	carry = +1;
+	r = a;
+	libj2_j2i_sub_j2i_carry(&r, CONST_ARG &b, &carry);
+	EXPECT(carry >= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_plus_one));
+
+	carry = +1;
+	r = a;
+	libj2_j2i_sub_j2i_carry(&r, CONST_ARG &r, &carry);
+	EXPECT(carry >= 0);
+	EXPECT(libj2_j2i_eq_ji(&r, +1));
+
+	carry = +1;
+	r = b;
+	libj2_j2i_rsub_j2i_carry(&r, CONST_ARG &a, &carry);
+	EXPECT(carry >= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_plus_one));
+
+	carry = +1;
+	r = a;
+	libj2_j2i_rsub_j2i_carry(&r, CONST_ARG &r, &carry);
+	EXPECT(carry >= 0);
+	EXPECT(libj2_j2i_eq_ji(&r, +1));
+
+	carry = -1;
+	r = (struct libj2_j2i){111, 222};
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &a, CONST_ARG &b, &r, &carry);
+	EXPECT(carry <= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_minus_one));
+
+	carry = -1;
+	r = a;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &r, CONST_ARG &b, &r, &carry);
+	EXPECT(carry <= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_minus_one));
+
+	carry = -1;
+	r = b;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &a, CONST_ARG &r, &r, &carry);
+	EXPECT(carry <= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_minus_one));
+
+	carry = -1;
+	r = a;
+	libj2_j2i_sub_j2i_to_j2i_carry(CONST_ARG &r, CONST_ARG &r, &r, &carry);
+	EXPECT(carry <= 0);
+	EXPECT(libj2_j2i_eq_ji(&r, -1));
+
+	carry = -1;
+	r = a;
+	libj2_j2i_sub_j2i_carry(&r, CONST_ARG &b, &carry);
+	EXPECT(carry <= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&b, &b_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_minus_one));
+
+	carry = -1;
+	r = a;
+	libj2_j2i_sub_j2i_carry(&r, CONST_ARG &r, &carry);
+	EXPECT(carry <= 0);
+	EXPECT(libj2_j2i_eq_ji(&r, -1));
+
+	carry = -1;
+	r = b;
+	libj2_j2i_rsub_j2i_carry(&r, CONST_ARG &a, &carry);
+	EXPECT(carry <= expected_overflow);
+	EXPECT(libj2_j2i_eq_j2i(&a, &a_saved));
+	EXPECT(libj2_j2i_eq_j2i(&r, &expected_minus_one));
+
+	carry = -1;
+	r = a;
+	libj2_j2i_rsub_j2i_carry(&r, CONST_ARG &r, &carry);
+	EXPECT(carry <= 0);
+	EXPECT(libj2_j2i_eq_ji(&r, -1));
 }
 
 
@@ -234,6 +400,8 @@ main(void)
 {
 	uintmax_t a, b, c, d, max, min, umax, vs[12];
 	unsigned i, ii, iii, iv, k, j;
+	struct libj2_j2i u, v;
+	int carry;
 
 	srand((unsigned)time(NULL));
 
@@ -289,6 +457,38 @@ main(void)
 			}
 		}
 	}
+
+	carry = +1;
+	libj2_j2i_max(&u);
+	libj2_j2i_zero(&v);
+	libj2_j2i_sub_j2i_to_j2i_carry(&u, &v, &u, &carry);
+	EXPECT(carry == +1);
+	EXPECT(libj2_j2i_is_min(&u));
+	EXPECT(libj2_j2i_is_zero(&v));
+
+	carry = +1;
+	libj2_j2i_max(&u);
+	libj2_j2i_zero(&v);
+	libj2_j2i_sub_j2i_carry(&u, &v, &carry);
+	EXPECT(carry == +1);
+	EXPECT(libj2_j2i_is_min(&u));
+	EXPECT(libj2_j2i_is_zero(&v));
+
+	carry = -1;
+	libj2_j2i_min(&u);
+	libj2_j2i_zero(&v);
+	libj2_j2i_sub_j2i_to_j2i_carry(&u, &v, &u, &carry);
+	EXPECT(carry == -1);
+	EXPECT(libj2_j2i_is_max(&u));
+	EXPECT(libj2_j2i_is_zero(&v));
+
+	carry = -1;
+	libj2_j2i_min(&u);
+	libj2_j2i_zero(&v);
+	libj2_j2i_sub_j2i_carry(&u, &v, &carry);
+	EXPECT(carry == -1);
+	EXPECT(libj2_j2i_is_max(&u));
+	EXPECT(libj2_j2i_is_zero(&v));
 
 	return 0;
 }

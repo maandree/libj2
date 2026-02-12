@@ -11,7 +11,7 @@ include mk/$(OS).mk
 
 
 LIB_MAJOR = 1
-LIB_MINOR = 1
+LIB_MINOR = 2
 LIB_VERSION = $(LIB_MAJOR).$(LIB_MINOR)
 LIB_NAME = j2
 
@@ -526,7 +526,22 @@ OBJ =\
 	libj2_j2i_sat_mul_j2i_to_j2i.o\
 	libj2_j2i_sat_mul_ji.o\
 	libj2_j2i_sat_mul_ji_to_j2i.o\
-	libj2_ji_sat_mul_j2i_to_j2i.o
+	libj2_ji_sat_mul_j2i_to_j2i.o\
+	libj2_j2u_add_j2u_to_j2u_carry.o\
+	libj2_j2u_add_j2u_carry.o\
+	libj2_j2i_add_j2i_to_j2i_carry.o\
+	libj2_j2i_add_j2i_carry.o\
+	libj2_j2u_sub_j2u_to_j2u_borrow.o\
+	libj2_j2u_sub_j2u_borrow.o\
+	libj2_j2u_rsub_j2u_borrow.o\
+	libj2_j2i_sub_j2i_to_j2i_carry.o\
+	libj2_j2i_sub_j2i_carry.o\
+	libj2_j2i_rsub_j2i_carry.o\
+	libj2_j2u_abs_diff_j2u_to_j2u.o\
+	libj2_j2u_abs_diff_j2u.o\
+	libj2_j2i_abs_diff_j2i_to_j2u.o\
+	libj2_ji_abs_diff_ju_to_j2u.o\
+	libj2_ju_abs_diff_ji_to_j2u.o
 
 SUBHDR =\
 	libj2/constants.h\

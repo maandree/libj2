@@ -23,11 +23,14 @@ static void
 check_(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low,
        uintmax_t r_high, uintmax_t r_low, int r_overflow)
 {
-	struct libj2_j2u a, b, r, a_saved, b_saved, expected;
+	struct libj2_j2u a, b, r, a_saved, b_saved, expected, expected_minus_one;
+	int borrow;
 
 	a_saved = (struct libj2_j2u){.high = a_high, .low = a_low};
 	b_saved = (struct libj2_j2u){.high = b_high, .low = b_low};
 	expected = (struct libj2_j2u){.high = r_high, .low = r_low};
+
+	libj2_j2u_sub_ju_to_j2u(&expected, 1, &expected_minus_one);
 
 	a = a_saved;
 	b = b_saved;
@@ -136,6 +139,90 @@ check_(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low,
 	EXPECT(libj2_j2u_rsub_j2u_overflow_p(&b, &a) == r_overflow);
 	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
 	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 0;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_borrow(&a, &b, &borrow);
+	EXPECT(borrow == r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&a, &expected));
+	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
+
+	borrow = 0;
+	r = (struct libj2_j2u){111, 222};
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &r, &borrow);
+	EXPECT(borrow == r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&r, &expected));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
+
+	borrow = 0;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &a, &borrow);
+	EXPECT(borrow == r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&a, &expected));
+	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
+
+	borrow = 0;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &b, &borrow);
+	EXPECT(borrow == r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&b, &expected));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 0;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_rsub_j2u_borrow(&b, &a, &borrow);
+	EXPECT(borrow == r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&b, &expected));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 1;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_borrow(&a, &b, &borrow);
+	EXPECT(borrow >= r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&a, &expected_minus_one));
+	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
+
+	borrow = 1;
+	r = (struct libj2_j2u){111, 222};
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &r, &borrow);
+	EXPECT(borrow >= r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&r, &expected_minus_one));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
+
+	borrow = 1;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &a, &borrow);
+	EXPECT(borrow >= r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&a, &expected_minus_one));
+	EXPECT(libj2_j2u_eq_j2u(&b, &b_saved));
+
+	borrow = 1;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &b, &borrow);
+	EXPECT(borrow >= r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&b, &expected_minus_one));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 1;
+	a = a_saved;
+	b = b_saved;
+	libj2_j2u_rsub_j2u_borrow(&b, &a, &borrow);
+	EXPECT(borrow >= r_overflow);
+	EXPECT(libj2_j2u_eq_j2u(&b, &expected_minus_one));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
 }
 
 
@@ -170,6 +257,7 @@ static void
 check_double(uintmax_t high, uintmax_t low)
 {
 	struct libj2_j2u a, a_saved, r;
+	int borrow;
 
 	a_saved = (struct libj2_j2u){.high = high, .low = low};
 
@@ -234,6 +322,58 @@ check_double(uintmax_t high, uintmax_t low)
 	a = a_saved;
 	EXPECT(libj2_j2u_rsub_j2u_overflow_p((const struct libj2_j2u *)&a, (const struct libj2_j2u *)&a) == 0);
 	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 0;
+	a = a_saved;
+	libj2_j2u_sub_j2u_borrow(&a, &a, &borrow);
+	EXPECT(borrow == 0);
+	EXPECT(libj2_j2u_is_zero(&a));
+
+	borrow = 0;
+	r = (struct libj2_j2u){111, 222};
+	a = a_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &a, &r, &borrow);
+	EXPECT(borrow == 0);
+	EXPECT(libj2_j2u_is_zero(&r));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 0;
+	a = a_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &a, &a, &borrow);
+	EXPECT(borrow == 0);
+	EXPECT(libj2_j2u_is_zero(&a));
+
+	borrow = 0;
+	a = a_saved;
+	libj2_j2u_rsub_j2u_borrow(&a, &a, &borrow);
+	EXPECT(borrow == 0);
+	EXPECT(libj2_j2u_is_zero(&a));
+
+	borrow = 1;
+	a = a_saved;
+	libj2_j2u_sub_j2u_borrow(&a, &a, &borrow);
+	EXPECT(borrow == 1);
+	EXPECT(libj2_j2u_is_max(&a));
+
+	borrow = 1;
+	r = (struct libj2_j2u){111, 222};
+	a = a_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &a, &r, &borrow);
+	EXPECT(borrow == 1);
+	EXPECT(libj2_j2u_is_max(&r));
+	EXPECT(libj2_j2u_eq_j2u(&a, &a_saved));
+
+	borrow = 1;
+	a = a_saved;
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &a, &a, &borrow);
+	EXPECT(borrow == 1);
+	EXPECT(libj2_j2u_is_max(&a));
+
+	borrow = 1;
+	a = a_saved;
+	libj2_j2u_rsub_j2u_borrow(&a, &a, &borrow);
+	EXPECT(borrow == 1);
+	EXPECT(libj2_j2u_is_max(&a));
 }
 
 
@@ -241,6 +381,8 @@ int
 main(void)
 {
 	unsigned i;
+	struct libj2_j2u a, b;
+	int borrow;
 
 	srand((unsigned)time(NULL));
 
@@ -271,6 +413,22 @@ main(void)
 		check_double(random_ju(), random_ju());
 		check_double(UINTMAX_MAX, random_ju());
 	}
+
+	borrow = 1;
+	libj2_j2u_min(&a);
+	libj2_j2u_zero(&b);
+	libj2_j2u_sub_j2u_to_j2u_borrow(&a, &b, &a, &borrow);
+	EXPECT(borrow == 1);
+	EXPECT(libj2_j2u_is_max(&a));
+	EXPECT(libj2_j2u_is_zero(&b));
+
+	borrow = 1;
+	libj2_j2u_min(&a);
+	libj2_j2u_zero(&b);
+	libj2_j2u_sub_j2u_borrow(&a, &b, &borrow);
+	EXPECT(borrow == 1);
+	EXPECT(libj2_j2u_is_max(&a));
+	EXPECT(libj2_j2u_is_zero(&b));
 
 	return 0;
 }

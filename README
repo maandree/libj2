@@ -361,6 +361,10 @@ DESCRIPTION
 	libj2_j2u_add_ju_overflow_p(3), libj2_ju_add_j2u_overflow_p(3)
 		Predict whether adding two values will result in an overflow.
 
+	libj2_j2i_add_j2i_carry(3), libj2_j2i_add_j2i_to_j2i_carry(3),
+	libj2_j2u_add_j2u_carry(3), libj2_j2u_add_j2u_to_j2u_carry(3)
+		Calculate the sum of two values; with overflow carray-over.
+
 	libj2_j2i_sat_add_j2i(3), libj2_j2i_sat_add_j2i_to_j2i(3),
 	libj2_j2i_sat_add_ji(3), libj2_j2i_sat_add_ji_to_j2i(3),
 	libj2_ji_sat_add_j2i_to_j2i(3), libj2_j2u_sat_add_j2u(3),
@@ -406,6 +410,16 @@ DESCRIPTION
 		Predict whether subtracting a value will result in an overflow.
 		These functions swap the position of the two operands.
 
+	libj2_j2i_sub_j2i_carry(3), libj2_j2i_sub_j2i_to_j2i_carry(3),
+	libj2_j2u_sub_j2u_borrow(3), libj2_j2u_sub_j2u_to_j2u_borrow(3)
+		Calculate the difference between two values; with
+		overflow carry-over.
+
+	libj2_j2i_rsub_j2i_carry(3), libj2_j2u_rsub_j2u_borrow(3)
+		Calculate the difference between two values; with
+		overflow carry-over. These functions swap the position
+		of the two operands.
+
 	libj2_j2i_sat_sub_j2i(3), libj2_j2i_sat_sub_j2i_to_j2i(3),
 	libj2_j2i_sat_sub_ji(3), libj2_j2i_sat_sub_ji_to_j2i(3),
 	libj2_ji_sat_sub_j2i_to_j2i(3), libj2_j2u_sat_sub_j2u(3),
@@ -419,6 +433,11 @@ DESCRIPTION
 	libj2_j2u_sat_rsub_j2u(3), libj2_j2u_sat_rsub_ju(3)
 		Calculate the difference between two values, but saturate on
 		overflow. These functions swap the position of the two operands.
+
+	libj2_j2i_abs_diff_j2i_to_j2u(3), libj2_j2u_abs_diff_j2u(3),
+	libj2_j2u_abs_diff_j2u_to_j2u(3), libj2_ju_abs_diff_ji_to_j2u(3),
+	libj2_ji_abs_diff_ju_to_j2u(3)
+		Calculate the absolute difference between two values.
 
 	libj2_j2i_mul_j2i(3), libj2_j2i_mul_j2i_to_j2i(3),
 	libj2_j2i_mul_ji(3), libj2_j2i_mul_ji_to_j2i(3),
