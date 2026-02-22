@@ -83,7 +83,7 @@ struct libj2_j2u {
  * libj2 does not implement bitwise operations,
  * bit-scanning, or bit-rotation operations
  * for this type, but a `struct libj2_j2i *`
- * can safetly be casted to `struct libj2_j2u *`
+ * can safely be cast to `struct libj2_j2u *`
  * for such operators as well as the for
  * unsigned bit shifting operations
  * 
@@ -110,7 +110,7 @@ struct libj2_j2i {
 /**
  * Arithmetic overflow prediction result
  * 
- * Use by some functions for which prediction
+ * Used by some functions for which prediction
  * is costly in edge cases, and thus stopped
  * as soon as such an edge case is detected
  * 
@@ -120,12 +120,12 @@ struct libj2_j2i {
  */
 enum libj2_overflow {
 	/**
-	 * Where will not be an overflow
+	 * There will be no overflow
 	 */
 	LIBJ2_NO_OVERFLOW = 0,
 
 	/**
-	 * Where will be a positive overflow
+	 * There will be a positive overflow
 	 */
 	LIBJ2_POSITIVE_OVERFLOW = 1,
 #define LIBJ2_OVERFLOW LIBJ2_POSITIVE_OVERFLOW
@@ -139,7 +139,7 @@ enum libj2_overflow {
 #define LIBJ2_OVERFLOW_UNKNOWN LIBJ2_POSITIVE_OVERFLOW_UNKNOWN
 
 	/**
-	 * Where will be a positive overflow
+	 * There will be a negative overflow
 	 */
 	LIBJ2_NEGATIVE_OVERFLOW = -1,
 
