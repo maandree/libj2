@@ -699,8 +699,11 @@ libj2_max_j2i_return(const struct libj2_j2i *a, ... /*, NULL */)
 inline void
 libj2_vmax_j2i_to_j2i(const struct libj2_j2i *a, va_list args)
 {
+	const struct libj2_j2i *b;
 	struct libj2_j2i *res;
-	a = libj2_vmax_j2i_return(a, args);
+	while ((b = va_arg(args, const struct libj2_j2i *)))
+		if (libj2_j2i_gt_j2i(b, a))
+			a = b;
 	res = va_arg(args, struct libj2_j2i *);
 	*res = *a;
 }
@@ -829,8 +832,11 @@ libj2_min_j2i_return(const struct libj2_j2i *a, ... /*, NULL */)
 inline void
 libj2_vmin_j2i_to_j2i(const struct libj2_j2i *a, va_list args)
 {
+	const struct libj2_j2i *b;
 	struct libj2_j2i *res;
-	a = libj2_vmin_j2i_return(a, args);
+	while ((b = va_arg(args, const struct libj2_j2i *)))
+		if (libj2_j2i_lt_j2i(b, a))
+			a = b;
 	res = va_arg(args, struct libj2_j2i *);
 	*res = *a;
 }
