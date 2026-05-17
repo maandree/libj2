@@ -65,7 +65,7 @@ self_check(uintmax_t a_high, uintmax_t a_low, uintmax_t b_high, uintmax_t b_low,
 static void
 check(uintmax_t a_high, uintmax_t a_low, uintmax_t ub)
 {
-	intmax_t b = ub > (uintmax_t)INTMAX_MAX ? (intmax_t)ub : -(intmax_t)~ub - 1;
+	intmax_t b = ub > (uintmax_t)INTMAX_MAX ? -(intmax_t)~ub - 1 : (intmax_t)ub;
 	struct libj2_j2i a, r;
 	uintmax_t expected_high, expected_low;
 	int expected_overflow;

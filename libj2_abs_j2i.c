@@ -88,7 +88,7 @@ check_min(void)
 	const uintmax_t high = ~(UINTMAX_MAX >> 1);
 	const uintmax_t low = 0;
 	struct libj2_j2i a, r;
-	struct libj2_j2u u;
+	struct libj2_j2u u, v;
 
 	a.high = high;
 	a.low = low;
@@ -110,7 +110,8 @@ check_min(void)
 	libj2_abs_j2i_to_j2u((const struct libj2_j2i *)&a, &u);
 	EXPECT(a.high == high);
 	EXPECT(a.low == low);
-	EXPECT(libj2_j2u_eq_j2u((const void *)&a, &u));
+	libj2_j2i_to_j2u(&a, &v);
+	EXPECT(libj2_j2u_eq_j2u(&v, &u));
 
 	a.high = high;
 	a.low = low;

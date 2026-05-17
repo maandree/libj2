@@ -600,19 +600,19 @@ $(TOBJ): $(HDR)
 $(TEST): libj2.a
 
 .c.o:
-	$(CC) -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) $(COV_CFLAGS) $(CPPFLAGS) $(COV_CPPFLAGS)
 
 .c.to:
-	$(CC) -c -o $@ $< -DTEST $(CFLAGS) $(CPPFLAGS)
+	$(CC) -c -o $@ $< -DTEST $(CFLAGS) $(CPPFLAGS) $(COV_CPPFLAGS)
 
 .to.t:
-	$(CC) -o $@ $< libj2.a $(LDFLAGS)
+	$(CC) -o $@ $< libj2.a $(LDFLAGS) $(COV_LDFLAGS)
 
 .c.t:
-	$(CC) -o $@ $< libj2.a -DTEST $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+	$(CC) -o $@ $< libj2.a -DTEST $(CFLAGS) $(CPPFLAGS) $(COV_CPPFLAGS) $(LDFLAGS) $(COV_LDFLAGS)
 
 .c.lo:
-	$(CC) -fPIC -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
+	$(CC) -fPIC -c -o $@ $< $(CFLAGS) $(COV_CFLAGS) $(CPPFLAGS) $(COV_CPPFLAGS)
 
 libj2.a: $(OBJ)
 	@rm -f -- $@

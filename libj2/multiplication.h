@@ -667,18 +667,24 @@ libj2_ju_mul_j2u_to_j2u_overflow_p(uintmax_t a, const struct libj2_j2u *b, struc
 inline int
 libj2_j2i_mul_j2i_overflow(struct libj2_j2i *a, const struct libj2_j2i *b)
 {
-	struct libj2_j2u t;
+	struct libj2_j2u u, v;
 	int overflow, neg = libj2_j2i_is_negative(a);
 	if (neg)
 		libj2_minus_j2i(a);
+	libj2_j2i_to_j2u(a, &u);
 	if (a == b) {
 		neg = 0;
-	} else if (libj2_j2i_is_negative(b)) {
-		neg ^= 1;
-		libj2_minus_j2i_to_j2u(b, &t);
-		b = (const void *)&t;
+		overflow = libj2_j2u_mul_j2u_overflow(&u, &u);
+	} else {
+		if (libj2_j2i_is_negative(b)) {
+			neg ^= 1;
+			libj2_minus_j2i_to_j2u(b, &v);
+		} else {
+			libj2_j2i_to_j2u(b, &v);
+		}
+		overflow = libj2_j2u_mul_j2u_overflow(&u, &v);
 	}
-	overflow = libj2_j2u_mul_j2u_overflow((void *)a, (const void *)b);
+	libj2_j2u_to_j2i(&u, a);
 	if (neg) {
 		if (overflow)
 			overflow = -overflow;
@@ -823,7 +829,11 @@ inline void
 libj2_ji_mul_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
 {
 	int neg = (a < 0) ^ (b < 0);
-	libj2_ju_mul_ju_to_j2u((uintmax_t)(a < 0 ? -a : a), (uintmax_t)(b < 0 ? -b : b), (void *)res);
+	uintmax_t u = a < 0 ? (uintmax_t)-(a + 1) + 1U : (uintmax_t)a;
+	uintmax_t v = b < 0 ? (uintmax_t)-(b + 1) + 1U : (uintmax_t)b;
+	struct libj2_j2u r;
+	libj2_ju_mul_ju_to_j2u(u, v, &r);
+	libj2_j2u_to_j2i(&r, res);
 	if (neg)
 		libj2_minus_j2i(res);
 }
@@ -847,13 +857,19 @@ inline void
 libj2_j2i_mul_ji(struct libj2_j2i *a, intmax_t b)
 {
 	int neg = libj2_j2i_is_negative(a);
+	struct libj2_j2u u;
+	uintmax_t v;
 	if (neg)
 		libj2_minus_j2i(a);
 	if (b < 0) {
 		neg ^= 1;
-		b = -b;
+		v = (uintmax_t)-(b + 1) + 1U;
+	} else {
+		v = (uintmax_t)b;
 	}
-	libj2_j2u_mul_ju((void *)a, (uintmax_t)b);
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_mul_ju(&u, v);
+	libj2_j2u_to_j2i(&u, a);
 	if (neg)
 		libj2_minus_j2i(a);
 }
@@ -1000,18 +1016,24 @@ libj2_ji_mul_j2i_to_j2i_overflow(intmax_t a, const struct libj2_j2i *b, struct l
 inline void
 libj2_j2i_mul_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
 {
-	struct libj2_j2u t;
+	struct libj2_j2u u, v;
 	int neg = libj2_j2i_is_negative(a);
 	if (neg)
 		libj2_minus_j2i(a);
+	libj2_j2i_to_j2u(a, &u);
 	if (a == b) {
 		neg = 0;
-	} else if (libj2_j2i_is_negative(b)) {
-		neg ^= 1;
-		libj2_minus_j2i_to_j2u(b, &t);
-		b = (const void *)&t;
+		libj2_j2u_mul_j2u(&u, &u);
+	} else {
+		if (libj2_j2i_is_negative(b)) {
+			neg ^= 1;
+			libj2_minus_j2i_to_j2u(b, &v);
+		} else {
+			libj2_j2i_to_j2u(b, &v);
+		}
+		libj2_j2u_mul_j2u(&u, &v);
 	}
-	libj2_j2u_mul_j2u((void *)a, (const void *)b);
+	libj2_j2u_to_j2i(&u, a);
 	if (neg)
 		libj2_minus_j2i(a);
 }
@@ -1040,12 +1062,15 @@ libj2_j2i_mul_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, s
 		b = a;
 		goto common;
 	} else if (a == b) {
+		struct libj2_j2u u, r;
 		if (libj2_j2i_is_negative(a)) {
-			libj2_minus_j2i_to_j2u(a, (void *)res);
-			libj2_j2u_mul_j2u((void *)res, (const void *)res);
+			libj2_minus_j2i_to_j2u(a, &r);
+			libj2_j2u_mul_j2u(&r, &r);
 		} else {
-			libj2_j2u_mul_j2u_to_j2u((const void *)a, (const void *)b, (void *)res);
+			libj2_j2i_to_j2u(a, &u);
+			libj2_j2u_mul_j2u_to_j2u(&u, &u, &r);
 		}
+		libj2_j2u_to_j2i(&r, res);
 	} else {
 		*res = *a;
 		goto common;

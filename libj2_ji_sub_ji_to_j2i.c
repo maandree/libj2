@@ -25,7 +25,7 @@ check(uintmax_t ua, uintmax_t ub)
 	intmax_t a = ua >> (LIBJ2_JU_BIT - 1U) ? -(intmax_t)~ua - 1 : (intmax_t)ua;
 	intmax_t b = ub >> (LIBJ2_JU_BIT - 1U) ? -(intmax_t)~ub - 1 : (intmax_t)ub;
 	struct libj2_j2i r, expected;
-	struct libj2_j2u wa, wb;
+	struct libj2_j2u wa, wb, ue;
 
 #if INTMAX_MIN + 1 != -INTMAX_MAX
 	if (ua == (UINTMAX >> 1) + 1U || ub == (UINTMAX >> 1) + 1U)
@@ -39,7 +39,8 @@ check(uintmax_t ua, uintmax_t ub)
 	wb.high = b < 0 ? UINTMAX_MAX : 0;
 
 	libj2_minus_j2u(&wb);
-	libj2_j2u_add_j2u_to_j2u(&wa, &wb, (void *)&expected);
+	libj2_j2u_add_j2u_to_j2u(&wa, &wb, &ue);
+	libj2_j2u_to_j2i(&ue, &expected);
 	libj2_ji_sub_ji_to_j2i(a, b, &r);
 	EXPECT(libj2_j2i_eq_j2i(&r, &expected));
 }

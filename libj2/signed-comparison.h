@@ -25,7 +25,7 @@ libj2_j2i_cmp_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b)
 	int cmp = libj2_sgn_j2i(a) - libj2_sgn_j2i(b);
 	if (cmp)
 		return cmp < 0 ? -1 : +1;
-	return libj2_j2u_cmp_j2u((const void *)a, (const void *)b);
+	return a->high < b->high ? -1 : a->high > b->high ? +1 : a->low < b->low ? -1 : a->low > b->low;
 }
 
 
@@ -120,7 +120,7 @@ libj2_j2i_ge_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_j2i_eq_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b)
 {
-	return libj2_j2u_eq_j2u((const void *)a, (const void *)b);
+	return a->high == b->high && a->low == b->low; 
 }
 
 
@@ -139,7 +139,7 @@ libj2_j2i_eq_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b)
 LIBJ2_PURE_ inline int
 libj2_j2i_ne_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b)
 {
-	return libj2_j2u_ne_j2u((const void *)a, (const void *)b);
+	return a->high != b->high || a->low != b->low;
 }
 
 

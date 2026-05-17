@@ -349,7 +349,7 @@ libj2_j2u_div_j2u_to_j2u(const struct libj2_j2u *a, const struct libj2_j2u *b, s
  * 
  * @since  1.0
  */
-inline uintmax_t
+LIBJ2_PURE_ inline uintmax_t
 libj2_j2u_div_j2u_return(const struct libj2_j2u *a, const struct libj2_j2u *b)
 {
 	struct libj2_j2u c = *a;
@@ -441,7 +441,7 @@ libj2_j2u_div_ju_to_j2u(const struct libj2_j2u *a, uintmax_t b, struct libj2_j2u
  * 
  * @since  1.0
  */
-inline uintmax_t
+LIBJ2_PURE_ inline uintmax_t
 libj2_j2u_div_ju_return(const struct libj2_j2u *a, uintmax_t b)
 {
 	struct libj2_j2u c = *a;
@@ -733,14 +733,17 @@ libj2_j2i_divmod_j2i_to_j2i(struct libj2_j2i *a, const struct libj2_j2i *b, stru
 {
 	int a_neg = libj2_j2i_is_negative(a);
 	int b_neg = libj2_j2i_is_negative(b);
-	struct libj2_j2u u;
+	struct libj2_j2u u, v, rq;
 	if (b_neg)
-		libj2_minus_j2i_to_j2u(b, &u);
+		libj2_minus_j2i_to_j2u(b, &v);
 	else
-		libj2_j2i_to_j2u(b, &u);
+		libj2_j2i_to_j2u(b, &v);
 	if (a_neg)
 		libj2_minus_j2i(a);
-	libj2_j2u_divmod_j2u_to_j2u((void *)a, &u, (void *)res_q);
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_divmod_j2u_to_j2u(&u, &v, &rq);
+	libj2_j2u_to_j2i(&u, a);
+	libj2_j2u_to_j2i(&rq, res_q);
 	if (a_neg)
 		libj2_minus_j2i(a);
 	if (a_neg != b_neg)
@@ -851,14 +854,17 @@ inline intmax_t
 libj2_j2i_divmod_ji(struct libj2_j2i *a, intmax_t b)
 {
 	int a_neg = libj2_j2i_is_negative(a);
-	uintmax_t u, q;
+	struct libj2_j2u u;
+	uintmax_t v, q;
 	if (a_neg)
 		libj2_minus_j2i(a);
 	if (b < 0)
-		u = (uintmax_t)-(b + 1) + 1U;
+		v = (uintmax_t)-(b + 1) + 1U;
 	else
-		u = (uintmax_t)b;
-	q = libj2_j2u_divmod_ju((void *)a, u);
+		v = (uintmax_t)b;
+	libj2_j2i_to_j2u(a, &u);
+	q = libj2_j2u_divmod_ju(&u, v);
+	libj2_j2u_to_j2i(&u, a);
 	if (a_neg)
 		libj2_minus_j2i(a);
 	return a_neg != (b < 0) ? -(intmax_t)q : (intmax_t)q;
@@ -891,15 +897,18 @@ inline void
 libj2_j2i_divmod_ji_to_j2i(struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res_q)
 {
 	int a_neg = libj2_j2i_is_negative(a);
-	uintmax_t u;
+	struct libj2_j2u u;
+	uintmax_t v;
 	if (a_neg)
 		libj2_minus_j2i(a);
 	if (b < 0)
-		u = (uintmax_t)-(b + 1) + 1U;
+		v = (uintmax_t)-(b + 1) + 1U;
 	else
-		u = (uintmax_t)b;
-	res_q->high = a->high / u;
-	res_q->low = libj2_j2u_divmod_ju((void *)a, u);
+		v = (uintmax_t)b;
+	libj2_j2i_to_j2u(a, &u);
+	res_q->high = a->high / v;
+	res_q->low = libj2_j2u_divmod_ju(&u, v);
+	libj2_j2u_to_j2i(&u, a);
 	if (a_neg)
 		libj2_minus_j2i(a);
 	if (a_neg != (b < 0))
@@ -933,17 +942,19 @@ inline void
 libj2_j2i_divmod_ji_to_j2i_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res_q, struct libj2_j2i *res_r)
 {
 	int a_neg = libj2_j2i_is_negative(a);
+	struct libj2_j2u rr;
 	uintmax_t u;
 	if (a_neg)
-		libj2_minus_j2i_to_j2u(a, (void *)res_r);
+		libj2_minus_j2i_to_j2u(a, &rr);
 	else
-		*res_r = *a;
+		libj2_j2i_to_j2u(a, &rr);
 	if (b < 0)
 		u = (uintmax_t)-(b + 1) + 1U;
 	else
 		u = (uintmax_t)b;
-	res_q->high = res_r->high / u;
-	res_q->low = libj2_j2u_divmod_ju((void *)res_r, u);
+	res_q->high = rr.high / u;
+	res_q->low = libj2_j2u_divmod_ju(&rr, u);
+	libj2_j2u_to_j2i(&rr, res_r);
 	if (a_neg)
 		libj2_minus_j2i(res_r);
 	if (a_neg != (b < 0))
@@ -1088,7 +1099,7 @@ libj2_j2i_div_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, s
  * 
  * @since  1.1
  */
-inline intmax_t
+LIBJ2_PURE_ inline intmax_t
 libj2_j2i_div_j2i_return(const struct libj2_j2i *a, const struct libj2_j2i *b)
 {
 	struct libj2_j2i c = *a;
@@ -1188,7 +1199,7 @@ libj2_j2i_div_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i 
  * 
  * @since  1.1
  */
-inline intmax_t
+LIBJ2_PURE_ inline intmax_t
 libj2_j2i_div_ji_return(const struct libj2_j2i *a, intmax_t b)
 {
 	struct libj2_j2i c = *a;
@@ -1287,14 +1298,17 @@ inline void
 libj2_j2i_mod_ji(struct libj2_j2i *a, intmax_t b)
 {
 	int a_neg = libj2_j2i_is_negative(a);
-	uintmax_t u;
+	struct libj2_j2u u;
+	uintmax_t v;
 	if (a_neg)
 		libj2_minus_j2i(a);
 	if (b < 0)
-		u = (uintmax_t)-(b + 1) + 1U;
+		v = (uintmax_t)-(b + 1) + 1U;
 	else
-		u = (uintmax_t)b;
-	libj2_j2u_mod_ju((void *)a, u);
+		v = (uintmax_t)b;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_mod_ju(&u, v);
+	libj2_j2u_to_j2i(&u, a);
 	if (a_neg)
 		libj2_minus_j2i(a);
 }

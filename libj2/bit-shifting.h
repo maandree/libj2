@@ -748,7 +748,10 @@ libj2_ju_rsh_underflow_p(uintmax_t a, unsigned b)
 inline void
 libj2_j2i_lsh(struct libj2_j2i *a, unsigned b)
 {
-	libj2_j2u_lsh((void *)a, b);
+	struct libj2_j2u u;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_lsh(&u, b);
+	libj2_j2u_to_j2i(&u, a);
 }
 
 
@@ -774,7 +777,10 @@ libj2_j2i_lsh(struct libj2_j2i *a, unsigned b)
 inline void
 libj2_j2i_lsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
 {
-	libj2_j2u_lsh_to_j2u((const void *)a, b, (void *)res);
+	struct libj2_j2u u, r;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_lsh_to_j2u(&u, b, &r);
+	libj2_j2u_to_j2i(&r, res);
 }
 
 
@@ -1037,8 +1043,11 @@ libj2_ji_lsh_to_j2i_overflow(intmax_t a, unsigned b, struct libj2_j2i *res)
 inline void
 libj2_j2i_rsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
 {
+	struct libj2_j2u u, r;
 	if (!libj2_j2i_is_negative(a)) {
-		libj2_j2u_rsh_to_j2u((const void *)a, b, (void *)res);
+		libj2_j2i_to_j2u(a, &u);
+		libj2_j2u_rsh_to_j2u(&u, b, &r);
+		libj2_j2u_to_j2i(&r, res);
 	} else if (b >= LIBJ2_J2U_BIT) {
 		res->high = UINTMAX_MAX;
 		res->low = UINTMAX_MAX;
@@ -1052,7 +1061,9 @@ libj2_j2i_rsh_to_j2i(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *re
 		res->low >>= b;
 		res->low |= UINTMAX_MAX << (LIBJ2_JU_BIT - b);
 	} else if (b) {
-		libj2_j2u_rsh_to_j2u((const void *)a, b, (void *)res);
+		libj2_j2i_to_j2u(a, &u);
+		libj2_j2u_rsh_to_j2u(&u, b, &r);
+		libj2_j2u_to_j2i(&r, res);
 		res->high |= UINTMAX_MAX << (LIBJ2_JU_BIT - b);
 	} else {
 		*res = *a;
@@ -1146,14 +1157,20 @@ libj2_ji_rsh_to_j2i(intmax_t a, unsigned b, struct libj2_j2i *res)
 inline int
 libj2_j2i_rsh_to_j2i_underflow(const struct libj2_j2i *a, unsigned b, struct libj2_j2i *res)
 {
+	struct libj2_j2u u, r;
+	libj2_j2i_to_j2u(a, &u);
 	if (libj2_j2i_is_negative(a)) {
 		int underflow;
-		libj2_not_j2u_to_j2u((const void *)a, (void *)res);
-		underflow = libj2_j2u_rsh_underflow((void *)res, b);
-		libj2_not_j2u((void *)res);
+		libj2_not_j2u_to_j2u(&u, &r);
+		underflow = libj2_j2u_rsh_underflow(&r, b);
+		libj2_not_j2u(&r);
+		libj2_j2u_to_j2i(&r, res);
 		return -underflow;
 	} else {
-		return libj2_j2u_rsh_to_j2u_underflow((const void *)a, b, (void *)res);
+		int ret;
+		ret = libj2_j2u_rsh_to_j2u_underflow(&u, b, &r);
+		libj2_j2u_to_j2i(&r, res);
+		return ret;
 	}
 }
 
@@ -1254,12 +1271,12 @@ libj2_ji_rsh_to_j2i_underflow(intmax_t a, unsigned b, struct libj2_j2i *res)
 LIBJ2_PURE_ inline int
 libj2_j2i_rsh_underflow_p(const struct libj2_j2i *a, unsigned b)
 {
+	struct libj2_j2u u = {.high = a->high, .low = a->low};
 	if (libj2_j2i_is_negative(a)) {
-		struct libj2_j2u t;
-		libj2_not_j2u_to_j2u((const void *)a, &t);
-		return -libj2_j2u_rsh_underflow_p(&t, b);
+		libj2_not_j2u(&u);
+		return -libj2_j2u_rsh_underflow_p(&u, b);
 	} else {
-		return libj2_j2u_rsh_underflow_p((const void *)a, b);
+		return libj2_j2u_rsh_underflow_p(&u, b);
 	}
 }
 

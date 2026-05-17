@@ -197,8 +197,10 @@ libj2_j2i_to_str(const struct libj2_j2i *a, char *buf, size_t bufsize, const cha
 	char *sigc;
 	struct libj2_j2u t;
 	size_t r;
-	if (!libj2_j2i_is_negative(a))
-		return libj2_j2u_to_str((const void *)a, buf, bufsize, digits);
+	if (!libj2_j2i_is_negative(a)) {
+		libj2_j2i_to_j2u(a, &t);
+		return libj2_j2u_to_str(&t, buf, bufsize, digits);
+	}
 	libj2_minus_j2i_to_j2u(a, &t);
 	if (bufsize > 1U) {
 		bufsize -= 1U;

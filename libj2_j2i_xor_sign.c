@@ -23,6 +23,7 @@ static void
 check(struct libj2_j2i *a)
 {
 	struct libj2_j2i r, saved, x;
+	struct libj2_j2u u;
 
 	saved = *a;
 
@@ -32,7 +33,8 @@ check(struct libj2_j2i *a)
 	EXPECT(libj2_j2i_eq_j2i(&r, &saved));
 
 	r = (struct libj2_j2i){111, 222};
-	libj2_j2i_xor_sign_to_j2u((const struct libj2_j2i *)a, (struct libj2_j2u *)&r);
+	libj2_j2i_xor_sign_to_j2u((const struct libj2_j2i *)a, &u);
+	libj2_j2u_to_j2i(&u, &r);
 	EXPECT(libj2_j2i_eq_j2i(a, &saved));
 	EXPECT(libj2_j2i_eq_j2i(&r, &saved));
 
@@ -40,7 +42,9 @@ check(struct libj2_j2i *a)
 	libj2_j2i_xor_sign(&r);
 	EXPECT(libj2_j2i_eq_j2i(&r, &saved));
 
-	libj2_not_j2u((void *)a);
+	libj2_j2i_to_j2u(a, &u);
+	libj2_not_j2u(&u);
+	libj2_j2u_to_j2i(&u, a);
 	x = *a;
 
 	r = (struct libj2_j2i){111, 222};
@@ -49,7 +53,8 @@ check(struct libj2_j2i *a)
 	EXPECT(libj2_j2i_eq_j2i(&r, &saved));
 
 	r = (struct libj2_j2i){111, 222};
-	libj2_j2i_xor_sign_to_j2u((const struct libj2_j2i *)a, (struct libj2_j2u *)&r);
+	libj2_j2i_xor_sign_to_j2u((const struct libj2_j2i *)a, &u);
+	libj2_j2u_to_j2i(&u, &r);
 	EXPECT(libj2_j2i_eq_j2i(a, &x));
 	EXPECT(libj2_j2i_eq_j2i(&r, &saved));
 

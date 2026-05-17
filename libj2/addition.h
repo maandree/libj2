@@ -426,15 +426,17 @@ libj2_j2u_add_j2u_overflow_p(const struct libj2_j2u *a, const struct libj2_j2u *
 inline void
 libj2_j2i_add_ji(struct libj2_j2i *a, intmax_t b)
 {
-	struct libj2_j2u u;
+	struct libj2_j2u u, v;
 	if (b < 0) {
-		u.high = UINTMAX_MAX;
-		u.low = ~(uintmax_t)-(b + 1);
+		v.high = UINTMAX_MAX;
+		v.low = ~(uintmax_t)-(b + 1);
 	} else {
-		u.high = 0;
-		u.low = (uintmax_t)b;
+		v.high = 0;
+		v.low = (uintmax_t)b;
 	}
-	libj2_j2u_add_j2u((void *)a, &u);
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_add_j2u(&u, &v);
+	libj2_j2u_to_j2i(&u, a);
 }
 
 
@@ -452,7 +454,11 @@ libj2_j2i_add_ji(struct libj2_j2i *a, intmax_t b)
 inline void
 libj2_j2i_add_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
 {
-	libj2_j2u_add_j2u((void *)a, (const void *)b);
+	struct libj2_j2u u, v;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2i_to_j2u(b, &v);
+	libj2_j2u_add_j2u(&u, &v);
+	libj2_j2u_to_j2i(&u, a);
 }
 
 
@@ -472,15 +478,17 @@ libj2_j2i_add_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
 inline void
 libj2_j2i_add_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *res)
 {
-	struct libj2_j2u u;
+	struct libj2_j2u u, v, r;
 	if (b < 0) {
-		u.high = UINTMAX_MAX;
-		u.low = ~(uintmax_t)-(b + 1);
+		v.high = UINTMAX_MAX;
+		v.low = ~(uintmax_t)-(b + 1);
 	} else {
-		u.high = 0;
-		u.low = (uintmax_t)b;
+		v.high = 0;
+		v.low = (uintmax_t)b;
 	}
-	libj2_j2u_add_j2u_to_j2u((const void *)a, &u, (void *)res);
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2u_add_j2u_to_j2u(&u, &v, &r);
+	libj2_j2u_to_j2i(&r, res);
 }
 
 
@@ -499,7 +507,11 @@ libj2_j2i_add_ji_to_j2i(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i 
 inline void
 libj2_j2i_add_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
 {
-	libj2_j2u_add_j2u_to_j2u((const void *)a, (const void *)b, (void *)res);
+	struct libj2_j2u u, v, r;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2i_to_j2u(b, &v);
+	libj2_j2u_add_j2u_to_j2u(&u, &v, &r);
+	libj2_j2u_to_j2i(&r, res);
 }
 
 
@@ -520,7 +532,7 @@ libj2_j2i_add_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, s
 inline void
 libj2_ji_add_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
 {
-	struct libj2_j2u u, v;
+	struct libj2_j2u u, v, r;
 	if (a < 0) {
 		u.high = UINTMAX_MAX;
 		u.low = ~(uintmax_t)-(a + 1);
@@ -535,7 +547,8 @@ libj2_ji_add_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
 		v.high = 0;
 		v.low = (uintmax_t)b;
 	}
-	libj2_j2u_add_j2u_to_j2u(&u, &v, (void *)res);
+	libj2_j2u_add_j2u_to_j2u(&u, &v, &r);
+	libj2_j2u_to_j2i(&r, res);
 }
 
 

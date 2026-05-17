@@ -90,7 +90,7 @@ int
 main(void)
 {
 	struct libj2_j2i a, b;
-	struct libj2_j2u t;
+	struct libj2_j2u u, v, t;
 	unsigned i, j, k, s;
 	int overflow;
 
@@ -101,29 +101,40 @@ main(void)
 		libj2_j2i_zero(&b);
 		check(&a, j, &b, 0);
 
-		libj2_not_j2u((void *)&a);
-		libj2_not_j2u((void *)&b);
-		libj2_j2u_lsh((void *)&b, j);
+		libj2_j2i_to_j2u(&a, &t);
+		libj2_not_j2u(&t);
+		libj2_j2u_to_j2i(&t, &a);
+		libj2_j2i_to_j2u(&b, &t);
+		libj2_not_j2u(&t);
+		libj2_j2u_lsh(&t, j);
+		libj2_j2u_to_j2i(&t, &b);
 		check(&a, j, &b, j >= LIBJ2_J2I_BIT ? -1 : 0);
 
 		for (i = 0; i < LIBJ2_J2I_BIT; i++) {
 			libj2_j2i_zero(&a);
-			libj2_j2u_or_bit((void *)&a, i);
+			libj2_j2i_to_j2u(&a, &t);
+			libj2_j2u_or_bit(&t, i);
+			libj2_j2u_to_j2i(&t, &a);
 			libj2_j2i_zero(&b);
-			if (i + j < LIBJ2_J2I_BIT)
-				libj2_j2u_or_bit((void *)&b, i + j);
+			if (i + j < LIBJ2_J2I_BIT) {
+				libj2_j2i_to_j2u(&b, &t);
+				libj2_j2u_or_bit(&t, i + j);
+				libj2_j2u_to_j2i(&t, &b);
+			}
 			overflow = i == LIBJ2_J2I_VBIT ? j ? -1 : 0 : i + j < LIBJ2_J2I_VBIT ? 0 : +1;
 			check(&a, j, &b, overflow);
 
-			libj2_j2i_zero(&a);
-			libj2_j2u_or_bit((void *)&a, i);
-			libj2_not_j2u((void *)&a);
-			libj2_j2i_zero(&b);
+			libj2_j2u_zero(&t);
+			libj2_j2u_or_bit(&t, i);
+			libj2_not_j2u(&t);
+			libj2_j2u_to_j2i(&t, &a);
+			libj2_j2u_zero(&t);
 			if (i + j < LIBJ2_J2I_BIT)
-				libj2_j2u_or_bit((void *)&b, i + j);
+				libj2_j2u_or_bit(&t, i + j);
 			for (k = 0; k < j; k++)
-				libj2_j2u_or_bit((void *)&b, k);
-			libj2_not_j2u((void *)&b);
+				libj2_j2u_or_bit(&t, k);
+			libj2_not_j2u(&t);
+			libj2_j2u_to_j2i(&t, &b);
 			overflow = i == LIBJ2_J2I_VBIT ? j ? +1 : 0 : i + j < LIBJ2_J2I_VBIT ? 0 : -1;
 			check(&a, j, &b, overflow);
 		}
@@ -132,24 +143,28 @@ main(void)
 	for (i = 0; i < 32; i++) {
 		for (j = 0; j < LIBJ2_J2I_BIT - 1U; j++) {
 			for (k = 0; k <= LIBJ2_J2I_BIT + 1U; k++) {
-				libj2_j2i_zero(&a);
-				libj2_j2i_zero(&b);
+				libj2_j2u_zero(&u);
+				libj2_j2u_zero(&v);
 				for (s = 0; s <= j; s++) {
 					if (rand() < rand())
 						continue;
-					libj2_j2u_or_bit((void *)&a, s);
-					libj2_j2u_or_bit((void *)&b, s + k);
+					libj2_j2u_or_bit(&u, s);
+					libj2_j2u_or_bit(&v, s + k);
 				}
-				overflow = libj2_co_j2u((const void *)&a) > libj2_co_j2u((const void *)&b);
+				libj2_j2u_to_j2i(&u, &a);
+				libj2_j2u_to_j2i(&v, &b);
+				overflow = libj2_co_j2u(&u) > libj2_co_j2u(&v);
 				overflow |= libj2_j2i_is_negative(&b);
 				check(&a, k, &b, overflow);
 
-				libj2_not_j2u((void *)&a);
-				libj2_not_j2u((void *)&b);
+				libj2_not_j2u(&u);
+				libj2_not_j2u(&v);
 				libj2_ju_lsh_to_j2u(1, k, &t);
 				libj2_j2u_sub_ju(&t, 1);
 				libj2_not_j2u(&t);
-				libj2_j2u_and_j2u((void *)&b, &t);
+				libj2_j2u_and_j2u(&v, &t);
+				libj2_j2u_to_j2i(&u, &a);
+				libj2_j2u_to_j2i(&v, &b);
 				overflow = -overflow;
 				if (a.high == UINTMAX_MAX && a.low == UINTMAX_MAX && k >= LIBJ2_J2I_BIT)
 					overflow = -1;

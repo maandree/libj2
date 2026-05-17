@@ -380,7 +380,7 @@ check(const struct libj2_j2u *a, const struct libj2_j2u *b)
 			v.high = random_ju();
 			v.low = random_ju();
 		} while (!v.high && !v.low);
-		b = &u;
+		b = &v;
 	}
 	check_manual(a, b, NULL, NULL);
 }

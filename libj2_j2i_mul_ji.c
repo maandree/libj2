@@ -102,8 +102,12 @@ mul_(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expe
 
 	t = *a;
 	libj2_j2i_sat_mul_ji(&t, b);
-	EXPECT(expect_overflow > 0 ? libj2_j2i_is_max(&t) :
-	       expect_overflow ? libj2_j2i_is_min(&t) : libj2_j2i_eq_j2i(&t, expected));
+	if (expect_overflow > 0)
+		EXPECT(libj2_j2i_is_max(&t));
+	else if (expect_overflow)
+		EXPECT(libj2_j2i_is_min(&t));
+	else
+		EXPECT(libj2_j2i_eq_j2i(&t, expected));
 
 	t = *a;
 	EXPECT(libj2_j2i_mul_ji_overflow_p((const struct libj2_j2i *)&t, b) == expect_overflow);
@@ -195,7 +199,7 @@ static void
 mul(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expect_overflow)
 {
 	struct libj2_j2i r, neg_a, e;
-	struct libj2_j2u u;
+	struct libj2_j2u u, ue;
 
 	libj2_minus_j2i_to_j2i(a, &neg_a);
 	libj2_j2i_to_j2u(a, &u);
@@ -215,7 +219,8 @@ mul(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expec
 	EXPECT(libj2_j2i_eq_j2i(&r, expected));
 
 
-	expect_overflow = libj2_j2u_mul_ju_to_j2u_overflow(&u, (uintmax_t)b + 1U, (void *)&e);
+	expect_overflow = libj2_j2u_mul_ju_to_j2u_overflow(&u, (uintmax_t)b + 1U, &ue);
+	libj2_j2u_to_j2i(&ue, &e);
 	if (libj2_j2i_is_negative(&e))
 		expect_overflow = 1;
 
@@ -229,7 +234,8 @@ mul(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expec
 
 	libj2_j2u_add_ju(&u, 1U);
 	libj2_j2i_add_ji(&neg_a, -1);
-	expect_overflow = libj2_j2u_mul_ju_to_j2u_overflow(&u, (uintmax_t)b, (void *)&e);
+	expect_overflow = libj2_j2u_mul_ju_to_j2u_overflow(&u, (uintmax_t)b, &ue);
+	libj2_j2u_to_j2i(&ue, &e);
 	if (libj2_j2i_is_negative(&e))
 		expect_overflow = 1;
 
@@ -238,7 +244,8 @@ mul(const struct libj2_j2i *a, intmax_t b, struct libj2_j2i *expected, int expec
 	EXPECT(libj2_j2i_eq_j2i(&r, &e));
 
 
-	expect_overflow = libj2_j2u_mul_ju_to_j2u_overflow(&u, (uintmax_t)b + 1U, (void *)&e);
+	expect_overflow = libj2_j2u_mul_ju_to_j2u_overflow(&u, (uintmax_t)b + 1U, &ue);
+	libj2_j2u_to_j2i(&ue, &e);
 	if (libj2_j2i_is_negative(&e))
 		expect_overflow = 1;
 

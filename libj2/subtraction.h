@@ -672,7 +672,11 @@ libj2_j2u_rsub_ju_overflow_p(const struct libj2_j2u *a, uintmax_t b)
 inline void
 libj2_j2i_sub_j2i_to_j2i(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2i *res)
 {
-	libj2_j2u_sub_j2u_to_j2u((const void *)a, (const void *)b, (void *)res);
+	struct libj2_j2u u, v, r;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2i_to_j2u(b, &v);
+	libj2_j2u_sub_j2u_to_j2u(&u, &v, &r);
+	libj2_j2u_to_j2i(&r, res);
 }
 
 
@@ -762,7 +766,11 @@ libj2_ji_sub_ji_to_j2i(intmax_t a, intmax_t b, struct libj2_j2i *res)
 inline void
 libj2_j2i_sub_j2i(struct libj2_j2i *a, const struct libj2_j2i *b)
 {
-	libj2_j2u_sub_j2u((void *)a, (const void *)b);
+	struct libj2_j2u u, v;
+	libj2_j2i_to_j2u(a, &u);
+	libj2_j2i_to_j2u(b, &v);
+	libj2_j2u_sub_j2u(&u, &v);
+	libj2_j2u_to_j2i(&u, a);
 }
 
 
@@ -1240,7 +1248,7 @@ libj2_j2u_rsub_j2u_borrow(struct libj2_j2u *a, const struct libj2_j2u *b, int *b
  * @param  a       The minuend (left-hand)
  * @param  b       The subtrahend (right-hand)
  * @param  res     The output parameter for the difference
- * @param  borrow  Shall point to the value +1, -1, or 0:
+ * @param  carry   Shall point to the value +1, -1, or 0:
  *                 the result will be incremented
  *                 with the value. When the function
  *                 returns, it will be updated to +1
@@ -1369,10 +1377,12 @@ libj2_j2u_abs_diff_j2u(struct libj2_j2u *a, const struct libj2_j2u *b)
 inline void
 libj2_j2i_abs_diff_j2i_to_j2u(const struct libj2_j2i *a, const struct libj2_j2i *b, struct libj2_j2u *res)
 {
+	struct libj2_j2i r;
 	if (libj2_j2i_ge_j2i(a, b))
-		libj2_j2i_sub_j2i_to_j2i(a, b, (void *)res);
+		libj2_j2i_sub_j2i_to_j2i(a, b, &r);
 	else
-		libj2_j2i_sub_j2i_to_j2i(b, a, (void *)res);
+		libj2_j2i_sub_j2i_to_j2i(b, a, &r);
+	libj2_j2i_to_j2u(&r, res);
 }
 
 

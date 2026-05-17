@@ -61,7 +61,10 @@ libj2_minus_j2u(struct libj2_j2u *a)
 inline void
 libj2_minus_j2i_to_j2i(const struct libj2_j2i *a, struct libj2_j2i *res)
 {
-	libj2_minus_j2u_to_j2u((const void *)a, (void *)res);
+	res->high = -a->high;
+	if (a->low)
+		res->high -= 1U;
+	res->low = -a->low;
 }
 
 
@@ -81,7 +84,7 @@ libj2_minus_j2i_to_j2i(const struct libj2_j2i *a, struct libj2_j2i *res)
 inline void
 libj2_minus_j2i(struct libj2_j2i *a)
 {
-	libj2_minus_j2u_to_j2u((const void *)a, (void *)a);
+	libj2_minus_j2i_to_j2i(a, a);
 }
 
 
@@ -103,7 +106,10 @@ libj2_minus_j2i(struct libj2_j2i *a)
 inline void
 libj2_minus_j2i_to_j2u(const struct libj2_j2i *a, struct libj2_j2u *res)
 {
-	libj2_minus_j2u_to_j2u((const void *)a, (void *)res);
+	res->high = -a->high;
+	if (a->low)
+		res->high -= 1U;
+	res->low = -a->low;
 }
 
 
@@ -126,7 +132,10 @@ libj2_minus_j2i_to_j2u(const struct libj2_j2i *a, struct libj2_j2u *res)
 inline void
 libj2_minus_j2u_to_j2i(const struct libj2_j2u *a, struct libj2_j2i *res)
 {
-	libj2_minus_j2u_to_j2u((const void *)a, (void *)res);
+	res->high = -a->high;
+	if (a->low)
+		res->high -= 1U;
+	res->low = -a->low;
 }
 
 
@@ -186,7 +195,10 @@ libj2_abs_j2i(struct libj2_j2i *a)
 inline void
 libj2_abs_j2i_to_j2u(const struct libj2_j2i *a, struct libj2_j2u *res)
 {
-	libj2_abs_j2i_to_j2i(a, (void *)res);
+	if (libj2_j2i_is_negative(a))
+		libj2_minus_j2i_to_j2u(a, res);
+	else
+		libj2_j2i_to_j2u(a, res);
 }
 
 
@@ -240,17 +252,18 @@ libj2_minus_abs_j2i(struct libj2_j2i *a)
  * 
  * @param  a    The integer to conditionally invert
  * @param  res  Output parameter for the sign-xor
- * @param  res  Output parameter for the inverse
  * 
  * @since  1.1
  */
 inline void
 libj2_j2i_xor_sign_to_j2i(const struct libj2_j2i *a, struct libj2_j2i *res)
 {
-	if (libj2_j2i_is_negative(a))
-		libj2_not_j2u_to_j2u((const void *)a, (void *)res);
-	else
+	if (libj2_j2i_is_negative(a)) {
+		res->high = ~a->high;
+		res->low = ~a->low;
+	} else {
 		*res = *a;
+	}
 }
 
 
@@ -266,7 +279,13 @@ libj2_j2i_xor_sign_to_j2i(const struct libj2_j2i *a, struct libj2_j2i *res)
 inline void
 libj2_j2i_xor_sign_to_j2u(const struct libj2_j2i *a, struct libj2_j2u *res)
 {
-	libj2_j2i_xor_sign_to_j2i(a, (void *)res);
+	if (libj2_j2i_is_negative(a)) {
+		res->high = ~a->high;
+		res->low = ~a->low;
+	} else {
+		res->high = a->high;
+		res->low = a->low;
+	}
 }
 
 
@@ -283,6 +302,8 @@ libj2_j2i_xor_sign_to_j2u(const struct libj2_j2i *a, struct libj2_j2u *res)
 inline void
 libj2_j2i_xor_sign(struct libj2_j2i *a)
 {
-	if (libj2_j2i_is_negative(a))
-		libj2_not_j2u((void *)a);
+	if (libj2_j2i_is_negative(a)) {
+		a->high = ~a->high;
+		a->low = ~a->low;
+	}
 }
