@@ -80,13 +80,6 @@ struct libj2_j2u {
  * Signed double-maximum precision integer,
  * using two's complement
  * 
- * libj2 does not implement bitwise operations,
- * bit-scanning, or bit-rotation operations
- * for this type, but a `struct libj2_j2i *`
- * can safely be cast to `struct libj2_j2u *`
- * for such operators as well as the for
- * unsigned bit shifting operations
- * 
  * If `a` is the maximum representable value,
  * `-a - 1` is the minimum representable value;
  * there is only one zero value (has no sign)
